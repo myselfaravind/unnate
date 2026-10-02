@@ -1171,6 +1171,107 @@ html.pl-on .hero *{animation-play-state:paused!important}
 .hero.pl-hand .hero-char .rise{transition:none!important;transform:none!important;opacity:0}
 @media (max-width:760px){ .pl-line{left:12%;right:12%;top:58%} .pl-char{left:calc(12% + 76% * var(--p,0));top:58%} }
 @media (prefers-reduced-motion:reduce){ .pl-char img{animation:none} }
+
+/* =====================================================================
+   PHONE EDITION (≤760px) — composed for the phone, not shrunk from desktop.
+   One 20px grid, left-aligned editorial type, one idea per screen.
+   ===================================================================== */
+.m-txt,.lab-s{display:none}
+@media (max-width:760px){
+  :root{--mg:20px}
+  .d-txt{display:none}.m-txt{display:inline}
+  .m-quiet .m-cta,.m-down .m-cta{transform:translate(-50%,160%)!important}
+  /* header: the logo sits on the same 20px grid as everything below it */
+  .header{left:8px;right:8px;padding-left:12px;padding-right:6px}
+
+  /* ---------- HERO: editorial, left-aligned; the mascot is the visual ---------- */
+  .hero-copy{align-items:flex-start;text-align:left;padding:max(96px,calc(env(safe-area-inset-top) + 84px)) var(--mg) 0}
+  .hero-for{display:none}
+  .hero h1{font-size:clamp(2.45rem,min(12vw,6.2svh),3.3rem);line-height:.94;letter-spacing:-.05em;text-align:left}
+  .hero h1 .ln,.hero h1 .ln > span{display:block}
+  .hero-sub{margin-left:0;margin-right:0;max-width:31ch;font-size:clamp(.92rem,2svh,1rem);line-height:1.45;margin-top:clamp(12px,1.8svh,16px);text-align:left}
+  .hero-actions{justify-content:flex-start;align-items:center;gap:6px 22px;margin-top:clamp(14px,2.2svh,22px)}
+  .hero-actions .btn{min-height:48px}
+  .orb-lab{display:none}
+  .hero .orb{--W:min(calc(var(--mw) * .8cqw),calc(var(--mw) * 1.45cqh))}
+  .hero-char{width:min(50cqw,70cqh);bottom:9%}
+
+  /* ---------- 02 WHAT WE DO: segmented services · one focused visual · one line ---------- */
+  #what-we-do{padding:max(88px,calc(env(safe-area-inset-top) + 76px)) var(--mg) max(20px,calc(env(safe-area-inset-bottom) + 16px));min-height:600px}
+  #what-we-do{grid-template-rows:auto auto;align-content:center}
+  #what-we-do .s2-head{gap:0}
+  #what-we-do .eyebrow{font-size:.76rem;letter-spacing:.2em;margin:0 0 12px}
+  #what-we-do .s2-h{font-size:clamp(1.85rem,min(8.6vw,4.7svh),2.5rem);line-height:.98}
+  #what-we-do .s2-sub{font-size:.92rem;margin-top:10px;max-width:34ch}
+  #what-we-do .map{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:auto minmax(0,1fr);column-gap:0;row-gap:clamp(12px,2svh,18px);padding-top:clamp(16px,2.6svh,26px);
+    --stage-h:clamp(150px,calc(100svh - 392px),340px)}
+  #what-we-do .lab{grid-row:1;grid-column:auto;display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:52px;padding:10px 4px 6px 0;border-top:2px solid var(--line);text-align:left;max-width:none;justify-self:stretch;align-self:start}
+  #what-we-do .lab::before{content:"";position:absolute;left:0;right:6px;top:-2px;height:2px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-out)}
+  #what-we-do .lab.is-on::before{transform:scaleX(1)}
+  #what-we-do .lab-n{font-size:.82rem}
+  #what-we-do .lab-t,#what-we-do .lab-d{display:none!important}
+  #what-we-do .lab-s{display:block;font-size:.98rem;font-weight:650;letter-spacing:-.02em;color:var(--ink);opacity:.4;transition:opacity .3s}
+  #what-we-do .lab.is-on .lab-s{opacity:1}
+  #what-we-do .center{grid-row:2;grid-column:1/-1;justify-content:flex-start;padding-top:0}
+  #what-we-do .stage{width:min(100%,calc(var(--stage-h) * 1.25));height:auto;aspect-ratio:5/4;margin:0 auto 0 0;border-radius:22px}
+  #what-we-do .cap{max-width:none;margin-top:14px;text-align:left}
+  #what-we-do .cap-t{font-size:1.14rem;line-height:1.2}
+  #what-we-do .cap-d{display:none}
+  #what-we-do .cap-m{font-size:.8rem;margin-top:6px}
+
+  /* ---------- 03 WORK: compact intro, segmented categories, swipe rails ---------- */
+  .w3-intro{align-items:flex-start;text-align:left;padding:max(84px,calc(env(safe-area-inset-top) + 72px)) var(--mg) 0}
+  .w3-k{margin-bottom:12px;font-size:.9rem}
+  .w3-intro h2{font-size:clamp(2.5rem,12.4vw,3.2rem);line-height:.92}
+  .w3-lede{margin-top:14px;font-size:.96rem;max-width:32ch}
+  .w3-cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;gap:0;margin-top:20px;padding:4px;border-radius:99px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
+  .w3-cat{justify-content:center;min-height:42px;padding:0 4px;font-size:.8rem;border-radius:99px;color:rgba(255,255,255,.75)}
+  .w3-cat::before,.w3-cat::after{display:none}
+  .w3-cat[aria-selected="true"]{background:#fff;color:var(--ink)}
+  .w3-trail,.w3-mini{display:none!important}
+  .w3-gal{padding:30px 0 56px}
+  .rail{margin:0 0 34px}
+  .rail-h{display:flex;align-items:baseline;justify-content:space-between;padding:0 var(--mg);margin:0 0 12px}
+  .rail-h h3{margin:0;font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.6rem;line-height:1}
+  .rail-hint{font-size:.72rem;font-weight:650;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.66)}
+  .rail-hint::after{content:" →"}
+  .rail-track{display:flex;align-items:flex-start;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--mg);padding:2px var(--mg) 4px;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  .rail-track::-webkit-scrollbar{display:none}
+  .rail-track > .w{flex:0 0 auto;width:min(82vw,360px);margin:0!important;scroll-snap-align:start;grid-column:auto!important}
+  .rail[data-rail="creative"] .rail-track > .w{width:min(76vw,330px)}
+  .rail[data-rail="video"] .rail-track > .w{width:min(62vw,280px)}
+  .rail .w-cap{margin-top:10px;font-size:.84rem}
+  .rail .w-tg{margin-left:0}
+  .rail[data-rail="video"] .w-lb{display:none}
+
+  /* ---------- CASE STUDY: tighter rhythm, readable measure ---------- */
+  .case-wrap{padding:72px var(--mg) 48px;gap:22px}
+  .case .h2{font-size:clamp(2.3rem,11vw,2.9rem)}
+  .case .lede{font-size:.98rem;margin-top:14px}
+  .case-shot{padding:2% 12% 4% 0}
+  .case-steps{gap:18px;padding-top:22px}
+  .case-steps p{font-size:.92rem;line-height:1.5;margin-top:6px}
+
+  /* ---------- PROCESS: same path, half the height ---------- */
+  .how-head{padding:84px var(--mg) 18px;gap:14px}
+  .how .h2{font-size:clamp(2.3rem,11vw,2.9rem)}
+  .how .lede{font-size:.98rem;margin-top:0}
+  .path-wrap{padding-top:12px}
+  .steps{gap:30px}
+  .step{min-height:0}
+  .step-card{padding-left:56px}
+  .step-card h3{font-size:1.5rem}
+  .step-card .q{font-size:.96rem;margin-top:6px}
+  .step-card .covers{font-size:.86rem;line-height:1.5;margin-top:8px}
+
+  /* ---------- ABOUT · CTA ---------- */
+  .about-wrap{padding:40px var(--mg) 72px}
+  .about-wrap .h2{font-size:clamp(2.3rem,11vw,2.9rem)}
+  .about-lede{font-size:.98rem;margin-top:16px}
+  .about-grid{margin-top:28px;gap:22px}
+}
+@media (max-width:350px){ #what-we-do .lab-s{font-size:.84rem;letter-spacing:-.03em} }
+@media (max-width:760px) and (max-height:620px){ .hero-sub{display:none} #what-we-do .s2-sub{display:none} #what-we-do{padding-top:max(70px,calc(env(safe-area-inset-top) + 62px))} #what-we-do .map{--stage-h:clamp(140px,calc(100svh - 398px),260px)} }
 </style>
 </head>
 <body>
@@ -1284,7 +1385,7 @@ html.pl-on .hero *{animation-play-state:paused!important}
   <div class="hero-copy" data-copy>
     <p class="hero-for">A creative &amp; digital studio for ambitious businesses</p>
     <h1 id="hero-title"><span class="ln"><span data-haze="People see">People see</span> <span data-haze="your brand">your brand</span></span> <span class="ln"><span class="serif" data-haze="before they">before they</span> <span data-haze="choose you.">choose you.</span></span></h1>
-    <p class="hero-sub">We build the websites, content, campaigns, and creative that make your business impossible to overlook.</p>
+    <p class="hero-sub"><span class="d-txt">We build the websites, content, campaigns, and creative that make your business impossible to overlook.</span><span class="m-txt">Websites, content and campaigns that make your business impossible to overlook.</span></p>
     <div class="hero-actions">
       <a class="btn" href="#start" data-open-brief>Start a Project <span class="knob" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
       <a class="link-quiet" href="#work">See Our Work</a>
@@ -1330,22 +1431,22 @@ html.pl-on .hero *{animation-play-state:paused!important}
     <svg class="links" id="s2Links" aria-hidden="true"></svg>
       <button class="lab lab--tl is-on" role="tab" id="s2-tab-0" aria-selected="true" aria-controls="s2-panel" tabindex="0" data-i="0">
         <span class="lab-n">01</span>
-        <span class="lab-t">Websites</span>
+        <span class="lab-t">Websites</span><span class="lab-s" aria-hidden="true">Websites</span>
         <span class="lab-d">Websites designed around your brand, audience, and goals.</span>
       </button>
       <button class="lab lab--tr" role="tab" id="s2-tab-1" aria-selected="false" aria-controls="s2-panel" tabindex="-1" data-i="1">
         <span class="lab-n">02</span>
-        <span class="lab-t">Social Media Creatives</span>
+        <span class="lab-t">Social Media Creatives</span><span class="lab-s" aria-hidden="true">Social</span>
         <span class="lab-d">Creative systems built to make your brand recognizable, consistent, and hard to scroll past.</span>
       </button>
       <button class="lab lab--bl" role="tab" id="s2-tab-2" aria-selected="false" aria-controls="s2-panel" tabindex="-1" data-i="2">
         <span class="lab-n">03</span>
-        <span class="lab-t">Short-Form Videos</span>
+        <span class="lab-t">Short-Form Videos</span><span class="lab-s" aria-hidden="true">Video</span>
         <span class="lab-d">Short-form videos built to communicate quickly, hold attention, and work across social and paid campaigns.</span>
       </button>
       <button class="lab lab--br" role="tab" id="s2-tab-3" aria-selected="false" aria-controls="s2-panel" tabindex="-1" data-i="3">
         <span class="lab-n">04</span>
-        <span class="lab-t">Paid Ads &amp; Digital Marketing</span>
+        <span class="lab-t">Paid Ads &amp; Digital Marketing</span><span class="lab-s" aria-hidden="true">Ads</span>
         <span class="lab-d">Paid campaigns built to put the right message in front of the right audience.</span>
       </button>
     <div class="center" role="tabpanel" id="s2-panel" aria-labelledby="s2-tab-0">
@@ -1370,7 +1471,7 @@ html.pl-on .hero *{animation-play-state:paused!important}
   <div class="w3-intro">
     <p class="w3-k"><span class="w3-dot" aria-hidden="true"></span>Selected work</p>
     <h2 id="w3-h">Work you <span class="l2">can inspect.</span></h2>
-    <p class="w3-lede">Websites, creatives and short-form video. Scroll through the work — open any piece to inspect it properly.</p>
+    <p class="w3-lede"><span class="d-txt">Websites, creatives and short-form video. Scroll through the work — open any piece to inspect it properly.</span><span class="m-txt">Websites, creatives and short-form video — tap any piece to inspect it.</span></p>
     <div class="w3-cats" role="tablist" aria-label="Work categories"><button class="w3-cat" type="button" role="tab" id="w3-cat-all" data-v="all" aria-selected="true" aria-controls="w3Gal" tabindex="0">All works</button><button class="w3-cat" type="button" role="tab" id="w3-cat-web" data-v="web" aria-selected="false" aria-controls="w3Gal" tabindex="-1">Websites</button><button class="w3-cat" type="button" role="tab" id="w3-cat-creative" data-v="creative" aria-selected="false" aria-controls="w3Gal" tabindex="-1">Creatives</button><button class="w3-cat" type="button" role="tab" id="w3-cat-video" data-v="video" aria-selected="false" aria-controls="w3Gal" tabindex="-1">Short-form</button></div>
     <svg class="w3-trail" viewBox="0 0 420 130" preserveAspectRatio="none" aria-hidden="true"><path d="M262 0 C262 36 128 34 120 66 C112 98 210 100 262 124"/><circle cx="262" cy="125" r="4"/></svg>
   </div>
@@ -1723,7 +1824,7 @@ const CONTACT_EMAIL = '';
 
     // mobile sticky CTA: after the hero, hidden once the form is on screen
     const cr0 = cta.getBoundingClientRect();
-    mCta.classList.toggle('is-on', y > vh * .85 && cr0.top > vh * .5);
+    mCta.classList.toggle('is-on', y > vh * .85 && cr0.top > vh * .5 && !document.documentElement.classList.contains('m-quiet'));
 
     // CTA clouds
     const cr = cta.getBoundingClientRect();
@@ -2029,7 +2130,27 @@ const TYPE_LABEL = { web:'Website', creative:'Creative', video:'Short-form' };
     return sp.filter(r => r.length);
   }
 
+  const phone = matchMedia('(max-width:760px)');
+  const RAIL = { web:'Websites', creative:'Creatives', video:'Short-form' };
+  const fig = (w, i, n, style) => `<figure class="w" data-type="${w.type}" data-id="${esc(w.id)}"${style ? ` style="${style}"` : ''}>
+        <button class="w-media" type="button" data-i="${i}" style="--ar:${w.ar};${w.arM ? `--ar-m:${w.arM};` : ''}" aria-label="Inspect ${esc(w.title)} — ${esc(w.label)}">
+          <span class="w-art">${art(w)}</span></button>
+        <figcaption class="w-cap"><span class="w-ix">${String(n).padStart(2, '0')}</span><span class="w-ti">${esc(w.title)}</span><span class="w-lb">${esc(w.label)}</span>${w.tag ? `<span class="w-tg">${esc(w.tag)}</span>` : ''}</figcaption>
+      </figure>`;
+  // phones: one swipeable rail per medium — the work stays large, the page stays short
+  function renderRails(){
+    visible = [];
+    const pool = view === 'all' ? spreadsFor('all').flat().map(([id]) => byId[id]).filter(Boolean) : WORKS.filter(w => w.type === view);
+    gal.innerHTML = ['web', 'creative', 'video'].map(t => {
+      const items = pool.filter(w => w.type === t); if (!items.length) return '';
+      return `<section class="rail" data-rail="${t}" aria-label="${RAIL[t]}"><header class="rail-h"><h3>${RAIL[t]}</h3>${items.length > 1 ? '<span class="rail-hint" aria-hidden="true">Swipe</span>' : ''}</header>
+        <div class="rail-track">${items.map((w, k) => fig(w, visible.push(w) - 1, k + 1)).join('')}</div></section>`;
+    }).join('');
+    observe();
+  }
+  phone.addEventListener && phone.addEventListener('change', () => render());
   function render(){
+    if (phone.matches) return renderRails();
     visible = []; let n = 0;
     gal.innerHTML = spreadsFor(view).map(row => `<div class="spread">${row.map(([id, cs, span, off]) => {
       const w = byId[id]; const i = visible.push(w) - 1; n++;
@@ -2138,6 +2259,16 @@ const TYPE_LABEL = { web:'Website', creative:'Creative', video:'Short-form' };
   render();
 })();
 })();
+</script>
+<script>
+/* phones: the floating "Start a Project" button steps aside while Section 02 or the work gallery fill the screen */
+(() => { if (!('IntersectionObserver' in window)) return; const seen = new Set();
+  const io = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target));
+    document.documentElement.classList.toggle('m-quiet', seen.size > 0); }, { threshold: .18 });
+  ['what-we-do', 'work'].forEach(id => { const el = document.getElementById(id); el && io.observe(el); }); })();
+/* phones: while reading (scrolling down) the floating button tucks away; scrolling up brings it back */
+(() => { let ly = scrollY; const r = document.documentElement;
+  addEventListener('scroll', () => { const y = scrollY; if (Math.abs(y - ly) < 8) return; r.classList.toggle('m-down', y > ly && y > 120); ly = y; }, { passive:true }); })();
 </script>
 </body>
 </html>
