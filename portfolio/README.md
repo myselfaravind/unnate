@@ -1,17 +1,18 @@
-# Portfolio — how to add real work
+window.UNNATE_PORTFOLIO = [
+  /* ---- websites ---- */
+  { id:'nova',     title:'Project 01', type:'web', label:'Website Design', tag:'Concept', src:'portfolio/websites/project-01/index.html', ar:'16/9',  arM:'4/5' },
+  { id:'kiln',     title:'Project 02', type:'web', label:'Website Design', tag:'Concept', src:'portfolio/websites/project-02/index.html', ar:'16/10', arM:'16/11' },
+  { id:'meridian', title:'Project 03', type:'web', label:'Website Design', tag:'Concept', src:'portfolio/websites/project-03/index.html', ar:'16/10', arM:'4/5' },
 
-Section 03 is driven by **portfolio/portfolio.js**. Static hosting can't list a folder, so each piece is named there once.
-All paths are relative to the site root, so they work locally, on GitHub and on Cloudflare.
+  /* ---- creatives ---- */
+  { id:'diwali',   title:'Diwali Campaign',    type:'creative', label:'Creative Campaign',       tag:'Concept',        demo:'diwali',   ar:'4/5' },
+  { id:'summer',   title:'Summer Drop',        type:'creative', label:'Social Creative',         tag:'Concept',        demo:'summer',   ar:'1/1' },
+  { id:'launch',   title:'Launch Week',        type:'creative', label:'Carousel Series',         tag:'Concept',        demo:'launch',   ar:'16/10', arM:'4/3' },
+  { id:'unnate',   title:'UNNATE Brand World', type:'creative', label:'Identity & Illustration', tag:'Self-initiated', demo:'brand',    ar:'16/10', arM:'4/3' },
 
-| Work | Put the files here | Entry in portfolio.js |
-|---|---|---|
-| Website (a real HTML site) | `portfolio/websites/<project>/index.html` + its own css/js/images/fonts | `{ id, title, type:'web', label, tag, src:'portfolio/websites/<project>/index.html' }` |
-| Creative | `portfolio/creatives/<file>.webp` (or .jpg/.png) | `{ id, title, type:'creative', label, tag, src:'portfolio/creatives/<file>.webp', alt:'what it shows' }` |
-| Short-form video | `portfolio/videos/<file>.mp4` + `<file>.jpg` poster | `{ id, title, type:'video', label, tag, src:'portfolio/videos/<file>.mp4', poster:'portfolio/videos/<file>.jpg' }` |
-
-- **Websites** render live in the gallery (a scaled desktop view; on phones the site's own mobile layout) and open fully interactive.
-  Keep each site self-contained in its folder with *relative* links (`css/style.css`, not `/css/style.css` or `C:\...`).
-- **Creatives** keep their own proportions — nothing is cropped.
-- **Videos** show the poster and only download when someone hovers (mouse) or opens them (touch). MP4 (H.264/AAC), ≤ 1080×1920, ideally ≤ 10 MB.
-- `featured: true` also places a piece in **All works**. `tag` keeps labelling honest ('Client work', 'Concept', 'Self-initiated').
-- Remove the built-in `demo:` entries as real pieces replace them.
+  /* ---- short-form video ---- */
+  { id:'product',  title:'Product Film',       type:'video', label:'Short-form Video', tag:'Concept', demo:'product', ar:'9/16' },
+  { id:'founder',  title:'Founder Story',      type:'video', label:'Short-form Video', tag:'Concept', demo:'founder', ar:'9/16' },
+  { id:'recipe',   title:'30-Second Recipe',   type:'video', label:'Short-form Video', tag:'Concept', demo:'recipe',  ar:'9/16' },
+  { id:'ba',       title:'Before / After',     type:'video', label:'Short-form Ad',    tag:'Concept', demo:'ba',      ar:'9/16' },
+];
