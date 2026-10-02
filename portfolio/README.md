@@ -1,20 +1,17 @@
-# Portfolio files
+# Portfolio — how to add real work
 
-Put the real work here, then fill the matching slot in `index.html` → search for `const WORK = {`.
-Nothing appears on the site until a slot has a file. Once any real work exists, empty slots are hidden automatically.
+Section 03 is driven by **portfolio/portfolio.js**. Static hosting can't list a folder, so each piece is named there once.
+All paths are relative to the site root, so they work locally, on GitHub and on Cloudflare.
 
-| Work | Folder | Slot fields in WORK |
+| Work | Put the files here | Entry in portfolio.js |
 |---|---|---|
-| Website demo (live) | `portfolio/websites/project-01/index.html` (+ its own css/js/images) | `preview:'portfolio/websites/project-01/index.html'` |
-| Website demo (image only) | `portfolio/websites/project-01/full.webp` — a full-page capture | `screenshot:'portfolio/websites/project-01/full.webp'` |
-| Creative | `portfolio/creatives/creative-01.webp` | `src:'portfolio/creatives/creative-01.webp'`, `alt:'…'` |
-| Short-form video | `portfolio/short-form/video-01.mp4` + `video-01.jpg` (poster) | `src:'…mp4'`, `poster:'…jpg'` |
+| Website (a real HTML site) | `portfolio/websites/<project>/index.html` + its own css/js/images/fonts | `{ id, title, type:'web', label, tag, src:'portfolio/websites/<project>/index.html' }` |
+| Creative | `portfolio/creatives/<file>.webp` (or .jpg/.png) | `{ id, title, type:'creative', label, tag, src:'portfolio/creatives/<file>.webp', alt:'what it shows' }` |
+| Short-form video | `portfolio/videos/<file>.mp4` + `<file>.jpg` poster | `{ id, title, type:'video', label, tag, src:'portfolio/videos/<file>.mp4', poster:'portfolio/videos/<file>.jpg' }` |
 
-Every slot also takes `title`, `description` (one line) and `kind` — use `'concept'` for demo/self-initiated work
-(labelled "Concept · Self-initiated") and `'client'` only for work done for a paying client.
-
-Recommended formats
-- Images: WebP (or JPG), long edge ≤ 2000px, ~200–400 KB. Keep the original aspect ratio; nothing is cropped.
-- Video: MP4 (H.264 + AAC), 1080×1920, ≤ 8–12 MB each; a JPG poster from the first strong frame.
-- Website demos that must stay on another server: use `preview:'https://…'` only if that site allows being framed;
-  otherwise supply a `screenshot` instead (shown honestly as a "full-page capture").
+- **Websites** render live in the gallery (a scaled desktop view; on phones the site's own mobile layout) and open fully interactive.
+  Keep each site self-contained in its folder with *relative* links (`css/style.css`, not `/css/style.css` or `C:\...`).
+- **Creatives** keep their own proportions — nothing is cropped.
+- **Videos** show the poster and only download when someone hovers (mouse) or opens them (touch). MP4 (H.264/AAC), ≤ 1080×1920, ideally ≤ 10 MB.
+- `featured: true` also places a piece in **All works**. `tag` keeps labelling honest ('Client work', 'Concept', 'Self-initiated').
+- Remove the built-in `demo:` entries as real pieces replace them.
