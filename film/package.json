@@ -1,0 +1,14 @@
+{
+  "name": "unnate-brand-film",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prep": "node shoot-sites.mjs && bash prep-media.sh",
+    "audio": "python3 sound.py",
+    "render": "node render.mjs",
+    "build": "bash build.sh"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}

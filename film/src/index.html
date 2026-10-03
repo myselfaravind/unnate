@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>UNNATE.COM — Brand Film</title>
+<meta name="viewport" content="width=1080">
+<style>
+@font-face{font-family:"Bricolage";src:url(fonts/bricolage.woff2) format("woff2");font-weight:200 800;font-stretch:75% 100%;font-display:block}
+@font-face{font-family:"Instrument";src:url(fonts/instrument-italic.woff2) format("woff2");font-style:italic;font-display:block}
+:root{--paper:#F1F7FD;--ink:#0C2447;--orange:#F84608;--orange-deep:#C93800;--grey:#E7EAEE;--g1:#DADFE5;--g2:#C9D0D8;--g3:#A7B0BB}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--grey);font-family:"Bricolage",sans-serif;color:var(--ink)}
+.abs{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform,opacity}
+.full{position:absolute;inset:0}
+#bg{position:absolute;inset:0}
+#sky{position:absolute;inset:0;opacity:0}
+#cam{position:absolute;inset:0;transform-origin:540px 960px}
+
+/* ---------- the 3D floor of identical template cards ---------- */
+#floorWrap{position:absolute;inset:0;perspective:1600px;overflow:hidden}
+#floor{position:absolute;left:0;top:0;transform-origin:0 0;transform-style:preserve-3d}
+.card{position:absolute;width:300px;height:380px;transform-style:preserve-3d}
+.face{position:absolute;inset:0;border-radius:18px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.front{background:var(--g1);box-shadow:0 2px 0 rgba(12,36,71,.05)}
+.front i,.front b{position:absolute;display:block;border-radius:6px}
+.front .t1{left:18px;top:18px;width:26px;height:26px;border-radius:50%;background:var(--g2)}
+.front .t2{left:52px;top:26px;width:80px;height:10px;background:var(--g2)}
+.front .im{left:18px;top:62px;right:18px;height:150px;background:var(--g2);border-radius:10px}
+.front b{left:18px;top:228px;font:700 22px/1 "Bricolage";font-stretch:90%;color:var(--g3);letter-spacing:-.01em}
+.front .l1{left:18px;top:262px;width:230px;height:10px;background:var(--g2)}
+.front .l2{left:18px;top:282px;width:170px;height:10px;background:var(--g2)}
+.front .bt{left:18px;top:316px;width:112px;height:38px;border-radius:20px;background:var(--g2)}
+.back{transform:rotateY(180deg);background:#fff;box-shadow:0 18px 40px -18px rgba(12,36,71,.35)}
+.back img{width:100%;height:100%;object-fit:cover;display:block}
+.back.tile{display:grid;place-items:center;font:800 64px/0.9 "Bricolage";font-stretch:75%;letter-spacing:-.02em;text-align:center}
+#fog{position:absolute;left:0;right:0;top:0;height:1300px;pointer-events:none}
+
+/* ---------- type ---------- */
+.disp{font-family:"Bricolage";font-weight:800;font-stretch:75%;letter-spacing:-.025em;line-height:.86;white-space:nowrap}
+.serif{font-family:"Instrument";font-style:italic;font-weight:400;letter-spacing:-.01em;white-space:nowrap}
+#online{font-size:228px;color:var(--g3)}
+#but{font-size:96px;color:#8D97A3}
+.ghost>span{color:rgba(150,160,172,.42)}
+#un,#seen{font-size:236px}
+.mask{overflow:hidden;padding:0 .08em}
+.mask>span{display:inline-block;will-change:transform}
+#cap{font-size:92px;color:var(--ink);text-align:center}
+#cap .mask{display:block}
+#n1{font-size:132px;color:var(--ink)}
+#n2{font-size:150px;color:var(--orange)}
+
+/* ---------- devices & formats ---------- */
+.shadowed{box-shadow:0 40px 80px -30px rgba(12,36,71,.45),0 0 0 1px rgba(12,36,71,.06)}
+#device{background:#fff;overflow:hidden}
+#device .chrome{position:absolute;left:0;right:0;top:0;height:52px;background:#fff;border-bottom:1px solid #E5EAF0;display:flex;align-items:center;gap:10px;padding-left:22px}
+#device .chrome i{width:14px;height:14px;border-radius:50%;background:#E0E5EC}
+#device .chrome i:first-child{background:var(--orange)}
+#device .chrome u{margin-left:20px;width:330px;height:26px;border-radius:13px;background:#F0F3F7}
+#device .scr{position:absolute;left:0;right:0;bottom:0;overflow:hidden;background:#fff}
+#device .scr>img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover}
+#feed{position:absolute;left:0;top:0;width:470px}
+.post{width:470px;background:#fff}
+.post .ph{height:58px;display:flex;align-items:center;gap:10px;padding:0 14px;font:700 17px "Bricolage"}
+.post .ph i{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--orange),#FF9A6B)}
+.post .ph s{text-decoration:none;color:#8a96a8;font-weight:500;font-size:14px}
+.post img{display:block;width:470px;height:588px;object-fit:cover}
+.post .pa{height:60px;display:flex;gap:16px;align-items:center;padding:0 16px}
+.post .pa i{width:26px;height:24px;border:3px solid var(--ink);border-radius:8px}
+.post .pa i:first-child{border-radius:50% 50% 45% 45%;border-color:var(--orange);background:var(--orange)}
+#notch{position:absolute;left:50%;top:12px;width:120px;height:32px;margin-left:-60px;border-radius:16px;background:#0C1220}
+.tilep{position:absolute;overflow:hidden;border-radius:16px;background:#fff}
+.tilep img{width:100%;height:100%;object-fit:cover;display:block}
+#vid{overflow:hidden;background:#111}
+#vid img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover}
+#vbar{position:absolute;left:28px;right:28px;top:26px;height:6px;border-radius:3px;background:rgba(255,255,255,.35)}
+#vbar b{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:#fff}
+#adh,#adf{position:absolute;left:0;right:0;background:#fff;display:flex;align-items:center}
+#adh{top:0;height:84px;gap:14px;padding:0 20px;font:800 24px "Bricolage";font-stretch:90%}
+#adh .av{width:48px;height:48px;border-radius:50%;background:var(--orange);overflow:hidden;position:relative}
+#adh .av img{position:absolute;width:150%;left:-25%;top:-6%}
+#adh small{display:block;font:500 17px "Bricolage";color:#8a96a8}
+#adf{bottom:0;height:96px;justify-content:space-between;padding:0 22px;font:700 22px "Bricolage";font-stretch:90%}
+#adf small{display:block;font:500 16px "Bricolage";color:#8a96a8}
+#adf em{font-style:normal;background:var(--orange);color:#fff;border-radius:30px;padding:14px 26px;font:700 21px "Bricolage"}
+#ring{position:absolute;inset:0;perspective:1500px;perspective-origin:540px 1000px}
+#ringIn{position:absolute;left:540px;top:1000px;transform-style:preserve-3d}
+.fmt{position:absolute;left:0;top:0;transform-style:preserve-3d}
+.fmt .in{position:absolute;inset:0;overflow:hidden;border-radius:14px;background:#fff}
+.fmt .in img{width:100%;height:100%;object-fit:cover;display:block}
+.fmt.bill .legs{position:absolute;left:18%;right:18%;bottom:-120px;height:120px;border-left:16px solid #2A3B57;border-right:16px solid #2A3B57}
+.fmt .lab{position:absolute;left:18px;bottom:16px;font:800 34px/0.9 "Bricolage";font-stretch:75%;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+.fmt.banner .in{display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:var(--ink);color:#fff;font:800 46px "Bricolage";font-stretch:75%}
+.fmt.banner .in em{font-style:normal;font:700 22px "Bricolage";background:var(--orange);padding:14px 24px;border-radius:30px}
+.storybars{position:absolute;left:14px;right:14px;top:14px;display:flex;gap:6px;z-index:2}
+.storybars i{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.55)}
+.storybars i:first-child{background:#fff}
+#lines{position:absolute;left:0;top:0;width:1080px;height:1920px;overflow:visible}
+#lines path{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+
+/* ---------- character / fx ---------- */
+.actor img{position:absolute;left:0;top:0;transform-origin:0 0;display:none}
+#fx{position:absolute;left:0;top:0}
+
+/* ---------- lockup ---------- */
+#lock{position:absolute;left:0;top:0;width:1080px;height:1920px}
+#wmClip,#comClip{position:absolute;overflow:hidden}
+#wm{position:absolute;left:0;top:0;display:block}
+#com{position:absolute;left:0;bottom:0;font-family:"Bricolage";font-weight:800;font-stretch:75%;color:var(--ink);line-height:1;letter-spacing:-.005em;white-space:nowrap}
+#com span{display:inline-block}
+#dot{position:absolute;left:0;top:0;border-radius:50%;background:var(--orange)}
+#cta1{font:700 74px/1 "Bricolage";font-stretch:85%;letter-spacing:-.02em;color:var(--ink);text-align:center}
+#cta2{font-size:150px;line-height:1;color:var(--orange);text-align:center}
+#grain{position:absolute;inset:-64px;opacity:.07;mix-blend-mode:multiply;pointer-events:none}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(130% 90% at 50% 45%,transparent 60%,rgba(12,36,71,.16))}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg"></div>
+  <div id="sky">
+    <img class="abs cl" src="../build/media/cloud-bank.webp" style="width:1700px">
+    <img class="abs cl" src="../build/media/cloud-puff.webp" style="width:900px">
+    <img class="abs cl" src="../build/media/cloud-small.webp" style="width:700px">
+    <img class="abs cl" src="../build/media/cloud-bank.webp" style="width:1500px">
+  </div>
+  <div id="cam">
+    <div id="floorWrap"><div id="floor"></div></div>
+    <div id="fog"></div>
+
+    <div id="online" class="abs disp mask"><span>ONLINE.</span></div>
+    <div id="but" class="abs serif mask"><span>but</span></div>
+
+    <!-- board connection lines (revelation) -->
+    <svg id="lines" viewBox="0 0 1080 1920"></svg>
+
+    <div id="device" class="abs shadowed">
+      <div class="chrome"><i></i><i></i><i></i><u></u></div>
+      <div class="scr">
+        <img id="dDesk" src="../build/media/maren-dental-studio-desk.jpg">
+        <img id="dMob" src="../build/media/maren-dental-studio-mob.jpg">
+        <div id="feed"></div>
+      </div>
+      <div id="notch"></div>
+    </div>
+
+    <div id="tiles"></div>
+
+    <div id="ring"><div id="ringIn"></div></div>
+
+    <div id="ad" class="abs shadowed" style="border-radius:22px;overflow:hidden;background:#fff">
+      <div id="adh"><span class="av"><img src="poses/hero.png"></span><span>SOLARA<small>Sponsored</small></span></div>
+      <div id="adf"><span>Rise Bright<small>Taste the fruit, not the sugar.</small></span><em>Shop now</em></div>
+    </div>
+    <div id="vid" class="abs"><img id="vA"><img id="vB"><div id="vbar"><b></b></div></div>
+
+    <div id="un" class="abs disp ghost">UN</div>
+    <div id="seen" class="abs disp ghost">SEEN.</div>
+
+    <div class="actor abs" id="ghost2"></div>
+    <div class="actor abs" id="ghost1"></div>
+    <div class="actor abs" id="actor"></div>
+    <canvas id="fx" width="1080" height="1920"></canvas>
+
+    <div id="lock">
+      <div id="wmClip"><img id="wm" src="wordmark.svg" alt="UNNATE"></div>
+      <div id="dot"></div>
+      <div id="comClip"><div id="com"><span>C</span><span>O</span><span>M</span></div></div>
+    </div>
+    <div id="cta1" class="abs mask"><span>Make your brand</span></div>
+    <div id="cta2" class="abs serif mask"><span>unmissable.</span></div>
+    <div id="n1" class="abs disp mask"><span>NOT PIECES.</span></div>
+    <div id="n2" class="abs serif mask"><span>A presence.</span></div>
+  </div>
+  <div id="cap" class="abs serif"></div>
+  <div id="flash"></div>
+  <canvas id="grain" width="1208" height="2048"></canvas>
+  <div id="vig"></div>
+</div>
+<script src="poses/meta.js"></script>
+<script src="film.js"></script>
+</body>
+</html>
