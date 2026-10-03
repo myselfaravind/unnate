@@ -1,44 +1,36 @@
 /* =====================================================================
    UNNATE · PORTFOLIO MANIFEST — the source of truth for Section 03.
-   Static hosting can't list a folder, so every piece is named here once.
-   Paths are relative to the site root (they work locally, on GitHub and on Cloudflare).
+   Static hosting can't list folders, so each piece is named here once.
+   Paths are relative to the site root and match the files in /portfolio.
+   Spaces and apostrophes in filenames are fine — they're encoded automatically.
 
-   type    'web' | 'creative' | 'video'
-   src     the real file:
-             website  →  'portfolio/websites/<project>/index.html'   (rendered live)
-             creative →  'portfolio/creatives/<file>.webp|.jpg|.png'
-             video    →  'portfolio/videos/<file>.mp4'
-   poster  (video, optional) a still image shown before playback
-   alt     (creative) what the image shows, for screen readers
-   tag     honest status: 'Client work', 'Concept', 'Self-initiated' …
-   featured: true  → also appears in "All works"
-
-   Pieces with `demo:` and no `src` are built-in artwork. Replace them with
-   real files as they arrive (or delete their lines).
+   type     'web' | 'creative' | 'video'
+   title    shown on the site (the project / content name)
+   label    the type line under the title
+   src      the real file (websites: the project's entry HTML file)
+   featured true → one of the curated pieces in "All Work"
+            (All Work is designed for 2 websites + 3 creatives + 2 videos)
+   tag      optional honest status, e.g. 'Client work' or 'Concept'
    ===================================================================== */
-
 window.UNNATE_PORTFOLIO = [
-  /* ---- websites ---- */
-  { id:'nova',     title:'Project 01', type:'web', label:'Website Design', tag:'Concept', src:'portfolio/websites/project-01/index.html', ar:'16/9',  arM:'4/5' },
-  { id:'kiln',     title:'Project 02', type:'web', label:'Website Design', tag:'Concept', src:'portfolio/websites/project-02/index.html', ar:'16/10', arM:'16/11' },
-  { id:'meridian', title:'Project 03', type:'web', label:'Website Design', tag:'Concept', src:'portfolio/websites/project-03/index.html', ar:'16/10', arM:'4/5' },
+  /* ---- websites (portfolio/websites/<project>/index.html) ---- */
+  { id:'maren-dental-studio', title:'Maren Dental Studio', type:'web', label:'Website', src:'portfolio/websites/Maren Dental Studio/index.html', featured:true },
+  { id:'oddcard',             title:'Oddcard',             type:'web', label:'Website', src:'portfolio/websites/Oddcard/index.html',             featured:true },
+  { id:'tickpic-moments',     title:'TickPic Moments',     type:'web', label:'Website', src:'portfolio/websites/TickPic Moments/index.html' },
 
-  /* ---- creatives ---- */
-  { id:'diwali',   title:'Diwali Campaign', type:'creative', label:'Creative Campaign', tag:'Concept', demo:'diwali', ar:'4/5' },
-  { id:'summer',   title:'Summer Drop', type:'creative', label:'Social Creative', tag:'Concept', demo:'summer', ar:'1/1' },
+  /* ---- creatives (portfolio/creatives) ---- */
+  { id:'beauty-spa',              title:'Beauty SPA',              type:'creative', label:'Creative', src:'portfolio/creatives/Beauty SPA.png',              alt:'Beauty SPA creative',              featured:true },
+  { id:'fresh-skin',              title:'Fresh Skin',              type:'creative', label:'Creative', src:'portfolio/creatives/Fresh Skin.png',              alt:'Fresh Skin creative',              featured:true },
+  { id:'dental-clinical-creative',title:'Dental Clinical creative',type:'creative', label:'Creative', src:'portfolio/creatives/Dental Clinical creative.png', alt:'Dental Clinical creative',         featured:true },
+  { id:'dental-care',             title:'Dental care',             type:'creative', label:'Creative', src:'portfolio/creatives/Dental care.png',             alt:'Dental care creative' },
+  { id:'skin-in-progress',        title:'SKIN in Progress',        type:'creative', label:'Creative', src:'portfolio/creatives/SKIN in Progress.png',        alt:'SKIN in Progress creative' },
+  { id:'unnate-creatives',        title:"Unnate Creative's",       type:'creative', label:'Creative', src:"portfolio/creatives/Unnate Creative's.png",       alt:'UNNATE creative' },
 
-  { id:'creative1', title:'Creative 01', type:'creative', label:'Creative Design', tag:'Self-initiated', src:'portfolio/creatives/creatives%20(1).png', alt:'Creative design 01', ar:'4/5' },
-  { id:'creative2', title:'Creative 02', type:'creative', label:'Creative Design', tag:'Self-initiated', src:'portfolio/creatives/creatives%20(2).png', alt:'Creative design 02', ar:'4/5' },
-  { id:'creative3', title:'Creative 03', type:'creative', label:'Creative Design', tag:'Self-initiated', src:'portfolio/creatives/creatives%20(3).png', alt:'Creative design 03', ar:'4/5' },
-  { id:'creative4', title:'Creative 04', type:'creative', label:'Creative Design', tag:'Self-initiated', src:'portfolio/creatives/creatives%20(4).png', alt:'Creative design 04', ar:'4/5' },
-  { id:'creative5', title:'Creative 05', type:'creative', label:'Creative Design', tag:'Self-initiated', src:'portfolio/creatives/creatives%20(5).png', alt:'Creative design 05', ar:'4/5' },
-
-  /* ---- short-form video ---- */
-  { id:'sf8', title:'SF8', type:'video', label:'Short-form Video', tag:'Self-initiated', src:'portfolio/videos/SF8.mp4', ar:'9/16' },
-  { id:'sf7', title:'SF7', type:'video', label:'Short-form Video', tag:'Self-initiated', src:'portfolio/videos/SF7.mp4', ar:'9/16' },
-  { id:'sf3', title:'SF3', type:'video', label:'Short-form Video', tag:'Self-initiated', src:'portfolio/videos/SF3.mp4', ar:'9/16' },
-  { id:'sf1', title:'SF1', type:'video', label:'Short-form Video', tag:'Self-initiated', src:'portfolio/videos/SF1.mp4', ar:'9/16' },
-  { id:'sf2', title:'SF2', type:'video', label:'Short-form Video', tag:'Self-initiated', src:'portfolio/videos/SF2.mp4', ar:'9/16' },
-  { id:'sf5', title:'SF5', type:'video', label:'Short-form Video', tag:'Self-initiated', src:'portfolio/videos/SF5.mp4', ar:'9/16' },
-  { id:'sf4', title:'SF4', type:'video', label:'Short-form Video', tag:'Self-initiated', src:'portfolio/videos/SF4.mp4', ar:'9/16' }
+  /* ---- short-form video (portfolio/videos) ---- */
+  { id:'crave-burgers-ad', title:"Crave Burger's AD", type:'video', label:'Short-form video', src:"portfolio/videos/Crave Burger's AD.mp4", featured:true },
+  { id:'solara-drinks',    title:"SOLARA Drink's",    type:'video', label:'Short-form video', src:"portfolio/videos/SOLARA Drink's.mp4",    featured:true },
+  { id:'crave-burgers',    title:"Crave Burger's",    type:'video', label:'Short-form video', src:"portfolio/videos/Crave Burger's.mp4" },
+  { id:'neuva-diwali',     title:'NEUVA Diwali',      type:'video', label:'Short-form video', src:'portfolio/videos/NEUVA Biwali.mp4' },
+  { id:'neuva',            title:'NEUVA',             type:'video', label:'Short-form video', src:'portfolio/videos/NEUVA.mp4' },
+  { id:'pearl-medspa',     title:'Pearl MedSpa',      type:'video', label:'Short-form video', src:'portfolio/videos/Pearl MedSpa.mp4' },
 ];

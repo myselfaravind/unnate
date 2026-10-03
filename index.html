@@ -1364,6 +1364,74 @@ html.pl-on .hero *{animation-play-state:paused!important}
   .w3 .rl-fig:nth-child(n){margin-top:0}.w3 .rl-fig:nth-child(even){margin-top:56px}
 }
 /* ==== /SECTION 03 · desktop showcase v2 ==== */
+/* ==== SECTION 03 · desktop portfolio v3 (justified editorial grid) ==== */
+@media (min-width:761px){
+  .w3 .jr{display:flex;align-items:flex-start;gap:clamp(22px,2.4vw,36px);margin:0 auto clamp(56px,8vh,88px)}
+  .w3 .jr > .g-fig{flex:var(--g) 1 0;min-width:0;margin:0}
+  .w3 .g-media{aspect-ratio:var(--ar);border-radius:16px;background:#0A3F8F;box-shadow:0 50px 90px -56px rgba(0,8,30,.95),0 0 0 1px rgba(255,255,255,.12)}
+  .w3 .g-web .g-media{padding-top:34px;background:#F3F6FA}
+  .w3 .g-web .g-media > .w-art{top:34px;overflow:hidden}
+  .w3 .g-web .b-chrome{height:34px}
+  .w3 .g-video .g-media{border-radius:22px;background:#05080F}
+  .w3 .g-media > .w-art > img,.w3 .g-media > .w-art > video{width:100%;height:100%;object-fit:cover;display:block}
+  .w3 .g-play{position:absolute;right:14px;bottom:14px;width:40px;height:40px;border-radius:50%;background:rgba(6,20,48,.6);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);pointer-events:none;z-index:3}
+  .w3 .g-play::after{content:"";position:absolute;left:15px;top:12px;border-left:12px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent}
+  .w3 .w3-play{display:none}
+  .w3 .g-cap{display:flex;align-items:baseline;gap:6px 12px;flex-wrap:wrap;margin-top:16px;font-size:.98rem}
+  .w3 .g-cap .w-ti,.w3 .sl-t,.w3 .rail .w-ti{text-transform:none;letter-spacing:-.01em}
+  .w3 .g-cap .w-ti{font-size:1.06rem;font-weight:700;color:#fff}
+  .w3 .g-cap .w-lb{color:rgba(255,255,255,.72)}
+  .w3 .g-cap .w-tg{margin-left:auto}
+}
+.w3 .rail .w-ti{text-transform:none}
+/* ==== /SECTION 03 · desktop portfolio v3 ==== */
+
+
+
+/* ==== SECTION 02 · pop-out showcase ==== */
+/* The blue container keeps its rounded edge and clipped sky; the work in front of it is free to break out. */
+#what-we-do .stage{overflow:visible}
+#what-we-do .stage::after{border-radius:inherit}
+#what-we-do .scene{background:none;border-radius:inherit}
+#what-we-do .scene::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--w-bg)}
+#what-we-do .sky{border-radius:inherit;overflow:hidden}
+#what-we-do .scene .pc .cd{box-shadow:0 30px 50px -24px rgba(2,18,50,.55),0 12px 22px -14px rgba(2,18,50,.35)}
+/* one clean composition per service: no separate floating mascots or connector inside the frame */
+#what-we-do .scene[data-i="0"] > .pc:nth-child(4),#what-we-do .scene[data-i="1"] > .pc:nth-child(5),#what-we-do .scene[data-i="2"] > .pc:nth-child(5),
+#what-we-do .scene[data-i="3"] > .pc:nth-child(2),#what-we-do .scene[data-i="3"] > .pc:nth-child(5),#what-we-do .scene[data-i="3"] > .pc:nth-child(6){display:none}
+#what-we-do .s2-tick{position:absolute;z-index:12;width:clamp(30px,3vw,42px);height:clamp(30px,3vw,42px);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg stroke='%23F84608' stroke-width='3.4' stroke-linecap='round'%3E%3Cpath d='M6 22 L15 25'/%3E%3Cpath d='M13 8 L19 17'/%3E%3Cpath d='M28 5 L27 15'/%3E%3C/g%3E%3C/svg%3E") no-repeat center/contain;pointer-events:none}
+#what-we-do .s2-tick--a{left:calc(-1 * clamp(22px,2.4vw,34px));top:calc(-1 * clamp(20px,2.2vw,30px))}
+#what-we-do .s2-tick--b{right:calc(-1 * clamp(24px,2.6vw,36px));top:42%;transform:scaleX(-1) rotate(80deg)}
+@media (min-width:761px){
+  #what-we-do .cap{margin-top:clamp(18px,2.6svh,28px)}
+  #what-we-do .map{padding-top:clamp(26px,4.4svh,48px)}
+  #what-we-do .scene[data-i="0"] > .pc:nth-child(2){--l:3!important;--t:-3!important;--w:70!important;--r:-2deg!important}
+  #what-we-do .scene[data-i="0"] > .pc:nth-child(3){--l:71!important;--t:19!important;--w:24!important;--r:4deg!important}
+  #what-we-do .scene[data-i="1"] > .pc:nth-child(2){--l:3!important;--t:15!important;--w:30!important;--r:-8deg!important}
+  #what-we-do .scene[data-i="1"] > .pc:nth-child(3){--l:35!important;--t:-5!important;--w:31!important;--r:0deg!important}
+  #what-we-do .scene[data-i="1"] > .pc:nth-child(4){--l:67!important;--t:15!important;--w:30!important;--r:8deg!important}
+  #what-we-do .scene[data-i="2"] > .pc:nth-child(2){--l:12!important;--t:13!important;--w:23!important;--r:-8deg!important}
+  #what-we-do .scene[data-i="2"] > .pc:nth-child(3){--l:37!important;--t:-4!important;--w:27!important;--r:0deg!important}
+  #what-we-do .scene[data-i="2"] > .pc:nth-child(4){--l:65!important;--t:13!important;--w:23!important;--r:8deg!important}
+  #what-we-do .scene[data-i="3"] > .pc:nth-child(3){--l:-3!important;--t:9!important;--w:42!important;--r:-4deg!important}
+  #what-we-do .scene[data-i="3"] > .pc:nth-child(4){--l:50!important;--t:36!important;--w:53!important;--r:3deg!important}
+}
+@media (max-width:760px){
+  #what-we-do .stage{margin-top:12px}
+  #what-we-do .s2-tick{width:26px;height:26px}
+  #what-we-do .s2-tick--a{left:-12px;top:-16px}
+  #what-we-do .s2-tick--b{right:-14px;top:48%}
+    #what-we-do .scene[data-i="0"] > .pc:nth-child(2){--ml:2!important;--mt:5!important;--mw:78!important;--mr:-2deg!important}
+    #what-we-do .scene[data-i="0"] > .pc:nth-child(3){--ml:73!important;--mt:17!important;--mw:29!important;--mr:4deg!important}
+    #what-we-do .scene[data-i="1"] > .pc:nth-child(2){--ml:1!important;--mt:14!important;--mw:50!important;--mr:-7deg!important}
+    #what-we-do .scene[data-i="1"] > .pc:nth-child(3){--ml:48!important;--mt:4!important;--mw:53!important;--mr:5deg!important}
+    #what-we-do .scene[data-i="2"] > .pc:nth-child(2){--ml:1!important;--mt:15!important;--mw:33!important;--mr:-8deg!important}
+    #what-we-do .scene[data-i="2"] > .pc:nth-child(3){--ml:32!important;--mt:-5!important;--mw:37!important;--mr:0deg!important}
+    #what-we-do .scene[data-i="2"] > .pc:nth-child(4){--ml:66!important;--mt:15!important;--mw:33!important;--mr:8deg!important}
+    #what-we-do .scene[data-i="3"] > .pc:nth-child(3){--ml:-1!important;--mt:6!important;--mw:55!important;--mr:-4deg!important}
+    #what-we-do .scene[data-i="3"] > .pc:nth-child(4){--ml:50!important;--mt:47!important;--mw:53!important;--mr:3deg!important}
+}
+/* ==== /SECTION 02 · pop-out showcase ==== */
 </style>
 </head>
 <body>
@@ -1542,7 +1610,7 @@ html.pl-on .hero *{animation-play-state:paused!important}
         <span class="lab-d">Paid campaigns built to put the right message in front of the right audience.</span>
       </button>
     <div class="center" role="tabpanel" id="s2-panel" aria-labelledby="s2-tab-0">
-      <div class="stage" id="s2Stage" tabindex="0" aria-label="Service showcase — use the arrow keys or swipe to change service">
+      <div class="stage" id="s2Stage" tabindex="0" aria-label="Service showcase — use the arrow keys or swipe to change service"><i class="s2-tick s2-tick--a" aria-hidden="true"></i><i class="s2-tick s2-tick--b" aria-hidden="true"></i>
         
           <div class="scene is-on" data-i="0" aria-hidden="false"><div class="sky" aria-hidden="true"><img loading="lazy" decoding="async" class="c1" src="assets/img/cloud-bank.webp" alt=""><img loading="lazy" decoding="async" class="c2" src="assets/img/cloud-puff.webp" alt=""><img loading="lazy" decoding="async" class="c3" src="assets/img/cloud-small.webp" alt=""></div><div class="pc" style="--l:7;--t:11;--w:58;--r:-1.5deg;--z:2;--dp:6px;--d:0ms;--ml:3;--mt:8;--mw:76;--mr:-1deg;"><div class="pc-par"><div class="pc-in"><div class="cd cd-site"><div class="cdx"><div class="cd-bar"><i></i><i></i><i></i><span>your-business.com</span></div><div class="cd-sb"><div class="cd-nav"><b>Your Business</b><span><u></u><u></u><em>Get in touch</em></span></div><div class="cd-hero"><div><strong>Say what you do. Show how.</strong><i></i><i></i><span class="cd-btn">Book a call</span></div><div class="cd-img"></div></div><div class="cd-tiles"><i></i><i></i><i></i></div></div></div></div></div></div></div><div class="pc" style="--l:58;--t:22;--w:16;--r:3deg;--z:3;--dp:10px;--d:90ms;--ml:72;--mt:26;--mw:24;--mr:3deg;"><div class="pc-par"><div class="pc-in"><div class="cd cd-mphone"><div class="cdx"><div class="mh">Your Business<u></u></div><strong>Say what you do.</strong><div class="mi"></div><i></i><i style="width:70%"></i><span class="mb">Book a call</span></div></div></div></div></div><div class="pc m-hide" style="--l:77;--t:54;--w:17;--r:0deg;--z:4;--dp:10px;--d:180ms;"><div class="pc-par"><div class="pc-in"><img loading="lazy" decoding="async" class="s2-mascot" src="assets/img/pose-look-left.webp" alt=""></div></div></div></div>
           <div class="scene" data-i="1" aria-hidden="true"><div class="sky" aria-hidden="true"><img loading="lazy" decoding="async" class="c1" src="assets/img/cloud-bank.webp" alt=""><img loading="lazy" decoding="async" class="c2" src="assets/img/cloud-puff.webp" alt=""><img loading="lazy" decoding="async" class="c3" src="assets/img/cloud-small.webp" alt=""></div><div class="pc" style="--l:8;--t:22;--w:27;--r:-7deg;--z:2;--dp:7px;--d:0ms;--ml:4;--mt:12;--mw:44;--mr:-6deg;"><div class="pc-par"><div class="pc-in"><div class="cd cd-post cd-post--a"><div class="cdx"><div class="cd-ph"><span class="av"></span><b>unnate</b><span class="dots">•••</span></div><div class="cd-pimg"><strong>One clear story.</strong><img loading="lazy" decoding="async" class="m" src="assets/img/pose-look-left.webp" alt=""></div><div class="cd-pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.4-7-9.5A4 4 0 0 1 12 8a4 4 0 0 1 7 2.5C19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12a8 8 0 1 1-3-6.2L20 5l-.6 3.4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 4 3 11l7 2 2 7z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18l-6-4-6 4z"/></svg></div></div></div></div></div></div><div class="pc" style="--l:36;--t:9;--w:29;--r:0deg;--z:3;--dp:10px;--d:70ms;--ml:49;--mt:18;--mw:46;--mr:5deg;"><div class="pc-par"><div class="pc-in"><div class="cd cd-post cd-post--b"><div class="cdx"><div class="cd-ph"><span class="av"></span><b>unnate</b><span class="dots">•••</span></div><div class="cd-pimg"><span class="sf">Show up clearly.</span><img loading="lazy" decoding="async" class="c" src="assets/img/cloud-puff.webp" alt=""><img loading="lazy" decoding="async" class="m" src="assets/img/pose-look-right.webp" alt=""></div><div class="cd-pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.4-7-9.5A4 4 0 0 1 12 8a4 4 0 0 1 7 2.5C19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12a8 8 0 1 1-3-6.2L20 5l-.6 3.4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 4 3 11l7 2 2 7z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18l-6-4-6 4z"/></svg></div></div></div></div></div></div><div class="pc m-hide" style="--l:65;--t:22;--w:27;--r:7deg;--z:2;--dp:7px;--d:130ms;"><div class="pc-par"><div class="pc-in"><div class="cd cd-post cd-post--c"><div class="cdx"><div class="cd-ph"><span class="av"></span><b>unnate</b><span class="dots">•••</span></div><div class="cd-pimg"><span class="sf">Claim less.</span><strong style="font-size:11cqi;margin-top:2cqi">Show more.</strong></div><div class="cd-pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.4-7-9.5A4 4 0 0 1 12 8a4 4 0 0 1 7 2.5C19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12a8 8 0 1 1-3-6.2L20 5l-.6 3.4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 4 3 11l7 2 2 7z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18l-6-4-6 4z"/></svg></div></div></div></div></div></div><div class="pc m-hide" style="--l:1;--t:63;--w:13;--r:0deg;--z:4;--dp:10px;--d:220ms;"><div class="pc-par"><div class="pc-in"><img loading="lazy" decoding="async" class="s2-mascot" src="assets/img/pose-look-right.webp" alt=""></div></div></div></div>
@@ -2149,26 +2217,14 @@ const CONTACT_EMAIL = '';
 <script>
 /* ===== Section 03 — Selected Work ===== */
 (() => {
-const DEMOS = {"nova": "<div class=\"mk nova\"><div class=\"pg\">\n  <header class=\"nv-nav\"><b>NOVA</b><nav><span>Shop</span><span>Rituals</span><span>Ingredients</span></nav><em>Bag (0)</em></header>\n  <section class=\"nv-hero\">\n    <div class=\"nv-copy\"><p class=\"nv-k\">Everyday skincare</p><h4>Skin,<br><i>simplified.</i></h4><p class=\"nv-p\">Three products. One routine. Nothing your skin doesn\u2019t need.</p><span class=\"nv-btn\">Shop the ritual</span></div>\n    <div class=\"nv-art\"><span class=\"nv-sun\"></span><span class=\"bt b1\"><i></i></span><span class=\"bt b2\"><i></i></span><span class=\"bt b3\"><i></i></span></div>\n  </section>\n  <section class=\"nv-steps\"><p class=\"nv-k\">The ritual</p><div class=\"nv-row\">\n    <div><span class=\"ic i1\"></span><b>01 Cleanse</b><small>Gel cleanser</small></div><div><span class=\"ic i2\"></span><b>02 Treat</b><small>Daily serum</small></div><div><span class=\"ic i3\"></span><b>03 Protect</b><small>Light SPF cream</small></div></div></section>\n  <section class=\"nv-band\"><h5>Made in <i>small batches.</i></h5><span class=\"nv-btn alt\">Read our process</span></section>\n  <footer class=\"nv-foot\"><b>NOVA</b><span>Shipping \u00b7 Returns \u00b7 Contact</span></footer>\n</div></div>", "kiln": "<div class=\"mk kiln-stage\">\n  <div class=\"kd\"><div class=\"kiln\"><div class=\"pg\">\n    <header class=\"kl-nav\"><b>Kiln Studio</b><span>Shop \u00b7 Workshops \u00b7 Visit</span></header>\n    <section class=\"kl-hero\"><h4>KILN</h4><div class=\"pots\"><i class=\"p1\"></i><i class=\"p2\"></i><i class=\"p3\"></i><i class=\"p4\"></i></div>\n      <p>Handmade ceramics from a two-person studio.</p><span class=\"kl-btn\">Book a workshop</span></section>\n    <section class=\"kl-grid\"><i></i><i></i><i></i><i></i><i></i><i></i></section>\n    <section class=\"kl-list\"><div><b>Sat 14</b><span>Wheel basics</span><em>4 seats</em></div><div><b>Sun 15</b><span>Glazing evening</span><em>6 seats</em></div><div><b>Sat 21</b><span>Bowls &amp; cups</span><em>2 seats</em></div></section>\n    <footer class=\"kl-foot\">Kiln Studio \u00b7 Open Thu\u2013Sun</footer>\n  </div></div></div>\n  <div class=\"kp\"><div class=\"kiln m\"><div class=\"pg\"><header class=\"kl-nav\"><b>Kiln</b><span>\u2630</span></header>\n    <section class=\"kl-hero\"><h4>KILN</h4><div class=\"pots\"><i class=\"p2\"></i><i class=\"p3\"></i></div><p>Handmade ceramics.</p><span class=\"kl-btn\">Book</span></section></div></div></div>\n</div>", "meridian": "<div class=\"mk meridian\"><div class=\"pg\">\n  <header class=\"md-nav\"><b>MERIDIAN</b><span>Projects \u00b7 Studio \u00b7 Contact</span></header>\n  <section class=\"md-hero\"><div class=\"md-sky\"></div><div class=\"md-b b1\"></div><div class=\"md-b b2\"></div><div class=\"md-b b3\"></div>\n    <h4>Spaces with a <i>point of view.</i></h4></section>\n  <section class=\"md-list\"><p class=\"md-k\">Selected projects</p>\n    <div><b>Harbour House</b><span>Residential</span><em>2024</em></div><div><b>The Long Room</b><span>Hospitality</span><em>2023</em></div><div><b>North Yard</b><span>Workplace</span><em>2023</em></div></section>\n  <section class=\"md-tiles\"><i></i><i></i><i></i></section>\n  <footer class=\"md-foot\"><b>Start a conversation</b><span>studio@meridian.example</span></footer>\n</div></div>", "diwali": "<div class=\"mk diwali\"><div class=\"dw-rings\"></div>\n  <div class=\"dw-diya\"><i class=\"fl\"></i><i class=\"bowl\"></i></div>\n  <h4>Light<br><i>it up.</i></h4><p>Festive collection \u00b7 Out now</p></div>", "summer": "<div class=\"mk summer\"><h4>SUMMER<br>DROP</h4><span class=\"sm-n\">01</span>\n  <div class=\"sm-blob\"></div>\n  <svg class=\"sm-st\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><defs><path id=\"sc\" d=\"M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0\"/></defs><circle cx=\"50\" cy=\"50\" r=\"46\"/><text><textPath href=\"#sc\">NEW \u00b7 NEW \u00b7 NEW \u00b7 NEW \u00b7 NEW \u00b7</textPath></text></svg>\n  <p>Limited run \u00b7 This week only</p></div>", "launch": "<div class=\"mk launch\"><div class=\"ln-c c1\"><small>Launch week</small><b>01</b><span>The idea</span></div>\n  <div class=\"ln-c c2\"><small>Launch week</small><b>02</b><span>The making</span></div>\n  <div class=\"ln-c c3\"><small>Launch week</small><b>03</b><span>It\u2019s live.</span></div></div>", "brand": "<div class=\"mk brand\"><img class=\"br-cloud\" src=\"%CLOUD%\" alt=\"\"><img class=\"br-m\" src=\"%POSE%\" alt=\"\">\n  <svg class=\"br-wm\" viewBox=\"0 0 2180 662\" aria-hidden=\"true\"><use href=\"#wm\"/></svg>\n  <div class=\"br-sw\"><i style=\"--c:#0B57B8\"></i><i style=\"--c:#2F8BE0\"></i><i style=\"--c:#F84608\"></i><i style=\"--c:#0C2447\"></i><i style=\"--c:#F1F7FD\"></i></div>\n  <span class=\"br-type\">Aa<i>Aa</i></span></div>", "product": "<div class=\"mk vid product\"><div class=\"vd-scene\"><div class=\"pf-spot\"></div><div class=\"pf-bottle\"><i></i></div><div class=\"pf-cap\"><span>Meet</span><span>the new</span><span>formula.</span></div></div>\n  <div class=\"vd-ui\"><span class=\"vd-t\">0:15</span><span class=\"vd-play\" aria-hidden=\"true\"></span></div><div class=\"vd-bar\"><i></i></div></div>", "founder": "<div class=\"mk vid founder\"><div class=\"vd-scene\"><div class=\"fd-bg\"></div><div class=\"fd-person\"><i class=\"hd\"></i><i class=\"sh\"></i></div><div class=\"fd-sub\"><span>We started with</span><span>one kiln</span><span>and a lot of</span><span>broken pots.</span></div></div>\n  <div class=\"vd-ui\"><span class=\"vd-t\">0:28</span><span class=\"vd-play\" aria-hidden=\"true\"></span></div><div class=\"vd-bar\"><i></i></div></div>", "recipe": "<div class=\"mk vid recipe\"><div class=\"vd-scene\"><div class=\"rc-plate\"><i class=\"f1\"></i><i class=\"f2\"></i><i class=\"f3\"></i><i class=\"f4\"></i></div><div class=\"rc-timer\"><span>00:30</span><span>00:20</span><span>00:10</span><span>00:00</span></div><div class=\"rc-cap\">30-second pasta</div></div>\n  <div class=\"vd-ui\"><span class=\"vd-t\">0:30</span><span class=\"vd-play\" aria-hidden=\"true\"></span></div><div class=\"vd-bar\"><i></i></div></div>", "ba": "<div class=\"mk vid ba\"><div class=\"vd-scene\"><div class=\"ba-a\"><span>After</span></div><div class=\"ba-b\"><span>Before</span></div><div class=\"ba-line\"></div><div class=\"ba-cta\">Book a refit \u2192</div></div>\n  <div class=\"vd-ui\"><span class=\"vd-t\">0:12</span><span class=\"vd-play\" aria-hidden=\"true\"></span></div><div class=\"vd-bar\"><i></i></div></div>"};
+const DEMOS = {};
 
 /* ======================================================================
    WORKS — the single source of truth.
    To use a real piece: set `src` (image or .mp4) and, for video, `poster`.
    The demo artwork is then ignored. `tag` keeps labelling honest.
    ====================================================================== */
-const WORKS_DEFAULT = [
-  { id:'nova',     title:'Nova',               type:'web',      label:'Website Design',          tag:'Concept',        demo:'nova',     ar:'16/9',  arM:'4/5' },
-  { id:'kiln',     title:'Kiln Studio',        type:'web',      label:'Website Redesign',        tag:'Concept',        demo:'kiln',     ar:'16/10', arM:'16/11' },
-  { id:'meridian', title:'Meridian',           type:'web',      label:'Landing Page',            tag:'Concept',        demo:'meridian', ar:'16/10', arM:'4/5' },
-  { id:'diwali',   title:'Diwali Campaign',    type:'creative', label:'Creative Campaign',       tag:'Concept',        demo:'diwali',   ar:'4/5' },
-  { id:'summer',   title:'Summer Drop',        type:'creative', label:'Social Creative',         tag:'Concept',        demo:'summer',   ar:'1/1' },
-  { id:'launch',   title:'Launch Week',        type:'creative', label:'Carousel Series',         tag:'Concept',        demo:'launch',   ar:'16/10', arM:'4/3' },
-  { id:'unnate',   title:'UNNATE Brand World', type:'creative', label:'Identity & Illustration', tag:'Self-initiated', demo:'brand',    ar:'16/10', arM:'4/3' },
-  { id:'product',  title:'Product Film',       type:'video',    label:'Short-form Video',        tag:'Concept',        demo:'product',  ar:'9/16' },
-  { id:'founder',  title:'Founder Story',      type:'video',    label:'Short-form Video',        tag:'Concept',        demo:'founder',  ar:'9/16' },
-  { id:'recipe',   title:'30-Second Recipe',   type:'video',    label:'Short-form Video',        tag:'Concept',        demo:'recipe',   ar:'9/16' },
-  { id:'ba',       title:'Before / After',     type:'video',    label:'Short-form Ad',           tag:'Concept',        demo:'ba',       ar:'9/16' },
-];
+const WORKS_DEFAULT = [];   /* the portfolio is defined in portfolio/portfolio.js */
 /* curated spreads per view: [id, columnStart, columnSpan, offsetTop] on a 12-column grid.
    Pieces not listed here are appended automatically, so new work never disappears. */
 const LAYOUT = {
@@ -2188,7 +2244,8 @@ const TYPE_LABEL = { web:'Website', creative:'Creative', video:'Short-form' };
   const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(hover:hover) and (pointer:fine)');
   const WORKS = (Array.isArray(window.UNNATE_PORTFOLIO) && window.UNNATE_PORTFOLIO.length ? window.UNNATE_PORTFOLIO : WORKS_DEFAULT)
-    .map(w => Object.assign({ ar: w.type === 'video' ? '9/16' : w.type === 'web' ? '16/10' : '4/5' }, w));
+    .map(w => Object.assign({ ar: w.type === 'video' ? '9/16' : w.type === 'web' ? '16/10' : '4/5' }, w,
+      w.src ? { src: encodeURI(w.src) } : {}, w.poster ? { poster: encodeURI(w.poster) } : {}));
   const byId = Object.fromEntries(WORKS.map(w => [w.id, w]));
   const imgSrc = k => (document.querySelector(`img[data-first="${k}"]`) || {}).src || '';
   const isHTML = s => /\.html?(?:[?#]|$)/i.test(s || ''), isVid = s => /\.(mp4|webm|mov|m4v)(?:[?#]|$)/i.test(s || '');
@@ -2232,7 +2289,7 @@ const TYPE_LABEL = { web:'Website', creative:'Creative', video:'Short-form' };
   // phones: one swipeable rail per medium — the work stays large, the page stays short
   function renderRails(){
     visible = [];
-    const pool = view === 'all' ? spreadsFor('all').flat().map(([id]) => byId[id]).filter(Boolean) : WORKS.filter(w => w.type === view);
+    const pool = view === 'all' ? (WORKS.some(w => w.featured) ? WORKS.filter(w => w.featured) : WORKS) : WORKS.filter(w => w.type === view);
     gal.innerHTML = ['web', 'creative', 'video'].map(t => {
       const items = pool.filter(w => w.type === t); if (!items.length) return '';
       return `<section class="rail" data-rail="${t}" aria-label="${RAIL[t]}"><header class="rail-h"><h3>${RAIL[t]}</h3>${items.length > 1 ? '<span class="rail-hint" aria-hidden="true">Swipe</span>' : ''}</header>
@@ -2242,53 +2299,60 @@ const TYPE_LABEL = { web:'Website', creative:'Creative', video:'Short-form' };
   }
   phone.addEventListener && phone.addEventListener('change', () => render());
 
-  /* ---- desktop showcase: three presentation modules, composed per category ---- */
-  const SHOW = {
-    all:      [['web','nova'], ['pair','diwali','summer'], ['reels','product','founder','recipe'], ['web','kiln',1], ['solo','unnate']],
-    web:      [['web','nova'], ['web','kiln',1], ['web','meridian']],
-    creative: [['pair','diwali','summer'], ['pair','launch','unnate',1]],
-    video:    [['reels','product','founder','recipe','ba']],
-  };
-  function modulesFor(v){
-    const mods = SHOW[v].map(m => { const r = m.slice(1), flip = typeof r[r.length - 1] === 'number' ? r.pop() : 0; return { kind: m[0], ids: r.filter(id => byId[id]), flip }; }).filter(m => m.ids.length);
-    const listed = new Set(mods.flatMap(m => m.ids));
-    const extra = WORKS.filter(w => !listed.has(w.id) && (v === 'all' ? (w.featured || !listed.size) : w.type === v)), add = [];
-    extra.filter(w => w.type === 'web').forEach((w, k) => add.push({ kind:'web', ids:[w.id], flip:k % 2 }));
-    const cr = extra.filter(w => w.type === 'creative'); for (let i = 0; i < cr.length; i += 2) add.push({ kind:'pair', ids:cr.slice(i, i + 2).map(w => w.id), flip:(i / 2) % 2 });
-    const vd = extra.filter(w => w.type === 'video');   for (let i = 0; i < vd.length; i += 4) add.push({ kind:'reels', ids:vd.slice(i, i + 4).map(w => w.id) });
-    return add.concat(mods).map(m => m.kind === 'pair' && m.ids.length < 2 ? Object.assign({}, m, { kind:'solo' }) : m);   // real work always leads; built-in demo pieces follow
+  /* ---- desktop showcase v3 ----
+     All Work:   a justified editorial grid — every piece keeps its own format, rows share one height.
+                 Row 1 website + creative · Row 2 video + creative + video · Row 3 creative + website
+     Websites:   one slab per site (live site in a browser, its own mobile layout in a phone)
+     Creatives / Short-form: the same justified grid, three per row                                  */
+  const AR = w => { const [x, y] = String(w.ar).split('/').map(Number); return y ? x / y : (+w.ar || 1); };
+  function rowsFor(v){
+    const items = v === 'all' ? (WORKS.some(w => w.featured) ? WORKS.filter(w => w.featured) : WORKS) : WORKS.filter(w => w.type === v);
+    if (v === 'all'){
+      const W = items.filter(w => w.type === 'web'), C = items.filter(w => w.type === 'creative'), V = items.filter(w => w.type === 'video');
+      const rows = [[W[0], C[0]], [V[0], C[1], V[1]], [C[2], W[1]]].map(r => r.filter(Boolean)).filter(r => r.length);
+      const used = new Set(rows.flat()), rest = items.filter(w => !used.has(w));
+      for (let i = 0; i < rest.length; i += 3) rows.push(rest.slice(i, i + 3));
+      return rows;
+    }
+    const rows = []; for (let i = 0; i < items.length; i += 3) rows.push(items.slice(i, i + 3)); return rows;
   }
   function renderShowcase(){
     visible = []; let n = 0;
     const pad = k => String(k).padStart(2, '0');
-    const cap = (w, k) => `<figcaption class="w-cap"><span class="w-ix">${pad(k)}</span><span class="w-ti">${esc(w.title)}</span><span class="w-lb">${esc(w.label)}</span>${w.tag ? `<span class="w-tg">${esc(w.tag)}</span>` : ''}</figcaption>`;
-    const btn = (w, i, cls) => `<button class="w-media ${cls}" type="button" data-i="${i}" style="--ar:${w.ar}" aria-label="Inspect ${esc(w.title)} — ${esc(w.label)}">`;
-    gal.innerHTML = modulesFor(view).map(m => {
-      if (m.kind === 'web'){
-        const w = byId[m.ids[0]], i = visible.push(w) - 1, k = ++n, framed = !(w.demo === 'kiln' && !w.src);
-        return `<article class="sl${m.flip ? ' is-flip' : ''}">
+    if (view === 'web'){
+      gal.innerHTML = WORKS.filter(w => w.type === 'web').map((w, k) => { const i = visible.push(w) - 1;
+        return `<article class="sl${k % 2 ? ' is-flip' : ''}">
           <figure class="w sl-fig" data-type="web" data-id="${esc(w.id)}">
-            ${btn(w, i, framed ? 'sl-browser' : 'sl-stage')}${framed ? `<span class="b-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="b-url">${esc(w.title)}</span></span>` : ''}<span class="w-art">${art(w)}</span></button>
-            ${framed ? `<button class="w-media sl-phone" type="button" data-i="${i}" tabindex="-1" aria-hidden="true"><span class="w-art">${art(w)}</span></button>` : ''}
+            <button class="w-media sl-browser" type="button" data-i="${i}" style="--ar:16/10" aria-label="Inspect ${esc(w.title)} — website"><span class="b-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="b-url">${esc(w.title)}</span></span><span class="w-art">${art(w)}</span></button>
+            <button class="w-media sl-phone" type="button" data-i="${i}" tabindex="-1" aria-hidden="true"><span class="w-art">${art(w)}</span></button>
           </figure>
-          <div class="sl-meta"><span class="sl-n">${pad(k)}</span><h4 class="sl-t">${esc(w.title)}</h4><p class="sl-l">${esc(w.label)}${framed ? ' · desktop &amp; mobile' : ''}</p>${w.tag ? `<span class="w-tg">${esc(w.tag)}</span>` : ''}
+          <div class="sl-meta"><span class="sl-n">${pad(k + 1)}</span><h4 class="sl-t">${esc(w.title)}</h4><p class="sl-l">Website · desktop &amp; mobile</p>${w.tag ? `<span class="w-tg">${esc(w.tag)}</span>` : ''}
             <button class="sl-open" type="button" data-i="${i}">Inspect website <span aria-hidden="true">→</span></button></div>
-        </article>`;
-      }
-      if (m.kind === 'reels')
-        return `<div class="rl">${m.ids.map(id => { const w = byId[id], i = visible.push(w) - 1, k = ++n;
-          return `<figure class="w rl-fig" data-type="video" data-id="${esc(w.id)}">${btn(w, i, 'rl-phone')}<span class="w-art">${art(w)}</span></button>${cap(w, k)}</figure>`; }).join('')}</div>`;
-      return `<div class="${m.kind === 'pair' ? 'pr' + (m.flip ? ' is-flip' : '') : 'solo'}">${m.ids.map(id => { const w = byId[id], i = visible.push(w) - 1, k = ++n;
-        return `<figure class="w mat-fig" data-type="${w.type}" data-id="${esc(w.id)}">${btn(w, i, 'mat')}<span class="w-art">${art(w)}</span></button>${cap(w, k)}</figure>`; }).join('')}</div>`;
-    }).join('');
+        </article>`; }).join('');
+    } else {
+      gal.innerHTML = rowsFor(view).map(row => `<div class="jr">${row.map(w => { const i = visible.push(w) - 1, k = ++n;
+        const web = w.type === 'web', ar = web ? 1.5 : AR(w);
+        return `<figure class="w g-fig g-${w.type}" data-type="${w.type}" data-id="${esc(w.id)}" style="--g:${ar.toFixed(4)}">
+          <button class="w-media g-media" type="button" data-i="${i}" style="--ar:${ar.toFixed(4)}" aria-label="Inspect ${esc(w.title)} — ${esc(w.label)}">${web ? `<span class="b-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="b-url">${esc(w.title)}</span></span>` : ''}<span class="w-art">${art(w)}</span>${w.type === 'video' ? '<span class="g-play" aria-hidden="true"></span>' : ''}</button>
+          <figcaption class="w-cap g-cap"><span class="w-ix">${pad(k)}</span><span class="w-ti">${esc(w.title)}</span><span class="w-lb">${esc(w.label)}</span>${w.tag ? `<span class="w-tg">${esc(w.tag)}</span>` : ''}</figcaption>
+        </figure>`; }).join('')}</div>`).join('');
+    }
     observe();
-    // real short-form plays muted while it is on screen (desktop reel stage only)
+    // real short-form plays muted while on screen — at most two at a time
     if (!reduce() && 'IntersectionObserver' in window){
+      const live = [];
       const vio = new IntersectionObserver(es => es.forEach(e => { const v = e.target;
-        if (e.isIntersecting){ if (!v.getAttribute('src')) v.src = v.dataset.src; v.muted = true; v.play().catch(() => {}); } else v.pause(); }), { threshold: .6 });
-      $$('.rl video[data-src]', gal).forEach(v => vio.observe(v));
+        if (e.isIntersecting){ if (!v.getAttribute('src')) v.src = v.dataset.src; v.muted = true; v.play().catch(() => {});
+          if (!live.includes(v)) live.push(v); while (live.length > 2) live.shift().pause(); }
+        else { v.pause(); const k = live.indexOf(v); if (k > -1) live.splice(k, 1); } }), { threshold: .6 });
+      $$('.jr video[data-src]', gal).forEach(v => vio.observe(v));
     }
   }
+  // real media sets its own proportions: the row re-balances to the true shape
+  gal.addEventListener('loadedmetadata', e => { const v = e.target; if (v.tagName !== 'VIDEO' || !v.videoWidth) return; const f = v.closest('.g-fig'); if (!f) return;
+    const r = v.videoWidth / v.videoHeight; f.style.setProperty('--g', r.toFixed(4)); f.querySelector('.g-media').style.setProperty('--ar', r.toFixed(4)); }, true);
+  gal.addEventListener('load', e => { const im = e.target; if (im.tagName !== 'IMG' || !im.naturalWidth) return; const f = im.closest('.g-fig'); if (!f) return;
+    const r = im.naturalWidth / im.naturalHeight; f.style.setProperty('--g', r.toFixed(4)); f.querySelector('.g-media').style.setProperty('--ar', r.toFixed(4)); }, true);
   function render(){
     if (phone.matches) return renderRails();
     return renderShowcase();
