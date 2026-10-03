@@ -1272,6 +1272,98 @@ html.pl-on .hero *{animation-play-state:paused!important}
 }
 @media (max-width:350px){ #what-we-do .lab-s{font-size:.84rem;letter-spacing:-.03em} }
 @media (max-width:760px) and (max-height:620px){ .hero-sub{display:none} #what-we-do .s2-sub{display:none} #what-we-do{padding-top:max(70px,calc(env(safe-area-inset-top) + 62px))} #what-we-do .map{--stage-h:clamp(140px,calc(100svh - 398px),260px)} }
+/* ==== MOBILE HERO v2 (reference composition) ==== */
+@media (max-width:760px){
+  /* header: a confident wordmark, a quiet round menu */
+  .header .logo{--wm-h:clamp(24px,7.2vw,30px)}
+  /* copy: one centred stack */
+  .hero-copy{align-items:center;text-align:center;padding:max(78px,calc(env(safe-area-inset-top) + 70px)) var(--mg,20px) 0}
+  .hero h1{text-align:center;font-size:clamp(2.4rem,min(13vw,6.8svh),3.5rem);line-height:.91;letter-spacing:-.05em}
+  .hero h1 .serif::after{content:"";position:absolute;left:2%;width:60%;bottom:-.17em;height:.2em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 14' preserveAspectRatio='none'%3E%3Cpath d='M3 10 C 45 3.5, 100 2.5, 157 6.5' fill='none' stroke='%23F84608' stroke-width='3.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 0 0/100% 100%;pointer-events:none}
+  .hero-sub{margin:clamp(9px,1.3svh,12px) auto 0;max-width:23.6em;font-size:clamp(.88rem,3.8vw,1rem);line-height:1.4;text-align:center;color:rgba(255,255,255,.93)}
+  .hero-actions{flex-direction:column;align-items:center;gap:2px;margin-top:clamp(13px,1.9svh,18px)}
+  .hero-actions .btn{min-width:min(228px,66vw);min-height:50px;justify-content:space-between;padding-left:26px;font-size:1.04rem}
+  .hero-actions .link-quiet{font-size:1rem}
+  .hero-actions .link-quiet::after{content:"→";margin-left:8px;font-weight:500}
+  /* visual: the mascot is the hero; work floats at its shoulders; clouds frame it */
+  .orbit-ring{display:none}
+  .hero-char{width:min(55cqw,65cqh);bottom:27%}
+  .hero-char .perch{left:-92%;width:284%;bottom:-74%}
+  .hero .orb{--W:min(calc(var(--mw) * 1cqw),calc(var(--mw) * 1.9cqh))}
+  .orbit > .orb:nth-child(3){--mx:23!important;--my:20!important;--mw:36!important;--r:-10deg!important;--ry:20deg!important;--mz:2!important}
+  .orbit > .orb:nth-child(4){--mx:81!important;--my:21!important;--mw:19!important;--r:9deg!important;--ry:-14deg!important;--mz:2!important}
+  .orbit > .orb:nth-child(3) .tilt,.orbit > .orb:nth-child(4) .tilt{position:relative}
+  .orbit > .orb:nth-child(3) .tilt::before,.orbit > .orb:nth-child(4) .tilt::before{content:"";position:absolute;width:26px;height:26px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cg stroke='%23fff' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M4 10 L11 15'/%3E%3Cpath d='M14 3 L15.5 11'/%3E%3Cpath d='M25 5 L20.5 12'/%3E%3C/g%3E%3C/svg%3E") no-repeat center/contain;pointer-events:none}
+  .orbit > .orb:nth-child(3) .tilt::before{left:-14px;top:-18px;transform:rotate(-14deg)}
+  .orbit > .orb:nth-child(4) .tilt::before{right:-16px;top:-16px;transform:scaleX(-1) rotate(-10deg)}
+}
+@media (max-width:760px) and (max-height:640px){ .hero-sub{display:none} .hero-actions{margin-top:14px} }
+@media (max-width:760px) and (max-height:700px){
+  .orbit > .orb:nth-child(3){--my:33!important;--mw:33!important}
+  .orbit > .orb:nth-child(4){--my:34!important;--mw:17!important}
+  .hero-char{bottom:22%}
+}
+/* ==== /MOBILE HERO v2 ==== */
+/* ==== SECTION 03 · desktop showcase v2 ==== */
+@media (min-width:761px){
+  .w3 .sl,.w3 .pr,.w3 .solo,.w3 .rl{margin:0 auto clamp(96px,14vh,160px)}
+  /* website slab: the live site in a browser, its own mobile layout in a phone, a clear project panel */
+  .w3 .sl{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,280px);column-gap:clamp(48px,5vw,88px);align-items:end}
+  .w3 .sl.is-flip{grid-template-columns:minmax(230px,280px) minmax(0,1fr)}
+  .w3 .sl.is-flip .sl-fig{order:2}
+  .w3 .sl-fig{position:relative;margin:0;padding-bottom:5%}
+  .w3 .sl-browser{padding-top:38px;border-radius:14px;background:#F3F6FA;box-shadow:0 70px 120px -56px rgba(0,8,30,.95),0 0 0 1px rgba(255,255,255,.16)}
+  .w3 .sl-browser > .w-art{top:38px;border-radius:0 0 14px 14px;overflow:hidden}
+  .w3 .b-chrome{position:absolute;left:0;right:0;top:0;height:38px;z-index:3;display:flex;align-items:center;gap:7px;padding:0 16px;background:#F3F6FA;border-bottom:1px solid #E3E9F1}
+  .w3 .b-chrome i{width:10px;height:10px;border-radius:50%;background:#D5DDE7}
+  .w3 .b-url{margin:0 auto;transform:translateX(-24px);min-width:200px;max-width:44%;padding:5px 16px;border-radius:7px;background:#fff;font-size:12px;font-weight:500;color:#6F819B;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .w3 .sl-phone{position:absolute;right:-30px;bottom:0;width:19%;aspect-ratio:9/19.5;padding:0;border-radius:30px;background:#0A0F1C;box-shadow:0 40px 70px -30px rgba(0,8,30,.9),0 0 0 1px rgba(255,255,255,.12);z-index:4}
+  .w3 .sl.is-flip .sl-phone{right:auto;left:-30px}
+  .w3 .sl-phone > .w-art{inset:7px;border-radius:24px;overflow:hidden;background:#fff}
+  .w3 .sl-stage{border-radius:16px;box-shadow:0 70px 120px -56px rgba(0,8,30,.95)}
+  .w3 .sl-meta{padding-bottom:7%}
+  .w3 .sl-n{display:block;font-family:var(--serif);font-style:italic;font-size:clamp(2.8rem,1.8rem + 2vw,4rem);line-height:1;color:var(--peach)}
+  .w3 .sl-t{margin:14px 0 6px;font-size:clamp(1.8rem,1.2rem + 1.2vw,2.5rem);font-weight:750;letter-spacing:-.04em;line-height:1}
+  .w3 .sl-l{margin:0 0 14px;font-size:1rem;color:rgba(255,255,255,.78)}
+  .w3 .sl-meta .w-tg{display:inline-block;margin-left:0}
+  .w3 .sl-open{all:unset;box-sizing:border-box;display:flex;width:max-content;align-items:center;gap:10px;margin-top:26px;min-height:48px;padding:0 22px;border-radius:99px;cursor:pointer;background:#fff;color:var(--ink);font-weight:650;font-size:.95rem;transition:transform .3s var(--ease-out)}
+  .w3 .sl-open:hover{transform:translateY(-2px)}
+  .w3 .sl-open:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+  /* creative wall: each piece hung on a mat, in asymmetric pairs */
+  .w3 .pr{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:clamp(36px,4vw,64px);align-items:start}
+  .w3 .pr.is-flip{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+  .w3 .pr .mat-fig:nth-child(2){margin-top:14%}
+  .w3 .solo{max-width:900px}
+  .w3 .mat-fig{margin:0}
+  .w3 .mat{border-radius:18px;background:#0D4DA9;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 50px 90px -60px rgba(0,8,30,.9)}
+  .w3 .mat > .w-art{inset:7%;border-radius:8px;overflow:hidden;box-shadow:0 40px 60px -32px rgba(0,8,30,.8)}
+  /* reel stage: short-form in phones, staggered */
+  .w3 .rl{display:flex;justify-content:center;align-items:flex-start;gap:clamp(26px,3vw,52px)}
+  .w3 .rl-fig{flex:0 0 auto;width:clamp(200px,17vw,262px);margin:0}
+  .w3 .rl-fig:nth-child(2){margin-top:64px}.w3 .rl-fig:nth-child(3){margin-top:20px}.w3 .rl-fig:nth-child(4){margin-top:84px}
+  .w3 .rl-phone{border-radius:36px;background:#0A0F1C;box-shadow:0 60px 100px -50px rgba(0,8,30,.95),0 0 0 1px rgba(255,255,255,.14)}
+  .w3 .rl-phone > .w-art{inset:9px;border-radius:28px;overflow:hidden}
+  .w3 .rl-phone::after{content:"";position:absolute;top:17px;left:50%;width:28%;height:15px;margin-left:-14%;border-radius:99px;background:#0A0F1C;z-index:3}
+  /* labels: museum-style, readable */
+  .w3 .mat-fig .w-cap,.w3 .rl-fig .w-cap{margin-top:18px;font-size:.98rem}
+  .w3 .mat-fig .w-ti,.w3 .rl-fig .w-ti{color:#fff}
+  .w3 .mat-fig .w-lb,.w3 .rl-fig .w-lb{color:rgba(255,255,255,.78)}
+  .w3 .rl-fig .w-cap{flex-wrap:wrap}.w3 .rl-fig .w-tg{margin-left:0}
+}
+@media (min-width:761px) and (max-width:1023px){
+  .w3 .sl,.w3 .sl.is-flip{grid-template-columns:minmax(0,1fr);row-gap:30px}
+  .w3 .sl.is-flip .sl-fig{order:0}
+  .w3 .sl-phone{right:-10px}.w3 .sl.is-flip .sl-phone{left:auto;right:-10px}
+  .w3 .sl-meta{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:22px;align-items:center;padding:0 4px}
+  .w3 .sl-n{grid-row:1 / span 2;font-size:3rem}
+  .w3 .sl-t{margin:0;font-size:1.8rem}.w3 .sl-l{margin:4px 0 0}
+  .w3 .sl-meta .w-tg{display:none}
+  .w3 .sl-open{grid-column:3;grid-row:1 / span 2;margin:0}
+  .w3 .rl{flex-wrap:wrap;row-gap:36px}
+  .w3 .rl-fig{width:calc(50% - 26px);max-width:280px}
+  .w3 .rl-fig:nth-child(n){margin-top:0}.w3 .rl-fig:nth-child(even){margin-top:56px}
+}
+/* ==== /SECTION 03 · desktop showcase v2 ==== */
 </style>
 </head>
 <body>
@@ -1385,7 +1477,7 @@ html.pl-on .hero *{animation-play-state:paused!important}
   <div class="hero-copy" data-copy>
     <p class="hero-for">A creative &amp; digital studio for ambitious businesses</p>
     <h1 id="hero-title"><span class="ln"><span data-haze="People see">People see</span> <span data-haze="your brand">your brand</span></span> <span class="ln"><span class="serif" data-haze="before they">before they</span> <span data-haze="choose you.">choose you.</span></span></h1>
-    <p class="hero-sub"><span class="d-txt">We build the websites, content, campaigns, and creative that make your business impossible to overlook.</span><span class="m-txt">Websites, content and campaigns that make your business impossible to overlook.</span></p>
+    <p class="hero-sub"><span class="d-txt">We build the websites, content, campaigns, and creative that make your business impossible to overlook.</span><span class="m-txt">Websites, content and campaigns that<br class="m-br"> make your business impossible to overlook.</span></p>
     <div class="hero-actions">
       <a class="btn" href="#start" data-open-brief>Start a Project <span class="knob" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
       <a class="link-quiet" href="#work">See Our Work</a>
@@ -2149,8 +2241,57 @@ const TYPE_LABEL = { web:'Website', creative:'Creative', video:'Short-form' };
     observe();
   }
   phone.addEventListener && phone.addEventListener('change', () => render());
+
+  /* ---- desktop showcase: three presentation modules, composed per category ---- */
+  const SHOW = {
+    all:      [['web','nova'], ['pair','diwali','summer'], ['reels','product','founder','recipe'], ['web','kiln',1], ['solo','unnate']],
+    web:      [['web','nova'], ['web','kiln',1], ['web','meridian']],
+    creative: [['pair','diwali','summer'], ['pair','launch','unnate',1]],
+    video:    [['reels','product','founder','recipe','ba']],
+  };
+  function modulesFor(v){
+    const mods = SHOW[v].map(m => { const r = m.slice(1), flip = typeof r[r.length - 1] === 'number' ? r.pop() : 0; return { kind: m[0], ids: r.filter(id => byId[id]), flip }; }).filter(m => m.ids.length);
+    const listed = new Set(mods.flatMap(m => m.ids));
+    const extra = WORKS.filter(w => !listed.has(w.id) && (v === 'all' ? (w.featured || !listed.size) : w.type === v)), add = [];
+    extra.filter(w => w.type === 'web').forEach((w, k) => add.push({ kind:'web', ids:[w.id], flip:k % 2 }));
+    const cr = extra.filter(w => w.type === 'creative'); for (let i = 0; i < cr.length; i += 2) add.push({ kind:'pair', ids:cr.slice(i, i + 2).map(w => w.id), flip:(i / 2) % 2 });
+    const vd = extra.filter(w => w.type === 'video');   for (let i = 0; i < vd.length; i += 4) add.push({ kind:'reels', ids:vd.slice(i, i + 4).map(w => w.id) });
+    return add.concat(mods).map(m => m.kind === 'pair' && m.ids.length < 2 ? Object.assign({}, m, { kind:'solo' }) : m);   // real work always leads; built-in demo pieces follow
+  }
+  function renderShowcase(){
+    visible = []; let n = 0;
+    const pad = k => String(k).padStart(2, '0');
+    const cap = (w, k) => `<figcaption class="w-cap"><span class="w-ix">${pad(k)}</span><span class="w-ti">${esc(w.title)}</span><span class="w-lb">${esc(w.label)}</span>${w.tag ? `<span class="w-tg">${esc(w.tag)}</span>` : ''}</figcaption>`;
+    const btn = (w, i, cls) => `<button class="w-media ${cls}" type="button" data-i="${i}" style="--ar:${w.ar}" aria-label="Inspect ${esc(w.title)} — ${esc(w.label)}">`;
+    gal.innerHTML = modulesFor(view).map(m => {
+      if (m.kind === 'web'){
+        const w = byId[m.ids[0]], i = visible.push(w) - 1, k = ++n, framed = !(w.demo === 'kiln' && !w.src);
+        return `<article class="sl${m.flip ? ' is-flip' : ''}">
+          <figure class="w sl-fig" data-type="web" data-id="${esc(w.id)}">
+            ${btn(w, i, framed ? 'sl-browser' : 'sl-stage')}${framed ? `<span class="b-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="b-url">${esc(w.title)}</span></span>` : ''}<span class="w-art">${art(w)}</span></button>
+            ${framed ? `<button class="w-media sl-phone" type="button" data-i="${i}" tabindex="-1" aria-hidden="true"><span class="w-art">${art(w)}</span></button>` : ''}
+          </figure>
+          <div class="sl-meta"><span class="sl-n">${pad(k)}</span><h4 class="sl-t">${esc(w.title)}</h4><p class="sl-l">${esc(w.label)}${framed ? ' · desktop &amp; mobile' : ''}</p>${w.tag ? `<span class="w-tg">${esc(w.tag)}</span>` : ''}
+            <button class="sl-open" type="button" data-i="${i}">Inspect website <span aria-hidden="true">→</span></button></div>
+        </article>`;
+      }
+      if (m.kind === 'reels')
+        return `<div class="rl">${m.ids.map(id => { const w = byId[id], i = visible.push(w) - 1, k = ++n;
+          return `<figure class="w rl-fig" data-type="video" data-id="${esc(w.id)}">${btn(w, i, 'rl-phone')}<span class="w-art">${art(w)}</span></button>${cap(w, k)}</figure>`; }).join('')}</div>`;
+      return `<div class="${m.kind === 'pair' ? 'pr' + (m.flip ? ' is-flip' : '') : 'solo'}">${m.ids.map(id => { const w = byId[id], i = visible.push(w) - 1, k = ++n;
+        return `<figure class="w mat-fig" data-type="${w.type}" data-id="${esc(w.id)}">${btn(w, i, 'mat')}<span class="w-art">${art(w)}</span></button>${cap(w, k)}</figure>`; }).join('')}</div>`;
+    }).join('');
+    observe();
+    // real short-form plays muted while it is on screen (desktop reel stage only)
+    if (!reduce() && 'IntersectionObserver' in window){
+      const vio = new IntersectionObserver(es => es.forEach(e => { const v = e.target;
+        if (e.isIntersecting){ if (!v.getAttribute('src')) v.src = v.dataset.src; v.muted = true; v.play().catch(() => {}); } else v.pause(); }), { threshold: .6 });
+      $$('.rl video[data-src]', gal).forEach(v => vio.observe(v));
+    }
+  }
   function render(){
     if (phone.matches) return renderRails();
+    return renderShowcase();
     visible = []; let n = 0;
     gal.innerHTML = spreadsFor(view).map(row => `<div class="spread">${row.map(([id, cs, span, off]) => {
       const w = byId[id]; const i = visible.push(w) - 1; n++;
@@ -2246,7 +2387,7 @@ const TYPE_LABEL = { web:'Website', creative:'Creative', video:'Short-form' };
     $('#inspT').innerHTML = `<b>${esc(w.title)}</b><span>${esc(w.label)}</span>${w.tag ? `<span>${esc(w.tag)}</span>` : ''}`;
     $('#inspIdx').textContent = `${String(ii + 1).padStart(2, '0')} / ${String(visible.length).padStart(2, '0')}`;
   }
-  gal.addEventListener('click', e => { const m = e.target.closest('.w-media'); if (!m) return; from = m; show(+m.dataset.i); insp.showModal(); document.documentElement.style.overflow = 'hidden'; $('#inspX').focus(); });
+  gal.addEventListener('click', e => { const m = e.target.closest('.w-media, .sl-open'); if (!m) return; from = m; show(+m.dataset.i); insp.showModal(); document.documentElement.style.overflow = 'hidden'; $('#inspX').focus(); });
   insp.addEventListener('close', () => { document.documentElement.style.overflow = ''; frame.innerHTML = ''; from && from.focus({ preventScroll: true }); });
   $('#inspX').addEventListener('click', () => insp.close());
   $('#inspPrev').addEventListener('click', () => show(ii - 1));
