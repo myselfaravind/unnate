@@ -1,4 +1,4 @@
-/* UNNATE — shared behaviour: the eyes, navigation, enquiry form, selected-work stage, footer. */
+/* UNNATE — shared behaviour: navigation, arrival, the Hairline figure, the work rail, the enquiry sheet, footer. */
 (() => {
   'use strict';
   const doc = document.documentElement;
@@ -9,82 +9,19 @@
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const SERVICES = ['Websites', 'Brand Identity', 'Content & Creative', 'Social Media', 'Digital Advertising', 'Not sure yet'];
-
-  /* ---------- the eyes ----------
-     One drawing, five moods: (default) looking · unimpressed · feel · shut · wink.
-     Pupils follow the pointer; on touch they look where data-look says ("x,y", each -1…1). */
-  const eye = (cx, side) => `<g class="open ${side}"><circle class="ball" cx="${cx}" cy="31" r="25"/><circle class="pupil" cx="${cx}" cy="31" r="11"/><circle class="glint" cx="${cx - 6}" cy="24" r="5"/><path class="lid" d="M${cx - 28} 24A28 30 0 0 1 ${cx + 28} 24Z"/></g><path class="shut ${side}" d="M${cx - 22} 36Q${cx} 12 ${cx + 22} 36"/>`;
-  const eyesSVG = (mood = '', cls = '', look = '') =>
-    `<svg class="eyes ${cls}" viewBox="${cls ? '0 0 110 60' : '1 4 108 54'}" aria-hidden="true" focusable="false"${mood ? ` data-mood="${mood}"` : ''}${look ? ` data-look="${look}"` : ''}>${eye(28, 'el')}${eye(82, 'er')}<path class="ticks" d="M114 12l11-9M119 31h14M114 50l11 9"/></svg>`;
-
-  // placeholders written in the HTML: <span data-eyes="mood" data-look="x,y" class="…">
-  $$('[data-eyes]').forEach(el => { el.outerHTML = eyesSVG(el.dataset.eyes, el.className, el.dataset.look || ''); });
-  // a double "o" becomes a pair of eyes; the letters stay in the DOM for readers
-  $$('.oo').forEach(el => {
-    el.insertAdjacentHTML('beforeend', eyesSVG(el.dataset.mood || '', '', el.dataset.look || ''));
-    el.classList.add('live');
-  });
-
-  const allEyes = () => $$('svg.eyes');
-  const setLook = (svg, x, y) => { svg.style.setProperty('--lx', x.toFixed(3)); svg.style.setProperty('--ly', y.toFixed(3)); };
-  const rest = svg => { const [x, y] = (svg.dataset.look || '0,0').split(',').map(Number); setLook(svg, x || 0, y || 0); };
-  allEyes().forEach(rest);
-  let following = false, raf = 0, px = 0, py = 0;
-  const follow = () => {
-    raf = 0;
-    allEyes().forEach(svg => {
-      if (svg.dataset.hold) return;
-      const r = svg.getBoundingClientRect();
-      if (r.bottom < -200 || r.top > innerHeight + 200) return;
-      const dx = px - (r.left + r.width / 2), dy = py - (r.top + r.height / 2);
-      const d = Math.hypot(dx, dy) || 1, reach = Math.min(1, d / 160);
-      setLook(svg, dx / d * reach, dy / d * reach);
-    });
-  };
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduceMotion.matches) {
-    addEventListener('pointermove', e => { if (!following) return; px = e.clientX; py = e.clientY; if (!raf) raf = requestAnimationFrame(follow); }, { passive: true });
-    document.addEventListener('pointerleave', () => allEyes().forEach(svg => !svg.dataset.hold && rest(svg)));
-  }
-
-  /* ---------- hero: see → feel, once ---------- */
-  requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('ready')));
-  const heroEyes = $('.hero svg.eyes');
-  if (heroEyes && !reduceMotion.matches) {
-    heroEyes.dataset.hold = '1';
-    setLook(heroEyes, 0, 0);
-    setTimeout(() => setLook(heroEyes, 1, .1), 900);                       // look at "see."
-    setTimeout(() => { setLook(heroEyes, -.5, .95); }, 1800);              // …down at "feel."
-    setTimeout(() => { heroEyes.dataset.mood = 'feel'; $('.hero h1').classList.add('drawn'); }, 2150);
-    setTimeout(() => { delete heroEyes.dataset.mood; delete heroEyes.dataset.hold; following = true; }, 4200);
-  } else {
-    following = true;
-    $('.hero h1')?.classList.add('drawn');
-  }
-  // the eyes light up whenever someone reaches for the enquiry button next to them
-  $$('[data-thrill]').forEach(btn => {
-    const target = () => $(btn.dataset.thrill);
-    const on = () => { const t = target(); if (t && !t.dataset.hold) t.dataset.mood = 'feel'; };
-    const off = () => { const t = target(); if (t && !t.dataset.hold) delete t.dataset.mood; };
-    btn.addEventListener('pointerenter', on); btn.addEventListener('focus', on);
-    btn.addEventListener('pointerleave', off); btn.addEventListener('blur', off);
-  });
-
-  /* ---------- scribbles draw when seen ---------- */
-  const drawables = $$('[data-draw]');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(entries => entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('drawn'); io.unobserve(e.target); }
-    }), { threshold: .5 });
-    drawables.forEach(el => io.observe(el));
-  } else drawables.forEach(el => el.classList.add('drawn'));
+  const ARR = '<span class="arr" aria-hidden="true">→</span>';
 
   /* ---------- shared project markup ---------- */
   const alt = it => esc(it.alt || `${it.title}: ${it.category.toLowerCase()}`);
   const thumb = it => it.type === 'web' ? `${it.id}-wide` : it.type === 'video' ? `${it.id}-poster` : `${it.id}-full`;
   const dims = it => it.type === 'web' ? [1200, 750] : it.type === 'video' ? [720, 1280] : (it.size || [1400, 1867]);
-  const pieceHTML = it => { const [w, h] = dims(it); return `<span class="piece ${it.type}"><img src="${ROOT}assets/work/${esc(thumb(it))}.webp" width="${w}" height="${h}" loading="lazy" decoding="async" alt="${alt(it)}"></span>`; };
+  const PLAY = '<span class="badge" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1.500l11 6.500-11 6.500z"/></svg></span>'.replace(/\.500/g, '.5');
+  const printHTML = (it, eager) => {
+    const [w, h] = dims(it);
+    return `<span class="print" style="--ar:${w}/${h}"><img src="${ROOT}assets/work/${esc(thumb(it))}.webp" width="${w}" height="${h}" ${eager ? '' : 'loading="lazy" '}decoding="async" draggable="false" alt="${alt(it)}">${it.type === 'video' ? PLAY : ''}</span>`;
+  };
   const tagsHTML = it => `<span class="tag">${esc(it.category)}</span>${it.kind ? `<span class="tag tag-kind">${esc(it.kind)}</span>` : ''}`;
-  window.UNNATE = { esc, ROOT, reduceMotion, pieceHTML, tagsHTML, alt };
+  window.UNNATE = { esc, ROOT, reduceMotion, printHTML, tagsHTML, alt, ARR };
 
   /* ---------- navigation ---------- */
   const toggle = $('.nav-toggle'), links = $('.nav-links');
@@ -95,7 +32,62 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setOpen(false); toggle.focus(); }
     });
+    document.addEventListener('pointerdown', e => { if (links.classList.contains('open') && !e.target.closest('.nav')) setOpen(false); });
   }
+
+  /* ---------- arrival: things settle as they are reached ---------- */
+  const arrive = els => {
+    if (!('IntersectionObserver' in window) || reduceMotion.matches) { els.forEach(el => el.classList.add('in')); return; }
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+    els.forEach(el => io.observe(el));
+  };
+  arrive($$('.reveal'));
+  window.UNNATE.arrive = arrive;
+
+  /* ---------- the ticker's pause button ---------- */
+  const ticker = $('[data-ticker]'), tickBtn = $('[data-ticker-pause]');
+  if (ticker && tickBtn) tickBtn.addEventListener('click', () => {
+    const paused = ticker.dataset.state !== 'paused';
+    ticker.dataset.state = tickBtn.dataset.state = paused ? 'paused' : 'playing';
+    tickBtn.setAttribute('aria-label', paused ? 'Play the moving list of services' : 'Pause the moving list of services');
+  });
+  if (tickBtn) tickBtn.dataset.state = 'playing';
+
+  /* ---------- Hairline: the page a figure is shown on ----------
+     The figure file calls hairline({...}); this mounts it the way the package's bench does,
+     plays its tour while it is on screen, and gives way to a real pointer. */
+  const HL = window.HL;
+  window.hairline = figure => {
+    const stage = $(`[data-figure="${figure.name}"]`);
+    if (!stage || !HL) return;
+    const readEl = $('[data-fig-read]'), playBtn = $('[data-fig-play]');
+    HL.inject(document);
+    stage.setAttribute('data-hairline', figure.name);
+    stage.setAttribute('role', 'img');
+    stage.setAttribute('aria-label', figure.means);
+    const svg = HL.mk('svg', { viewBox: '0 0 400 320', 'aria-hidden': 'true' }, stage);
+    let text = 'rest';
+    const read = { get textContent() { return text; }, set textContent(v) { text = v == null ? '' : String(v); if (readEl) readEl.textContent = text; } };
+    figure.mount({ stage, svg, read }, figure.range[1]);
+
+    let playing = null, wanted = !reduceMotion.matches, seen = false;
+    const sync = () => {
+      const on = wanted && seen && !document.hidden;
+      if (on && !playing) playing = HL.tour(stage, figure.tour || HL.LAP);
+      if (!on && playing) { playing.stop(); playing = null; }
+      if (playBtn) {
+        playBtn.dataset.state = wanted ? 'playing' : 'paused';
+        playBtn.setAttribute('aria-label', wanted ? 'Pause the drawing’s animation' : 'Play the drawing’s animation');
+      }
+    };
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { seen = es[0].isIntersecting; sync(); }, { threshold: .35 }).observe(stage);
+    else seen = true;
+    document.addEventListener('visibilitychange', sync);
+    if (playBtn) playBtn.addEventListener('click', () => { wanted = !wanted; sync(); });
+    sync();
+  };
 
   /* ---------- footer: year + verified links only ---------- */
   $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
@@ -109,18 +101,99 @@
     connect.innerHTML = items.join('');
   }
 
-  /* ---------- enquiry modal ---------- */
+  /* ---------- selected work: a rail of prints ----------
+     Native horizontal scrolling with snap points (touch and trackpad get real momentum for free).
+     With a mouse the rail can be dragged: it tracks the pointer 1:1 from where it was grabbed,
+     and on release it is thrown to the print nearest where that momentum would have carried it. */
+  const data = window.UNNATE_PORTFOLIO || [];
+  const carousel = $('[data-carousel]');
+  const cats = $('[data-cats]');
+  if (cats && data.length) {
+    cats.innerHTML = ['Brand Identity', 'Websites', 'Content & Creative', 'Campaigns'].filter(g => data.some(i => i.group === g))
+      .map(g => `<li><a class="tag" href="${ROOT}work/?show=${encodeURIComponent(g)}">${esc(g)}</a></li>`).join('');
+  }
+  if (carousel && data.length) {
+    const items = data.filter(i => i.featured);
+    const rail = $('[data-rail]', carousel), count = $('[data-count]', carousel), bar = $('.rail-bar i', carousel);
+    const prev = $('[data-prev]', carousel), next = $('[data-next]', carousel);
+    const pad = n => String(n).padStart(2, '0');
+    rail.innerHTML = items.map((it, i) => `<li class="slide" aria-roledescription="slide" aria-label="${i + 1} of ${items.length}">
+        <a href="${ROOT}work/#${encodeURIComponent(it.id)}" aria-label="${esc(it.title)}: view project">${printHTML(it, i < 2)}</a>
+        <div class="cap"><span class="n" aria-hidden="true">${pad(i + 1)}</span><h3>${esc(it.title)}</h3><div class="tags">${tagsHTML(it)}</div><p>${esc(it.desc)}</p></div>
+      </li>`).join('');
+    const slides = $$('.slide', rail);
+    const behavior = () => reduceMotion.matches ? 'auto' : 'smooth';
+    const origin = () => parseFloat(getComputedStyle(rail).scrollPaddingLeft) || 0;
+    const posOf = el => el.offsetLeft - origin();
+    const maxScroll = () => rail.scrollWidth - rail.clientWidth;
+    const nearest = x => slides.reduce((a, el, i) => Math.abs(Math.min(posOf(el), maxScroll()) - x) < Math.abs(Math.min(posOf(slides[a]), maxScroll()) - x) ? i : a, 0);
+    let index = 0;
+    const update = () => {
+      index = rail.scrollLeft >= maxScroll() - 2 ? Math.max(nearest(rail.scrollLeft), index) : nearest(rail.scrollLeft);
+      const end = rail.scrollLeft >= maxScroll() - 2;
+      count.textContent = `${pad(end ? items.length : index + 1)} / ${pad(items.length)}`;
+      bar.style.setProperty('--p', (maxScroll() > 0 ? Math.max(.06, rail.scrollLeft / maxScroll()) : 1).toFixed(3));
+      prev.disabled = rail.scrollLeft <= 2; next.disabled = end;
+    };
+    const go = i => rail.scrollTo({ left: Math.min(posOf(slides[Math.max(0, Math.min(slides.length - 1, i))]), maxScroll()), behavior: behavior() });
+    let ticking = false;
+    rail.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; update(); }); } }, { passive: true });
+    addEventListener('resize', update);
+    prev.addEventListener('click', () => go(nearest(rail.scrollLeft) - 1));
+    next.addEventListener('click', () => go(nearest(rail.scrollLeft) + 1));
+    rail.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(nearest(rail.scrollLeft) + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(nearest(rail.scrollLeft) - 1); }
+    });
+    // mouse drag
+    let drag = null;
+    const project = (v, d = .996) => (v / 1000) * d / (1 - d);          // where the momentum would carry it, px
+    rail.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      drag = { x: e.clientX, left: rail.scrollLeft, moved: false, hist: [[e.timeStamp, e.clientX]] };
+    });
+    addEventListener('pointermove', e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) < 8) return;                        // a little hysteresis before it becomes a drag
+      if (!drag.moved) { drag.moved = true; rail.classList.add('dragging'); }
+      rail.scrollLeft = drag.left - dx;
+      drag.hist.push([e.timeStamp, e.clientX]); if (drag.hist.length > 6) drag.hist.shift();
+    });
+    const release = e => {
+      if (!drag) return;
+      const d = drag; drag = null;
+      if (!d.moved) return;
+      const [t0, x0] = d.hist[0], [t1, x1] = d.hist[d.hist.length - 1];
+      const v = t1 > t0 && e.timeStamp - t1 < 80 ? (x1 - x0) / (t1 - t0) * 1000 : 0;   // px/s at release
+      const target = nearest(rail.scrollLeft - Math.max(-900, Math.min(900, project(v))));
+      rail.classList.remove('dragging');
+      go(target);
+      // a drag is not a click on the print underneath
+      const stop = ev => { ev.preventDefault(); ev.stopPropagation(); };
+      rail.addEventListener('click', stop, { capture: true, once: true });
+      setTimeout(() => rail.removeEventListener('click', stop, { capture: true }), 0);
+    };
+    addEventListener('pointerup', release);
+    addEventListener('pointercancel', release);
+    rail.addEventListener('dragstart', e => e.preventDefault());
+    update();
+  }
+
+  /* ---------- enquiry sheet ---------- */
+  const sticker = (label, id) => `<span class="sticker" aria-hidden="true"><svg class="ring" viewBox="0 0 120 120"><path id="${id}" fill="none" d="M16 60a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/><text><textPath href="#${id}" textLength="272">${label}</textPath></text></svg><svg class="core" viewBox="0 0 48 48"><path d="M10 25l9 9 19-21"/></svg></span>`;
   const modal = document.createElement('dialog');
   modal.className = 'modal';
   modal.id = 'enquiry';
   modal.setAttribute('aria-labelledby', 'enquiry-title');
   modal.innerHTML = `
+    <div class="check c-orange modal-top" aria-hidden="true"></div>
     <button type="button" class="close" data-close aria-label="Close enquiry form"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
     <div class="modal-in">
       <div data-view="form">
         <p class="eyebrow">Have something in mind?</p>
-        <h2 class="display" id="enquiry-title" tabindex="-1">Tell us a little about it.</h2>
-        <p class="intro">A few lines is plenty. Everything is required unless it says optional.</p>
+        <h2 class="display" id="enquiry-title" tabindex="-1">Let’s make something that <em>matters.</em></h2>
+        <p class="intro">Tell us a little about it. Everything is required unless it says optional.</p>
         <form class="form" novalidate>
           <div class="field">
             <label for="f-name">Your name</label>
@@ -151,14 +224,14 @@
           <div class="hp" aria-hidden="true"><label for="f-hp">Leave this field empty</label><input id="f-hp" name="company_url" type="text" tabindex="-1" autocomplete="off"></div>
           <div class="form-alert" role="alert" hidden></div>
           <div class="form-foot">
-            <button type="submit" class="btn"><span data-label>Submit enquiry <span class="arr" aria-hidden="true">→</span></span></button>
+            <button type="submit" class="btn"><span data-label>Submit enquiry ${ARR}</span></button>
             <p class="privacy">Your information will be used to respond to your enquiry.${CFG.privacyUrl ? ` <a href="${esc(CFG.privacyUrl)}">Privacy policy</a>` : ''}</p>
           </div>
         </form>
       </div>
       <div data-view="sent" class="sent" hidden>
-        ${eyesSVG('feel', 'big')}
-        <h2 class="display" tabindex="-1">Thanks for reaching out.</h2>
+        ${sticker('ENQUIRY RECEIVED · ENQUIRY RECEIVED · ', 'ring-sent')}
+        <h2 class="display" tabindex="-1" style="margin:0">Thanks for reaching out.</h2>
         <p>We’ve received your enquiry and will be in touch soon.</p>
         <button type="button" class="btn btn-ink" data-close>Close</button>
       </div>
@@ -176,6 +249,9 @@
     if (sent) { form.reset(); clearErrors(); sent = false; }
     views.form.hidden = false; views.sent.hidden = true;
     if (service) $$('input[name="services"]', form).forEach(c => { if (c.value === service) c.checked = true; });
+    // the sheet grows out of the button that asked for it
+    const r = opener && opener.getBoundingClientRect ? opener.getBoundingClientRect() : null;
+    modal.style.transformOrigin = r ? `${((r.left + r.width / 2) / innerWidth * 100).toFixed(1)}% ${((r.top + r.height / 2) / innerHeight * 100).toFixed(1)}%` : '';
     if (typeof modal.showModal === 'function') modal.showModal(); else modal.setAttribute('open', '');
     doc.classList.add('locked');
     modal.scrollTop = 0;
@@ -224,9 +300,7 @@
   const setSending = on => {
     sending = on;
     submitBtn.setAttribute('aria-disabled', String(on));
-    $('[data-label]', submitBtn).innerHTML = on
-      ? '<span class="spinner" aria-hidden="true"></span> Sending…'
-      : 'Submit enquiry <span class="arr" aria-hidden="true">→</span>';
+    $('[data-label]', submitBtn).innerHTML = on ? '<span class="spinner" aria-hidden="true"></span> Sending…' : `Submit enquiry ${ARR}`;
   };
   const fail = msg => {
     alertBox.textContent = msg;
@@ -278,67 +352,4 @@
       setSending(false);
     }
   });
-
-  /* ---------- selected work: one piece on the table at a time ---------- */
-  const stage = $('[data-stage]');
-  const data = window.UNNATE_PORTFOLIO || [];
-  if (stage && data.length) {
-    const items = data.filter(i => i.featured);
-    const idx = $('.stage-index', stage), media = $('.stage-media', stage), info = $('[data-info]', stage);
-    const count = $('.count', stage), playBtn = $('[data-play]', stage);
-    const INTERVAL = 6000;
-    const tilt = [-2, 1.5, -1, 2, -1.5, 1];
-    let index = 0, userPaused = reduceMotion.matches, hover = false, focus = false, timer = null;
-    const pad = n => String(n + 1).padStart(2, '0');
-
-    idx.innerHTML = items.map((it, i) => `<button type="button" data-i="${i}"><span class="n" aria-hidden="true">${pad(i)}</span><span>${esc(it.title)}</span></button>`).join('');
-    const tabs = $$('button', idx);
-    const show = (i, announce) => {
-      index = (i + items.length) % items.length;                     // wraps at both ends
-      const it = items[index], href = `${ROOT}work/#${encodeURIComponent(it.id)}`;
-      media.classList.remove('swap'); void media.offsetWidth; media.classList.add('swap');
-      media.innerHTML = `<a href="${href}" style="transform:rotate(${tilt[index % tilt.length]}deg)" aria-label="${esc(it.title)}: view project">${pieceHTML(it).replace('loading="lazy"', '')}</a>`;
-      info.innerHTML = `<span class="big-n" aria-hidden="true">${pad(index)}</span>
-        <div class="tags">${tagsHTML(it)}</div>
-        <h3>${esc(it.title)}</h3>
-        <p class="desc">${esc(it.desc)}</p>
-        <a class="go" href="${href}">View project <span class="arr" aria-hidden="true">→</span></a>`;
-      tabs.forEach((t, n) => t.setAttribute('aria-current', String(n === index)));
-      if (idx.scrollWidth > idx.clientWidth) idx.scrollTo({ left: tabs[index].offsetLeft - 16, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
-      count.textContent = `${index + 1} of ${items.length}`;
-      info.setAttribute('aria-live', announce ? 'polite' : 'off');
-      const nx = items[(index + 1) % items.length]; new Image().src = `${ROOT}assets/work/${thumb(nx)}.webp`;
-    };
-    const running = () => !userPaused && !hover && !focus && !document.hidden;
-    const sync = () => {
-      clearInterval(timer); timer = null;
-      if (running()) timer = setInterval(() => show(index + 1, false), INTERVAL);
-      playBtn.setAttribute('aria-label', userPaused ? 'Play automatic slideshow' : 'Pause automatic slideshow');
-      playBtn.dataset.state = userPaused ? 'paused' : 'playing';
-      stage.dataset.autoplay = running() ? 'on' : 'off';
-    };
-    // Taking manual control stops autoplay until the visitor presses play again.
-    const takeControl = () => { if (!userPaused) { userPaused = true; sync(); } };
-    idx.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { takeControl(); show(+b.dataset.i, true); } });
-    $('[data-prev]', stage).addEventListener('click', () => { takeControl(); show(index - 1, true); });
-    $('[data-next]', stage).addEventListener('click', () => { takeControl(); show(index + 1, true); });
-    playBtn.addEventListener('click', () => { userPaused = !userPaused; sync(); });
-    stage.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); takeControl(); show(index + 1, true); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); takeControl(); show(index - 1, true); }
-    });
-    let sx = null;                                                    // swipe on the piece
-    media.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
-    media.addEventListener('touchend', e => {
-      if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; sx = null;
-      if (Math.abs(dx) > 40) { takeControl(); show(index + (dx < 0 ? 1 : -1), true); }
-    }, { passive: true });
-    stage.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { hover = true; sync(); } });
-    stage.addEventListener('pointerleave', () => { hover = false; sync(); });
-    stage.addEventListener('focusin', () => { focus = true; sync(); });
-    stage.addEventListener('focusout', e => { if (!stage.contains(e.relatedTarget)) { focus = false; sync(); } });
-    document.addEventListener('visibilitychange', sync);
-    reduceMotion.addEventListener?.('change', () => { if (reduceMotion.matches) { userPaused = true; sync(); } });
-    show(0, false); sync();
-  }
 })();

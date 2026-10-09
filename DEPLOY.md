@@ -7,15 +7,18 @@ server-side function delivers the enquiry form. Hosted on Cloudflare Pages from 
 
 ```
 index.html                 homepage (7 sections: hero, philosophy, services, work, point of view, contact, footer)
-                           The idea: “looking → feeling”. A pair of hand-drawn eyes looks, looks closer,
-                           remembers and finally feels something. See the comment at the top of site.css.
+                           The theme is "the pinboard": work is printed, framed and taped to a studio wall,
+                           with stickers and checkerboard tape between sections. See the comment at the top of site.css.
 work/index.html            the Work page: every project, filters, project viewer
-assets/css/site.css        the whole design system and layout
+assets/css/site.css        the whole design system and layout (colour and type tokens are at the top)
 assets/js/config.js        ← the values you edit: social links, email, form endpoint
-assets/js/site.js          the eyes, navigation, enquiry form, selected-work stage
+assets/js/site.js          navigation, the hero figure's host, selected-work rail, enquiry form
 assets/js/work.js          Work page wall, category filters and viewer
-assets/fonts/              self-hosted fonts (Epilogue for type, Nanum Pen Script for handwritten notes)
-assets/img/                logo.svg (the orange character's files are kept here but the site no longer uses them)
+assets/hairline/           the hero's line drawing: kernel.js is the Hairline engine (MIT, unchanged — do not edit),
+                           beneath.js is the figure itself
+lab/                       the figure on its own test page (hairline-beneath.html) and its check sheet
+assets/fonts/              self-hosted fonts (Fraunces for display type, Epilogue for text)
+assets/img/                logo.svg (the orange character's files are kept here but the site does not use them)
 assets/work/               optimised thumbnails, generated from portfolio/ by tools/build-media.mjs
 portfolio/portfolio.js     ← the portfolio manifest: one entry per project
 portfolio/websites|creatives|videos/   the original project files
@@ -57,7 +60,10 @@ RESEND_API_KEY=re_xxx ENQUIRY_TO=you@example.com node tools/dev-server.mjs   # s
 6. **Project labels** — in `portfolio/portfolio.js`, set `kind` (`'Client Work'`, `'Self-Initiated'`, `'Concept'`
    or `'Demo'`) on each project. Only two are labelled today, because only those could be confirmed from the
    files themselves.
-7. **Website thumbnails** — run `node tools/build-media.mjs` once on a normal internet connection (see below).
+7. **Videos** — the six `.mp4` files named in `portfolio/portfolio.js` are not in this repository
+   (`portfolio/videos/` is empty). Until they are added, the Work page shows each film's still frame with a
+   short note instead of a player.
+8. **Website thumbnails** — run `node tools/build-media.mjs` once on a normal internet connection (see below).
 
 ## Updating the portfolio
 

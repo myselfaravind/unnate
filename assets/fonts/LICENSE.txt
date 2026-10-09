@@ -1,2 +1,4 @@
-Epilogue and Nanum Pen Script are licensed under the SIL Open Font License 1.1
+Fraunces and Epilogue are licensed under the SIL Open Font License 1.1
 (https://openfontlicense.org). Latin subsets, self-hosted.
+Fraunces: Copyright 2020 The Fraunces Project Authors (github.com/undercasetype/Fraunces).
+nanum-pen-script.woff2 (also OFL 1.1) is kept from the previous design; the site no longer loads it.
