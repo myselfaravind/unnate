@@ -19,47 +19,59 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="UNNATE creative studio. Your brand is more than what people see. It’s what they feel.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0C0C0C">
+<meta name="theme-color" content="#FCF9F4">
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="manifest" href="../site.webmanifest">
-<link rel="preload" href="../assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/epilogue.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/nanum-pen-script.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/site.css">
+<style>.doodle,.scribble{filter:url(#wobble)}.eyes.big{filter:url(#wobble-lg)}.frame *,.hang *{vector-effect:non-scaling-stroke}</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="wobble" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+    <filter id="wobble-lg" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".016" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs>
+  <symbol id="d-web" viewBox="0 0 64 64"><rect x="5" y="9" width="54" height="42" rx="4"/><path d="M5 20h54M11 14.5h.1M17 14.5h.1"/><path class="hot" d="M35 29v19l5-5 4 9 4-2-4-9h7z"/></symbol>
+  <symbol id="d-brand" viewBox="0 0 64 64"><circle cx="32" cy="30" r="23"/><path class="hot" d="M23 20v11a9 9 0 0 0 18 0V20"/><path d="M14 59h36"/></symbol>
+  <symbol id="d-content" viewBox="0 0 64 64"><rect x="7" y="24" width="50" height="32" rx="3"/><path d="M7 24L53 9l3 9L10 32M19 20l4 8M31 16l4 8M43 12l4 8"/><path class="hot" d="M27 34v13l12-6.5z"/></symbol>
+  <symbol id="d-social" viewBox="0 0 64 64"><path d="M8 11h48v31H31L19 54V42H8z"/><path class="hot" d="M32 35c-9-6-10-14-4-15 3 0 4 3 4 3s1-3 4-3c6 1 5 9-4 15z"/></symbol>
+  <symbol id="d-ads" viewBox="0 0 64 64"><path d="M9 27v11h9l22 12V15L18 27zM20 38l3 13h7l-3-10"/><path class="hot" d="M47 24q7 8 0 17M53 18q12 14 0 29"/></symbol>
+</svg>
 <header class="site-head">
-  <nav class="nav glass" aria-label="Primary">
+  <nav class="nav" aria-label="Primary">
     <a class="nav-logo" href="../" aria-label="UNNATE home"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="../assets/img/logo.svg#wm"/></svg></a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <div class="nav-links" id="nav-links">
+      <a href="../">Home</a>
       <a href="../#services">Services</a>
       <a href="../work/" aria-current="page">Work</a>
-      <a href="../#approach">Our approach</a>
+      <button type="button" class="btn btn-sm" data-enquire>Contact</button>
     </div>
-    <button type="button" class="btn btn-orange btn-sm" data-enquire>Connect with us</button>
-    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span></button>
   </nav>
 </header>
 
 <main id="main">
-<section class="work-hero ink grain" aria-labelledby="work-h1">
+<section class="work-hero paper" aria-labelledby="work-h1">
   <div class="wrap">
     <p class="eyebrow">A little proof of what we do</p>
-    <h1 class="h-display h-xl" id="work-h1" data-draw>Good thinking. <span class="hl">Made visible.<svg class="mark" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 13C52 5 96 19 150 11S252 6 296 12"/></svg></span></h1>
-    <p class="lede">Websites, creatives and short-form video—each shaped around a clear idea and a reason to exist.</p>
-    <div class="filters" id="filters" role="group" aria-label="Filter projects by type"></div>
+    <h1 class="display d-xl" id="work-h1">Have a <span class="nb">g<span class="oo" data-look=".3,.9">oo</span>d</span> look around.</h1>
+    <p class="lede">Ideas are one thing. Seeing them come to life is another. Every piece here is shown in its own shape and labelled for what it is.</p>
+    <div class="filters" id="filters" role="group" aria-label="Filter projects by category"></div>
   </div>
 </section>
-<section class="gallery ink" aria-label="Projects">
+<section class="wall-band paper" aria-label="Projects">
   <div class="wrap">
-    <p class="vh" id="grid-status" role="status"></p>
-    <ul class="grid" id="grid"></ul>
-    <noscript><p>The project gallery needs JavaScript to load.</p></noscript>
-    <div class="gallery-note">
-      <p>Every project has a different brief. The intention is always to make the work mean something.</p>
-      <button type="button" class="btn btn-orange" data-enquire>Connect with us</button>
+    <p class="vh" id="wall-status" role="status"></p>
+    <ul class="wall" id="wall"></ul>
+    <noscript><p>The project wall needs JavaScript to load.</p></noscript>
+    <div class="wall-note">
+      <p>Let’s make something that matters.</p>
+      <button type="button" class="btn" data-enquire>Connect with us <span class="arr" aria-hidden="true">→</span></button>
     </div>
   </div>
 </section>
@@ -68,18 +80,19 @@
   <div class="viewer-in">
     <div class="viewer-media"></div>
     <div class="viewer-side">
-      <button type="button" class="modal-close" data-close aria-label="Close project"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
+      <button type="button" class="close" data-close aria-label="Close project"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
       <div data-info style="display:contents"></div>
       <div class="viewer-nav">
-        <p class="car-count"></p>
-        <button type="button" class="car-btn glass" data-prev aria-label="Previous project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
-        <button type="button" class="car-btn glass" data-next aria-label="Next project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <p class="count"></p>
+        <button type="button" class="round" data-prev aria-label="Previous project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button type="button" class="round" data-next aria-label="Next project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
     </div>
   </div>
 </dialog>
-<footer class="foot ink grain">
+<footer class="foot ink">
   <div class="wrap">
+    <p class="foot-close"><span class="nb">G<span class="oo" data-mood="wink" data-look="0,-.5">oo</span>d</span> things start with a good idea. Let’s see where yours goes.</p>
     <div class="foot-top">
       <div>
         <a class="foot-logo" href="../" aria-label="UNNATE home"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="../assets/img/logo.svg#wm"/></svg></a>
@@ -93,7 +106,7 @@
             <li><a href="../">Home</a></li>
             <li><a href="../#services">Services</a></li>
             <li><a href="../work/">Work</a></li>
-            <li><a href="../#contact">Contact</a></li>
+            <li><button type="button" data-enquire>Contact</button></li>
           </ul>
         </nav>
         <nav aria-labelledby="f-svc">
@@ -112,11 +125,7 @@
         </div>
       </div>
     </div>
-    <p class="foot-close" data-draw>Good things start with a good idea. Let’s see where <span class="hl">yours goes.<svg class="mark" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 13C52 5 96 19 150 11S252 6 296 12"/></svg></span></p>
-    <div class="foot-base">
-      <p>© UNNATE <span data-year>2026</span>. All rights reserved.</p>
-      <p class="made">Made with intention.</p>
-    </div>
+    <p class="foot-base">© UNNATE <span data-year>2026</span>. All rights reserved.</p>
   </div>
 </footer>
 <script src="../assets/js/config.js"></script>
