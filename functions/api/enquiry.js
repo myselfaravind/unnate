@@ -44,6 +44,8 @@ export async function onRequestPost({ request, env }) {
   if (!name) fields.name = 'Enter your name.';
   if (!email) fields.email = 'Enter your work email.';
   else if (!EMAIL.test(email)) fields.email = 'Enter an email address in the format name@company.com.';
+  if (!company) fields.company = 'Enter your company or brand name.';
+  if (!message) fields.message = 'Tell us a little about your project.';
   if (Object.keys(fields).length) return json(422, { ok: false, error: 'validation', fields });
 
   if (!env.RESEND_API_KEY || !env.ENQUIRY_TO) {
@@ -54,12 +56,12 @@ export async function onRequestPost({ request, env }) {
   const text = [
     `Name: ${name}`,
     `Email: ${email}`,
-    `Company or brand: ${company || '—'}`,
+    `Company or brand: ${company}`,
     `Website or social profile: ${website || '—'}`,
     `Needs help with: ${services.length ? services.join(', ') : '—'}`,
     '',
     'Project:',
-    message || '—',
+    message,
     '',
     `Sent from ${new URL(request.url).host}${oneLine(data.page, 200)}`
   ].join('\n');

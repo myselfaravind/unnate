@@ -7,13 +7,15 @@ server-side function delivers the enquiry form. Hosted on Cloudflare Pages from 
 
 ```
 index.html                 homepage (7 sections: hero, philosophy, services, work, point of view, contact, footer)
+                           The idea: “looking → feeling”. A pair of hand-drawn eyes looks, looks closer,
+                           remembers and finally feels something. See the comment at the top of site.css.
 work/index.html            the Work page: every project, filters, project viewer
 assets/css/site.css        the whole design system and layout
 assets/js/config.js        ← the values you edit: social links, email, form endpoint
-assets/js/site.js          navigation, enquiry modal + form, carousel, hand-drawn marks
-assets/js/work.js          Work page filters and viewer
-assets/fonts/              self-hosted fonts (Bricolage Grotesque, Instrument Sans, Instrument Serif)
-assets/img/                logo.svg and the orange character
+assets/js/site.js          the eyes, navigation, enquiry form, selected-work stage
+assets/js/work.js          Work page wall, category filters and viewer
+assets/fonts/              self-hosted fonts (Epilogue for type, Nanum Pen Script for handwritten notes)
+assets/img/                logo.svg (the orange character's files are kept here but the site no longer uses them)
 assets/work/               optimised thumbnails, generated from portfolio/ by tools/build-media.mjs
 portfolio/portfolio.js     ← the portfolio manifest: one entry per project
 portfolio/websites|creatives|videos/   the original project files
@@ -50,20 +52,27 @@ RESEND_API_KEY=re_xxx ENQUIRY_TO=you@example.com node tools/dev-server.mjs   # s
 3. **Links** — add your real Instagram, LinkedIn and email in `assets/js/config.js`. Empty values are not shown;
    until then the footer's Connect column offers "Send an enquiry".
 4. **Privacy policy** — if you publish one, put its URL in `privacyUrl` in `assets/js/config.js`.
-5. **Project labels** — in `portfolio/portfolio.js`, set `kind` (`'Client Work'`, `'Self-Initiated'`, `'Concept'`
+5. **Brand Identity work** — there is no brand-identity project in `portfolio/` yet, so that category is not shown
+   as a filter. Add one with `group: 'Brand Identity'` and it appears automatically.
+6. **Project labels** — in `portfolio/portfolio.js`, set `kind` (`'Client Work'`, `'Self-Initiated'`, `'Concept'`
    or `'Demo'`) on each project. Only two are labelled today, because only those could be confirmed from the
    files themselves.
-6. **Website thumbnails** — run `node tools/build-media.mjs` once on a normal internet connection (see below).
+7. **Website thumbnails** — run `node tools/build-media.mjs` once on a normal internet connection (see below).
 
 ## Updating the portfolio
 
 1. Put the file in `portfolio/websites/<name>/`, `portfolio/creatives/` or `portfolio/videos/`.
 2. Add an entry to `portfolio/portfolio.js` (the header comment explains each field). `featured: true` puts it
-   in the homepage carousel.
+   on the homepage stage; `group` files it under a category.
 3. Regenerate thumbnails: `npm i sharp playwright && node tools/build-media.mjs` (needs ffmpeg installed).
    Add `--no-web` to skip website screenshots.
 
 Only add work that is real, and only label it with a `kind` that is true.
+
+## The enquiry form
+
+Required: name, work email, company or brand name, project message. Optional: website or social profile, services.
+The success message is shown only when the server answers `"ok": true`. There is no calendar or call booking.
 
 ## Deploy
 

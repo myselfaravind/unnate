@@ -51,6 +51,7 @@ if (!process.argv.includes('--no-web')) {
     const shot = await page.screenshot();
     await card(shot, it.id);
     await sharp(shot).resize({ width: 1400 }).webp({ quality: 80 }).toFile(path.join(out, `${it.id}-full.webp`));
+    await sharp(shot).extract({ left: 0, top: 0, width: 1440, height: 900 }).resize({ width: 1200 }).webp({ quality: 80 }).toFile(path.join(out, `${it.id}-wide.webp`));
     await page.close();
     console.log('web', it.id);
   }
