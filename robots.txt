@@ -1,5 +1,0 @@
-# UNNATE — allow all crawlers
-User-agent: *
-Allow: /
-
-Sitemap: https://YOUR-DOMAIN.com/sitemap.xml
