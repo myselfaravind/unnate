@@ -65,13 +65,14 @@ line drawing (a Hairline figure) that says what the headline says: what people s
 - **Ticker**: one moving band of the three service names, with a pause button. The only marquee on the site.
 - **Services board**: one bordered panel divided into three columns (Web, Content & Social, Paid Campaigns), each with a coloured tab, a pitch line, a short description, five deliverables and a link. Stacks to one column below 62em.
 - **Work rail**: prints in a horizontal row at one shared height, with number, title, tags and one line of description. Swipe, drag, arrow keys or the two round buttons.
-- **Principle stickers**: three tilted cards (card, ink, orange).
+- **Point of view**: a scene fixed behind the text (low sun on butter, rings on sky, grid on blush, risen sun on ink) with panes of warm glass travelling over it. Each pane sets the scene as it reaches the middle of the screen. Copy here is about listening and reasons, and does not repeat the brand line.
 - **Enquiry sheet**: a bordered dialog with labelled fields, pill checkboxes for the services, inline errors.
 
 ## Motion
 - Content rises into place once as it enters the viewport.
 - The hero drawing plays a short tour while it is on screen and gives way to the pointer at once. It has a pause button.
-- With reduced motion on, the ticker, sticker and tour stop, and everything is shown in its final state.
+- Grouped things arrive in sequence (service columns, work prints). Where the browser supports scroll-linked animation natively, the checker tape and colour washes drift as they pass.
+- With reduced motion on, the ticker, sticker, tour and drifts stop, the scene changes without easing, and everything is shown in its final state.
 
 ## Rules
 - Do not add a second accent colour or a second display typeface.

@@ -57,6 +57,19 @@
   arrive($$('.reveal'));
   window.UNNATE.arrive = arrive;
 
+  /* ---------- point of view: each pane of glass sets the scene behind it as it reaches the middle of the screen ---------- */
+  const pov = $('[data-pov]');
+  if (pov) {
+    const panes = $$('[data-step-at]', pov);
+    if ('IntersectionObserver' in window) {
+      const mid = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) pov.dataset.step = e.target.dataset.stepAt; }), { rootMargin: '-45% 0px -45% 0px' });
+      const seen = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); seen.unobserve(e.target); } }), { rootMargin: '0px 0px -12% 0px', threshold: .15 });
+      panes.forEach(el => { mid.observe(el); seen.observe(el); });
+      // above the section the scene rests in its first state; below it, in its last
+      new IntersectionObserver(es => { const e = es[0]; if (!e.isIntersecting) pov.dataset.step = e.boundingClientRect.top > 0 ? '0' : '3'; }).observe(pov);
+    } else panes.forEach(el => el.classList.add('in'));
+  }
+
   /* ---------- the ticker's pause button ---------- */
   const ticker = $('[data-ticker]'), tickBtn = $('[data-ticker-pause]');
   if (ticker && tickBtn) tickBtn.addEventListener('click', () => {
@@ -162,6 +175,8 @@
         <div class="cap"><span class="n" aria-hidden="true">${pad(i + 1)}</span><h3>${esc(it.title)}</h3><div class="tags">${tagsHTML(it)}</div><p>${esc(it.desc)}</p></div>
       </li>`).join('');
     const slides = $$('.slide', rail);
+    slides.forEach((el, i) => el.style.setProperty('--i', Math.min(i, 5)));
+    arrive([rail]);
     const behavior = () => reduceMotion.matches ? 'auto' : 'smooth';
     const origin = () => parseFloat(getComputedStyle(rail).scrollPaddingLeft) || 0;
     const posOf = el => el.offsetLeft - origin();
