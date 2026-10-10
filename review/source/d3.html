@@ -1,0 +1,130 @@
+<nav class="dock" aria-label="Primary">
+  <a href="#top" class="dock-logo" aria-label="UNNATE home">{{LOGO}}</a>
+  <a href="#services">Services</a>
+  <a href="#work">Work</a>
+  <a href="#approach">Approach</a>
+  <button type="button" class="dock-cta" data-enquire>Contact</button>
+</nav>
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-title" data-lens-area>
+  <div class="layer base">
+    <div class="wrap hero-in">
+      <p class="eye">{{HERO_EYE}}</p>
+      <h1 id="hero-title">Your brand is more than what people see. It’s what they <em>feel.</em></h1>
+      <div class="hero-foot">
+        <p class="lede">{{HERO_LEDE}}</p>
+        <div class="cta">
+          <button type="button" class="btn" data-enquire>Connect with us&nbsp;{{ARR}}</button>
+          <a class="link" href="#work">Explore our work&nbsp;{{ARR}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layer lens" aria-hidden="true" data-lens inert>
+    <div class="wrap hero-in">
+      <p class="eye">{{HERO_EYE}}</p>
+      <p class="h1">Your brand is more than what people see. It’s what they <em>feel.</em></p>
+      <div class="hero-foot">
+        <p class="lede">{{HERO_LEDE}}</p>
+        <div class="cta">
+          <span class="btn">Connect with us&nbsp;{{ARR}}</span>
+          <span class="link">Explore our work&nbsp;{{ARR}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ring" aria-hidden="true" data-ring></div>
+</section>
+
+<section class="sec philo" id="philosophy" aria-labelledby="philo-title">
+  <div class="wrap">
+    <p class="eye">{{PHILO_EYE}}</p>
+    <h2 class="mega" id="philo-title" data-reveal>Creativity should solve problems, not just <span class="hollow">sit pretty.</span></h2>
+    <div class="philo-cols" data-reveal style="--d:.1s">
+      <p class="kicker">{{P4}}</p>
+      <div><p>{{P1}}</p><p>{{P2}}</p><p>{{P3}}</p></div>
+    </div>
+  </div>
+  <p class="slam" aria-label="{{ST1}} {{ST2}}"><span class="s1" aria-hidden="true">{{ST1}}</span><span class="s2" aria-hidden="true">{{ST2}}</span></p>
+</section>
+
+<section class="services" id="services" aria-labelledby="svc-title">
+  <div class="svc-intro">
+    <div class="wrap">
+      <p class="eye">{{SVC_EYE}}</p>
+      <h2 class="mega" id="svc-title" data-reveal>Good ideas deserve good execution.</h2>
+      <p class="lede" data-reveal style="--d:.1s">{{SVC_INTRO}}</p>
+    </div>
+  </div>
+<!--SVC-->  <span class="anchor" id="{{S_ID}}"></span>
+  <article class="band">
+    <div class="wrap band-in">
+      <div class="band-head"><span class="band-n" aria-hidden="true">{{S_N}}</span><h3>{{S_NAME}}</h3></div>
+      <div class="band-body">
+        <p class="band-pitch">{{S_PITCH}}</p>
+        <p class="band-desc">{{S_DESC}}</p>
+        <ul class="band-list" aria-label="{{S_NAME}}: what’s included">{{S_ITEMS}}</ul>
+        <button type="button" class="btn" data-enquire data-service="{{S_NAME}}">{{S_CTA}}&nbsp;{{ARR}}</button>
+      </div>
+    </div>
+  </article>
+<!--/SVC-->  <p class="svc-close"><span class="wrap">{{SVC_CLOSE}}</span></p>
+</section>
+
+<section class="sec work" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <p class="eye">{{WORK_EYE}}</p>
+    <h2 class="mega" id="work-title" data-reveal>Have a look at what we’ve made.</h2>
+    <div class="work-top" data-reveal style="--d:.1s">
+      <p class="lede">{{WORK_DESC}}</p>
+      <div class="filters" data-filters role="group" aria-label="Filter projects by category"></div>
+    </div>
+    <p class="vh" role="status" data-status></p>
+    <ul class="mosaic" data-mosaic></ul>
+    <p class="work-foot"><a class="btn" href="../work/">See all our work&nbsp;{{ARR}}</a></p>
+  </div>
+</section>
+
+<section class="sec pov" id="approach" aria-labelledby="pov-title">
+  <div class="wrap">
+    <p class="eye">{{POV_EYE}}</p>
+    <h2 class="mega" id="pov-title" data-reveal>Not just something to look at. Something to <span class="hot">remember.</span></h2>
+    <div class="philo-cols" data-reveal style="--d:.1s">
+      <p class="kicker">{{V1}}</p>
+      <div><p>{{V2}}</p><p>{{V3}}</p></div>
+    </div>
+  </div>
+  <ol class="rows">
+    <li><div class="wrap"><span class="n" aria-hidden="true">01</span><h3>{{PR1}}</h3><p>{{PR1D}}</p></div></li>
+    <li><div class="wrap"><span class="n" aria-hidden="true">02</span><h3>{{PR2}}</h3><p>{{PR2D}}</p></div></li>
+    <li><div class="wrap"><span class="n" aria-hidden="true">03</span><h3>{{PR3}}</h3><p>{{PR3D}}</p></div></li>
+  </ol>
+  <div class="wrap"><p class="pov-close" data-reveal>Because creativity isn’t just how something looks. It’s what happens because of it.</p></div>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-in">
+    <p class="eye">{{CONTACT_EYE}}</p>
+    <h2 class="mega huge" id="contact-title" data-reveal>Let’s make something that matters.</h2>
+    <div class="contact-foot">
+      <div class="contact-copy"><p>{{C1}}</p><p>{{C2}}</p></div>
+      <button type="button" class="orbit" data-enquire data-magnet><span>Connect with us&nbsp;{{ARR}}</span></button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-close">Good things start with a good idea. Let’s see where yours goes.</p>
+    <div class="foot-grid">
+      <div><p class="foot-line">{{FOOT_LINE}}</p><p class="foot-desc">{{FOOT_DESC}}</p></div>
+      <nav aria-label="Navigation"><h2>Navigation</h2><ul><li><a href="#top">Home</a></li><li><a href="#services">Services</a></li><li><a href="../work/">Work</a></li><li><button type="button" data-enquire>Contact</button></li></ul></nav>
+      <nav aria-label="Services"><h2>Services</h2><ul><li><a href="#web">Web</a></li><li><a href="#content-social">Content &amp; Social</a></li><li><a href="#paid-campaigns">Paid Campaigns</a></li></ul></nav>
+      <div><h2>Connect</h2><ul><li><button type="button" data-enquire>Send an enquiry</button></li></ul></div>
+    </div>
+    <p class="foot-base">© UNNATE <span data-year>2026</span>. All rights reserved.</p>
+  </div>
+  <a class="foot-mark" href="#top" aria-label="UNNATE home, back to top">{{LOGO}}</a>
+</footer>

@@ -1,0 +1,142 @@
+<header class="head">
+  <nav class="nav" aria-label="Primary">
+    <a class="nav-logo" href="#top" aria-label="UNNATE home">{{LOGO}}</a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#approach">Approach</a>
+      <button type="button" class="btn btn-sm" data-enquire>Contact</button>
+    </div>
+  </nav>
+</header>
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eye" data-reveal>{{HERO_EYE}}</p>
+      <h1 id="hero-title" data-reveal style="--d:.05s">Your brand is more than what people see. It’s what they <em>feel.</em></h1>
+      <p class="lede" data-reveal style="--d:.12s">{{HERO_LEDE}}</p>
+      <div class="cta" data-reveal style="--d:.18s">
+        <button type="button" class="btn" data-enquire>Connect with us&nbsp;{{ARR}}</button>
+        <a class="link" href="#work">Explore our work&nbsp;{{ARR}}</a>
+      </div>
+    </div>
+    <div class="stage" data-reveal style="--d:.15s">
+      <div class="glow" aria-hidden="true"></div>
+      <div class="stage-fig" data-figure="ascent"></div>
+      <div class="panel glass" aria-live="polite">
+        <p class="panel-n"><span data-stage-n>05</span><span aria-hidden="true"> / 05</span></p>
+        <p class="panel-t" data-stage-t>Paid Campaigns</p>
+        <p class="panel-d" data-stage-d>Put the right message in front of the right people.</p>
+      </div>
+      <button type="button" class="play" data-fig-play data-state="playing" aria-label="Pause the drawing’s animation"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2h4v12H3zM9 2h4v12H9z"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z"/></svg></button>
+      <ol class="stages" data-stages aria-label="The five stages of the drawing">
+        <li><button type="button" data-stage="1" aria-pressed="false"><span class="n">01</span>Understand</button></li>
+        <li><button type="button" data-stage="2" aria-pressed="false"><span class="n">02</span>Define</button></li>
+        <li><button type="button" data-stage="3" aria-pressed="false"><span class="n">03</span>Web</button></li>
+        <li><button type="button" data-stage="4" aria-pressed="false"><span class="n">04</span>Content</button></li>
+        <li><button type="button" data-stage="5" aria-pressed="false"><span class="n">05</span>Campaigns</button></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="sec philo" id="philosophy" aria-labelledby="philo-title">
+  <div class="wrap">
+    <p class="rule-label">{{PHILO_EYE}}</p>
+    <div class="philo-grid">
+      <h2 class="h-xl" id="philo-title" data-reveal>Creativity should solve problems, not just <em>sit pretty.</em></h2>
+      <div class="prose" data-reveal style="--d:.1s">
+        <p>{{P1}}</p><p>{{P2}}</p><p>{{P3}}</p>
+        <p class="kicker">{{P4}}</p>
+      </div>
+    </div>
+    <p class="statement" data-reveal><span>{{ST1}}</span> <span class="hot">{{ST2}}</span></p>
+  </div>
+</section>
+
+<section class="sec" id="services" aria-labelledby="svc-title">
+  <div class="wrap">
+    <p class="rule-label">{{SVC_EYE}}</p>
+    <div class="sec-head" data-reveal>
+      <h2 class="h-lg" id="svc-title">{{SVC_H}}</h2>
+      <p class="lede">{{SVC_INTRO}}</p>
+    </div>
+    <ul class="svc3" data-reveal>
+<!--SVC-->      <li class="svc" id="{{S_ID}}">
+        <p class="svc-n" aria-hidden="true">{{S_N}}</p>
+        <h3>{{S_NAME}}</h3>
+        <p class="svc-pitch">{{S_PITCH}}</p>
+        <p class="svc-desc">{{S_DESC}}</p>
+        <ul class="svc-list" aria-label="{{S_NAME}}: what’s included">{{S_ITEMS}}</ul>
+        <button type="button" class="link" data-enquire data-service="{{S_NAME}}">{{S_CTA}}&nbsp;{{ARR}}</button>
+      </li>
+<!--/SVC-->    </ul>
+    <p class="svc-close" data-reveal>{{SVC_CLOSE}}</p>
+  </div>
+</section>
+
+<section class="sec work" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <p class="rule-label">{{WORK_EYE}}</p>
+    <div class="sec-head" data-reveal>
+      <h2 class="h-lg" id="work-title">Have a look at what we’ve made.</h2>
+      <p class="lede">{{WORK_DESC}}</p>
+    </div>
+  </div>
+  <div data-carousel role="region" aria-roledescription="carousel" aria-label="Selected work">
+    <ul class="rail" data-rail tabindex="0" aria-label="Projects. Use the left and right arrow keys to move between them."></ul>
+    <div class="wrap rail-ctrl">
+      <button type="button" class="round" data-prev aria-label="Previous project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      <button type="button" class="round" data-next aria-label="Next project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <p class="count" data-count aria-live="polite"></p>
+      <div class="bar" aria-hidden="true"><i></i></div>
+      <a class="link" href="../work/">See all our work&nbsp;{{ARR}}</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec pov" id="approach" aria-labelledby="pov-title">
+  <div class="wrap">
+    <p class="rule-label">{{POV_EYE}}</p>
+    <div class="philo-grid">
+      <h2 class="h-lg" id="pov-title" data-reveal>Not just something to look at. Something to <em>remember.</em></h2>
+      <div class="prose" data-reveal style="--d:.1s"><p class="kicker">{{V1}}</p><p>{{V2}}</p><p>{{V3}}</p></div>
+    </div>
+    <ol class="climb">
+      <li data-reveal><span class="n" aria-hidden="true">01</span><h3>{{PR1}}</h3><p>{{PR1D}}</p></li>
+      <li data-reveal style="--d:.1s"><span class="n" aria-hidden="true">02</span><h3>{{PR2}}</h3><p>{{PR2D}}</p></li>
+      <li data-reveal style="--d:.2s"><span class="n" aria-hidden="true">03</span><h3>{{PR3}}</h3><p>{{PR3D}}</p></li>
+    </ol>
+    <p class="pov-close" data-reveal>Because creativity isn’t just how something looks. It’s what happens because of it.</p>
+  </div>
+</section>
+
+<section class="sec contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-grid">
+    <div class="glow" aria-hidden="true"></div>
+    <div data-reveal>
+      <p class="eye">{{CONTACT_EYE}}</p>
+      <h2 class="h-xl" id="contact-title">Let’s make something that <em>matters.</em></h2>
+    </div>
+    <div class="glass contact-card" data-reveal style="--d:.1s">
+      <p>{{C1}}</p><p>{{C2}}</p>
+      <button type="button" class="btn" data-enquire>Connect with us&nbsp;{{ARR}}</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-close">Good things start with a good idea. Let’s see where yours goes.</p>
+    <div class="foot-grid">
+      <div><a class="foot-logo" href="#top" aria-label="UNNATE home">{{LOGO}}</a><p class="foot-line">{{FOOT_LINE}}</p><p class="foot-desc">{{FOOT_DESC}}</p></div>
+      <nav aria-label="Navigation"><h2>Navigation</h2><ul><li><a href="#top">Home</a></li><li><a href="#services">Services</a></li><li><a href="../work/">Work</a></li><li><button type="button" data-enquire>Contact</button></li></ul></nav>
+      <nav aria-label="Services"><h2>Services</h2><ul><li><a href="#web">Web</a></li><li><a href="#content-social">Content &amp; Social</a></li><li><a href="#paid-campaigns">Paid Campaigns</a></li></ul></nav>
+      <div><h2>Connect</h2><ul><li><button type="button" data-enquire>Send an enquiry</button></li></ul></div>
+    </div>
+    <p class="foot-base">© UNNATE <span data-year>2026</span>. All rights reserved.</p>
+  </div>
+</footer>
