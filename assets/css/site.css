@@ -96,7 +96,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 /* numerals: the display italic, set large */
 .n{font-family:var(--display);font-style:italic;font-weight:440;font-variant-numeric:lining-nums;letter-spacing:-.03em}
 /* a marker stroke behind a phrase, and a drawn underline beneath one */
-.mark{background:linear-gradient(transparent 58%,var(--hl,var(--butter)) 58% 92%,transparent 92%);padding-inline:.08em;margin-inline:-.08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.mark{background:linear-gradient(transparent 58%,var(--hl,var(--butter)) 58% 92%,transparent 92%) no-repeat 0 0/100% 100%;padding-inline:.08em;margin-inline:-.08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .under{position:relative;white-space:nowrap}
 .under svg{position:absolute;left:-2%;bottom:-.16em;width:104%;height:.3em;overflow:visible;fill:none;stroke:var(--orange);stroke-width:5;stroke-linecap:round}
 .under path{stroke-dasharray:1;stroke-dashoffset:0}
@@ -144,11 +144,17 @@ a:hover>.arr,button:hover>.arr,.btn:hover .arr{transform:translateX(.25em)}
 @media (max-width:47.99em){
   .nav{position:relative}
   .nav-toggle{display:inline-flex;align-items:center}
-  .nav-links{position:absolute;top:calc(100% + .5rem);left:0;right:0;flex-direction:column;align-items:stretch;gap:.25rem;padding:.75rem;border-radius:var(--r-lg);background:var(--card);border:1px solid rgba(26,22,19,.12);box-shadow:var(--shadow);transform-origin:top right;opacity:0;visibility:hidden;transform:scale(.96) translateY(-.5rem);transition:opacity .2s,transform .28s var(--ease),visibility 0s .28s}
+  .nav-links{position:absolute;top:calc(100% + .5rem);left:0;right:0;flex-direction:column;align-items:stretch;gap:.25rem;padding:.75rem;border-radius:var(--r-lg);background:rgba(255,253,248,.86);-webkit-backdrop-filter:blur(20px) saturate(170%);backdrop-filter:blur(20px) saturate(170%);border:1px solid rgba(26,22,19,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),var(--shadow);transform-origin:top right;opacity:0;visibility:hidden;transform:scale(.96) translateY(-.5rem);transition:opacity .2s,transform .28s var(--ease),visibility 0s .28s}
   .nav-links.open{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .28s var(--ease)}
   .nav-links a:not(.btn){min-height:3.25rem;font-size:1.15rem;padding-inline:1.1rem}
   .nav-links .btn{margin:.5rem 0 0}
 }
+
+/* ---------- glass: a pane that sits over colour. Light on light grounds, dark on the ink ground.
+   Used where something floats: the navigation, the stage label, the service columns over their colour wash,
+   the work controls, the contact card. Open type and solid stickers carry the rest. ---------- */
+.glass,.stage-info,.contact .card{background:linear-gradient(135deg,rgba(255,253,248,.78),rgba(255,253,248,.46));-webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);border:1.5px solid var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(255,255,255,.35),0 18px 40px -22px rgba(26,22,19,.45)}
+.glass-dark{background:linear-gradient(135deg,rgba(250,245,234,.14),rgba(250,245,234,.05));-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);border:1px solid rgba(250,245,234,.22);box-shadow:inset 0 1px 0 rgba(250,245,234,.25)}
 
 /* ---------- prints: a piece of work, framed and taped to the wall ---------- */
 .print{position:relative;display:block;background:var(--card);padding:.6rem;border-radius:.35rem;box-shadow:var(--shadow);transform:rotate(var(--tilt,0deg));transition:transform .45s var(--spring);text-decoration:none}
@@ -178,16 +184,18 @@ a.print:hover,a:hover>.print,a:focus-visible>.print{transform:rotate(0deg) trans
    the stage in hand, and four buttons that pick one. Nothing here is taken from the portfolio. */
 .stage{position:relative;width:min(100%,38rem);margin-inline:auto;display:grid;gap:.75rem}
 .stage-fig{position:relative}
-/* a sun coming up behind the tall end of the climb, cut off at the ground line the pillars stand on */
-.stage-fig::before{content:"";position:absolute;left:37%;top:36%;width:61%;aspect-ratio:1;border-radius:50%;background:var(--butter);box-shadow:inset 0 0 0 2px var(--ink);clip-path:inset(0 0 50% 0)}
+/* a sun coming up behind the tall end of the climb: the box is cut off at the ground line the pillars stand on, and the disc rises inside it */
+.sun{position:absolute;left:37%;top:36%;width:61%;aspect-ratio:2/1;overflow:hidden}
+.sun i{position:absolute;inset:0 0 auto 0;aspect-ratio:1;border-radius:50%;background:var(--butter);box-shadow:inset 0 0 0 2px var(--ink);animation:sunrise 1.6s var(--ease) .35s both}
+@keyframes sunrise{from{transform:translateY(52%)}}
 [data-hairline]{--hairline-plate:#FFFDF8;--hairline-hi:#FF5A1F;--hairline-edge:#1A1613;--hairline-mid:#4A423B;--hairline-lo:#B9AE9E;--hairline-stroke:1.35;cursor:crosshair}
-.stage-info{position:absolute;left:0;top:0;width:min(19rem,62%);padding:.95rem 1.1rem 1.05rem;border:2px solid var(--ink);border-radius:var(--r);background:rgba(255,253,248,.62);-webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),4px 4px 0 var(--ink)}
+.stage-info{position:absolute;left:0;top:4%;z-index:2;width:min(20rem,64%);padding:.95rem 1.1rem 1.05rem;border-radius:var(--r)}
 .si-n{font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-deep);font-variant-numeric:tabular-nums}
 .si-d{margin-top:.45rem;font-size:1rem;line-height:1.45;font-weight:500;text-wrap:pretty}
 .stage-info.swap>*{animation:si .45s var(--ease)}
 @keyframes si{from{opacity:0;transform:translateY(.4rem)}}
 .stages{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
-.stages button{display:grid;gap:.1rem;width:100%;min-height:3.6rem;padding:.6rem .9rem .5rem;text-align:left;font-weight:700;font-size:1rem;line-height:1.2;background:var(--card);border:2px solid var(--ink);border-radius:var(--r);transition:background-color .2s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease)}
+.stages button{display:grid;gap:.1rem;width:100%;min-height:3.6rem;padding:.6rem .9rem .5rem;text-align:left;font-weight:700;font-size:1rem;line-height:1.2;background:rgba(255,253,248,.7);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:2px solid var(--ink);border-radius:var(--r);transition:background-color .2s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease)}
 .stages .n{font-size:1.15rem;line-height:1;color:var(--orange-deep)}
 .stages button:hover,.stages button[aria-pressed="true"]{background:var(--orange);box-shadow:3px 3px 0 var(--ink);transform:translate(-1px,-1px)}
 .stages button:hover .n,.stages button[aria-pressed="true"] .n{color:var(--ink)}
@@ -201,13 +209,6 @@ a.print:hover,a:hover>.print,a:focus-visible>.print{transform:rotate(0deg) trans
   .stage{margin-right:0}
 }
 @media (max-width:63.99em){.stage{width:min(100%,34rem)}}
-@media (max-width:34em){
-  .stage-fig{display:grid}
-  .stage-info{position:relative;width:auto;order:2;margin-top:.25rem}
-  .fig-play{top:.25rem}
-  .stages{grid-template-columns:repeat(2,1fr)}
-  .stages button{min-height:3.25rem;padding:.55rem .8rem .45rem;font-size:.95rem}
-}
 /* the ticker */
 .ticker{position:relative;display:flex;align-items:center;background:var(--ink);color:var(--paper);overflow:hidden}
 .ticker-track{display:flex;flex:none;gap:0;animation:slide 38s linear infinite;will-change:transform}
@@ -249,9 +250,12 @@ a.print:hover,a:hover>.print,a:focus-visible>.print{transform:rotate(0deg) trans
 /* ---------- 03 · services: one board, three columns ---------- */
 .sec-head{display:grid;gap:1.5rem 4rem;align-items:end;margin-bottom:clamp(2.5rem,5vw,4rem)}
 @media (min-width:60em){.sec-head{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}}
-.board{border:2px solid var(--ink);border-radius:var(--r-lg);background:var(--ink);box-shadow:8px 8px 0 var(--ink);overflow:hidden;display:grid}
-.svc{display:flex;flex-direction:column;border-top:2px solid var(--ink);background:var(--card);transition:background-color .35s var(--ease)}
-.svc:hover,.svc:focus-within{background:color-mix(in srgb,var(--tab) 24%,var(--card))}
+.services{overflow:clip}
+.services::before{content:"";position:absolute;inset:18% -6% 4%;pointer-events:none;background:radial-gradient(34% 46% at 14% 42%,rgba(255,224,138,.95),transparent 70%),radial-gradient(34% 50% at 50% 62%,rgba(214,228,255,1),transparent 70%),radial-gradient(34% 46% at 88% 40%,rgba(255,210,194,1),transparent 70%)}
+.services .wrap{position:relative}
+.board{border:2px solid var(--ink);border-radius:var(--r-lg);box-shadow:0 30px 60px -34px rgba(26,22,19,.5);overflow:hidden;display:grid}
+.svc{display:flex;flex-direction:column;border-top:2px solid var(--ink);background:linear-gradient(160deg,rgba(255,253,248,.82),rgba(255,253,248,.5));-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9);transition:background-color .35s var(--ease)}
+.svc:hover,.svc:focus-within{background-color:color-mix(in srgb,var(--tab) 45%,transparent)}
 .svc:first-child{border-top:0}
 .svc-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 1.5rem;background:var(--tab);border-bottom:2px solid var(--ink)}
 .svc-top svg{transition:transform .5s var(--spring);width:2.9rem;height:2.9rem;fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
@@ -279,6 +283,8 @@ a.print:hover,a:hover>.print,a:focus-visible>.print{transform:rotate(0deg) trans
 
 /* ---------- 04 · selected work: prints along a dark wall ---------- */
 .work{overflow:clip}
+.work::before{content:"";position:absolute;right:-10%;bottom:-12%;width:min(46rem,90%);aspect-ratio:1;border-radius:50%;pointer-events:none;background:radial-gradient(closest-side,rgba(255,90,31,.5),rgba(255,90,31,.12) 55%,transparent)}
+.work>*{position:relative}
 .work .lede{color:var(--cream-2)}
 .cats{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
 .cats a{display:inline-flex;align-items:center;min-height:2.75rem;padding:.2em 1.1em 0;text-decoration:none;transition:background-color .18s,color .18s}
@@ -299,11 +305,13 @@ a.print:hover,a:hover>.print,a:focus-visible>.print{transform:rotate(0deg) trans
 .cap h3{font-family:var(--display);font-weight:560;font-variation-settings:"SOFT" 100;font-size:1.6rem;line-height:1.1;letter-spacing:-.015em}
 .cap .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:.55rem 0 .5rem}
 .cap p{font-size:.98rem;line-height:1.5;color:var(--cream-2)}
-.rail-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.5rem;margin-top:1.5rem}
+.rail-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.5rem;margin-top:1.5rem;padding:.75rem .75rem .75rem .9rem;border-radius:99px}
 .rail-ctrl .count{font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.06em;min-width:4.5em}
 .rail-bar{flex:1 1 8rem;height:4px;border-radius:2px;background:var(--rule-inv);overflow:hidden}
 .rail-bar i{display:block;height:100%;width:100%;background:var(--orange);transform-origin:left;transform:scaleX(var(--p,.1));transition:transform .25s var(--ease)}
-.rail-ctrl .btn{margin-left:auto}
+.rail-ctrl .btn{margin-left:auto;box-shadow:none}
+.rail-ctrl .btn:hover,.rail-ctrl .btn:active{box-shadow:none}
+.rail-ctrl .round{width:2.9rem;height:2.9rem;border-width:1.5px}
 @media (max-width:40em){.rail{--h:16.5rem;padding-top:1.5rem}.slide .print img{max-width:76vw}.cap{min-width:0;width:76vw}.rail-ctrl .btn{margin-left:0;width:100%}.rail-bar{order:-1;flex-basis:100%}}
 
 /* ---------- 05 · point of view: three stickers on a yellow wall ---------- */
@@ -331,7 +339,11 @@ a.print:hover,a:hover>.print,a:focus-visible>.print{transform:rotate(0deg) trans
 /* ---------- 06 · contact ---------- */
 .contact-grid{display:grid;gap:2.5rem 4rem;align-items:center}
 .contact h2{font-size:clamp(2.8rem,7.4vw,6.5rem)}
-.contact .card{position:relative;background:var(--card);border:2px solid var(--ink);border-radius:var(--r-lg);box-shadow:8px 8px 0 var(--ink);padding:clamp(1.75rem,3.5vw,2.75rem);transform:rotate(1.4deg)}
+.contact{overflow:clip}
+.contact-grid{position:relative}
+.contact-grid::before{content:"";position:absolute;right:-8%;top:50%;width:min(36rem,80%);aspect-ratio:1;translate:0 -50%;border-radius:50%;pointer-events:none;background:radial-gradient(closest-side,rgba(255,224,138,.95),rgba(255,224,138,.3) 60%,transparent)}
+.contact-grid>*{position:relative}
+.contact .card{position:relative;border-radius:var(--r-lg);padding:clamp(1.75rem,3.5vw,2.75rem);transform:rotate(1.4deg)}
 .contact .card p{font-size:1.12rem;line-height:1.6}
 .contact .card p+p{margin-top:1em}
 .contact .card .btn{margin-top:1.75rem}
@@ -446,18 +458,134 @@ dialog::backdrop{background:rgba(26,22,19,.55);-webkit-backdrop-filter:blur(10px
 .js .note.reveal.in{transform:rotate(1.2deg)}
 .js .principles .reveal.in:hover{transform:rotate(0deg) translateY(-.35rem)}
 
+/* the marker is drawn across its phrase as the heading arrives */
+.js .reveal .mark{background-size:0% 100%;transition:background-size .9s var(--ease) .35s}
+.js .reveal.in .mark{background-size:100% 100%}
+/* the verdict: the hollow line comes from the left, the solid one from the right */
+.js .verdict .reveal{opacity:1;transform:translateX(-6%);transition:transform 1s var(--ease) var(--d,0s)}
+.js .verdict .v2.reveal{transform:none}
+.js .verdict .v2.reveal>span{display:block;transform:translateX(8%);transition:transform 1s var(--ease) .12s}
+.js .verdict .reveal.in,.js .verdict .v2.reveal.in>span{transform:none}
+/* the navigation tucks away while reading down and returns on the way up */
+.site-head{transition:transform .45s var(--ease)}
+.site-head.away{transform:translateY(-130%)}
+
+/* ---------- phones: its own layout, not the desktop one made smaller.
+   Type steps down a size, sections lose their air, long lists become chips, and repeated blocks sit side by side. ---------- */
+@media (max-width:40em){
+  :root{--section:3.25rem;--gutter:1.1rem;--check:1rem;--r-lg:1.25rem}
+  body{font-size:1rem;line-height:1.55}
+  .eyebrow{font-size:.66rem;padding:.5em .8em .4em;margin-bottom:.9rem}
+  .d-xl{font-size:2.15rem}.d-lg{font-size:1.85rem}.d-md{font-size:1.4rem}
+  .lede{font-size:1rem;line-height:1.5}
+  .btn{min-height:2.9rem;padding:.6em 1.2em .5em;font-size:.95rem;box-shadow:3px 3px 0 var(--ink)}
+  .go{padding-block:.6rem;font-size:.95rem}
+  /* nav */
+  .site-head{padding-top:max(.5rem,env(safe-area-inset-top))}
+  .nav{padding:.3rem .3rem .3rem 1rem}
+  .nav-logo svg{height:1.25rem}
+  .nav-toggle{min-height:2.75rem;padding:.15em 1em 0;font-size:.95rem}
+  /* hero */
+  .hero{padding-top:4.9rem}
+  .hero-grid{gap:1.25rem;padding-bottom:1.75rem}
+  .hero h1{font-size:clamp(1.95rem,8.6vw,2.3rem);margin-bottom:.4em}
+  .hero-cta{margin-top:1.25rem;gap:.25rem 1rem;flex-wrap:nowrap}
+  .hero-cta .btn{padding-inline:1.05em;flex:none}
+  .hero-cta .go{font-size:.9rem;white-space:nowrap;padding-block:.85rem}
+  .stage{gap:.5rem}
+  .stage-fig{margin-top:-2.75rem;display:block}
+  .stage-info{position:relative;top:auto;width:auto;min-height:6.1rem;padding:.75rem .9rem .8rem;margin-top:-1.9rem}
+  .si-n{font-size:.72rem}.si-d{font-size:.92rem;line-height:1.4;margin-top:.3rem}
+  .fig-play{top:3rem;width:2.75rem;height:2.75rem}
+  .stages{grid-template-columns:repeat(4,minmax(0,1fr));gap:.35rem}
+  .stages button{min-height:3rem;padding:.4rem .2rem .35rem;place-items:center;text-align:center;font-size:.78rem;gap:0;border-width:1.5px;border-radius:.75rem;-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--card)}
+  .stages .n{font-size:.95rem}
+  .ticker li{font-size:1.05rem;gap:1rem;padding:.65rem 0 .55rem 1rem}
+  .ticker-pause{width:2.75rem;height:2.75rem}
+  /* philosophy */
+  .thread{margin-bottom:1rem}
+  .philo-h{font-size:clamp(2rem,9.4vw,2.5rem)}
+  .philo-body{margin-top:2rem;padding-top:1.25rem;gap:1.25rem}
+  .philo-cols{gap:.8rem}.philo-cols p{font-size:.98rem;line-height:1.5}
+  .philo-kicker{font-size:1.35rem}
+  .verdict{margin-top:2.25rem;font-size:clamp(1.35rem,7vw,1.75rem)}
+  /* services: a compact card each, the deliverables as chips */
+  .sec-head{gap:.75rem;margin-bottom:1.5rem}
+  .board{box-shadow:0 20px 40px -26px rgba(26,22,19,.5)}
+  .svc{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+  .svc-top{padding:.55rem 1rem}.svc-top svg{width:2rem;height:2rem}.svc-top .n{font-size:1.4rem}
+  .svc-body{padding:1rem 1rem 0}
+  .svc h3{font-size:1.5rem}
+  .svc-pitch{font-size:1.05rem;margin-top:.4rem}
+  .svc-desc{font-size:.94rem;line-height:1.5;margin-top:.55rem}
+  .svc-list{display:flex;flex-wrap:wrap;gap:.35rem;margin:.9rem 0 1rem;border-top:0}
+  .svc-list li{padding:.4rem .7rem .32rem;border:1.5px solid var(--ink);border-radius:99px;font-size:.8rem;line-height:1.25;font-weight:600;background:rgba(255,253,248,.7)}
+  .svc-list li:last-child{border-bottom:1.5px solid var(--ink)}
+  .svc-list li::before{display:none}
+  .svc .go{margin:auto -1rem 0;padding:.8rem 1rem .7rem}
+  .svc-close{margin-top:1.75rem;font-size:1.15rem}
+  /* work */
+  .cats{margin-top:.9rem;gap:.35rem}.cats a{min-height:2.75rem;padding-inline:.9rem}
+  .rail{--h:13.5rem;gap:1.1rem;padding-top:1.25rem;padding-bottom:.75rem}
+  .cap{margin-top:1rem;gap:.1rem .7rem}.cap .n{font-size:1.7rem}.cap h3{font-size:1.25rem}.cap p{font-size:.9rem;line-height:1.4}.cap .tags{margin:.35rem 0 .3rem}
+  .rail-ctrl{margin-top:.75rem;gap:.6rem .75rem;padding:.6rem;border-radius:1.25rem}
+  .rail-ctrl .round{width:2.75rem;height:2.75rem}
+  .rail-bar{order:0;flex:1 1 4rem}
+  .rail-ctrl .count{min-width:0;font-size:.9rem}
+  /* point of view: number beside the words */
+  .pov-top{gap:1rem}
+  .pov .prose p:first-child{font-size:1.25rem}
+  .principles{gap:.7rem;margin-top:1.75rem}
+  .principles li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 .9rem;align-items:start;padding:.9rem 1rem 1rem;box-shadow:4px 4px 0 var(--ink)}
+  .principles .n{grid-row:span 2;font-size:2.1rem;margin:0;line-height:1}
+  .principles h3{font-size:1.4rem}
+  .principles p{font-size:.94rem;line-height:1.45;margin-top:.3rem}
+  .principles li:nth-child(1){--tilt:-.8deg}.principles li:nth-child(2){--tilt:.6deg}.principles li:nth-child(3){--tilt:-.4deg}
+  .pov-close{margin-top:1.75rem}
+  /* contact */
+  .contact h2{font-size:clamp(2.1rem,10vw,2.6rem)}
+  .contact-grid{gap:3.75rem}
+  .contact .card{padding:1.1rem 1.15rem 1.25rem;transform:rotate(.8deg)}
+  .contact .card p{font-size:.98rem;line-height:1.5}
+  .contact .card .btn{margin-top:1.1rem}
+  .contact .sticker{--size:5rem;top:-4.4rem;right:.5rem}
+  /* footer: the two link lists side by side */
+  .foot{padding-top:2.5rem}
+  .foot-close{font-size:1.6rem;padding-bottom:1.5rem}
+  .foot-top{gap:1.5rem;padding-block:1.5rem}
+  .foot-logo svg{height:1.6rem}
+  .foot-line{font-size:1.1rem;margin-top:.6rem}.foot-desc{font-size:.94rem}
+  .foot-cols{grid-template-columns:1fr 1fr;gap:1rem 1.5rem}
+  .foot-cols a,.foot-cols button{min-height:2.75rem;font-size:.96rem}
+  .foot-base{padding-block:1rem;font-size:.82rem}
+  /* dialogs */
+  .nav-links{background:rgba(255,253,248,.96)}
+  .modal-in{padding:1.1rem}
+  .modal h2{font-size:1.7rem}
+  .form{gap:.9rem;margin-top:1.1rem}
+  .field input[type="text"],.field input[type="email"],.field textarea{min-height:3rem;padding:.65rem .8rem .55rem;font-size:1rem}
+  .field textarea{min-height:6.5rem}
+  .pick span{min-height:2.75rem;font-size:.92rem;padding-inline:.9rem}
+}
+
+@media (max-width:23.5em){.hero-cta{flex-wrap:wrap}}
+
 /* ---------- people's settings ---------- */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important;transition-delay:0s!important}
   .js .reveal{opacity:1;transform:none}
   .js .reveal.print,.js .principles .reveal,.js .note.reveal,.js .contact .card.reveal{transform:rotate(var(--tilt,0deg))}
-  .ticker-track,.sticker .ring{animation:none!important}
+  .ticker-track,.sticker .ring,.sun i{animation:none!important}
+  .js .reveal .mark{background-size:100% 100%}
+  .js .verdict .reveal,.js .verdict .v2.reveal>span{transform:none}
+  .site-head.away{transform:none}
   .ticker-pause,.fig-play{display:none}
   .js .under path{stroke-dashoffset:0}
 }
 @media (prefers-reduced-transparency:reduce){
-  .nav,.nav-links{background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .nav,.nav-links,.glass,.stage-info,.contact .card,.svc,.stages button{background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .glass-dark{background:#2a2622;-webkit-backdrop-filter:none;backdrop-filter:none}
   dialog::backdrop{background:rgba(26,22,19,.85);-webkit-backdrop-filter:none;backdrop-filter:none}
 }
 @media (prefers-contrast:more){

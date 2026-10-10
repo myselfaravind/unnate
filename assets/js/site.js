@@ -35,6 +35,17 @@
     document.addEventListener('pointerdown', e => { if (links.classList.contains('open') && !e.target.closest('.nav')) setOpen(false); });
   }
 
+  /* the bar tucks away on the way down the page and comes back on the way up (never while the menu is open) */
+  const head = $('.site-head');
+  if (head && 'IntersectionObserver' in window && !reduceMotion.matches) {
+    let last = scrollY, tick = false;
+    addEventListener('scroll', () => { if (tick) return; tick = true; requestAnimationFrame(() => {
+      tick = false; const y = scrollY, open = links && links.classList.contains('open');
+      if (Math.abs(y - last) < 8) return;
+      head.classList.toggle('away', y > last && y > 240 && !open && !head.contains(document.activeElement)); last = y;
+    }); }, { passive: true });
+  }
+
   /* ---------- arrival: things settle as they are reached ---------- */
   const arrive = els => {
     if (!('IntersectionObserver' in window) || reduceMotion.matches) { els.forEach(el => el.classList.add('in')); return; }
