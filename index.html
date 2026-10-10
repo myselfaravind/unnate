@@ -56,7 +56,7 @@
 
 <main id="main">
 
-<!-- 01 · HERO — what people see is the top layer; the drawing comes apart to show the three beneath it -->
+<!-- 01 · HERO — four pillars climbing: discover, strategy, execute, evolve -->
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap hero-grid">
     <div>
@@ -70,15 +70,19 @@
     </div>
     <div class="stage reveal" style="--d:.2s">
       <div class="stage-fig">
-        <div data-figure="beneath"></div>
+        <div data-figure="growth"></div>
+        <div class="stage-info" aria-live="polite">
+          <p class="si-n"><span data-stage-n>04</span> / <span data-stage-k>Evolve</span></p>
+          <p class="si-d" data-stage-d>Learn from results, refine what matters, and improve the experience over time.</p>
+        </div>
         <button type="button" class="fig-play" data-fig-play data-state="playing" aria-label="Pause the drawing’s animation"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2h4v12H3zM9 2h4v12H9z"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z"/></svg></button>
       </div>
-      <ul class="layers" data-layers aria-label="The layers of the drawing">
-        <li><button type="button" data-layer="4" aria-pressed="false"><span class="n" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg></span>What people see</button></li>
-        <li><button type="button" data-layer="3" aria-pressed="false"><span class="n" aria-hidden="true">01</span>Feel something.</button></li>
-        <li><button type="button" data-layer="2" aria-pressed="false"><span class="n" aria-hidden="true">02</span>Mean something.</button></li>
-        <li><button type="button" data-layer="1" aria-pressed="false"><span class="n" aria-hidden="true">03</span>Make it matter.</button></li>
-      </ul>
+      <ol class="stages" data-stages aria-label="How we work, in four stages">
+        <li><button type="button" data-stage="1" aria-pressed="false"><span class="n" aria-hidden="true">01</span>Discover</button></li>
+        <li><button type="button" data-stage="2" aria-pressed="false"><span class="n" aria-hidden="true">02</span>Strategy</button></li>
+        <li><button type="button" data-stage="3" aria-pressed="false"><span class="n" aria-hidden="true">03</span>Execute</button></li>
+        <li><button type="button" data-stage="4" aria-pressed="false"><span class="n" aria-hidden="true">04</span>Evolve</button></li>
+      </ol>
     </div>
   </div>
   <div class="ticker" data-ticker data-state="playing">
@@ -88,23 +92,21 @@
   <div class="check two c-sky" aria-hidden="true"></div>
 </section>
 
-<!-- 02 · OUR PHILOSOPHY — a note taped to the wall -->
+<!-- 02 · OUR PHILOSOPHY — set as type: one phrase marked, one phrase hung up to look pretty, and a verdict in two lines -->
 <section class="philo band sky" id="philosophy" aria-labelledby="philo-title">
   <div class="wrap">
-    <div class="philo-grid">
-      <div class="philo-head reveal">
-        <p class="eyebrow">What we believe</p>
-        <h2 class="display d-xl" id="philo-title">Creativity should <span class="mark" style="--hl:var(--orange)">solve problems,</span> not just <em>sit pretty.</em></h2>
-      </div>
-      <div class="note prose reveal" style="--d:.12s">
+    <p class="thread reveal"><span class="eyebrow">What we believe</span><i aria-hidden="true"></i></p>
+    <h2 class="display philo-h reveal" id="philo-title">Creativity should <span class="mark" style="--hl:var(--orange)">solve problems,</span> not just <span class="pretty"><em>sit pretty.</em></span></h2>
+    <div class="philo-body">
+      <div class="philo-cols reveal">
         <p>Good design catches your eye. Great creative work gives you a reason to keep looking.</p>
         <p>We believe the best brands don’t just look different. They make people feel something, communicate something meaningful and give people a reason to remember them.</p>
         <p>That’s why we bring thinking and intention into everything we create—from the smallest visual detail to the biggest campaign idea.</p>
-        <p class="kicker">Because looking good is a start. Making an impression is the point.</p>
       </div>
+      <p class="philo-kicker reveal" style="--d:.1s">Because looking good is a start. Making an impression is the point.</p>
     </div>
-    <p class="statement reveal"><span class="s1">Good looks get attention.</span> <span class="s2">Good thinking makes it count.</span></p>
   </div>
+  <p class="verdict" aria-label="Good looks get attention. Good thinking makes it count."><span class="v1 reveal" aria-hidden="true">Good looks get attention.</span><span class="v2 reveal" aria-hidden="true" style="--d:.12s"><span>Good thinking makes it count.</span></span></p>
 </section>
 
 <!-- 03 · SERVICES — one board, three columns: Web, Content & Social, Paid Campaigns -->
@@ -269,6 +271,6 @@
 <script src="portfolio/portfolio.js"></script>
 <script src="assets/hairline/kernel.js"></script>
 <script src="assets/js/site.js"></script>
-<script type="module" src="assets/hairline/beneath.js"></script>
+<script type="module" src="assets/hairline/growth.js"></script>
 </body>
 </html>

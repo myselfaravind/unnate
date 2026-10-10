@@ -60,7 +60,8 @@ line drawing (a Hairline figure) that says what the headline says: what people s
 
 ## Components
 - **Navigation**: one floating glass pill, logo left, three links and the Contact button right. Below 48em the links move into a menu.
-- **Hero stage**: the drawing on a butter disc, with four buttons beneath it, one per layer. Hovering, focusing or tapping a button lifts its layer. No portfolio images appear in the hero.
+- **Hero stage**: a line drawing of four pillars climbing (discover, strategy, execute, evolve) with a butter sun rising behind the tall end. A pane of glass names the stage in hand; four buttons beneath pick one by hover, focus or tap. No portfolio images appear in the hero.
+- **Philosophy**: type only. The headline runs the full width; one phrase is marked in orange, one hangs in a small frame from a pin. A dashed thread carries on from the hero. The closing verdict is two full-width lines, one hollow, one solid.
 - **Ticker**: one moving band of the three service names, with a pause button. The only marquee on the site.
 - **Services board**: one bordered panel divided into three columns (Web, Content & Social, Paid Campaigns), each with a coloured tab, a pitch line, a short description, five deliverables and a link. Stacks to one column below 62em.
 - **Work rail**: prints in a horizontal row at one shared height, with number, title, tags and one line of description. Swipe, drag, arrow keys or the two round buttons.

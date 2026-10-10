@@ -62,28 +62,38 @@
   window.hairline = figure => {
     const stage = $(`[data-figure="${figure.name}"]`);
     if (!stage || !HL) return;
-    const playBtn = $('[data-fig-play]'), layerBtns = $$('[data-layers] [data-layer]');
+    const playBtn = $('[data-fig-play]'), btns = $$('[data-stages] [data-stage]'), info = $('.stage-info');
+    const STAGES = [
+      ['Discover', 'Understand the business, uncover the real challenge, and define what success needs to look like.'],
+      ['Strategy', 'Turn insights into a clear direction, focused priorities, and a purposeful plan.'],
+      ['Execute', 'Bring the strategy to life through considered design, meaningful content, and effective execution.'],
+      ['Evolve', 'Learn from results, refine what matters, and improve the experience over time.'],
+    ];
     HL.inject(document);
     stage.setAttribute('data-hairline', figure.name);
     stage.setAttribute('role', 'img');
     stage.setAttribute('aria-label', figure.means);
     const svg = HL.mk('svg', { viewBox: '0 0 400 320', 'aria-hidden': 'true' }, stage);
-    // the figure's read-out ("rest", "layer 3") lights the matching button under the drawing
-    let text = 'rest';
+    // the figure's read-out ("rest", "stage 3") lights the matching button and fills the pane of glass
+    let text = 'rest', shown = STAGES.length;
     const read = { get textContent() { return text; }, set textContent(v) {
       text = v == null ? '' : String(v);
-      const n = (/layer (\d)/.exec(text) || [])[1];
-      layerBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.layer === n)));
+      const n = +((/stage (\d)/.exec(text) || [])[1] || 0);
+      btns.forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.stage === n)));
+      const k = n || STAGES.length; if (k === shown || !info) return; shown = k;
+      $('[data-stage-n]', info).textContent = String(k).padStart(2, '0'); $('[data-stage-k]', info).textContent = STAGES[k - 1][0]; $('[data-stage-d]', info).textContent = STAGES[k - 1][1];
+      info.classList.remove('swap'); void info.offsetWidth; info.classList.add('swap');
     } };
     figure.mount({ stage, svg, read }, figure.range[1]);
-    // the buttons answer for the pointer: each one holds it over its own layer, so the drawing works from the keyboard and by tap
+    // the buttons answer for the pointer: each one holds it over its own pillar, so the drawing works from the keyboard and by tap
+    const XS = [87, 162, 238, 313];
     const hold = n => {
-      const r = stage.getBoundingClientRect(), y = 62 + (4 - n + .5) * 52;
-      stage.dispatchEvent(new PointerEvent('pointermove', { pointerType: 'mouse', pointerId: 1, bubbles: true, clientX: r.left + .74 * r.width, clientY: r.top + y / 320 * r.height }));
+      const r = stage.getBoundingClientRect();
+      stage.dispatchEvent(new PointerEvent('pointermove', { pointerType: 'mouse', pointerId: 1, bubbles: true, clientX: r.left + XS[n - 1] / 400 * r.width, clientY: r.top + .6 * r.height }));
     };
     const letGo = () => stage.dispatchEvent(new PointerEvent('pointerleave', { pointerType: 'mouse', pointerId: 1 }));
-    layerBtns.forEach(b => {
-      const n = +b.dataset.layer;
+    btns.forEach(b => {
+      const n = +b.dataset.stage;
       b.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hold(n); });
       b.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse' && document.activeElement !== b) letGo(); });
       b.addEventListener('focus', () => hold(n));
