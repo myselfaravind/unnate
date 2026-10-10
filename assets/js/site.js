@@ -8,7 +8,7 @@
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const SERVICES = ['Websites', 'Brand Identity', 'Content & Creative', 'Social Media', 'Digital Advertising', 'Not sure yet'];
+  const SERVICES = ['Web', 'Content & Social', 'Paid Campaigns', 'Not sure yet'];
   const ARR = '<span class="arr" aria-hidden="true">→</span>';
 
   /* ---------- shared project markup ---------- */
@@ -62,15 +62,34 @@
   window.hairline = figure => {
     const stage = $(`[data-figure="${figure.name}"]`);
     if (!stage || !HL) return;
-    const readEl = $('[data-fig-read]'), playBtn = $('[data-fig-play]');
+    const playBtn = $('[data-fig-play]'), layerBtns = $$('[data-layers] [data-layer]');
     HL.inject(document);
     stage.setAttribute('data-hairline', figure.name);
     stage.setAttribute('role', 'img');
     stage.setAttribute('aria-label', figure.means);
     const svg = HL.mk('svg', { viewBox: '0 0 400 320', 'aria-hidden': 'true' }, stage);
+    // the figure's read-out ("rest", "layer 3") lights the matching button under the drawing
     let text = 'rest';
-    const read = { get textContent() { return text; }, set textContent(v) { text = v == null ? '' : String(v); if (readEl) readEl.textContent = text; } };
+    const read = { get textContent() { return text; }, set textContent(v) {
+      text = v == null ? '' : String(v);
+      const n = (/layer (\d)/.exec(text) || [])[1];
+      layerBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.layer === n)));
+    } };
     figure.mount({ stage, svg, read }, figure.range[1]);
+    // the buttons answer for the pointer: each one holds it over its own layer, so the drawing works from the keyboard and by tap
+    const hold = n => {
+      const r = stage.getBoundingClientRect(), y = 62 + (4 - n + .5) * 52;
+      stage.dispatchEvent(new PointerEvent('pointermove', { pointerType: 'mouse', pointerId: 1, bubbles: true, clientX: r.left + .74 * r.width, clientY: r.top + y / 320 * r.height }));
+    };
+    const letGo = () => stage.dispatchEvent(new PointerEvent('pointerleave', { pointerType: 'mouse', pointerId: 1 }));
+    layerBtns.forEach(b => {
+      const n = +b.dataset.layer;
+      b.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hold(n); });
+      b.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse' && document.activeElement !== b) letGo(); });
+      b.addEventListener('focus', () => hold(n));
+      b.addEventListener('blur', letGo);
+      b.addEventListener('click', () => hold(n));
+    });
 
     let playing = null, wanted = !reduceMotion.matches, seen = false;
     const sync = () => {
@@ -224,7 +243,7 @@
           <div class="hp" aria-hidden="true"><label for="f-hp">Leave this field empty</label><input id="f-hp" name="company_url" type="text" tabindex="-1" autocomplete="off"></div>
           <div class="form-alert" role="alert" hidden></div>
           <div class="form-foot">
-            <button type="submit" class="btn"><span data-label>Submit enquiry ${ARR}</span></button>
+            <button type="submit" class="btn"><span data-label>Submit enquiry&nbsp;${ARR}</span></button>
             <p class="privacy">Your information will be used to respond to your enquiry.${CFG.privacyUrl ? ` <a href="${esc(CFG.privacyUrl)}">Privacy policy</a>` : ''}</p>
           </div>
         </form>
@@ -300,7 +319,7 @@
   const setSending = on => {
     sending = on;
     submitBtn.setAttribute('aria-disabled', String(on));
-    $('[data-label]', submitBtn).innerHTML = on ? '<span class="spinner" aria-hidden="true"></span> Sending…' : `Submit enquiry ${ARR}`;
+    $('[data-label]', submitBtn).innerHTML = on ? '<span class="spinner" aria-hidden="true"></span> Sending…' : `Submit enquiry&nbsp;${ARR}`;
   };
   const fail = msg => {
     alertBox.textContent = msg;
@@ -341,12 +360,12 @@
         Object.entries(body.fields).forEach(([k, m]) => form.elements[k] && setError(form.elements[k], m));
         const first = $('[aria-invalid="true"]', form); if (first) first.focus();
       } else {
-        fail('Your enquiry wasn’t sent — the server didn’t accept it. Nothing you typed has been lost. Try sending it again in a moment.');
+        fail('Your enquiry wasn’t sent. The server didn’t accept it. Nothing you typed has been lost. Try sending it again in a moment.');
       }
     } catch (err) {
       fail(err.name === 'AbortError'
-        ? 'Your enquiry wasn’t sent — the connection timed out. Nothing you typed has been lost. Check your connection and send it again.'
-        : 'Your enquiry wasn’t sent — we couldn’t reach the server. Nothing you typed has been lost. Check your connection and send it again.');
+        ? 'Your enquiry wasn’t sent. The connection timed out. Nothing you typed has been lost. Check your connection and send it again.'
+        : 'Your enquiry wasn’t sent. We couldn’t reach the server. Nothing you typed has been lost. Check your connection and send it again.');
     } finally {
       clearTimeout(timer);
       setSending(false);

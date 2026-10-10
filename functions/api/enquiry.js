@@ -12,7 +12,7 @@
  *                              verified in Resend. Defaults to Resend's test sender, which can only
  *                              deliver to the email address that owns the Resend account.
  */
-const SERVICES = ['Websites', 'Brand Identity', 'Content & Creative', 'Social Media', 'Digital Advertising', 'Not sure yet'];
+const SERVICES = ['Web', 'Content & Social', 'Paid Campaigns', 'Not sure yet'];
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 const json = (status, body) => new Response(JSON.stringify(body), {

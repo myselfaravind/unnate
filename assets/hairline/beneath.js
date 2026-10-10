@@ -2,7 +2,7 @@
  * Beneath: what looks like one screen is a stack of four plates. On top, the
  * surface people see, a window with its bar, dots and a button. Under it, the
  * identity (a disc and a bar standing proud), then the system (a grid of
- * dots), then a plain base. At rest the stack is barely open and only the
+ * dots), then a plain base. At rest the stack stands a little open, each plate showing, and only the
  * surface is bright. The pointer's height picks a plate, which takes the
  * bright edge; its distance across pulls the stack apart, the gaps beside the
  * chosen plate opening most. The slider is the widest gap.
@@ -16,7 +16,7 @@ const {
 } = HL;
 
 const W = 112, D = 78, N = 4, TH = [7, 4, 4, 4], RC = 11;
-const REST = [7, 7, 15], MIN = 6, FAR = 0.42, RSUM = REST[0] + REST[1] + REST[2];
+const REST = [13, 13, 19], MIN = 6, FAR = 0.42, RSUM = REST[0] + REST[1] + REST[2];
 const BAND0 = 62, BAND1 = 270, X0 = 96, X1 = 304;
 
 /** A ring moved to stand somewhere else on its plate. */

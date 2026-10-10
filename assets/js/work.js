@@ -28,6 +28,8 @@
     const b = e.target.closest('[data-filter]'); if (!b) return;
     filter = b.dataset.filter;
     $$('[data-filter]', filters).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    // keep the chosen category in the address, so the view can be shared or reloaded
+    history.replaceState(null, '', filter === 'all' ? location.pathname : `?show=${encodeURIComponent(filter)}`);
     render();
   });
   render();
