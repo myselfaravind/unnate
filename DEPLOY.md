@@ -18,7 +18,7 @@ assets/hairline/           the hero's line drawing: kernel.js is the Hairline en
                            beneath.js is the figure itself
 lab/                       the figure on its own test page (hairline-beneath.html) and its check sheet
 assets/fonts/              self-hosted fonts (Fraunces for display type, Epilogue for text)
-assets/img/                logo.svg (the orange character's files are kept here but the site does not use them)
+assets/img/                logo.svg and the orange character (pose-look-*.webp are used in the thinking section and the contact letter)
 assets/work/               optimised thumbnails, generated from portfolio/ by tools/build-media.mjs
 portfolio/portfolio.js     ← the portfolio manifest: one entry per project
 portfolio/websites|creatives|videos/   the original project files

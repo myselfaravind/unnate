@@ -2,16 +2,17 @@
 name: UNNATE
 theme: "The Pinboard"
 colors:
-  ink: "#1A1613"          # text, borders, hard shadows, dark sections
-  ink-2: "#4A423B"        # secondary text on light grounds
-  paper: "#FAF5EA"        # page ground
-  card: "#FFFDF8"         # raised surfaces: board, notes, form, figure plates
-  orange: "#FF5A1F"       # the one accent: primary buttons, highlights, active states
-  orange-deep: "#B53A08"  # orange for text on light grounds (passes AA)
-  sky: "#D6E4FF"          # section ground (philosophy), service tab
-  butter: "#FFE08A"       # section ground (point of view), hero disc, tape, service tab
-  blush: "#FFD2C2"        # service tab
-  mint: "#CFEBD6"         # success sticker
+  ink: "#0E1A3C"          # deep navy: text, borders, hard shadows, dark sections
+  ink-2: "#414C6E"        # secondary text on light grounds
+  paper: "#F7F4EE"        # page ground
+  card: "#FFFEFB"         # raised surfaces: board, letter, form, figure plates
+  orange: "#FF5A1F"       # the one accent: primary buttons, the highlighted word, active states
+  orange-type: "#EC480C"  # orange for large display type on light grounds
+  orange-deep: "#B83A07"  # orange for small text on light grounds (passes AA)
+  sky: "#D3E1FF"          # pale blue ground (philosophy), service tab
+  cornflower: "#A8C2FF"   # stronger blue ground (contact), the disc behind the thinking panes
+  mint: "#E3EBFF"         # palest blue ground (thinking section)
+  butter: "#FFD8C2"       # the warm tint, a pale orange: hero sun, tape, second sheet of the letter
 typography:
   display: { family: "Fraunces", fallback: "Iowan Old Style, Palatino Linotype, Georgia, serif", weight: 560, tracking: "-0.022em", leading: 1.04, axes: "SOFT 100" }
   display-italic: { family: "Fraunces Italic", weight: 480, use: "emphasis inside headlines, service pitches, numerals" }
@@ -42,8 +43,9 @@ Checkerboard tape marks where one section ends and the next begins. The hero car
 line drawing (a Hairline figure) that says what the headline says: what people see is only the top layer.
 
 ## Colour
+- Three hues only: navy, blue and orange. Every other colour is a tint of one of them.
 - One accent, orange, used the same way everywhere: primary buttons, the highlighted phrase, active states, the bright edge in the hero drawing.
-- Sections change ground colour for rhythm: paper (hero, services), sky (philosophy), ink (work, footer), butter (point of view), orange (contact).
+- Sections change ground for rhythm: paper (hero, services), sky (philosophy), navy (work, footer), palest blue (thinking), cornflower (contact). Orange is never a ground, so it always reads as the thing to press.
 - Small orange text on light grounds uses `orange-deep`. Body text is always ink on a light ground or paper on ink.
 
 ## Type
@@ -65,7 +67,9 @@ line drawing (a Hairline figure) that says what the headline says: what people s
 - **Ticker**: one moving band of the three service names, with a pause button. The only marquee on the site.
 - **Services board**: one bordered panel divided into three columns (Web, Content & Social, Paid Campaigns), each with a coloured tab, a pitch line, a short description, five deliverables and a link. Stacks to one column below 62em.
 - **Work rail**: prints in a horizontal row at one shared height, with number, title, tags and one line of description. Swipe, drag, arrow keys or the two round buttons.
-- **Point of view**: a scene fixed behind the text (low sun on butter, rings on sky, grid on blush, risen sun on ink) with panes of warm glass travelling over it. Each pane sets the scene as it reaches the middle of the screen. Copy here is about listening and reasons, and does not repeat the brand line.
+- **Hero headline**: two sentences at two sizes across the full width. The first is plain and ends on a hollow word; the second is large and ends on the one word in orange italic.
+- **Thinking section**: words on the left (sticky on desktop) with the mascot listening; three glass panes over one blue disc on the right. Things arrive once and then hold still; the pane being read gets an orange numeral.
+- **Contact letter**: a sheet of studio letterhead (checker edge, logo, margin rule) on cornflower, a second sheet behind it, a round stamp pressed on, the mascot standing at the corner looking toward the pointer, and one large button.
 - **Enquiry sheet**: a bordered dialog with labelled fields, pill checkboxes for the services, inline errors.
 
 ## Motion

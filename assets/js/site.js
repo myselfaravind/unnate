@@ -57,17 +57,31 @@
   arrive($$('.reveal'));
   window.UNNATE.arrive = arrive;
 
-  /* ---------- point of view: each pane of glass sets the scene behind it as it reaches the middle of the screen ---------- */
-  const pov = $('[data-pov]');
-  if (pov) {
-    const panes = $$('[data-step-at]', pov);
-    if ('IntersectionObserver' in window) {
-      const mid = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) pov.dataset.step = e.target.dataset.stepAt; }), { rootMargin: '-45% 0px -45% 0px' });
-      const seen = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); seen.unobserve(e.target); } }), { rootMargin: '0px 0px -12% 0px', threshold: .15 });
-      panes.forEach(el => { mid.observe(el); seen.observe(el); });
-      // above the section the scene rests in its first state; below it, in its last
-      new IntersectionObserver(es => { const e = es[0]; if (!e.isIntersecting) pov.dataset.step = e.boundingClientRect.top > 0 ? '0' : '3'; }).observe(pov);
-    } else panes.forEach(el => el.classList.add('in'));
+  /* ---------- point of view: the pane nearest the middle of the screen is marked as the one being read ---------- */
+  const panes = $$('[data-pane]');
+  if (panes.length && 'IntersectionObserver' in window) {
+    const mid = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('now', e.isIntersecting)), { rootMargin: '-47% 0px -47% 0px' });
+    panes.forEach(el => mid.observe(el));
+  }
+
+  /* ---------- hero: the last word answers a hover, a tap or the keyboard with one small wave ---------- */
+  const feel = $('[data-feel]');
+  if (feel && !reduceMotion.matches) {
+    const wave = () => { feel.classList.remove('wave', 'redraw'); void feel.offsetWidth; feel.classList.add('wave', 'redraw'); };
+    feel.addEventListener('pointerenter', wave); feel.addEventListener('click', wave);
+  }
+
+  /* ---------- contact: the character beside the letter looks toward the pointer (three drawings, swapped) ---------- */
+  const mascot = $('[data-mascot]');
+  if (mascot && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduceMotion.matches) {
+    const poses = { left: mascot.dataset.poseLeft, down: mascot.dataset.poseDown, right: mascot.dataset.poseRight };
+    let cur = 'left', warmed = false;
+    mascot.closest('section').addEventListener('pointermove', e => {
+      if (!warmed) { warmed = true; Object.values(poses).forEach(u => { new Image().src = u; }); }
+      const r = mascot.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+      const want = dx > r.width * .4 ? 'right' : (dy > 0 && Math.abs(dx) < r.width * .6 ? 'down' : 'left');
+      if (want !== cur) { cur = want; mascot.src = poses[want]; }
+    });
   }
 
   /* ---------- the ticker's pause button ---------- */
@@ -128,7 +142,8 @@
     let playing = null, wanted = !reduceMotion.matches, seen = false;
     const sync = () => {
       const on = wanted && seen && !document.hidden;
-      if (on && !playing) playing = HL.tour(stage, figure.tour || HL.LAP);
+      // one lap to show what the drawing does, then it rests until someone touches it or presses play
+      if (on && !playing) playing = HL.tour(stage, figure.tour || HL.LAP, i => { if ((figure.tour || HL.LAP)[i] === null) { wanted = false; sync(); } });
       if (!on && playing) { playing.stop(); playing = null; }
       if (playBtn) {
         playBtn.dataset.state = wanted ? 'playing' : 'paused';

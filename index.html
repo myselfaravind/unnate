@@ -19,7 +19,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="UNNATE creative studio. Your brand is more than what people see. It’s what they feel.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#FAF5EA">
+<meta name="theme-color" content="#F7F4EE">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -59,11 +59,16 @@
 <!-- 01 · HERO — four pillars climbing: discover, strategy, execute, evolve -->
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow reveal">UNNATE · Creative Studio</p>
-      <h1 class="display reveal" id="hero-title" style="--d:.06s">Your brand is more than what people see. It’s what they <em class="under">feel.<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 14C40 4 74 20 112 10S190 4 226 13S276 16 296 9"/></svg></em></h1>
-      <p class="lede reveal" style="--d:.14s">We build brands, design digital experiences, and create content that connects creativity with purpose.</p>
-      <div class="hero-cta reveal" style="--d:.22s">
+    <div class="hero-top">
+      <p class="eyebrow">UNNATE · Creative Studio</p>
+      <h1 class="hero-h" id="hero-title" aria-label="Your brand is more than what people see. It’s what they feel.">
+        <span class="h-see" aria-hidden="true"><span class="w" style="--i:0">Your</span> <span class="w" style="--i:1">brand</span> <span class="w" style="--i:2">is</span> <span class="w" style="--i:3">more</span> <span class="w" style="--i:4">than</span> <span class="w" style="--i:5">what</span> <span class="w" style="--i:6">people</span> <span class="w hollow" style="--i:7">see.</span></span>
+        <span class="h-feel" aria-hidden="true"><span class="w" style="--i:0">It’s</span> <span class="w" style="--i:1">what</span> <span class="w" style="--i:2">they</span> <span class="w" style="--i:3"><em class="under" data-feel><span class="l" style="--k:0">f</span><span class="l" style="--k:1">e</span><span class="l" style="--k:2">e</span><span class="l" style="--k:3">l</span><span class="l" style="--k:4">.</span><svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 14C40 4 74 20 112 10S190 4 226 13S276 16 296 9"/></svg></em></span></span>
+      </h1>
+    </div>
+    <div class="hero-copy">
+      <p class="lede">We build brands, design digital experiences, and create content that connects creativity with purpose.</p>
+      <div class="hero-cta">
         <button type="button" class="btn" data-enquire>Connect with us&nbsp;<span class="arr" aria-hidden="true">→</span></button>
         <a class="go" href="#work">Explore our work&nbsp;<span class="arr" aria-hidden="true">→</span></a>
       </div>
@@ -186,43 +191,52 @@
 </section>
 <div class="check two c-butter" aria-hidden="true"></div>
 
-<!-- 05 · OUR POINT OF VIEW — why to trust us with the work. A fixed scene changes behind panes of glass as you read down. -->
-<section class="pov" id="approach" aria-labelledby="pov-title" data-pov data-step="0">
-  <div class="pov-stage" aria-hidden="true"><i class="pv-disc"></i><i class="pv-rings"></i><i class="pv-grid"></i><i class="pv-bar"></i></div>
-  <div class="wrap pov-flow">
-    <div class="pov-panel pov-intro" data-step-at="0">
-      <p class="eyebrow">The thinking behind the work</p>
-      <h2 class="display d-xl" id="pov-title">We listen before we <em>make.</em></h2>
-      <div class="prose">
+<!-- 05 · OUR POINT OF VIEW — why to trust us with the work. Still and readable: the words on the left, three panes on the right. -->
+<section class="pov band" id="approach" aria-labelledby="pov-title" data-pov>
+  <div class="wrap pov-grid">
+    <div class="pov-lead">
+      <p class="eyebrow reveal">The thinking behind the work</p>
+      <h2 class="display d-xl reveal" id="pov-title">We listen before we <em>make.</em></h2>
+      <div class="prose reveal" style="--d:.08s">
         <p>Most requests arrive as a deliverable: a new website, a few Reels, a campaign. The reason behind the request is usually more useful than the request.</p>
         <p>So we ask before we suggest. Who is this for? What should change once it is live? What has already been tried? The answers decide what we make, and sometimes what we leave out.</p>
       </div>
+      <img class="pov-mascot reveal" style="--d:.16s" src="assets/img/pose-look-right.webp" width="471" height="539" alt="" loading="lazy" decoding="async">
     </div>
-    <ol class="pov-steps">
-      <li class="pov-panel" data-step-at="1"><span class="n" aria-hidden="true">01</span><h3>Listen first.</h3><p>We start with your business, your audience and what needs to change. Design comes into the conversation later.</p></li>
-      <li class="pov-panel" data-step-at="2"><span class="n" aria-hidden="true">02</span><h3>Decide with reasons.</h3><p>Every recommendation arrives with its reasoning, so you can question it, shape it and choose with confidence.</p></li>
-      <li class="pov-panel" data-step-at="3"><span class="n" aria-hidden="true">03</span><h3>Make what is needed.</h3><p>Nothing is added for show. We build what the goal calls for, and we say so when a request will not help.</p></li>
-    </ol>
-    <p class="pov-panel pov-close display d-md" data-step-at="3">You should always know what we are making, <span class="under">and why.<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 14C40 4 74 20 112 10S190 4 226 13S276 16 296 9"/></svg></span></p>
+    <div class="pov-side">
+      <ol class="pov-steps">
+        <li class="pov-pane reveal" data-pane><span class="n" aria-hidden="true">01</span><h3>Listen first.</h3><p>We start with your business, your audience and what needs to change. Design comes into the conversation later.</p></li>
+        <li class="pov-pane reveal" data-pane style="--d:.1s"><span class="n" aria-hidden="true">02</span><h3>Decide with reasons.</h3><p>Every recommendation arrives with its reasoning, so you can question it, shape it and choose with confidence.</p></li>
+        <li class="pov-pane reveal" data-pane style="--d:.2s"><span class="n" aria-hidden="true">03</span><h3>Make what is needed.</h3><p>Nothing is added for show. We build what the goal calls for, and we say so when a request will not help.</p></li>
+      </ol>
+      <p class="pov-close display d-md reveal">You should always know what we are making, <span class="under">and why.<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 14C40 4 74 20 112 10S190 4 226 13S276 16 296 9"/></svg></span></p>
+    </div>
   </div>
 </section>
 <div class="check two c-ink-orange" aria-hidden="true"></div>
 
-<!-- 06 · CONTACT -->
-<section class="contact band orange" id="contact" aria-labelledby="contact-title">
-  <div class="wrap">
-    <div class="contact-grid">
-      <div class="reveal">
-        <p class="eyebrow">Have something in mind?</p>
-        <h2 class="display" id="contact-title">Let’s make something that <em>matters.</em></h2>
-      </div>
-      <div class="card reveal" style="--d:.12s">
-        <span class="sticker" aria-hidden="true"><svg class="ring" viewBox="0 0 120 120"><path id="ring-4644" fill="none" d="M16 60a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/><text><textPath href="#ring-4644" textLength="272">CONNECT WITH US · CONNECT WITH US · </textPath></text></svg><svg class="core" viewBox="0 0 48 48"><use href="#i-star"/></svg></span>
+<!-- 06 · CONTACT — the last page: a letter on the studio's own letterhead -->
+<section class="contact band" id="contact" aria-labelledby="contact-title">
+  <div class="wrap letter-wrap">
+    <div class="sheet sheet-back" aria-hidden="true"></div>
+    <article class="sheet letter reveal">
+      <div class="check letter-edge" aria-hidden="true"></div>
+      <header class="letter-head">
+        <span class="letter-logo"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="assets/img/logo.svg#wm"/></svg></span>
+        <p>Creative studio<br>Web · Content &amp; Social · Paid Campaigns</p>
+      </header>
+      <p class="eyebrow">Have something in mind?</p>
+      <h2 class="display" id="contact-title">Let’s make something that <em class="under">matters.<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 14C40 4 74 20 112 10S190 4 226 13S276 16 296 9"/></svg></em></h2>
+      <div class="letter-body">
         <p>A new brand. A better website. Content that feels more like you. A campaign ready to go further.</p>
         <p>Whatever you’re working towards, tell us a little about it. We’ll start with the idea, understand the challenge and work out what makes sense.</p>
-        <button type="button" class="btn btn-ink" data-enquire>Connect with us&nbsp;<span class="arr" aria-hidden="true">→</span></button>
       </div>
-    </div>
+      <div class="letter-sign">
+        <button type="button" class="btn btn-lg" data-enquire>Connect with us&nbsp;<span class="arr" aria-hidden="true">→</span></button>
+      </div>
+      <span class="sticker stamp" aria-hidden="true"><svg class="ring" viewBox="0 0 120 120"><path id="ring-stamp" fill="none" d="M16 60a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/><text><textPath href="#ring-stamp" textLength="272">CONNECT WITH US · CONNECT WITH US · </textPath></text></svg><svg class="core" viewBox="0 0 48 48"><use href="#i-star"/></svg></span>
+      <img class="letter-mascot" data-mascot data-pose-left="assets/img/pose-look-left.webp" data-pose-down="assets/img/pose-look-down.webp" data-pose-right="assets/img/pose-look-right.webp" src="assets/img/pose-look-left.webp" width="552" height="525" alt="" loading="lazy" decoding="async">
+    </article>
   </div>
 </section>
 
