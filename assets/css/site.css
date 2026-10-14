@@ -1391,3 +1391,4 @@ html.js .gpage[data-reveal].in{opacity:1;transform:rotate(1.2deg);transition:opa
 @media (max-width:40em){.nav-sheet.glass{background:rgb(255 255 255 / .95)}}
 @media (max-width:40em){.filters button .c{font-size:.86em}}
 @media (max-width:22.49em){.tabs [role=tab] .tn{font-size:1.04em}}
+.direct-k{color:#fff}
