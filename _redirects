@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects. Old or likely addresses → the real pages.
+/clinic-websites      /clinical-websites/     301
+/clinic-websites/     /clinical-websites/     301
+/clinics              /clinical-websites/     301
+/clinics/             /clinical-websites/     301
+/final-year-project   /final-year-projects/   301
+/final-year-project/  /final-year-projects/   301

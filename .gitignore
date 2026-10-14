@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+.dev.vars
+
+# Original portfolio files stay on the studio machine; the site uses the optimised copies in assets/.
+portfolio/creatives/
+portfolio/videos/
+portfolio/websites/

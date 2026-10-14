@@ -1,355 +1,335 @@
-/* UNNATE — shared behaviour: navigation, arrival, the Hairline figure, the work rail, the enquiry sheet, footer. */
+/* UNNATE · shared behaviour for every page. No libraries.
+   Navigation, reveals, the character, enquiry forms, tab sets, the reading timeline,
+   the landing-page hero and footer links. Page-specific code lives in home.js and work.js. */
 (() => {
   'use strict';
-  const doc = document.documentElement;
-  const ROOT = doc.dataset.root || '';
-  const CFG = window.UNNATE_CONFIG || {};
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const doc = document.documentElement;
+  const CFG = window.UNNATE_CONFIG || {};
+  const RM = matchMedia('(prefers-reduced-motion: reduce)');
+  const FINE = matchMedia('(hover: hover) and (pointer: fine)');
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const SERVICES = ['Websites', 'Brand Identity', 'Content & Creative', 'Social Media', 'Digital Advertising', 'Not sure yet'];
-  const ARR = '<span class="arr" aria-hidden="true">→</span>';
+  const behavior = () => (RM.matches ? 'auto' : 'smooth');
+  const U = window.UNNATE = { $, $$, esc, RM, FINE, CFG, behavior };
 
-  /* ---------- shared project markup ---------- */
-  const alt = it => esc(it.alt || `${it.title}: ${it.category.toLowerCase()}`);
-  const thumb = it => it.type === 'web' ? `${it.id}-wide` : it.type === 'video' ? `${it.id}-poster` : `${it.id}-full`;
-  const dims = it => it.type === 'web' ? [1200, 750] : it.type === 'video' ? [720, 1280] : (it.size || [1400, 1867]);
-  const PLAY = '<span class="badge" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1.500l11 6.500-11 6.500z"/></svg></span>'.replace(/\.500/g, '.5');
-  const printHTML = (it, eager) => {
-    const [w, h] = dims(it);
-    return `<span class="print" style="--ar:${w}/${h}"><img src="${ROOT}assets/work/${esc(thumb(it))}.webp" width="${w}" height="${h}" ${eager ? '' : 'loading="lazy" '}decoding="async" draggable="false" alt="${alt(it)}">${it.type === 'video' ? PLAY : ''}</span>`;
-  };
-  const tagsHTML = it => `<span class="tag">${esc(it.category)}</span>${it.kind ? `<span class="tag tag-kind">${esc(it.kind)}</span>` : ''}`;
-  window.UNNATE = { esc, ROOT, reduceMotion, printHTML, tagsHTML, alt, ARR };
+  $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+
+  /* ---------- verified contact links only (assets/js/config.js) ---------- */
+  const EMAILS = (Array.isArray(CFG.emails) ? CFG.emails : [CFG.emails]).map(e => String(e || '').trim()).filter(e => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e));
+  const links = EMAILS.map(e => ({ kind: 'email', href: `mailto:${e}`, text: e }));
+  if (CFG.instagram) links.push({ kind: 'social', href: CFG.instagram, text: 'Instagram', ext: true });
+  if (CFG.linkedin) links.push({ kind: 'social', href: CFG.linkedin, text: 'LinkedIn', ext: true });
+  const ext = l => l.ext ? ' target="_blank" rel="noopener"' : '';
+  const newTab = l => l.ext ? '<span class="vh"> (opens in a new tab)</span>' : '';
+  $$('[data-connect]').forEach(ul => {
+    ul.innerHTML = '<li><a href="#contact" data-enquire>Send an enquiry</a></li>' +
+      links.map(l => `<li><a href="${esc(l.href)}"${ext(l)}>${esc(l.text)}${newTab(l)}</a></li>`).join('');
+    if (ul.dataset.connect) $('a', ul).setAttribute('href', ul.dataset.connect);
+  });
+  // on the contact cards: both email addresses, once they are filled in
+  $$('[data-direct]').forEach(box => {
+    if (!EMAILS.length) { box.remove(); return; }
+    box.innerHTML = `<p class="direct-k">Or email us directly</p>` + EMAILS.map(e => `<a class="glass-blue" href="mailto:${esc(e)}"><svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#mail"/></svg>${esc(e)}</a>`).join('');
+  });
 
   /* ---------- navigation ---------- */
-  const toggle = $('.nav-toggle'), links = $('.nav-links');
-  if (toggle && links) {
-    const setOpen = open => { links.classList.toggle('open', open); toggle.setAttribute('aria-expanded', String(open)); toggle.textContent = open ? 'Close' : 'Menu'; };
-    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
-    links.addEventListener('click', e => { if (e.target.closest('a,button')) setOpen(false); });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setOpen(false); toggle.focus(); }
-    });
-    document.addEventListener('pointerdown', e => { if (links.classList.contains('open') && !e.target.closest('.nav')) setOpen(false); });
+  const nav = $('[data-nav]'), toggle = $('.nav-toggle'), sheet = $('#nav-sheet');
+  if (nav) {
+    const sentinel = document.createElement('div');
+    sentinel.setAttribute('aria-hidden', 'true');
+    sentinel.style.cssText = 'position:absolute;top:140px;left:0;width:1px;height:1px;pointer-events:none';
+    document.body.prepend(sentinel);
+    new IntersectionObserver(([e]) => nav.classList.toggle('compact', !e.isIntersecting && e.boundingClientRect.top < 0)).observe(sentinel);
+  }
+  if (toggle && sheet) {
+    const setMenu = open => {
+      toggle.setAttribute('aria-expanded', String(open));
+      $('.vh', toggle).textContent = open ? 'Close menu' : 'Open menu';
+      sheet.hidden = !open; sheet.classList.toggle('open', open);
+    };
+    toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+    sheet.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !sheet.hidden) { setMenu(false); toggle.focus(); } });
+    document.addEventListener('pointerdown', e => { if (!sheet.hidden && !e.target.closest('[data-nav]')) setMenu(false); });
+    addEventListener('resize', () => { if (!sheet.hidden && innerWidth > 640) setMenu(false); });
   }
 
-  /* ---------- arrival: things settle as they are reached ---------- */
+  /* ---------- reveals that carry meaning ---------- */
+  $$('[data-stagger]').forEach(g => [...g.children].forEach((c, i) => c.style.setProperty('--k', i)));
+  $$('.track').forEach(t => [...t.children].forEach((c, i) => c.style.setProperty('--k', i)));
   const arrive = els => {
-    if (!('IntersectionObserver' in window) || reduceMotion.matches) { els.forEach(el => el.classList.add('in')); return; }
-    const io = new IntersectionObserver(entries => entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    }), { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+    if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('in')); return; }
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -12% 0px' });
     els.forEach(el => io.observe(el));
   };
-  arrive($$('.reveal'));
-  window.UNNATE.arrive = arrive;
+  arrive($$('[data-reveal], .print, .notes, [data-stagger], .track'));
+  U.arrive = arrive;
 
-  /* ---------- the ticker's pause button ---------- */
-  const ticker = $('[data-ticker]'), tickBtn = $('[data-ticker-pause]');
-  if (ticker && tickBtn) tickBtn.addEventListener('click', () => {
-    const paused = ticker.dataset.state !== 'paused';
-    ticker.dataset.state = tickBtn.dataset.state = paused ? 'paused' : 'playing';
-    tickBtn.setAttribute('aria-label', paused ? 'Play the moving list of services' : 'Pause the moving list of services');
-  });
-  if (tickBtn) tickBtn.dataset.state = 'playing';
+  /* ---------- glass steps: the step you are reading turns from glass to solid ---------- */
+  const steps = $$('[data-step]');
+  const stepIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) steps.forEach(st => st.classList.toggle('now', st === e.target)); }), { rootMargin: '-44% 0px -44% 0px' });
+  steps.forEach(st => stepIO.observe(st));
 
-  /* ---------- Hairline: the page a figure is shown on ----------
-     The figure file calls hairline({...}); this mounts it the way the package's bench does,
-     plays its tour while it is on screen, and gives way to a real pointer. */
-  const HL = window.HL;
-  window.hairline = figure => {
-    const stage = $(`[data-figure="${figure.name}"]`);
-    if (!stage || !HL) return;
-    const readEl = $('[data-fig-read]'), playBtn = $('[data-fig-play]');
-    HL.inject(document);
-    stage.setAttribute('data-hairline', figure.name);
-    stage.setAttribute('role', 'img');
-    stage.setAttribute('aria-label', figure.means);
-    const svg = HL.mk('svg', { viewBox: '0 0 400 320', 'aria-hidden': 'true' }, stage);
-    let text = 'rest';
-    const read = { get textContent() { return text; }, set textContent(v) { text = v == null ? '' : String(v); if (readEl) readEl.textContent = text; } };
-    figure.mount({ stage, svg, read }, figure.range[1]);
-
-    let playing = null, wanted = !reduceMotion.matches, seen = false;
-    const sync = () => {
-      const on = wanted && seen && !document.hidden;
-      if (on && !playing) playing = HL.tour(stage, figure.tour || HL.LAP);
-      if (!on && playing) { playing.stop(); playing = null; }
-      if (playBtn) {
-        playBtn.dataset.state = wanted ? 'playing' : 'paused';
-        playBtn.setAttribute('aria-label', wanted ? 'Pause the drawing’s animation' : 'Play the drawing’s animation');
-      }
-    };
-    if ('IntersectionObserver' in window) new IntersectionObserver(es => { seen = es[0].isIntersecting; sync(); }, { threshold: .35 }).observe(stage);
-    else seen = true;
-    document.addEventListener('visibilitychange', sync);
-    if (playBtn) playBtn.addEventListener('click', () => { wanted = !wanted; sync(); });
-    sync();
-  };
-
-  /* ---------- footer: year + verified links only ---------- */
-  $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
-  const connect = $('[data-connect]');
-  if (connect) {
-    const items = [];
-    if (CFG.instagram) items.push(`<li><a href="${esc(CFG.instagram)}" target="_blank" rel="noopener">Instagram<span class="vh"> (opens in a new tab)</span></a></li>`);
-    if (CFG.linkedin) items.push(`<li><a href="${esc(CFG.linkedin)}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></li>`);
-    if (CFG.email) items.push(`<li><a href="mailto:${esc(CFG.email)}">Email</a></li>`);
-    if (!items.length) items.push('<li><button type="button" data-enquire>Send an enquiry</button></li>');
-    connect.innerHTML = items.join('');
-  }
-
-  /* ---------- selected work: a rail of prints ----------
-     Native horizontal scrolling with snap points (touch and trackpad get real momentum for free).
-     With a mouse the rail can be dragged: it tracks the pointer 1:1 from where it was grabbed,
-     and on release it is thrown to the print nearest where that momentum would have carried it. */
-  const data = window.UNNATE_PORTFOLIO || [];
-  const carousel = $('[data-carousel]');
-  const cats = $('[data-cats]');
-  if (cats && data.length) {
-    cats.innerHTML = ['Brand Identity', 'Websites', 'Content & Creative', 'Campaigns'].filter(g => data.some(i => i.group === g))
-      .map(g => `<li><a class="tag" href="${ROOT}work/?show=${encodeURIComponent(g)}">${esc(g)}</a></li>`).join('');
-  }
-  if (carousel && data.length) {
-    const items = data.filter(i => i.featured);
-    const rail = $('[data-rail]', carousel), count = $('[data-count]', carousel), bar = $('.rail-bar i', carousel);
-    const prev = $('[data-prev]', carousel), next = $('[data-next]', carousel);
-    const pad = n => String(n).padStart(2, '0');
-    rail.innerHTML = items.map((it, i) => `<li class="slide" aria-roledescription="slide" aria-label="${i + 1} of ${items.length}">
-        <a href="${ROOT}work/#${encodeURIComponent(it.id)}" aria-label="${esc(it.title)}: view project">${printHTML(it, i < 2)}</a>
-        <div class="cap"><span class="n" aria-hidden="true">${pad(i + 1)}</span><h3>${esc(it.title)}</h3><div class="tags">${tagsHTML(it)}</div><p>${esc(it.desc)}</p></div>
-      </li>`).join('');
-    const slides = $$('.slide', rail);
-    const behavior = () => reduceMotion.matches ? 'auto' : 'smooth';
-    const origin = () => parseFloat(getComputedStyle(rail).scrollPaddingLeft) || 0;
-    const posOf = el => el.offsetLeft - origin();
-    const maxScroll = () => rail.scrollWidth - rail.clientWidth;
-    const nearest = x => slides.reduce((a, el, i) => Math.abs(Math.min(posOf(el), maxScroll()) - x) < Math.abs(Math.min(posOf(slides[a]), maxScroll()) - x) ? i : a, 0);
-    let index = 0;
-    const update = () => {
-      index = rail.scrollLeft >= maxScroll() - 2 ? Math.max(nearest(rail.scrollLeft), index) : nearest(rail.scrollLeft);
-      const end = rail.scrollLeft >= maxScroll() - 2;
-      count.textContent = `${pad(end ? items.length : index + 1)} / ${pad(items.length)}`;
-      bar.style.setProperty('--p', (maxScroll() > 0 ? Math.max(.06, rail.scrollLeft / maxScroll()) : 1).toFixed(3));
-      prev.disabled = rail.scrollLeft <= 2; next.disabled = end;
-    };
-    const go = i => rail.scrollTo({ left: Math.min(posOf(slides[Math.max(0, Math.min(slides.length - 1, i))]), maxScroll()), behavior: behavior() });
-    let ticking = false;
-    rail.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; update(); }); } }, { passive: true });
-    addEventListener('resize', update);
-    prev.addEventListener('click', () => go(nearest(rail.scrollLeft) - 1));
-    next.addEventListener('click', () => go(nearest(rail.scrollLeft) + 1));
-    rail.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); go(nearest(rail.scrollLeft) + 1); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); go(nearest(rail.scrollLeft) - 1); }
-    });
-    // mouse drag
-    let drag = null;
-    const project = (v, d = .996) => (v / 1000) * d / (1 - d);          // where the momentum would carry it, px
-    rail.addEventListener('pointerdown', e => {
-      if (e.pointerType !== 'mouse' || e.button !== 0) return;
-      drag = { x: e.clientX, left: rail.scrollLeft, moved: false, hist: [[e.timeStamp, e.clientX]] };
-    });
+  /* ---------- light on glass follows the pointer ---------- */
+  if (FINE.matches) {
+    let gx = 0, gy = 0, graf = 0;
     addEventListener('pointermove', e => {
-      if (!drag) return;
-      const dx = e.clientX - drag.x;
-      if (!drag.moved && Math.abs(dx) < 8) return;                        // a little hysteresis before it becomes a drag
-      if (!drag.moved) { drag.moved = true; rail.classList.add('dragging'); }
-      rail.scrollLeft = drag.left - dx;
-      drag.hist.push([e.timeStamp, e.clientX]); if (drag.hist.length > 6) drag.hist.shift();
-    });
-    const release = e => {
-      if (!drag) return;
-      const d = drag; drag = null;
-      if (!d.moved) return;
-      const [t0, x0] = d.hist[0], [t1, x1] = d.hist[d.hist.length - 1];
-      const v = t1 > t0 && e.timeStamp - t1 < 80 ? (x1 - x0) / (t1 - t0) * 1000 : 0;   // px/s at release
-      const target = nearest(rail.scrollLeft - Math.max(-900, Math.min(900, project(v))));
-      rail.classList.remove('dragging');
-      go(target);
-      // a drag is not a click on the print underneath
-      const stop = ev => { ev.preventDefault(); ev.stopPropagation(); };
-      rail.addEventListener('click', stop, { capture: true, once: true });
-      setTimeout(() => rail.removeEventListener('click', stop, { capture: true }), 0);
-    };
-    addEventListener('pointerup', release);
-    addEventListener('pointercancel', release);
-    rail.addEventListener('dragstart', e => e.preventDefault());
-    update();
+      gx = e.clientX; gy = e.clientY;
+      if (graf) return;
+      graf = requestAnimationFrame(() => {
+        graf = 0;
+        const g = document.elementFromPoint(gx, gy)?.closest('.glass, .glass-dark');
+        if (g) { const r = g.getBoundingClientRect(); g.style.setProperty('--mx', ((gx - r.left) / r.width * 100).toFixed(1) + '%'); g.style.setProperty('--my', ((gy - r.top) / r.height * 100).toFixed(1) + '%'); }
+      });
+    }, { passive: true });
   }
 
-  /* ---------- enquiry sheet ---------- */
-  const sticker = (label, id) => `<span class="sticker" aria-hidden="true"><svg class="ring" viewBox="0 0 120 120"><path id="${id}" fill="none" d="M16 60a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/><text><textPath href="#${id}" textLength="272">${label}</textPath></text></svg><svg class="core" viewBox="0 0 48 48"><path d="M10 25l9 9 19-21"/></svg></span>`;
-  const modal = document.createElement('dialog');
-  modal.className = 'modal';
-  modal.id = 'enquiry';
-  modal.setAttribute('aria-labelledby', 'enquiry-title');
-  modal.innerHTML = `
-    <div class="check c-orange modal-top" aria-hidden="true"></div>
-    <button type="button" class="close" data-close aria-label="Close enquiry form"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
-    <div class="modal-in">
-      <div data-view="form">
-        <p class="eyebrow">Have something in mind?</p>
-        <h2 class="display" id="enquiry-title" tabindex="-1">Let’s make something that <em>matters.</em></h2>
-        <p class="intro">Tell us a little about it. Everything is required unless it says optional.</p>
-        <form class="form" novalidate>
-          <div class="field">
-            <label for="f-name">Your name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="120">
-          </div>
-          <div class="field">
-            <label for="f-email">Work email</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200" spellcheck="false">
-          </div>
-          <div class="field">
-            <label for="f-company">Company or brand name</label>
-            <input id="f-company" name="company" type="text" autocomplete="organization" required maxlength="160">
-          </div>
-          <div class="field">
-            <label for="f-site">Website or social profile <span class="opt">(optional)</span></label>
-            <input id="f-site" name="website" type="text" autocomplete="url" maxlength="300" spellcheck="false">
-          </div>
-          <fieldset class="field full">
-            <legend>What do you need help with? <span class="opt">(choose any that apply)</span></legend>
-            <div class="picks">
-              ${SERVICES.map(s => `<label class="pick"><input type="checkbox" name="services" value="${esc(s)}"><span>${esc(s)}</span></label>`).join('')}
-            </div>
-          </fieldset>
-          <div class="field full">
-            <label for="f-msg">Tell us a little about your project</label>
-            <textarea id="f-msg" name="message" rows="5" required maxlength="5000" placeholder="What’s the idea, challenge or goal you’re working towards?"></textarea>
-          </div>
-          <div class="hp" aria-hidden="true"><label for="f-hp">Leave this field empty</label><input id="f-hp" name="company_url" type="text" tabindex="-1" autocomplete="off"></div>
-          <div class="form-alert" role="alert" hidden></div>
-          <div class="form-foot">
-            <button type="submit" class="btn"><span data-label>Submit enquiry ${ARR}</span></button>
-            <p class="privacy">Your information will be used to respond to your enquiry.${CFG.privacyUrl ? ` <a href="${esc(CFG.privacyUrl)}">Privacy policy</a>` : ''}</p>
-          </div>
-        </form>
-      </div>
-      <div data-view="sent" class="sent" hidden>
-        ${sticker('ENQUIRY RECEIVED · ENQUIRY RECEIVED · ', 'ring-sent')}
-        <h2 class="display" tabindex="-1" style="margin:0">Thanks for reaching out.</h2>
-        <p>We’ve received your enquiry and will be in touch soon.</p>
-        <button type="button" class="btn btn-ink" data-close>Close</button>
-      </div>
-    </div>`;
-  document.body.appendChild(modal);
-
-  const form = $('form', modal);
-  const alertBox = $('.form-alert', modal);
-  const submitBtn = $('button[type="submit"]', modal);
-  const views = { form: $('[data-view="form"]', modal), sent: $('[data-view="sent"]', modal) };
-  let opener = null, sending = false, sent = false;
-
-  const openModal = (trigger, service) => {
-    opener = trigger || document.activeElement;
-    if (sent) { form.reset(); clearErrors(); sent = false; }
-    views.form.hidden = false; views.sent.hidden = true;
-    if (service) $$('input[name="services"]', form).forEach(c => { if (c.value === service) c.checked = true; });
-    // the sheet grows out of the button that asked for it
-    const r = opener && opener.getBoundingClientRect ? opener.getBoundingClientRect() : null;
-    modal.style.transformOrigin = r ? `${((r.left + r.width / 2) / innerWidth * 100).toFixed(1)}% ${((r.top + r.height / 2) / innerHeight * 100).toFixed(1)}%` : '';
-    if (typeof modal.showModal === 'function') modal.showModal(); else modal.setAttribute('open', '');
-    doc.classList.add('locked');
-    modal.scrollTop = 0;
-    $('#f-name', modal).focus({ preventScroll: true });
-  };
-  const closeModal = () => { if (modal.open) modal.close(); };
-  modal.addEventListener('close', () => {
-    doc.classList.remove('locked');
-    if (opener && document.contains(opener)) opener.focus({ preventScroll: true });
-  });
-  modal.addEventListener('click', e => {
-    if (e.target === modal || e.target.closest('[data-close]')) closeModal();
-  });
-  document.addEventListener('click', e => {
-    const t = e.target.closest('[data-enquire]');
-    if (!t) return;
-    e.preventDefault();
-    openModal(t, t.dataset.service);
-  });
-
-  const setError = (input, msg) => {
-    const field = input.closest('.field');
-    if (!field) return;
-    let el = $('.err', field);
-    if (!msg) { if (el) el.remove(); input.removeAttribute('aria-invalid'); input.removeAttribute('aria-describedby'); return; }
-    if (!el) { el = document.createElement('p'); el.className = 'err'; el.id = input.id + '-err'; field.appendChild(el); }
-    el.textContent = msg;
-    input.setAttribute('aria-invalid', 'true');
-    input.setAttribute('aria-describedby', el.id);
-  };
-  function clearErrors() { $$('input,textarea', form).forEach(i => i.id && setError(i, '')); alertBox.hidden = true; }
-  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  const validate = () => {
-    const f = form.elements, bad = [];
-    const need = (input, msg) => { const m = input.value.trim() ? '' : msg; setError(input, m); if (m) bad.push(input); };
-    need(f.name, 'Enter your name.');
-    const ev = f.email.value.trim();
-    const emsg = !ev ? 'Enter your work email.' : (!EMAIL.test(ev) ? 'Enter an email address in the format name@company.com.' : '');
-    setError(f.email, emsg); if (emsg) bad.push(f.email);
-    need(f.company, 'Enter your company or brand name.');
-    need(f.message, 'Tell us a little about your project.');
-    return bad;
-  };
-  form.addEventListener('input', e => { if (e.target.getAttribute('aria-invalid')) validate(); });
-
-  const setSending = on => {
-    sending = on;
-    submitBtn.setAttribute('aria-disabled', String(on));
-    $('[data-label]', submitBtn).innerHTML = on ? '<span class="spinner" aria-hidden="true"></span> Sending…' : `Submit enquiry ${ARR}`;
-  };
-  const fail = msg => {
-    alertBox.textContent = msg;
-    alertBox.hidden = false;
-    alertBox.scrollIntoView({ block: 'nearest' });
-  };
-
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (sending) return;                       // no duplicate submissions
-    alertBox.hidden = true;
-    const bad = validate();
-    if (bad.length) { bad[0].focus(); return; }
-    const fd = new FormData(form);
-    const payload = {
-      name: fd.get('name').trim(), email: fd.get('email').trim(), company: fd.get('company').trim(),
-      website: fd.get('website').trim(), services: fd.getAll('services'), message: fd.get('message').trim(),
-      company_url: fd.get('company_url'), page: location.pathname
+  /* ---------- the character, animated from the supplied action sheet ----------
+     Each actor holds the sheet's poses as stacked frames. Frames cross-fade (90ms) instead of
+     cutting, and the whole figure moves as one box, so the artwork itself is never distorted. */
+  const makeActor = root => {
+    const frames = {}; $$('img[data-f]', root).forEach(i => { frames[i.dataset.f] = i; });
+    let cur = null, timers = [];
+    const show = f => { if (cur === f || !frames[f]) return; if (cur) frames[cur].classList.remove('on'); frames[f].classList.add('on'); cur = f; };
+    const move = (x, y, ms = 0, ease = 'linear') => {
+      root.style.setProperty('--at', ms + 'ms'); root.style.setProperty('--ae', ease);
+      root.style.setProperty('--ax', x.toFixed(1) + 'px'); root.style.setProperty('--ay', y.toFixed(1) + 'px');
+      root.style.setProperty('--fs', (1 - Math.min(.35, Math.abs(y) / 60)).toFixed(3));
     };
-    const endpoint = /^https?:/.test(CFG.enquiryEndpoint || '') ? CFG.enquiryEndpoint : ROOT + (CFG.enquiryEndpoint || 'api/enquiry');
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 20000);
-    setSending(true);
-    try {
-      const res = await fetch(endpoint, {
-        method: 'POST', signal: ctrl.signal,
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      let body = null;
-      try { body = await res.json(); } catch { /* non-JSON response */ }
-      // Success is shown only when the server confirms it accepted the enquiry.
-      if (res.ok && body && (body.ok === true || body.success === true)) {
-        sent = true;
-        views.form.hidden = true; views.sent.hidden = false;
-        $('h2', views.sent).focus();
-      } else if (res.status === 422 && body && body.fields) {
-        Object.entries(body.fields).forEach(([k, m]) => form.elements[k] && setError(form.elements[k], m));
-        const first = $('[aria-invalid="true"]', form); if (first) first.focus();
-      } else {
-        fail('Your enquiry wasn’t sent — the server didn’t accept it. Nothing you typed has been lost. Try sending it again in a moment.');
-      }
-    } catch (err) {
-      fail(err.name === 'AbortError'
-        ? 'Your enquiry wasn’t sent — the connection timed out. Nothing you typed has been lost. Check your connection and send it again.'
-        : 'Your enquiry wasn’t sent — we couldn’t reach the server. Nothing you typed has been lost. Check your connection and send it again.');
-    } finally {
-      clearTimeout(timer);
-      setSending(false);
+    const stop = () => { timers.forEach(clearTimeout); timers = []; };
+    // a sequence: [frame, duration ms, x, y, ease]
+    const play = (seq, done) => {
+      stop(); let t = 0;
+      seq.forEach(([f, d, x, y, e]) => { timers.push(setTimeout(() => { show(f); if (x !== undefined) move(x, y || 0, d, e || 'cubic-bezier(.22,1,.36,1)'); }, t)); t += d; });
+      if (done) timers.push(setTimeout(done, t));
+    };
+    return { show, move, stop, play, get cur() { return cur; }, root };
+  };
+  U.makeActor = makeActor;
+
+  /* The contact character: walks in once when the card comes into view, then stands and breathes.
+     It hops when pointed at or tapped, crouches to watch while you type, and leaps when an enquiry is sent. */
+  const contactActor = (root, form) => {
+    const a = makeActor(root);
+    let ready = false, busy = false, typing = false, glances = 0;
+    a.show('stand');
+    const rest = () => { busy = false; a.show(typing ? 'crouch' : 'stand'); a.move(0, 0, 200); };
+    const walkIn = () => {
+      if (RM.matches) { ready = true; return; }
+      busy = true; root.classList.remove('idle');
+      const w = root.offsetWidth, x0 = -w * .55;
+      a.move(x0, 0); root.style.opacity = '0';
+      requestAnimationFrame(() => { root.style.transition = 'opacity .35s ease'; root.style.opacity = '1'; });
+      const cyc = ['step', 'hop', 'stride', 'hop', 'step', 'hop', 'stride', 'hop'];
+      const seq = cyc.map((f, i) => [f, 140, x0 + (i + 1) * (-x0 / cyc.length), i % 2 ? -3 : 0]);
+      seq.push(['crouch', 160, 0, 0], ['stand', 120, 0, 0]);
+      a.play(seq, () => { ready = true; rest(); if (FINE.matches) root.classList.add('idle'); });
+    };
+    const hop = () => {
+      if (!ready || busy) return;
+      if (RM.matches) { a.show('leap'); setTimeout(rest, 500); return; }
+      busy = true; root.classList.remove('idle');
+      a.play([['crouch', 120, 0, 2], ['leap', 260, 0, -22, 'cubic-bezier(.2,.8,.3,1)'], ['hop', 220, 0, 0, 'cubic-bezier(.5,0,.8,.6)'], ['stand', 140, 0, 0]],
+        () => { rest(); if (FINE.matches) root.classList.add('idle'); });
+    };
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !ready && !busy) walkIn();
+      root.classList.toggle('idle', e.isIntersecting && ready && !busy && FINE.matches && !RM.matches);
+    }, { threshold: .6 }).observe(root);
+    if (FINE.matches) root.addEventListener('pointerenter', hop);
+    root.addEventListener('click', hop);
+    if (FINE.matches && !RM.matches) setInterval(() => {
+      if (!ready || busy || typing || document.hidden || glances >= 3) return;
+      const r = root.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+      glances++; a.show('crouch'); setTimeout(() => { if (!busy && !typing) a.show('stand'); }, 1100);
+    }, 7000);
+    if (form) {
+      form.addEventListener('change', e => { if (e.target.type === 'checkbox' && e.target.checked) hop(); });
+      form.addEventListener('focusin', e => { if (!e.target.matches('input:not([type=checkbox]),textarea,select')) return; typing = true; if (!busy) a.show('crouch'); });
+      form.addEventListener('focusout', () => { typing = false; setTimeout(() => { if (!typing && !busy) a.show('stand'); }, 300); });
+      form.addEventListener('enquiry:sent', () => { busy = false; hop(); setTimeout(() => { busy = false; hop(); }, 900); });
     }
+  };
+
+  /* ---------- enquiry forms → FormSubmit ----------
+     Each form says what kind of enquiry it is (data-kind) and which fields it requires (required + data-msg).
+     A valid form is posted with FormSubmit's AJAX endpoint (https://formsubmit.co/ajax/…), so the visitor
+     stays on the page. It goes to the first studio address, with the second copied in (_cc), and shows
+     success only when FormSubmit answers that it accepted the enquiry. No key or secret is involved. */
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const SUBJECT = { general: 'Studio enquiry', clinic: 'Clinic website enquiry', student: 'Final-year project enquiry' };
+  // FormSubmit discards any submission containing one of these phrases (checked on its server)
+  const BLACKLIST = 'viagra, cialis, casino, porn, escort, payday loan, backlinks, guest post';
+  const ENDPOINT = EMAILS.length ? `https://formsubmit.co/ajax/${encodeURIComponent(String(CFG.formsubmitAlias || '').trim() || EMAILS[0])}` : '';
+  // the visible label of a field, without "(optional)" and similar notes
+  const labelOf = (form, el) => {
+    const host = el.type === 'checkbox' ? el.closest('fieldset')?.querySelector('legend') : $(`label[for="${CSS.escape(el.id)}"]`, form);
+    if (!host) return el.name;
+    const c = host.cloneNode(true); $$('.opt', c).forEach(o => o.remove());
+    return c.textContent.replace(/\s+/g, ' ').trim().replace(/[?:]$/, '');
+  };
+  const emailHint = EMAILS.length ? `, or email us at ${EMAILS.join(' or ')}.` : '.';
+  $$('[data-form]').forEach(form => {
+    const card = form.closest('[data-formcard]') || form.parentElement;
+    const views = { form: $('[data-view=form]', card), sent: $('[data-view=sent]', card) };
+    const alertBox = $('.form-alert', form), submit = $('button[type=submit]', form), label = $('[data-label]', submit);
+    const idle = label.textContent;
+    const actorRoot = form.closest('.contact')?.querySelector('.actor-c');
+    if (actorRoot) contactActor(actorRoot, form);
+
+    const setError = (input, msg) => {
+      const field = input.closest('.field'); if (!field) return;
+      let el = $('.err', field);
+      const hint = $('.hint', field);
+      if (!msg) { el?.remove(); input.removeAttribute('aria-invalid'); if (hint) input.setAttribute('aria-describedby', hint.id); else input.removeAttribute('aria-describedby'); return; }
+      if (!el) { el = document.createElement('p'); el.className = 'err'; el.id = input.id + '-err'; field.appendChild(el); }
+      el.textContent = msg; input.setAttribute('aria-invalid', 'true');
+      input.setAttribute('aria-describedby', hint ? `${el.id} ${hint.id}` : el.id);
+    };
+    const validate = () => {
+      const bad = [];
+      $$('input,textarea,select', form).forEach(i => {
+        if (i.type === 'checkbox' || i.closest('.hp')) return;
+        const v = i.value.trim();
+        let msg = '';
+        if (i.required && !v) msg = i.dataset.msg || 'This field is required.';
+        else if (i.type === 'email' && v && !EMAIL.test(v)) msg = 'Enter an email address in the format name@example.com.';
+        setError(i, msg); if (msg) bad.push(i);
+      });
+      return bad;
+    };
+    form.addEventListener('input', e => { if (e.target.getAttribute('aria-invalid')) validate(); });
+
+    let sending = false;
+    const setSending = on => {
+      sending = on; submit.setAttribute('aria-disabled', String(on));
+      label.innerHTML = on ? '<span class="spinner" aria-hidden="true"></span>Sending…' : esc(idle);
+    };
+    const fail = msg => { alertBox.textContent = msg; alertBox.hidden = false; alertBox.scrollIntoView({ block: 'nearest', behavior: behavior() }); };
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (sending) return;                                   // no duplicate submissions
+      alertBox.hidden = true;
+      const bad = validate(); if (bad.length) { bad[0].focus(); return; }
+      if (!ENDPOINT) { fail('Enquiries can’t be sent from this page yet. Please try again later.'); return; }
+      // readable field names, in the order they appear on the form; ticked options joined into one line
+      const kind = form.dataset.kind || 'general', fields = {};
+      $$('input, textarea, select', form).forEach(el => {
+        if (!el.name || el.closest('.hp') || (el.type === 'checkbox' && !el.checked)) return;
+        const k = labelOf(form, el), v = el.value.trim();
+        if (el.type === 'checkbox') fields[k] = fields[k] ? `${fields[k]}, ${v}` : v;
+        else fields[k] = v || '—';
+      });
+      const name = form.elements.name.value.trim(), email = form.elements.email.value.trim();
+      const who = ['company', 'clinic', 'college'].map(n => form.elements[n]?.value.trim()).find(Boolean);
+      const payload = {
+        _subject: `${SUBJECT[kind] || SUBJECT.general} — ${name}${who ? ` (${who})` : ''}`,
+        _replyto: email,                                       // “Reply” in the inbox answers the visitor
+        _cc: EMAILS.slice(1).join(','),                        // the second studio inbox receives a copy
+        _template: 'table',
+        _captcha: 'false',                                     // reCAPTCHA can't be shown to an AJAX request
+        _honey: form.elements._honey?.value || '',             // FormSubmit silently drops it if a bot filled this in
+        _blacklist: BLACKLIST,
+        Form: SUBJECT[kind] || SUBJECT.general,
+        ...fields,
+        Page: `${location.origin}${location.pathname} (${document.title})`
+      };
+      const ctrl = new AbortController(), t = setTimeout(() => ctrl.abort(), 20000);
+      setSending(true);
+      try {
+        const res = await fetch(ENDPOINT, { method: 'POST', signal: ctrl.signal, headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
+        let body = null; try { body = await res.json(); } catch { /* not JSON */ }
+        // success is shown only when FormSubmit confirms it accepted the enquiry ("success": "true" or true)
+        if (res.ok && body && String(body.success) === 'true') {
+          views.form.hidden = true; views.sent.hidden = false;
+          $('h3', views.sent).focus();
+          form.dispatchEvent(new CustomEvent('enquiry:sent'));
+        } else {
+          // e.g. before activation FormSubmit answers success "false" with a message saying so; the owner sees it here
+          if (body && body.message) console.warn('FormSubmit:', body.message);
+          fail('Your enquiry wasn’t sent. The server didn’t accept it. Nothing you typed has been lost. Try sending it again in a moment' + emailHint);
+        }
+      } catch (err) {
+        fail(err.name === 'AbortError'
+          ? 'Your enquiry wasn’t sent. The connection timed out. Nothing you typed has been lost. Check your connection and send it again' + emailHint
+          : 'Your enquiry wasn’t sent. We couldn’t reach the server. Nothing you typed has been lost. Check your connection and send it again' + emailHint);
+      } finally { clearTimeout(t); setSending(false); }
+    });
   });
+
+  /* every "contact" action brings you to this page's form, with the right option already ticked;
+     on a page without a form, the link's own href takes you to one */
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-enquire]'); if (!t) return;
+    const contact = $('#contact'), form = contact && $('[data-form]', contact);
+    if (!form) return;
+    e.preventDefault();
+    if (t.dataset.service) $$('input[type=checkbox]', form).forEach(c => { if (c.value === t.dataset.service) c.checked = true; });
+    if (location.hash !== '#contact') history.pushState(null, '', '#contact');
+    contact.scrollIntoView({ behavior: behavior(), block: 'start' });
+    const first = $('input:not([type=checkbox]):not([tabindex="-1"])', form);
+    setTimeout(() => first && first.focus({ preventScroll: true }), RM.matches ? 0 : 650);
+  });
+
+  /* ---------- tab sets: one control, one panel (keyboard: arrows, Home, End) ---------- */
+  $$('[data-tabset]').forEach(set => {
+    const tabs = $$('[role=tab]', set), panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+    const select = (i, focus) => {
+      i = (i + tabs.length) % tabs.length;
+      tabs.forEach((t, k) => { t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; });
+      panels.forEach((p, k) => { if (!p) return; const was = p.hidden; p.hidden = k !== i; if (k === i && was && !RM.matches) { p.classList.remove('enter'); void p.offsetWidth; p.classList.add('enter'); } });
+      if (focus) tabs[i].focus();
+    };
+    tabs.forEach((t, i) => t.addEventListener('click', () => select(i)));
+    set.addEventListener('keydown', e => {
+      const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1, Home: 'h', End: 'e' }[e.key];
+      if (k === undefined || !e.target.closest('[role=tab]')) return;
+      e.preventDefault();
+      const cur = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
+      select(k === 'h' ? 0 : k === 'e' ? tabs.length - 1 : cur + k, true);
+    });
+  });
+
+  /* ---------- the reading timeline: the line fills as you read, each step lights when it is reached ---------- */
+  $$('.timeline').forEach(tl => {
+    const steps = $$('.tl', tl);
+    let raf = 0;
+    const draw = () => {
+      raf = 0;
+      const r = tl.getBoundingClientRect(), mid = innerHeight * .55;
+      const p = Math.max(0, Math.min(1, (mid - r.top) / Math.max(1, r.height)));
+      tl.style.setProperty('--tp', RM.matches ? 1 : p.toFixed(3));
+      steps.forEach(s => s.classList.toggle('on', RM.matches || s.getBoundingClientRect().top < mid));
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(draw); };
+    let live = false;
+    new IntersectionObserver(([e]) => { live = e.isIntersecting; if (live) kick(); }).observe(tl);
+    addEventListener('scroll', () => { if (live) kick(); }, { passive: true });
+    addEventListener('resize', kick);
+    draw();
+  });
+
+  /* ---------- landing hero: lines arrive once fonts are ready; the screens drift a little as you scroll ---------- */
+  const lhero = $('.lhero');
+  if (lhero) {
+    $$('.lhero-h .ln', lhero).forEach((ln, i) => ln.style.setProperty('--l', i));
+    $$('.cap-code, .cap-caret', lhero).forEach(c => new IntersectionObserver(([e]) => c.classList.toggle('live', e.isIntersecting)).observe(c));
+    const pulse = $('.cap-pulse', lhero);
+    if (pulse && !RM.matches) setTimeout(() => pulse.classList.add('live'), 2800);
+    Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(r => setTimeout(r, 700))]).then(() => requestAnimationFrame(() => lhero.classList.add('go')));
+    const drift = $('[data-drift]', lhero);
+    if (drift && !RM.matches && matchMedia('(min-width: 40.01em)').matches) {      // no drift on phones: it opens gaps on small screens
+      let raf = 0;
+      const draw = () => { raf = 0; const y = Math.min(scrollY, innerHeight); drift.style.setProperty('--py', (y * -.05).toFixed(1) + 'px'); };
+      addEventListener('scroll', () => { if (!raf && scrollY < innerHeight * 1.2) raf = requestAnimationFrame(draw); }, { passive: true });
+    }
+    const fa = $('.actor-f', lhero);
+    if (fa) {
+      const a = makeActor(fa); a.show('stand');
+      const pose = f => () => { if (!RM.matches) a.show(f); };
+      if (FINE.matches) { fa.addEventListener('pointerenter', pose('crouch')); fa.addEventListener('pointerleave', pose('stand')); }
+      fa.addEventListener('click', () => { if (RM.matches) return; a.play([['crouch', 120, 0, 2], ['leap', 260, 0, -18, 'cubic-bezier(.2,.8,.3,1)'], ['hop', 220, 0, 0, 'cubic-bezier(.5,0,.8,.6)'], ['stand', 140, 0, 0]]); });
+    }
+  }
 })();

@@ -1,0 +1,6 @@
+# UNNATE — allow all crawlers. The demo builds are excluded: they hold placeholder content.
+User-agent: *
+Allow: /
+Disallow: /demos/
+
+Sitemap: https://unnate.com/sitemap.xml
