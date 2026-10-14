@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- UNNATE · social preview card template. Rendered to /assets/img/og/*.jpg by tools/build-og.mjs. Not linked from the site. -->
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="stylesheet" href="/assets/css/site.css">
+<style>
+  html,body{margin:0;width:1200px;height:630px;overflow:hidden}
+  body{background:radial-gradient(50rem 26rem at 95% -10%,var(--sky),transparent 70%),var(--paper)}
+  .og{position:relative;box-sizing:border-box;width:1200px;height:630px;padding:64px 72px;display:flex;flex-direction:column}
+  .og .hand{font-size:30px;transform:rotate(-2deg);margin:0 0 22px}
+  .og h1{font-weight:640;font-stretch:112%;font-size:86px;line-height:.98;letter-spacing:-.045em;margin:0;max-width:15em}
+  .og h1 .cap{height:.8em}
+  .og .mark{position:absolute;left:72px;bottom:56px;width:180px;height:auto;color:var(--ink)}
+  .og .chip{position:absolute;right:72px;bottom:52px;font:600 22px "Mona Sans";padding:14px 24px;border-radius:999px;background:var(--ink);color:#fff}
+  .og .mascot{position:absolute;right:40px;top:150px;width:340px}
+  .cap-eyes{background:#F9450A}
+</style></head>
+<body><div class="og" id="og"></div>
+<script>
+const P = {
+  home: ['UNNATE · Creative Studio', 'Your brand is more than what people see. It’s what they <span class="cap cap-feel"><span class="eye-stage"><img src="/assets/img/eyes/happy.webp" alt=""></span></span> feel.', 'unnate.com'],
+  'clinical-websites': ['Websites for clinics & wellness', 'Your clinic, clearly explained <span class="cap cap-pulse"><svg viewBox="0 0 120 40"><path pathLength="1" style="stroke-dashoffset:0" d="M4 22h26l7-14 10 26 8-18 5 6h56"/></svg></span> before the first visit.', 'unnate.com/clinical-websites'],
+  'final-year-projects': ['Final-year project support', 'Build a final&#8209;year project you can actually <span class="cap cap-liquid cap-alt cap-code"><span class="cc">&lt;/&gt;</span></span> explain.', 'unnate.com/final-year-projects']
+};
+const [hand, h, url] = P[new URLSearchParams(location.search).get('page')] || P.home;
+document.getElementById('og').innerHTML = `<p class="hand">${hand}</p><h1>${h}</h1><svg class="mark" viewBox="0 0 2180 662"><use href="/assets/img/icons.svg#wm"/></svg><span class="chip">${url}</span>`;
+</script></body></html>
