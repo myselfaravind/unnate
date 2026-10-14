@@ -1,7 +1,9 @@
-// Browser checks for the running site. Start the preview first:  MOCK_EMAIL=1 node tools/dev-server.mjs
+// Browser checks for the running site. Start the preview first:  node tools/dev-server.mjs
 // then:  node tools/test-browser.mjs        (needs Playwright with Chromium: npm i playwright && npx playwright install chromium)
 // Checks every page at phone, tablet and desktop widths for errors, failed requests and sideways overflow,
 // then routes, navigation, forms, the project viewer, film previews and reduced motion.
+// No email is ever sent: every request to formsubmit.co is intercepted and answered here, and recorded
+// so the tests can check exactly what the site would send.
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 let chromium;
@@ -12,6 +14,19 @@ const WIDTHS = [320, 375, 390, 430, 768, 1280, 1440, 1680];
 let failures = 0;
 const ok = (cond, msg) => { console.log(cond ? '  ✓' : '  ✗', msg); if (!cond) failures++; };
 const browser = await chromium.launch(process.env.CHANNEL ? { channel: process.env.CHANNEL } : {});
+// every page gets a stand-in for FormSubmit: it records the request and answers like FormSubmit's AJAX endpoint
+const sent = [];
+let formsubmitReply = { status: 200, body: { success: 'true', message: 'The form was submitted successfully.' } };
+const newPage = browser.newPage.bind(browser);
+browser.newPage = async opts => {
+  const page = await newPage(opts);
+  await page.route('https://formsubmit.co/**', async r => {
+    sent.push({ url: r.request().url(), body: JSON.parse(r.request().postData() || '{}') });
+    await new Promise(z => setTimeout(z, 300));
+    await r.fulfill({ status: formsubmitReply.status, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(formsubmitReply.body) });
+  });
+  return page;
+};
 
 const scrollThrough = async page => {
   const h = await page.evaluate(() => document.documentElement.scrollHeight);
@@ -98,50 +113,57 @@ const formCase = async (path, fill, sentText) => {
   await form.locator('input[type=checkbox]').first().check();
   await form.locator('button[type=submit]').click();
   await page.waitForSelector('#contact [data-view=sent]:not([hidden])', { timeout: 5000 }).catch(() => {});
-  const sent = await page.isVisible('#contact [data-view=sent]');
-  ok(sent, `${path}: valid submit shows the success message (server confirmed)`);
-  if (sent) ok((await page.textContent('#contact [data-view=sent]')).includes(sentText), `${path}: success text is right`);
+  const shown = await page.isVisible('#contact [data-view=sent]');
+  ok(shown, `${path}: valid submit shows the success message once FormSubmit confirms`);
+  if (shown) ok((await page.textContent('#contact [data-view=sent]')).includes(sentText), `${path}: success text is right`);
   await page.close();
 };
 await formCase('/', [['[name=name]', 'Test Person'], ['[name=email]', 'test@example.com'], ['[name=company]', 'Test Co'], ['[name=message]', 'A website.']], 'Thanks for reaching out');
 await formCase('/clinical-websites/', [['[name=name]', 'Dr Test'], ['[name=email]', 'dr@example.com'], ['[name=clinic]', 'Test Dental'], ['[name=message]', 'A new site.']], 'Thank you');
 await formCase('/final-year-projects/', [['[name=name]', 'Student'], ['[name=email]', 'student@example.com'], ['[name=message]', 'A booking system.']], 'Got it');
-{
-  // the server rejects: the form must say so and keep what was typed
+for (const [label, reply] of [['FormSubmit rejects it (e.g. not activated yet)', { status: 200, body: { success: 'false', message: 'This form needs Activation.' } }], ['FormSubmit is down', { status: 500, body: {} }]]) {
+  // the form must say so, not show success, and keep what was typed
+  formsubmitReply = reply;
   const page = await browser.newPage();
-  await page.route('**/api/enquiry', r => r.fulfill({ status: 503, contentType: 'application/json', body: '{"ok":false,"error":"not_configured"}' }));
   await page.goto(BASE + '/final-year-projects/#contact', { waitUntil: 'load' });
   await page.fill('#s-name', 'Student'); await page.fill('#s-email', 'student@example.com'); await page.fill('#s-msg', 'Idea');
   await page.click('#contact button[type=submit]');
   await page.waitForSelector('.form-alert:not([hidden])');
-  ok(!(await page.isVisible('[data-view=sent]')) && (await page.inputValue('#s-msg')) === 'Idea', 'a failed send shows an error, not success, and keeps the text');
+  ok(!(await page.isVisible('[data-view=sent]')) && (await page.inputValue('#s-msg')) === 'Idea', `${label}: an error is shown, not success, and the text is kept`);
   await page.close();
 }
+formsubmitReply = { status: 200, body: { success: 'true', message: 'The form was submitted successfully.' } };
 
 console.log('Contact details and delivery');
 {
-  // with two addresses in config.js, both appear on the contact card and in the footer
   const page = await browser.newPage({ viewport: { width: 390, height: 800 }, isMobile: true, hasTouch: true });
-  await page.route('**/assets/js/config.js', r => r.fulfill({ contentType: 'text/javascript', body: "window.UNNATE_CONFIG={enquiryEndpoint:'/api/enquiry',emails:['first@example.test','second@example.test']};" }));
-  const posts = [];
-  await page.route('**/api/enquiry', async r => { posts.push(JSON.parse(r.request().postData())); await new Promise(z => setTimeout(z, 400)); r.fulfill({ contentType: 'application/json', body: '{"ok":true}' }); });
+  await page.goto(BASE + '/', { waitUntil: 'load' });
+  const cfg = await page.evaluate(() => fetch('/assets/js/config.js').then(r => r.text()).then(t => { const w = {}; new Function('window', t)(w); return w.UNNATE_CONFIG; }));
+  ok(cfg.emails.length === 2 && cfg.emails.every(e => /@unnate\.com$/.test(e)), `config.js holds the two studio addresses (${cfg.emails.join(', ')})`);
   for (const path of ['/', '/clinical-websites/', '/final-year-projects/']) {
     await page.goto(BASE + path, { waitUntil: 'load' });
     const card = await page.$$eval('#contact [data-direct] a', as => as.map(a => a.getAttribute('href')));
     const foot = await page.$$eval('.foot [data-connect] a[href^="mailto:"]', as => as.map(a => a.getAttribute('href')));
-    ok(card.join() === 'mailto:first@example.test,mailto:second@example.test' && foot.length === 2, `${path}: both email addresses shown on the contact card and in the footer`);
+    const want = cfg.emails.map(e => 'mailto:' + e).join();
+    ok(card.join() === want && foot.join() === want, `${path}: both addresses shown on the contact card and in the footer`);
   }
-  await page.fill('#s-name', 'Student'); await page.fill('#s-email', 'student@example.com'); await page.fill('#s-msg', 'Idea');
-  await page.click('#contact button[type=submit]'); await page.click('#contact button[type=submit]', { force: true }).catch(() => {});
-  await page.waitForSelector('#contact [data-view=sent]:not([hidden])');
-  ok(posts.length === 1, `a double tap sends one request (${posts.length})`);
-  ok(posts[0].kind === 'student' && posts[0].page === '/final-year-projects/' && !!posts[0].title && !!posts[0].submission_id, 'the request carries the form kind, page, page title and a submission id');
-  await page.close();
-}
-{
-  const page = await browser.newPage();
-  await page.goto(BASE + '/', { waitUntil: 'load' });
-  ok(await page.$$eval('#contact [data-direct]', d => d.length === 0) && await page.$$eval('.foot [data-connect] a[href^="mailto:"]', a => a.length === 0), 'with no addresses configured, no empty email links are shown');
+  for (const [path, fill, kind] of [
+    ['/', [['#f-name', 'Test Person'], ['#f-email', 'test@example.com'], ['#f-company', 'Test Co'], ['#f-msg', 'A website.']], 'Studio enquiry'],
+    ['/clinical-websites/', [['#c-name', 'Dr Test'], ['#c-email', 'dr@example.com'], ['#c-clinic', 'Test Dental'], ['#c-msg', 'A new site.']], 'Clinic website enquiry'],
+    ['/final-year-projects/', [['#s-name', 'Student'], ['#s-email', 'student@example.com'], ['#s-msg', 'A booking system.']], 'Final-year project enquiry']]) {
+    await page.goto(BASE + path + '#contact', { waitUntil: 'load' });
+    for (const [sel, v] of fill) await page.fill(sel, v);
+    await page.locator('#contact input[type=checkbox]').first().check();
+    const before = sent.length;
+    await page.click('#contact button[type=submit]'); await page.click('#contact button[type=submit]', { force: true }).catch(() => {});
+    await page.waitForSelector('#contact [data-view=sent]:not([hidden])');
+    const mine = sent.slice(before), b = mine[0]?.body || {};
+    ok(mine.length === 1, `${path}: a double tap sends one request (${mine.length})`);
+    ok(mine[0]?.url === `https://formsubmit.co/ajax/${encodeURIComponent(cfg.emails[0])}`, `${path}: posts to FormSubmit's AJAX endpoint for ${cfg.emails[0]}`);
+    ok(b._cc === cfg.emails[1], `${path}: copies in ${cfg.emails[1]} with _cc`);
+    ok(b._replyto === fill[1][1] && b._subject.startsWith(kind) && b._honey === '' && b._captcha === 'false' && b._template === 'table' && !!b._blacklist, `${path}: subject, reply-to, honeypot, captcha, template and blacklist fields are set`);
+    ok(b.Form === kind && /Tell us|What would you like|about your project/i.test(Object.keys(b).join()) && b.Page.includes(path), `${path}: readable fields, the ticked option and the page are included`);
+  }
   await page.close();
 }
 

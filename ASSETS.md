@@ -42,7 +42,7 @@ where they were rendered from these same files.
 
 ### Short-form films — `assets/work/video/`
 
-Re-encoded from the originals in git history (commit `3fe1dea`): H.264, 720×1280, CRF 25, AAC 96 kb/s,
+Re-encoded from the originals in git history (commit `3fe1dea`; Restaurant from the file you uploaded): H.264, 720×1280, CRF 25, AAC 96 kb/s,
 `+faststart`. Each film also has a 5-second, 360×640, silent `-preview.mp4` used for hover previews.
 The full film loads only when someone opens it; a preview loads only when a mouse rests on its card.
 
@@ -54,6 +54,7 @@ The full film loads only when someone opens it; a preview loads only when a mous
 | `neuva-diwali` | `NEUVA Biwali.mp4` (17.8 MB) | 2.4 MB | 149 KB | `neuva-diwali-poster.webp`, `neuva-diwali.webp` |
 | `crave-burgers` | `Crave Burger's.mp4` (19.5 MB) | 2.9 MB | 140 KB | `crave-burgers-poster.webp`, `crave-burgers.webp` |
 | `neuva` | `NEUVA.mp4` (20.2 MB) | 2.8 MB | 169 KB | `neuva-poster.webp`, `neuva.webp` |
+| `restaurant` | `Restaurant.mp4` (20.2 MB, supplied 14 Oct) | 2.8 MB | 124 KB | `restaurant-poster.webp`, `restaurant.webp` |
 
 ### Brand
 
@@ -66,16 +67,15 @@ The full film loads only when someone opens it; a preview loads only when a mous
 | `assets/img/og/*.jpg` | Social preview cards, rendered by `tools/build-og.mjs` from `tools/og.html` |
 | `favicon.ico`, `favicon-32x32.png`, `apple-touch-icon.png`, `icon-192/512.png` | Restored from git history (the orange eyes icon) |
 
-## Pending — files I could not use
+## Pending — the one file still missing
 
-These appear in the portfolio screenshots, but the files themselves are not in this repository, its history or
-any of its branches, so they are **not** on the site. (Folder screenshots show their names and thumbnails, but a
+This appears in the portfolio screenshots, but the file itself is not in this repository, its history or any
+of its branches, so it is **not** on the site. (Folder screenshots show their names and thumbnails, but a
 thumbnail is not a usable image.)
 
 | File | What happens when it arrives |
 |---|---|
 | `portfolio/creatives/Modern Dental Studio Portrait.png` (2.3 MB) | Add the entry below to `portfolio/portfolio.js`, then run `node tools/build-media.mjs --no-web`. It appears in the homepage rail, on `/work/` and, through its `healthcare` tag, on `/clinical-websites/`. |
-| `portfolio/videos/Restaurant.mp4` (19.7 MB, 20 s) | Add an entry like the other films (`type: 'video'`, `kind: 'Client Work'`, `posterAt`, and the four `assets/work/…` paths), then run the same command. |
 
 Ready-made entry for the portrait. Its thumbnail reads “Modern dentistry. At a human pace.”; check the title,
 description and alt text against the real file before publishing:

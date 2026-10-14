@@ -152,10 +152,23 @@
     }
   };
 
-  /* ---------- enquiry forms ----------
+  /* ---------- enquiry forms → FormSubmit ----------
      Each form says what kind of enquiry it is (data-kind) and which fields it requires (required + data-msg).
-     It posts JSON to the endpoint in config.js and shows success only when the server confirms it. */
+     A valid form is posted with FormSubmit's AJAX endpoint (https://formsubmit.co/ajax/…), so the visitor
+     stays on the page. It goes to the first studio address, with the second copied in (_cc), and shows
+     success only when FormSubmit answers that it accepted the enquiry. No key or secret is involved. */
   const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const SUBJECT = { general: 'Studio enquiry', clinic: 'Clinic website enquiry', student: 'Final-year project enquiry' };
+  // FormSubmit discards any submission containing one of these phrases (checked on its server)
+  const BLACKLIST = 'viagra, cialis, casino, porn, escort, payday loan, backlinks, guest post';
+  const ENDPOINT = EMAILS.length ? `https://formsubmit.co/ajax/${encodeURIComponent(String(CFG.formsubmitAlias || '').trim() || EMAILS[0])}` : '';
+  // the visible label of a field, without "(optional)" and similar notes
+  const labelOf = (form, el) => {
+    const host = el.type === 'checkbox' ? el.closest('fieldset')?.querySelector('legend') : $(`label[for="${CSS.escape(el.id)}"]`, form);
+    if (!host) return el.name;
+    const c = host.cloneNode(true); $$('.opt', c).forEach(o => o.remove());
+    return c.textContent.replace(/\s+/g, ' ').trim().replace(/[?:]$/, '');
+  };
   const emailHint = EMAILS.length ? `, or email us at ${EMAILS.join(' or ')}.` : '.';
   $$('[data-form]').forEach(form => {
     const card = form.closest('[data-formcard]') || form.parentElement;
@@ -199,28 +212,42 @@
       if (sending) return;                                   // no duplicate submissions
       alertBox.hidden = true;
       const bad = validate(); if (bad.length) { bad[0].focus(); return; }
-      // one id per filled-in form: kept across retries, renewed after a confirmed send (the server uses it to drop duplicates)
-      form.dataset.sid ||= (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2));
-      const fd = new FormData(form), payload = { kind: form.dataset.kind || 'general', page: location.pathname, title: document.title, submission_id: form.dataset.sid };
-      for (const [k, v] of fd.entries()) {
-        if (form.elements[k] instanceof RadioNodeList || $(`input[type=checkbox][name="${k}"]`, form)) (payload[k] ||= []).push(String(v).trim());
-        else payload[k] = String(v).trim();
-      }
-      const ep = CFG.enquiryEndpoint || '/api/enquiry';
+      if (!ENDPOINT) { fail('Enquiries can’t be sent from this page yet. Please try again later.'); return; }
+      // readable field names, in the order they appear on the form; ticked options joined into one line
+      const kind = form.dataset.kind || 'general', fields = {};
+      $$('input, textarea, select', form).forEach(el => {
+        if (!el.name || el.closest('.hp') || (el.type === 'checkbox' && !el.checked)) return;
+        const k = labelOf(form, el), v = el.value.trim();
+        if (el.type === 'checkbox') fields[k] = fields[k] ? `${fields[k]}, ${v}` : v;
+        else fields[k] = v || '—';
+      });
+      const name = form.elements.name.value.trim(), email = form.elements.email.value.trim();
+      const who = ['company', 'clinic', 'college'].map(n => form.elements[n]?.value.trim()).find(Boolean);
+      const payload = {
+        _subject: `${SUBJECT[kind] || SUBJECT.general} — ${name}${who ? ` (${who})` : ''}`,
+        _replyto: email,                                       // “Reply” in the inbox answers the visitor
+        _cc: EMAILS.slice(1).join(','),                        // the second studio inbox receives a copy
+        _template: 'table',
+        _captcha: 'false',                                     // reCAPTCHA can't be shown to an AJAX request
+        _honey: form.elements._honey?.value || '',             // FormSubmit silently drops it if a bot filled this in
+        _blacklist: BLACKLIST,
+        Form: SUBJECT[kind] || SUBJECT.general,
+        ...fields,
+        Page: `${location.origin}${location.pathname} (${document.title})`
+      };
       const ctrl = new AbortController(), t = setTimeout(() => ctrl.abort(), 20000);
       setSending(true);
       try {
-        const res = await fetch(ep, { method: 'POST', signal: ctrl.signal, headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
+        const res = await fetch(ENDPOINT, { method: 'POST', signal: ctrl.signal, headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
         let body = null; try { body = await res.json(); } catch { /* not JSON */ }
-        // success is shown only when the server confirms it accepted the enquiry
-        if (res.ok && body && (body.ok === true || body.success === true)) {
-          views.form.hidden = true; views.sent.hidden = false; delete form.dataset.sid;
+        // success is shown only when FormSubmit confirms it accepted the enquiry ("success": "true" or true)
+        if (res.ok && body && String(body.success) === 'true') {
+          views.form.hidden = true; views.sent.hidden = false;
           $('h3', views.sent).focus();
           form.dispatchEvent(new CustomEvent('enquiry:sent'));
-        } else if (res.status === 422 && body && body.fields) {
-          Object.entries(body.fields).forEach(([k, m]) => form.elements[k] && setError(form.elements[k], m));
-          $('[aria-invalid=true]', form)?.focus();
         } else {
+          // e.g. before activation FormSubmit answers success "false" with a message saying so; the owner sees it here
+          if (body && body.message) console.warn('FormSubmit:', body.message);
           fail('Your enquiry wasn’t sent. The server didn’t accept it. Nothing you typed has been lost. Try sending it again in a moment' + emailHint);
         }
       } catch (err) {

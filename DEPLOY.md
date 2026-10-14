@@ -1,7 +1,7 @@
 # UNNATE website
 
-A static site: plain HTML, CSS and JavaScript, no framework and no build step. One small server-side
-function delivers the enquiry forms. Hosted on Cloudflare Pages from this repository.
+A static site: plain HTML, CSS and JavaScript, no framework, no build step and no server code. Enquiry forms
+are delivered by FormSubmit (free, no account, no API key). Hosted on Cloudflare Pages from this repository.
 
 ## Pages
 
@@ -23,16 +23,15 @@ visits, refreshes and back/forward all work. All internal links and asset paths 
 ```
 assets/css/site.css        the whole design system: tokens, components, every page's layout
 assets/js/config.js        ← the values you edit: the two email addresses, social links, form endpoint
-assets/js/site.js          shared: navigation, reveals, the character, enquiry forms, tabs, timeline
+assets/js/site.js          shared: navigation, reveals, the character, enquiry forms (→ FormSubmit), tabs, timeline
 assets/js/home.js          homepage only: hero capsules and eyes, process card, drawer, verdict
 assets/js/work.js          project rails, filters, hover previews and the viewer (home, /work/, landing pages)
 assets/img/icons.svg       the wordmark and every icon
 assets/img/mascot, eyes    the character's poses and expressions
 assets/work/               optimised portfolio media (cards, full images, posters, films, website screenshots)
 portfolio/portfolio.js     ← the portfolio data: one entry per project
-functions/api/enquiry.js   the enquiry endpoint (Cloudflare Pages Function → Resend email)
 _headers, _redirects       Cloudflare Pages headers and redirects
-tools/dev-server.mjs       local preview that also runs the enquiry function
+tools/dev-server.mjs       local preview (static files, folder URLs and the 404 page, like Cloudflare Pages)
 tools/check-site.mjs       static checks: broken links, unused assets, headings, prices, canonicals
 tools/build-media.mjs      regenerates assets/work/ from the originals in portfolio/
 tools/build-og.mjs         regenerates the social preview images
@@ -47,34 +46,38 @@ one, change it in all five HTML files.
 Needs Node 18 or newer. Nothing to install.
 
 ```
-node tools/dev-server.mjs                   # http://localhost:8788 — forms show their error state (no email settings)
-MOCK_EMAIL=1 node tools/dev-server.mjs      # forms succeed; the email (to two test inboxes) is printed instead of sent
-MOCK_EMAIL=fail node tools/dev-server.mjs   # the email provider "rejects" it, to see the failure state
-RESEND_API_KEY=re_xxx ENQUIRY_TO='a@unnate.com, b@unnate.com' node tools/dev-server.mjs   # sends a real email to both
-node tools/check-site.mjs                   # static checks; exits non-zero if anything is broken
+node tools/dev-server.mjs        # http://localhost:8788
+node tools/check-site.mjs        # static checks; exits non-zero if anything is broken
+node tools/test-browser.mjs      # browser checks (needs Playwright); intercepts FormSubmit, so no email is sent
 ```
+
+Test real enquiry delivery on the published site, not on localhost (see step 1 below).
 
 ## Before going live
 
-1. **Enquiry delivery to both inboxes (required — the forms cannot deliver until this is done).**
-   Every valid enquiry, from any of the three forms, is emailed to **both** studio addresses in one message,
-   with Reply-To set to the visitor, by `functions/api/enquiry.js` through Resend. The API key stays on the server.
-   - Create an account at resend.com and an API key. Add and verify the `unnate.com` domain (Resend shows the DNS
-     records to add) so mail can be sent from it.
-   - Cloudflare Pages → your project → Settings → Variables and Secrets → Production:
-     - `RESEND_API_KEY` — as a **secret**
-     - `ENQUIRY_TO` — both addresses, separated by a comma: `first@unnate.com, second@unnate.com`
-     - `ENQUIRY_FROM` — e.g. `UNNATE Website <enquiries@unnate.com>` (an address on the verified domain)
-   - Redeploy. Then send one test enquiry from each form (home, `/clinical-websites/`, `/final-year-projects/`)
-     and confirm **each test arrives in both inboxes**. The subject says which form it came from; the body ends
-     with the form, the page and its title.
-   - Until these are set, the forms say clearly that the enquiry was not sent (the server answers 503). Nothing
-     is ever shown as sent unless Resend has accepted it.
-   - A double tap or a retry cannot send the same enquiry twice: each filled-in form carries a submission id,
-     and the function passes it (with a hash of the email) to Resend as an `Idempotency-Key`.
-2. **Contact details** — put the studio's two customer-facing email addresses in `emails` in
-   `assets/js/config.js`. Both then appear on every contact card ("Or email us directly") and in the footer.
-   Use the same two addresses in `ENQUIRY_TO`. No phone number or WhatsApp is shown, by design.
+1. **Activate FormSubmit (required — nothing is delivered until this is done).**
+   Every form (home, `/clinical-websites/`, `/final-year-projects/`) posts the enquiry from the visitor's browser
+   to FormSubmit's AJAX endpoint, `https://formsubmit.co/ajax/aravind@unnate.com`, with `saran@unnate.com`
+   copied in through FormSubmit's `_cc` field. Visitors stay on the page. There is no key, secret or setting
+   in Cloudflare.
+   1. Deploy the site, open **https://unnate.com/** (the real address, not localhost or a preview link) and
+      send one enquiry through the homepage form.
+   2. **That first enquiry is not delivered.** FormSubmit instead emails **aravind@unnate.com** an activation
+      message (“Action Required: Activate FormSubmit…”). The form on the site shows “Your enquiry wasn’t sent”,
+      which is correct: FormSubmit answered that the form still needs activation. Check the spam folder too.
+   3. Click **Activate Form** in that email. This is a one-time step for the address.
+   4. If **saran@unnate.com** also receives a FormSubmit confirmation email, click its link as well. FormSubmit
+      may ask copied-in addresses to confirm before they get copies.
+   5. Send a fresh test enquiry from **each** of the three forms. Check that each one arrives in **both** inboxes,
+      that the subject says which form it came from (“Clinic website enquiry — …”), and that pressing Reply
+      answers the visitor's address.
+   6. Optional: after activation FormSubmit emails a random string you can use instead of your address, so the
+      address doesn't appear in the form request. Paste it into `formsubmitAlias` in `assets/js/config.js`.
+   Until step 3 is done, every form shows its error message and nothing is lost on the visitor's side, but no
+   enquiry reaches you. Nothing is ever shown as sent unless FormSubmit answers that it accepted it.
+2. **Contact details** — the two addresses are `emails` in `assets/js/config.js`. They appear on every contact
+   card (“Or email us directly”) and in the footer, and they are also where enquiries go: to the first, with
+   the second copied in. Change them there and both the display and the delivery follow.
 3. **Privacy policy** — if you publish one, put its URL in `privacyUrl` in `assets/js/config.js`.
 4. **Portfolio** — read the "Pending" section of `ASSETS.md`: the Modern Dental Studio Portrait creative and the
    Restaurant film are not in the repository yet. A ready-made data entry for the portrait is there.
@@ -91,17 +94,29 @@ node tools/check-site.mjs                   # static checks; exits non-zero if a
 
 ## The enquiry forms
 
-| Form | Kind | Required |
+| Form | Subject line | Required |
 |---|---|---|
-| Homepage | `general` | name, work email, company or brand, message |
-| `/clinical-websites/` | `clinic` | name, email, clinic or practice name, message |
-| `/final-year-projects/` | `student` | name, email, message |
+| Homepage | Studio enquiry — *name* (*company*) | name, work email, company or brand, message |
+| `/clinical-websites/` | Clinic website enquiry — *name* (*clinic*) | name, email, clinic or practice name, message |
+| `/final-year-projects/` | Final-year project enquiry — *name* (*college*) | name, email, message |
 
-Everything else is optional. Validation runs in the browser and again in `functions/api/enquiry.js`. A success
-message appears only when the server answers `"ok": true`, which it does only after Resend accepts the email.
-A hidden honeypot field filters simple spam bots.
+Everything else is optional. Each email lists the visitor's answers under their on-page labels, the ticked
+options, and the page the form was sent from; Reply goes to the visitor.
+
+- **Validation:** required fields and the email format are checked in the browser before anything is sent.
+- **Spam:** a hidden honeypot field (`_honey`) and a short phrase blacklist (`_blacklist`) are enforced by
+  FormSubmit on its own servers. FormSubmit's reCAPTCHA is switched off (`_captcha=false`) because it cannot be
+  shown to a form sent in the background. If spam becomes a problem, the next step is FormSubmit's
+  random-string alias (step 6 above).
+- **Duplicates:** the button is locked while a form is sending, and the form is replaced by the thank-you
+  message once FormSubmit confirms it.
+- **Failure:** if FormSubmit is unreachable, rejects the request or hasn't been activated, the visitor sees an
+  error, keeps what they typed, and is offered both email addresses.
+- **Limits:** FormSubmit is a free third-party service; it does not guarantee delivery and may change its
+  terms. Your privacy notice, if you publish one, should mention that enquiries are passed to FormSubmit.
 
 ## Deploy
 
-Commit and push. In Cloudflare Pages: no build command, output directory `/`. The `functions/` folder is
-picked up automatically and served at `/api/enquiry`; `_headers` and `_redirects` are applied automatically.
+Commit and push. In Cloudflare Pages: no build command, output directory `/`. `_headers` and `_redirects` are
+applied automatically. No environment variables are needed. If `RESEND_API_KEY`, `ENQUIRY_TO` or
+`ENQUIRY_FROM` were ever added in Cloudflare Pages settings, they are no longer used and can be deleted.

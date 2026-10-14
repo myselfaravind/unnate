@@ -24,7 +24,8 @@
    preview   videos: a 5-second muted loop for hover previews (about 150 KB)
    demoUrl   websites: where the working build is hosted on this site
    case      websites: notes and screenshots, every line checked against the project's own files
-   src       the original file in portfolio/ (kept on the studio's machine, not deployed); posterAt: the film's still, in seconds
+   src       the original file in portfolio/ (kept on the studio's machine, not deployed); posterAt: the film's still, in seconds;
+             previewAt: where the 5-second hover preview starts (default: 4 s before posterAt)
 
    After adding or changing an original in portfolio/, run:  node tools/build-media.mjs
    Only add work that is real and approved. Approved creatives: Dental care, Fresh Skin and Modern Dental
@@ -133,6 +134,11 @@ window.UNNATE_PORTFOLIO = [
     alt: 'A frame from the Crave Burgers short: a man at an office desk with a burger box.',
     thumb: '/assets/work/crave-burgers.webp', poster: '/assets/work/crave-burgers-poster.webp',
     video: '/assets/work/video/crave-burgers.mp4', preview: '/assets/work/video/crave-burgers-preview.mp4' },
+  { id: 'restaurant', src: 'portfolio/videos/Restaurant.mp4', posterAt: 19, previewAt: 9, group: 'Content & Creative', title: 'Restaurant', category: 'Short-form video', type: 'video', kind: 'Client Work', featured: true,
+    desc: 'A restaurant film that follows one plate of rigatoni through a warm dining room to its first taste.',
+    alt: 'A frame from the Restaurant film: rigatoni with roasted cherry tomatoes and basil, in warm restaurant light.',
+    thumb: '/assets/work/restaurant.webp', poster: '/assets/work/restaurant-poster.webp',
+    video: '/assets/work/video/restaurant.mp4', preview: '/assets/work/video/restaurant-preview.mp4' },
   { id: 'dental-care', src: 'portfolio/creatives/Dental care.png', group: 'Content & Creative', title: 'Dental care', category: 'Social creative', type: 'creative', kind: 'Client Work', featured: true, tags: ['healthcare'],
     desc: 'A patient-facing clinic creative seen from the dentist’s mirror.',
     alt: 'Dental care creative: a masked dentist holding a dental mirror, seen from inside the patient’s mouth, with the line “A closer look at a brighter you.”',
