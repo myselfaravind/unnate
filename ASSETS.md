@@ -4,11 +4,14 @@ What the site shows, where each file comes from, and what is still missing.
 The data the site reads is `portfolio/portfolio.js`. Originals live in `portfolio/` on the studio
 machine and are **not** committed (see `.gitignore`); the site only uses the optimised copies in `assets/`.
 
-Labels: a project carries `kind: 'Demo'`, `'Concept'` or `'Self-Initiated'` only where the files prove it.
-The three websites are labelled from their own HTML: Maren and Tick Pic Moments use placeholder phone
-numbers, addresses and emails (`+1 (000) 000-0000`, `123 Wellness Avenue`, `wa.me/914400000000`), so both
-are **Demo**; Oddcart was already labelled **Concept**. Nothing else is labelled, because nothing in the
-files says whether it was client work. If any creative or film *was* client work, add `kind: 'Client Work'`.
+Labels: every short film and creative is **Client Work** (confirmed by the studio). The three websites are
+labelled from their own HTML: Maren and Tick Pic Moments use placeholder phone numbers, addresses and emails
+(`+1 (000) 000-0000`, `123 Wellness Avenue`, `wa.me/914400000000`), so both are **Demo**; Oddcart is a **Concept**.
+No client names, testimonials or results are shown anywhere.
+
+**Approved creatives: three only.** Dental care, Fresh Skin and Modern Dental Studio Portrait. No other creative
+is shown. The four older creatives (SKIN in Progress, Dental Clinical creative, UNNATE Creatives, Beauty SPA)
+were removed from the data, the homepage and `assets/work/`.
 
 ## In use
 
@@ -33,12 +36,9 @@ where they were rendered from these same files.
 
 | id | Original | Shown on |
 |---|---|---|
-| `skin-in-progress` | `portfolio/creatives/SKIN in Progress.png` | Home (rail, Content folder, verdict), `/clinical-websites/` rail, `/work/` |
-| `dental-clinical-creative` | `portfolio/creatives/Dental Clinical creative.png` | Home (rail, Paid folder), `/clinical-websites/` rail, `/work/` |
-| `unnate-creatives` | `portfolio/creatives/Unnate Creative's.png` | Home (rail, verdict), `/work/` |
-| `dental-care` | `portfolio/creatives/Dental care.png` | Home rail, `/clinical-websites/` rail, `/work/` |
-| `beauty-spa` | `portfolio/creatives/Beauty SPA.png` | `/clinical-websites/` rail, `/work/` |
-| `fresh-skin` | `portfolio/creatives/Fresh Skin.png` | Home verdict, `/work/` |
+| `dental-care` | `portfolio/creatives/Dental care.png` | Home (rail, glass panel), `/clinical-websites/` rail, `/work/` |
+| `fresh-skin` | `portfolio/creatives/Fresh Skin.png` | Home (rail, Content folder, glass panel), `/clinical-websites/` rail, `/work/` |
+| `modern-dental-studio-portrait` | `portfolio/creatives/Modern Dental Studio Portrait.png` | **Pending — the file has not been supplied** (see below) |
 
 ### Short-form films — `assets/work/video/`
 
@@ -68,20 +68,25 @@ The full film loads only when someone opens it; a preview loads only when a mous
 
 ## Pending — files I could not use
 
-These appear in the portfolio screenshots you supplied, but the files themselves are not in this repository
-or its history, so they are **not** on the site:
+These appear in the portfolio screenshots, but the files themselves are not in this repository, its history or
+any of its branches, so they are **not** on the site. (Folder screenshots show their names and thumbnails, but a
+thumbnail is not a usable image.)
 
-| File (from your screenshots) | What's needed |
+| File | What happens when it arrives |
 |---|---|
-| `portfolio/videos/Restaurant.mp4` (19.7 MB, 20 s) | Copy it into `portfolio/videos/`, add an entry to `portfolio/portfolio.js` (id, title, group, category, one honest line, `src`, `posterAt`, and the four `assets/work/…` paths), then run `node tools/build-media.mjs --no-web`. |
-| `portfolio/creatives/Modern Dental Studio Portrait.png` (2.3 MB) | The thumbnail reads “Modern dentistry. At a human pace.”, Maren's line, so it looks like a Maren creative. Add it the same way, with `tags: ['healthcare']`, and it will also appear on `/clinical-websites/`. |
+| `portfolio/creatives/Modern Dental Studio Portrait.png` (2.3 MB) | Add the entry below to `portfolio/portfolio.js`, then run `node tools/build-media.mjs --no-web`. It appears in the homepage rail, on `/work/` and, through its `healthcare` tag, on `/clinical-websites/`. |
+| `portfolio/videos/Restaurant.mp4` (19.7 MB, 20 s) | Add an entry like the other films (`type: 'video'`, `kind: 'Client Work'`, `posterAt`, and the four `assets/work/…` paths), then run the same command. |
 
-**Please confirm:** your current `portfolio/creatives/` folder only holds *Dental care*, *Fresh Skin* and
-*Modern Dental Studio Portrait*. The site still shows four creatives that are no longer in that folder:
-*SKIN in Progress*, *Dental Clinical creative*, *UNNATE Creatives* and *Beauty SPA*. Their optimised
-copies are in the repository and the prototype used them, so I kept them. If you removed them on purpose,
-delete their entries from `portfolio/portfolio.js` (and the matching `<figure>`/`<img>` lines in
-`index.html`'s folders and verdict).
+Ready-made entry for the portrait. Its thumbnail reads “Modern dentistry. At a human pace.”; check the title,
+description and alt text against the real file before publishing:
+
+```js
+  { id: 'modern-dental-studio-portrait', src: 'portfolio/creatives/Modern Dental Studio Portrait.png', group: 'Content & Creative',
+    title: 'Modern Dental Studio Portrait', category: 'Social creative', type: 'creative', kind: 'Client Work', featured: true, tags: ['healthcare'],
+    desc: 'A portrait-led creative for a modern dental studio: “Modern dentistry. At a human pace.”',
+    alt: 'A smiling woman in soft light beside the line “Modern dentistry. At a human pace.”',
+    thumb: '/assets/work/modern-dental-studio-portrait.webp', full: '/assets/work/modern-dental-studio-portrait-full.webp' },
+```
 
 No brand-identity project exists yet, so there is no "Brand Identity" filter; one appears automatically when
 a project with `group: 'Brand Identity'` is added.

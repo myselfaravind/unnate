@@ -23,7 +23,7 @@
   let lastList = P;                                       // the list the viewer steps through
 
   const cardHTML = (p, i) => `<li class="slide"><a href="/work/#${esc(p.id)}" data-id="${esc(p.id)}" aria-label="${esc(p.title)}, ${esc(p.category)}${p.kind ? ', ' + esc(p.kind) : ''}: view project">
-      <div class="thumb"><img src="${esc(p.thumb)}" alt="${esc(p.alt || '')}" loading="${i < 4 ? 'eager' : 'lazy'}" decoding="async" width="800" height="1000">${p.type === 'video' ? `<span class="play glass-dark" aria-hidden="true">${ICON('play')}</span>` : ''}<span class="open glass" aria-hidden="true">${p.case ? 'Case notes' : p.type === 'video' ? 'Watch' : 'View project'}${ICON('arrow')}</span></div>
+      <div class="thumb"><img src="${esc(p.thumb)}" alt="${esc(p.alt || '')}" loading="${i < 4 ? 'eager' : 'lazy'}" decoding="async" width="800" height="1000">${p.type === 'video' ? `<span class="play glass-dark" aria-hidden="true">${ICON('play')}</span>` : ''}<span class="cue glass" aria-hidden="true">${p.case ? 'Case notes' : p.type === 'video' ? 'Watch' : 'View project'}${ICON('arrow')}</span></div>
       <div class="meta"><h3>${esc(p.title)}</h3><span class="cat">${esc(p.category)}</span></div>${p.kind ? `<span class="kind">${esc(p.kind)}</span>` : ''}</a></li>`;
 
   sections.forEach(sec => {

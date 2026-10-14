@@ -22,7 +22,7 @@ visits, refreshes and back/forward all work. All internal links and asset paths 
 
 ```
 assets/css/site.css        the whole design system: tokens, components, every page's layout
-assets/js/config.js        ← the values you edit: email, phone, WhatsApp, social links, form endpoint
+assets/js/config.js        ← the values you edit: the two email addresses, social links, form endpoint
 assets/js/site.js          shared: navigation, reveals, the character, enquiry forms, tabs, timeline
 assets/js/home.js          homepage only: hero capsules and eyes, process card, drawer, verdict
 assets/js/work.js          project rails, filters, hover previews and the viewer (home, /work/, landing pages)
@@ -48,32 +48,36 @@ Needs Node 18 or newer. Nothing to install.
 
 ```
 node tools/dev-server.mjs                   # http://localhost:8788 — forms show their error state (no email settings)
-MOCK_EMAIL=1 node tools/dev-server.mjs      # forms succeed; the email is printed in the terminal instead of sent
+MOCK_EMAIL=1 node tools/dev-server.mjs      # forms succeed; the email (to two test inboxes) is printed instead of sent
 MOCK_EMAIL=fail node tools/dev-server.mjs   # the email provider "rejects" it, to see the failure state
-RESEND_API_KEY=re_xxx ENQUIRY_TO=you@example.com node tools/dev-server.mjs   # sends a real email
+RESEND_API_KEY=re_xxx ENQUIRY_TO='a@unnate.com, b@unnate.com' node tools/dev-server.mjs   # sends a real email to both
 node tools/check-site.mjs                   # static checks; exits non-zero if anything is broken
 ```
 
 ## Before going live
 
-1. **Enquiry email (required — the forms cannot deliver until this is done).**
-   - Create an account at resend.com and an API key. Verify the `unnate.com` domain in Resend.
-   - Cloudflare Pages → your project → Settings → Variables and Secrets, for Production:
-     - `RESEND_API_KEY` (as a *secret*)
-     - `ENQUIRY_TO` — the inbox that should receive enquiries
-     - `ENQUIRY_FROM` — e.g. `UNNATE Website <enquiries@unnate.com>`
-   - Redeploy, then send a test enquiry from each of the three forms (home, clinic, student) and confirm
-     all three arrive. The subject line says which form it came from.
-   - Prefer a form service? Put its full https endpoint in `enquiryEndpoint` in `assets/js/config.js`. It must
-     accept a JSON POST and answer with JSON containing `"ok": true`.
-2. **Contact details** — add your real email, phone, WhatsApp, Instagram and LinkedIn in `assets/js/config.js`.
-   Empty values are simply not shown. Once filled in they appear on every contact card and in the footer.
-   Clinic owners and students in particular will look for a phone or WhatsApp number.
+1. **Enquiry delivery to both inboxes (required — the forms cannot deliver until this is done).**
+   Every valid enquiry, from any of the three forms, is emailed to **both** studio addresses in one message,
+   with Reply-To set to the visitor, by `functions/api/enquiry.js` through Resend. The API key stays on the server.
+   - Create an account at resend.com and an API key. Add and verify the `unnate.com` domain (Resend shows the DNS
+     records to add) so mail can be sent from it.
+   - Cloudflare Pages → your project → Settings → Variables and Secrets → Production:
+     - `RESEND_API_KEY` — as a **secret**
+     - `ENQUIRY_TO` — both addresses, separated by a comma: `first@unnate.com, second@unnate.com`
+     - `ENQUIRY_FROM` — e.g. `UNNATE Website <enquiries@unnate.com>` (an address on the verified domain)
+   - Redeploy. Then send one test enquiry from each form (home, `/clinical-websites/`, `/final-year-projects/`)
+     and confirm **each test arrives in both inboxes**. The subject says which form it came from; the body ends
+     with the form, the page and its title.
+   - Until these are set, the forms say clearly that the enquiry was not sent (the server answers 503). Nothing
+     is ever shown as sent unless Resend has accepted it.
+   - A double tap or a retry cannot send the same enquiry twice: each filled-in form carries a submission id,
+     and the function passes it (with a hash of the email) to Resend as an `Idempotency-Key`.
+2. **Contact details** — put the studio's two customer-facing email addresses in `emails` in
+   `assets/js/config.js`. Both then appear on every contact card ("Or email us directly") and in the footer.
+   Use the same two addresses in `ENQUIRY_TO`. No phone number or WhatsApp is shown, by design.
 3. **Privacy policy** — if you publish one, put its URL in `privacyUrl` in `assets/js/config.js`.
-4. **Portfolio** — read the "Pending" section of `ASSETS.md`: two files from your portfolio folder are not in
-   the repository yet, and four creatives on the site are no longer in your local folder.
-5. **Project labels** — in `portfolio/portfolio.js`, set `kind: 'Client Work'` on anything that was a paid
-   client project. Only add labels that are true.
+4. **Portfolio** — read the "Pending" section of `ASSETS.md`: the Modern Dental Studio Portrait creative and the
+   Restaurant film are not in the repository yet. A ready-made data entry for the portrait is there.
 
 ## Updating the portfolio
 

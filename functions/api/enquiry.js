@@ -6,12 +6,15 @@
  *   general  the homepage            — name, email, company, message
  *   clinic   /clinical-websites/     — name, email, clinic, message
  *   student  /final-year-projects/   — name, email, message
- * It answers { ok: true } only after Resend has accepted the email, so the site never
- * shows a success message for an enquiry that was not delivered.
+ * Every enquiry goes to every address in ENQUIRY_TO (the studio's two inboxes), in one email,
+ * with Reply-To set to the visitor. It answers { ok: true } only after Resend has accepted the
+ * email, so the site never shows a success message for an enquiry that was not delivered.
+ * Each form fill carries a submission id; it is sent to Resend as an Idempotency-Key, so a
+ * double click or a retry after a lost response cannot deliver the same enquiry twice.
  *
  * Set these in Cloudflare Pages → Settings → Variables and Secrets (never in the code):
  *   RESEND_API_KEY   (secret)  API key from https://resend.com/api-keys
- *   ENQUIRY_TO                 the inbox that should receive enquiries
+ *   ENQUIRY_TO                 both inboxes, separated by a comma: "first@unnate.com, second@unnate.com"
  *   ENQUIRY_FROM     optional  e.g. "UNNATE Website <enquiries@unnate.com>" — the domain must be
  *                              verified in Resend. Defaults to Resend's test sender, which can only
  *                              deliver to the email address that owns the Resend account.
@@ -93,31 +96,42 @@ export async function onRequestPost({ request, env }) {
   if (values.email && !EMAIL.test(values.email)) fields.email = 'Enter an email address in the format name@example.com.';
   if (Object.keys(fields).length) return json(422, { ok: false, error: 'validation', fields });
 
-  if (!env.RESEND_API_KEY || !env.ENQUIRY_TO) {
-    console.error('UNNATE enquiry: RESEND_API_KEY and ENQUIRY_TO must be set — the enquiry was NOT delivered.');
+  const to = String(env.ENQUIRY_TO || '').split(/[,;\s]+/).map(a => a.trim()).filter(Boolean);
+  if (!env.RESEND_API_KEY || !to.length || to.some(a => !EMAIL.test(a))) {
+    console.error('UNNATE enquiry: RESEND_API_KEY and ENQUIRY_TO (comma-separated addresses) must be set — the enquiry was NOT delivered.');
     return json(503, { ok: false, error: 'not_configured' });
   }
+  if (to.length < 2) console.warn('UNNATE enquiry: ENQUIRY_TO has one address; the studio expects two.');
+  const id = oneLine(data.submission_id, 80).replace(/[^\w-]/g, '');
 
   const lines = spec.fields.filter(([k]) => k !== 'message').map(([k, label]) => {
     const v = values[k];
     return `${label}: ${(Array.isArray(v) ? v.join(', ') : v) || '—'}`;
   });
+  const host = new URL(request.url).host, page = oneLine(data.page, 200) || '/';
   const text = [`${spec.subject}`, '', ...lines, '', `${spec.fields.find(f => f[0] === 'message')[1]}:`, values.message, '',
-    `Sent from ${new URL(request.url).host}${oneLine(data.page, 200)}`].join('\n');
+    '—', `Form: ${spec.subject} (${kind})`, `Page: https://${host}${page}${data.title ? ` (${oneLine(data.title, 160)})` : ''}`,
+    'Reply to this email to answer the visitor directly.'].join('\n');
   const who = values.company || values.clinic || values.college;
 
+  const email = {
+    from: env.ENQUIRY_FROM || 'UNNATE Website <onboarding@resend.dev>',
+    to,
+    reply_to: values.email,
+    subject: `${spec.subject} — ${values.name}${who ? ` (${who})` : ''}`,
+    text
+  };
+  const body = JSON.stringify(email);
+  // Resend replays a request with the same key and the same body instead of sending it again (for 24 hours).
+  // The key joins the form's submission id with a hash of this exact email, so a resend of the same enquiry
+  // is dropped, while an enquiry the visitor corrected after an error is sent as a new one.
+  const digest = id ? [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(body)))].slice(0, 12).map(b => b.toString(16).padStart(2, '0')).join('') : '';
   let res;
   try {
     res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
-      headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
-      body: JSON.stringify({
-        from: env.ENQUIRY_FROM || 'UNNATE Website <onboarding@resend.dev>',
-        to: [env.ENQUIRY_TO],
-        reply_to: values.email,
-        subject: `${spec.subject} — ${values.name}${who ? ` (${who})` : ''}`,
-        text
-      })
+      headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json', ...(id ? { 'idempotency-key': `enquiry-${id}-${digest}` } : {}) },
+      body
     });
   } catch (err) {
     console.error('UNNATE enquiry: could not reach Resend', err);

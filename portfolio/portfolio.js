@@ -11,7 +11,8 @@
    category  the label on the card
    type      'web' | 'creative' | 'video'
    kind      'Client Work' | 'Self-Initiated' | 'Concept' | 'Demo'. Only set it when it is true;
-             a piece without a kind shows no badge.
+             a piece without a kind shows no badge. The studio has confirmed every film and creative
+             here is client work; the three websites are labelled from their own files.
    desc      one honest line about the piece
    alt       description of the card image for screen readers
    featured  true → on the homepage rail, in this order
@@ -26,7 +27,8 @@
    src       the original file in portfolio/ (kept on the studio's machine, not deployed); posterAt: the film's still, in seconds
 
    After adding or changing an original in portfolio/, run:  node tools/build-media.mjs
-   Only add work that is real.
+   Only add work that is real and approved. Approved creatives: Dental care, Fresh Skin and Modern Dental
+   Studio Portrait (pending its file: see ASSETS.md).
    ===================================================================== */
 window.UNNATE_PORTFOLIO = [
   { id: 'maren-dental-studio', group: 'Websites', title: 'Maren Dental Studio', category: 'Website', type: 'web', kind: 'Demo', featured: true, tags: ['healthcare'],
@@ -55,11 +57,7 @@ window.UNNATE_PORTFOLIO = [
       ],
       phone: '/assets/work/sites/maren-m.webp'
     } },
-  { id: 'skin-in-progress', src: 'portfolio/creatives/SKIN in Progress.png', group: 'Content & Creative', title: 'SKIN in Progress', category: 'Social creative', type: 'creative', featured: true, tags: ['healthcare'],
-    desc: 'A typographic poster for a clinical spa’s skin-analysis treatment.',
-    alt: 'SKIN in Progress poster: a white skin-analysis machine framed by bold black type and treatment lists.',
-    thumb: '/assets/work/skin-in-progress.webp', full: '/assets/work/skin-in-progress-full.webp', size: [1086, 1448] },
-  { id: 'solara-drinks', src: "portfolio/videos/SOLARA Drink's.mp4", posterAt: 6, group: 'Content & Creative', title: 'SOLARA Drinks', category: 'Short-form video', type: 'video', featured: true,
+  { id: 'solara-drinks', src: "portfolio/videos/SOLARA Drink's.mp4", posterAt: 6, group: 'Content & Creative', title: 'SOLARA Drinks', category: 'Short-form video', type: 'video', kind: 'Client Work', featured: true,
     desc: 'A product spot for a fruit drink, led by its illustrated label.',
     alt: 'A frame from the SOLARA Drinks film: a bottle wrapped in an illustrated fruit label.',
     thumb: '/assets/work/solara-drinks.webp', poster: '/assets/work/solara-drinks-poster.webp',
@@ -89,11 +87,7 @@ window.UNNATE_PORTFOLIO = [
       ],
       phone: '/assets/work/sites/oddcart-m.webp'
     } },
-  { id: 'dental-clinical-creative', src: 'portfolio/creatives/Dental Clinical creative.png', group: 'Campaigns', title: 'Dental Clinical creative', category: 'Advertising creative', type: 'creative', featured: true, tags: ['healthcare'],
-    desc: 'A marketing creative for dental clinics, built around one slow-moving visual joke.',
-    alt: 'Dental Clinical creative: a dentist riding a slow sloth under the headline “Tired of slow growth for your dental clinic?”',
-    thumb: '/assets/work/dental-clinical-creative.webp', full: '/assets/work/dental-clinical-creative-full.webp', size: [1122, 1402] },
-  { id: 'crave-burgers-ad', src: "portfolio/videos/Crave Burger's AD.mp4", posterAt: 17, group: 'Campaigns', title: 'Crave Burgers ad', category: 'Short-form video', type: 'video', featured: true,
+  { id: 'crave-burgers-ad', src: "portfolio/videos/Crave Burger's AD.mp4", posterAt: 17, group: 'Campaigns', title: 'Crave Burgers ad', category: 'Short-form video', type: 'video', kind: 'Client Work', featured: true,
     desc: 'A short-form ad built on the first-bite reaction.',
     alt: 'A frame from the Crave Burgers ad: a man, eyes wide, about to take the first bite of a burger.',
     thumb: '/assets/work/crave-burgers-ad.webp', poster: '/assets/work/crave-burgers-ad-poster.webp',
@@ -124,42 +118,33 @@ window.UNNATE_PORTFOLIO = [
       ],
       phone: '/assets/work/sites/tickpic-m.webp'
     } },
-  { id: 'pearl-medspa', src: 'portfolio/videos/Pearl MedSpa.mp4', posterAt: 17, group: 'Content & Creative', title: 'Pearl MedSpa', category: 'Short-form video', type: 'video', featured: true, tags: ['healthcare'],
+  { id: 'pearl-medspa', src: 'portfolio/videos/Pearl MedSpa.mp4', posterAt: 17, group: 'Content & Creative', title: 'Pearl MedSpa', category: 'Short-form video', type: 'video', kind: 'Client Work', featured: true, tags: ['healthcare'],
     desc: 'A quiet consultation-room film for a medical spa.',
     alt: 'A frame from the Pearl MedSpa film: a smiling woman in a bright consultation room.',
     thumb: '/assets/work/pearl-medspa.webp', poster: '/assets/work/pearl-medspa-poster.webp',
     video: '/assets/work/video/pearl-medspa.mp4', preview: '/assets/work/video/pearl-medspa-preview.mp4' },
-  { id: 'unnate-creatives', src: "portfolio/creatives/Unnate Creative's.png", group: 'Content & Creative', title: 'UNNATE Creatives', category: 'Studio creative', type: 'creative', kind: 'Self-Initiated', featured: true,
-    desc: 'A studio piece about what content should make an audience do.',
-    alt: 'UNNATE Creatives poster: clouds over a meadow under the headline “Content to make your audience…”, with the orange UNNATE character at a desk.',
-    thumb: '/assets/work/unnate-creatives.webp', full: '/assets/work/unnate-creatives-full.webp', size: [1092, 1440] },
-  { id: 'neuva-diwali', src: 'portfolio/videos/NEUVA Biwali.mp4', posterAt: 17, group: 'Campaigns', title: 'NEUVA Diwali', category: 'Short-form video', type: 'video', featured: true,
+  { id: 'neuva-diwali', src: 'portfolio/videos/NEUVA Biwali.mp4', posterAt: 17, group: 'Campaigns', title: 'NEUVA Diwali', category: 'Short-form video', type: 'video', kind: 'Client Work', featured: true,
     desc: 'A Diwali corporate-gifting film: one more workday, then a box worth sharing.',
     alt: 'A frame from the NEUVA Diwali film: an open gift box of jars and sweets among Diwali lights.',
     thumb: '/assets/work/neuva-diwali.webp', poster: '/assets/work/neuva-diwali-poster.webp',
     video: '/assets/work/video/neuva-diwali.mp4', preview: '/assets/work/video/neuva-diwali-preview.mp4' },
-  { id: 'crave-burgers', src: "portfolio/videos/Crave Burger's.mp4", posterAt: 1, group: 'Content & Creative', title: 'Crave Burgers', category: 'Short-form video', type: 'video', featured: true,
+  { id: 'crave-burgers', src: "portfolio/videos/Crave Burger's.mp4", posterAt: 1, group: 'Content & Creative', title: 'Crave Burgers', category: 'Short-form video', type: 'video', kind: 'Client Work', featured: true,
     desc: 'An office-set short where one burger turns into a round of orders.',
     alt: 'A frame from the Crave Burgers short: a man at an office desk with a burger box.',
     thumb: '/assets/work/crave-burgers.webp', poster: '/assets/work/crave-burgers-poster.webp',
     video: '/assets/work/video/crave-burgers.mp4', preview: '/assets/work/video/crave-burgers-preview.mp4' },
-  { id: 'dental-care', src: 'portfolio/creatives/Dental care.png', group: 'Content & Creative', title: 'Dental care', category: 'Social creative', type: 'creative', featured: true, tags: ['healthcare'],
+  { id: 'dental-care', src: 'portfolio/creatives/Dental care.png', group: 'Content & Creative', title: 'Dental care', category: 'Social creative', type: 'creative', kind: 'Client Work', featured: true, tags: ['healthcare'],
     desc: 'A patient-facing clinic creative seen from the dentist’s mirror.',
     alt: 'Dental care creative: a masked dentist holding a dental mirror, seen from inside the patient’s mouth, with the line “A closer look at a brighter you.”',
     thumb: '/assets/work/dental-care.webp', full: '/assets/work/dental-care-full.webp', size: [1122, 1402] },
 
-  // On the Work page only (and on landing pages where tagged).
-  { id: 'neuva', src: 'portfolio/videos/NEUVA.mp4', posterAt: 17, group: 'Campaigns', title: 'NEUVA', category: 'Short-form video', type: 'video',
-    desc: 'A second cut of the Diwali gifting film, with a different lead.',
-    alt: 'A frame from the second NEUVA cut: gift boxes stacked among warm Diwali lights.',
-    thumb: '/assets/work/neuva.webp', poster: '/assets/work/neuva-poster.webp',
-    video: '/assets/work/video/neuva.mp4', preview: '/assets/work/video/neuva-preview.mp4' },
-  { id: 'beauty-spa', src: 'portfolio/creatives/Beauty SPA.png', group: 'Content & Creative', title: 'Beauty SPA', category: 'Social creative', type: 'creative', tags: ['healthcare'],
-    desc: 'A facial-treatment poster for a clinical beauty spa.',
-    alt: 'Beauty SPA poster: a facial treatment in a splash of water, with the line “Refresh, renew, radiate.”',
-    thumb: '/assets/work/beauty-spa.webp', full: '/assets/work/beauty-spa-full.webp', size: [1024, 1536] },
-  { id: 'fresh-skin', src: 'portfolio/creatives/Fresh Skin.png', group: 'Content & Creative', title: 'Fresh Skin', category: 'Product creative', type: 'creative',
+  { id: 'fresh-skin', src: 'portfolio/creatives/Fresh Skin.png', group: 'Content & Creative', title: 'Fresh Skin', category: 'Product creative', type: 'creative', kind: 'Client Work', featured: true, tags: ['healthcare'],
     desc: 'A launch creative for a daily skincare cleanser.',
     alt: 'Fresh Skin creative: a cleanser bottle among leaves with the line “Pure Care Daily.”',
     thumb: '/assets/work/fresh-skin.webp', full: '/assets/work/fresh-skin-full.webp', size: [1024, 1536] },
+  { id: 'neuva', src: 'portfolio/videos/NEUVA.mp4', posterAt: 17, group: 'Campaigns', title: 'NEUVA', category: 'Short-form video', type: 'video', kind: 'Client Work',
+    desc: 'A second cut of the Diwali gifting film, with a different lead.',
+    alt: 'A frame from the second NEUVA cut: gift boxes stacked among warm Diwali lights.',
+    thumb: '/assets/work/neuva.webp', poster: '/assets/work/neuva-poster.webp',
+    video: '/assets/work/video/neuva.mp4', preview: '/assets/work/video/neuva-preview.mp4' },   // on the Work page only
 ];

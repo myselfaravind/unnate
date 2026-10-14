@@ -6,10 +6,11 @@ window.UNNATE_CONFIG = {
   // answer with JSON containing "ok": true, or the site will (correctly) say the enquiry wasn't sent.
   enquiryEndpoint: '/api/enquiry',
 
-  // Verified public contact details only. Each one appears on the contact cards and in the footer once filled in.
-  email: '',       // e.g. 'hello@unnate.com'
-  phone: '',       // e.g. '+91 98765 43210'
-  whatsapp: '',    // the WhatsApp number, with country code, e.g. '+91 98765 43210'
+  // The studio's two customer-facing email addresses. Both appear on every contact card and in the footer.
+  // (Where enquiries are *delivered* is set separately, on the server: ENQUIRY_TO, see DEPLOY.md.)
+  emails: ['', ''],   // e.g. ['hello@unnate.com', 'projects@unnate.com']
+
+  // Verified social links only. Leave '' to hide.
   instagram: '',   // e.g. 'https://www.instagram.com/your-handle/'
   linkedin: '',    // e.g. 'https://www.linkedin.com/company/your-page/'
 

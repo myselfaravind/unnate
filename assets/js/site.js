@@ -16,13 +16,10 @@
   $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 
   /* ---------- verified contact links only (assets/js/config.js) ---------- */
-  const digits = v => String(v || '').replace(/[^\d+]/g, '');
-  const links = [];
-  if (CFG.email) links.push({ label: 'Email', href: `mailto:${CFG.email}`, text: CFG.email });
-  if (CFG.phone) links.push({ label: 'Call', href: `tel:${digits(CFG.phone)}`, text: CFG.phone });
-  if (CFG.whatsapp) links.push({ label: 'WhatsApp', href: `https://wa.me/${digits(CFG.whatsapp).replace('+', '')}`, text: 'WhatsApp', ext: true });
-  if (CFG.instagram) links.push({ label: 'Instagram', href: CFG.instagram, text: 'Instagram', ext: true });
-  if (CFG.linkedin) links.push({ label: 'LinkedIn', href: CFG.linkedin, text: 'LinkedIn', ext: true });
+  const EMAILS = (Array.isArray(CFG.emails) ? CFG.emails : [CFG.emails]).map(e => String(e || '').trim()).filter(e => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e));
+  const links = EMAILS.map(e => ({ kind: 'email', href: `mailto:${e}`, text: e }));
+  if (CFG.instagram) links.push({ kind: 'social', href: CFG.instagram, text: 'Instagram', ext: true });
+  if (CFG.linkedin) links.push({ kind: 'social', href: CFG.linkedin, text: 'LinkedIn', ext: true });
   const ext = l => l.ext ? ' target="_blank" rel="noopener"' : '';
   const newTab = l => l.ext ? '<span class="vh"> (opens in a new tab)</span>' : '';
   $$('[data-connect]').forEach(ul => {
@@ -30,11 +27,10 @@
       links.map(l => `<li><a href="${esc(l.href)}"${ext(l)}>${esc(l.text)}${newTab(l)}</a></li>`).join('');
     if (ul.dataset.connect) $('a', ul).setAttribute('href', ul.dataset.connect);
   });
-  // on the contact card: direct email / phone / WhatsApp, only once they are filled in
+  // on the contact cards: both email addresses, once they are filled in
   $$('[data-direct]').forEach(box => {
-    const direct = links.filter(l => ['Email', 'Call', 'WhatsApp'].includes(l.label));
-    if (!direct.length) { box.remove(); return; }
-    box.innerHTML = direct.map(l => `<a class="glass-blue" href="${esc(l.href)}"${ext(l)}>${esc(l.label === 'Email' ? l.text : l.label === 'Call' ? 'Call ' + l.text : l.text)}${newTab(l)}</a>`).join('');
+    if (!EMAILS.length) { box.remove(); return; }
+    box.innerHTML = `<p class="direct-k">Or email us directly</p>` + EMAILS.map(e => `<a class="glass-blue" href="mailto:${esc(e)}"><svg class="ic" aria-hidden="true"><use href="/assets/img/icons.svg#mail"/></svg>${esc(e)}</a>`).join('');
   });
 
   /* ---------- navigation ---------- */
@@ -160,6 +156,7 @@
      Each form says what kind of enquiry it is (data-kind) and which fields it requires (required + data-msg).
      It posts JSON to the endpoint in config.js and shows success only when the server confirms it. */
   const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const emailHint = EMAILS.length ? `, or email us at ${EMAILS.join(' or ')}.` : '.';
   $$('[data-form]').forEach(form => {
     const card = form.closest('[data-formcard]') || form.parentElement;
     const views = { form: $('[data-view=form]', card), sent: $('[data-view=sent]', card) };
@@ -202,7 +199,9 @@
       if (sending) return;                                   // no duplicate submissions
       alertBox.hidden = true;
       const bad = validate(); if (bad.length) { bad[0].focus(); return; }
-      const fd = new FormData(form), payload = { kind: form.dataset.kind || 'general', page: location.pathname };
+      // one id per filled-in form: kept across retries, renewed after a confirmed send (the server uses it to drop duplicates)
+      form.dataset.sid ||= (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2));
+      const fd = new FormData(form), payload = { kind: form.dataset.kind || 'general', page: location.pathname, title: document.title, submission_id: form.dataset.sid };
       for (const [k, v] of fd.entries()) {
         if (form.elements[k] instanceof RadioNodeList || $(`input[type=checkbox][name="${k}"]`, form)) (payload[k] ||= []).push(String(v).trim());
         else payload[k] = String(v).trim();
@@ -215,19 +214,19 @@
         let body = null; try { body = await res.json(); } catch { /* not JSON */ }
         // success is shown only when the server confirms it accepted the enquiry
         if (res.ok && body && (body.ok === true || body.success === true)) {
-          views.form.hidden = true; views.sent.hidden = false;
+          views.form.hidden = true; views.sent.hidden = false; delete form.dataset.sid;
           $('h3', views.sent).focus();
           form.dispatchEvent(new CustomEvent('enquiry:sent'));
         } else if (res.status === 422 && body && body.fields) {
           Object.entries(body.fields).forEach(([k, m]) => form.elements[k] && setError(form.elements[k], m));
           $('[aria-invalid=true]', form)?.focus();
         } else {
-          fail('Your enquiry wasn’t sent. The server didn’t accept it. Nothing you typed has been lost. Try sending it again in a moment' + (CFG.email ? `, or email us at ${CFG.email}.` : '.'));
+          fail('Your enquiry wasn’t sent. The server didn’t accept it. Nothing you typed has been lost. Try sending it again in a moment' + emailHint);
         }
       } catch (err) {
         fail(err.name === 'AbortError'
-          ? 'Your enquiry wasn’t sent. The connection timed out. Nothing you typed has been lost. Check your connection and send it again.'
-          : 'Your enquiry wasn’t sent. We couldn’t reach the server. Nothing you typed has been lost. Check your connection and send it again.');
+          ? 'Your enquiry wasn’t sent. The connection timed out. Nothing you typed has been lost. Check your connection and send it again' + emailHint
+          : 'Your enquiry wasn’t sent. We couldn’t reach the server. Nothing you typed has been lost. Check your connection and send it again' + emailHint);
       } finally { clearTimeout(t); setSending(false); }
     });
   });
@@ -293,7 +292,7 @@
     if (pulse && !RM.matches) setTimeout(() => pulse.classList.add('live'), 2800);
     Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(r => setTimeout(r, 700))]).then(() => requestAnimationFrame(() => lhero.classList.add('go')));
     const drift = $('[data-drift]', lhero);
-    if (drift && !RM.matches) {
+    if (drift && !RM.matches && matchMedia('(min-width: 40.01em)').matches) {      // no drift on phones: it opens gaps on small screens
       let raf = 0;
       const draw = () => { raf = 0; const y = Math.min(scrollY, innerHeight); drift.style.setProperty('--py', (y * -.05).toFixed(1) + 'px'); };
       addEventListener('scroll', () => { if (!raf && scrollY < innerHeight * 1.2) raf = requestAnimationFrame(draw); }, { passive: true });

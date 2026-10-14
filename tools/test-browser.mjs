@@ -62,6 +62,7 @@ console.log('Navigation');
   await page.goto(BASE + '/', { waitUntil: 'load' });
   await page.click('.nav-toggle');
   ok(await page.isVisible('#nav-sheet'), 'mobile menu opens');
+  ok(await page.evaluate(() => { const s = document.querySelector('#nav-sheet'), w = s.clientWidth; return getComputedStyle(s).display === 'grid' && [...s.querySelectorAll('a')].every(a => a.getBoundingClientRect().width > w * .8); }), 'menu items stack full width');
   await page.click('#nav-sheet a[href="/clinical-websites/"]');
   await page.waitForURL('**/clinical-websites/');
   ok(true, 'menu link reaches /clinical-websites/');
@@ -117,12 +118,40 @@ await formCase('/final-year-projects/', [['[name=name]', 'Student'], ['[name=ema
   await page.close();
 }
 
+console.log('Contact details and delivery');
+{
+  // with two addresses in config.js, both appear on the contact card and in the footer
+  const page = await browser.newPage({ viewport: { width: 390, height: 800 }, isMobile: true, hasTouch: true });
+  await page.route('**/assets/js/config.js', r => r.fulfill({ contentType: 'text/javascript', body: "window.UNNATE_CONFIG={enquiryEndpoint:'/api/enquiry',emails:['first@example.test','second@example.test']};" }));
+  const posts = [];
+  await page.route('**/api/enquiry', async r => { posts.push(JSON.parse(r.request().postData())); await new Promise(z => setTimeout(z, 400)); r.fulfill({ contentType: 'application/json', body: '{"ok":true}' }); });
+  for (const path of ['/', '/clinical-websites/', '/final-year-projects/']) {
+    await page.goto(BASE + path, { waitUntil: 'load' });
+    const card = await page.$$eval('#contact [data-direct] a', as => as.map(a => a.getAttribute('href')));
+    const foot = await page.$$eval('.foot [data-connect] a[href^="mailto:"]', as => as.map(a => a.getAttribute('href')));
+    ok(card.join() === 'mailto:first@example.test,mailto:second@example.test' && foot.length === 2, `${path}: both email addresses shown on the contact card and in the footer`);
+  }
+  await page.fill('#s-name', 'Student'); await page.fill('#s-email', 'student@example.com'); await page.fill('#s-msg', 'Idea');
+  await page.click('#contact button[type=submit]'); await page.click('#contact button[type=submit]', { force: true }).catch(() => {});
+  await page.waitForSelector('#contact [data-view=sent]:not([hidden])');
+  ok(posts.length === 1, `a double tap sends one request (${posts.length})`);
+  ok(posts[0].kind === 'student' && posts[0].page === '/final-year-projects/' && !!posts[0].title && !!posts[0].submission_id, 'the request carries the form kind, page, page title and a submission id');
+  await page.close();
+}
+{
+  const page = await browser.newPage();
+  await page.goto(BASE + '/', { waitUntil: 'load' });
+  ok(await page.$$eval('#contact [data-direct]', d => d.length === 0) && await page.$$eval('.foot [data-connect] a[href^="mailto:"]', a => a.length === 0), 'with no addresses configured, no empty email links are shown');
+  await page.close();
+}
+
 console.log('Work, viewer and films');
 {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
   await page.goto(BASE + '/', { waitUntil: 'load' });
   const n = await page.locator('#work .rail .slide').count();
-  ok(n === 12, `homepage rail shows ${n} featured projects`);
+  const counts = await page.evaluate(() => ({ featured: UNNATE_PORTFOLIO.filter(p => p.featured).length, all: UNNATE_PORTFOLIO.length, health: UNNATE_PORTFOLIO.filter(p => (p.tags || []).includes('healthcare')).length, web: UNNATE_PORTFOLIO.filter(p => p.group === 'Websites').length }));
+  ok(n === counts.featured, `homepage rail shows all ${n} featured projects`);
   const card = page.locator('#work a[data-id="solara-drinks"]');
   // Playwright's own Chromium has no H.264 decoder; real Chrome, Safari, Edge and Firefox do.
   const h264 = await page.evaluate(() => !!document.createElement('video').canPlayType('video/mp4; codecs="avc1.640028"'));
@@ -149,7 +178,8 @@ console.log('Work, viewer and films');
   ok(await page.evaluate(() => document.activeElement.dataset.id === 'solara-drinks'), 'focus returns to the card');
   await page.click('[data-allwork]');
   await page.waitForTimeout(600);                                     // the change runs inside a view transition
-  ok(await page.locator('#work .rail .slide').count() === 15, '“See all our work” shows all 15 projects');
+  ok(await page.locator('#work .rail .slide').count() === counts.all, `“See all our work” shows all ${counts.all} projects`);
+  ok(await page.evaluate(() => [...document.querySelectorAll('img')].every(i => !/skin-in-progress|dental-clinical-creative|unnate-creatives|beauty-spa/.test(i.src))), 'no unapproved creative appears on the homepage');
   await page.close();
 }
 {
@@ -162,7 +192,7 @@ console.log('Work, viewer and films');
   await page.keyboard.press('Escape');
   await page.click('[data-filter="Websites"]');
   await page.waitForTimeout(600);
-  ok(await page.locator('.rail .slide').count() === 3, 'the Websites filter shows 3 projects');
+  ok(await page.locator('.rail .slide').count() === 3, 'the Websites filter shows the 3 websites');
   await page.close();
 }
 {
@@ -172,7 +202,8 @@ console.log('Work, viewer and films');
   ok(await page.isVisible('#mp3') && !(await page.isVisible('#mp1')), 'Maren screen tabs switch panels');
   await page.keyboard.press('ArrowRight');
   ok(await page.isVisible('#mp4'), 'arrow keys move between Maren tabs');
-  ok(await page.locator('#more .rail .slide').count() === 6, 'the clinic rail shows the 6 healthcare projects');
+  const health = await page.evaluate(() => UNNATE_PORTFOLIO.filter(p => (p.tags || []).includes('healthcare')).length);
+  ok(await page.locator('#more .rail .slide').count() === health, `the clinic rail shows the ${health} healthcare projects`);
   await page.close();
 }
 

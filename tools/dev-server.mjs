@@ -2,7 +2,7 @@
 //   node tools/dev-server.mjs                  → form shows its error state (no email settings)
 //   MOCK_EMAIL=1 node tools/dev-server.mjs     → pretends Resend accepted the email (prints it here)
 //   MOCK_EMAIL=fail node tools/dev-server.mjs  → pretends Resend rejected the email
-//   RESEND_API_KEY=… ENQUIRY_TO=… node tools/dev-server.mjs → sends real email
+//   RESEND_API_KEY=… ENQUIRY_TO='a@…, b@…' node tools/dev-server.mjs → sends real email to both
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
@@ -15,11 +15,11 @@ const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '
 
 const env = { ...process.env };
 if (process.env.MOCK_EMAIL) {
-  env.RESEND_API_KEY ||= 'mock'; env.ENQUIRY_TO ||= 'studio@example.test';
+  env.RESEND_API_KEY ||= 'mock'; env.ENQUIRY_TO ||= 'first@example.test, second@example.test';
   const real = globalThis.fetch;
   globalThis.fetch = async (url, init) => {
     if (String(url).startsWith('https://api.resend.com/')) {
-      console.log('\n[mock Resend] would send:\n', JSON.parse(init.body));
+      console.log('\n[mock Resend] would send (idempotency-key: %s):\n', init.headers['idempotency-key'] || '—', JSON.parse(init.body));
       return process.env.MOCK_EMAIL === 'fail' ? new Response('{"message":"mock failure"}', { status: 500 }) : new Response('{"id":"mock"}', { status: 200 });
     }
     return real(url, init);
