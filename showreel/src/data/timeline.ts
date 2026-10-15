@@ -35,7 +35,7 @@ export const T = {
   standOut: 139,
   silence: 163,
   folders: 172,
-  reelStart: 194, // first shot starts inside the opening folder
+  reelStart: 190, // first shot appears inside the opening folder; camera dives in until f200
   drop: 200, // first full-frame frame of the reel = first downbeat
   outro: 695,
   end: 740,

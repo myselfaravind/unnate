@@ -42,7 +42,7 @@ const fill: Framing = {kind: 'fill'};
 // [id, src, srcIn, rate, from, dur, framing, grade, note]
 const rows: Array<[string, string, number, number, number, number, Framing, string | undefined, string]> = [
   // --- 1. Opener: scale + impact (bars 1–2)
-  ['gorilla-stomp', 'hero-gorilla', 0.0, 1.0, 194, 21, fill, undefined, 'giant foot lands, dust — opens inside the folder, lands on the drop'],
+  ['gorilla-stomp', 'hero-gorilla', 0.0, 1.0, 190, 25, fill, undefined, 'giant foot lands, dust — opens inside the folder, lands on the drop'],
   ['gorilla-charge', 'hero-gorilla', 4.92, 1.3, 215, 15, fill, undefined, 'gorilla charges camera'],
   ['gorilla-splash', 'hero-gorilla', 6.05, 1.4, 230, 15, fill, undefined, 'white splash bursts — match-cuts to juice splash'],
   ['solara-splash', 'solara', 9.65, 1.3, 245, 23, fill, 'saturate(1.06) contrast(1.04)', 'juice explosion, bottle tumbling'],

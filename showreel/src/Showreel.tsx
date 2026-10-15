@@ -6,7 +6,7 @@ import {SHOTS} from './data/shots';
 import {MUSIC_SRC, T, VO_OFFSET, VO_SRC} from './data/timeline';
 import {easeIn, lerp} from './lib/anim';
 import {loadFonts} from './fonts';
-import {FOLDER_INTERIOR, FolderFront, Folders} from './scenes/intro/Folders';
+import {FolderFront, Folders, diveClip} from './scenes/intro/Folders';
 import {Hello} from './scenes/intro/Hello';
 import {Ideas} from './scenes/intro/Ideas';
 import {Name} from './scenes/intro/Name';
@@ -40,8 +40,8 @@ export const Showreel: React.FC = () => {
   const f = useCurrentFrame();
 
   // first shot is born inside the folder (f194) and reaches full frame on the downbeat (f200)
-  const k = lerp(f, T.reelStart, T.drop, 1, 0, easeIn);
-  const firstClip = `inset(${FOLDER_INTERIOR.top * k}px ${FOLDER_INTERIOR.right * k}px ${FOLDER_INTERIOR.bottom * k}px ${FOLDER_INTERIOR.left * k}px round ${24 * k}px)`;
+  const firstClip = f < T.drop ? diveClip(f) : undefined;
+  const firstBlur = lerp(f, T.reelStart, T.drop, 9, 0, easeIn);
 
   const grain = f < T.drop ? 0.13 : f < T.outro ? 0.05 : 0.13;
 
@@ -63,7 +63,13 @@ export const Showreel: React.FC = () => {
       {/* ---------- PORTFOLIO (real footage, excerpts only) */}
       {SHOTS.map((shot, i) => (
         <Sequence key={shot.id} from={shot.from} durationInFrames={shot.dur} name={shot.id}>
-          <ClipShot shot={shot} clip={i === 0 ? firstClip : undefined} />
+          {i === 0 ? (
+            <AbsoluteFill style={{filter: firstBlur > 0.05 ? `blur(${firstBlur}px)` : undefined}}>
+              <ClipShot shot={shot} clip={firstClip} />
+            </AbsoluteFill>
+          ) : (
+            <ClipShot shot={shot} />
+          )}
         </Sequence>
       ))}
       <Window from={T.reelStart} to={T.drop}>
@@ -77,14 +83,14 @@ export const Showreel: React.FC = () => {
 
       <Grain opacity={grain} />
 
-      {/* ---------- AUDIO: supplied VO untouched; music ducked under it, full once the reel starts */}
+      {/* ---------- AUDIO: supplied VO untouched; music sits under it, the build rises from f160, the drop lands at f200 */}
       <Sequence from={VO_OFFSET}>
         <Audio src={staticFile(VO_SRC)} volume={1.12} />
       </Sequence>
       <Audio
         src={staticFile(MUSIC_SRC)}
         volume={(fr) =>
-          interpolate(fr, [0, VO_OFFSET + 194, T.drop - 1, T.drop], [0.3, 0.3, 0.5, 0.78], {
+          interpolate(fr, [0, 160, 196, T.drop - 1, T.drop], [0.19, 0.19, 0.3, 0.3, 0.56], {
             extrapolateLeft: 'clamp',
             extrapolateRight: 'clamp',
           })

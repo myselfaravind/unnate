@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Easing, useCurrentFrame} from 'remotion';
 import {Folder, Pointer} from '../../components/Graphics';
 import {easeIn, easeInOut, easeOut, lerp, pop, rnd} from '../../lib/anim';
 import {paperBg} from '../../theme';
@@ -16,8 +16,33 @@ const FH = FOLDER.w * 0.78;
 export const FOLDER_INTERIOR = {
   top: FOLDER.top + FH * 0.2,
   right: 1080 - (FOLDER.left + FOLDER.w * 0.93),
-  bottom: 1920 - (FOLDER.top + FH * 0.8),
+  bottom: 1920 - (FOLDER.top + FH * 0.97),
   left: FOLDER.left + FOLDER.w * 0.07,
+};
+
+/**
+ * The transition: one continuous camera dive into the open folder (f189 -> f200).
+ * Zoom is interpolated in log space with an accelerating ease, so the push feels like a single
+ * physical move that hits terminal speed exactly on the downbeat.
+ */
+const DIVE_A = 189;
+const DIVE_B = 200;
+const IC = {x: (FOLDER_INTERIOR.left + 1080 - FOLDER_INTERIOR.right) / 2, y: (FOLDER_INTERIOR.top + 1920 - FOLDER_INTERIOR.bottom) / 2};
+export const diveCam = (f: number) => {
+  const p = lerp(f, DIVE_A, DIVE_B, 0, 1, Easing.bezier(0.42, 0, 0.78, 0.45));
+  const s = Math.pow(9, p);
+  const cx = IC.x + (540 - IC.x) * p;
+  const cy = IC.y + (960 - IC.y) * p;
+  return {s, p, tx: cx - IC.x * s, ty: cy - IC.y * s, css: `translate(${cx - IC.x * s}px, ${cy - IC.y * s}px) scale(${s})`};
+};
+/** Screen-space clip of the folder mouth, for the first shot. */
+export const diveClip = (f: number) => {
+  const {s, tx, ty} = diveCam(f);
+  const top = Math.max(0, FOLDER_INTERIOR.top * s + ty);
+  const left = Math.max(0, FOLDER_INTERIOR.left * s + tx);
+  const right = Math.max(0, 1080 - ((1080 - FOLDER_INTERIOR.right) * s + tx));
+  const bottom = Math.max(0, 1920 - ((1920 - FOLDER_INTERIOR.bottom) * s + ty));
+  return `inset(${top}px ${right}px ${bottom}px ${left}px round ${Math.min(60, 14 * s)}px)`;
 };
 
 const SATS = Array.from({length: 10}).map((_, i) => {
@@ -45,6 +70,7 @@ export const Folders: React.FC = () => {
 
   return (
     <AbsoluteFill style={{background: paperBg, overflow: 'hidden'}}>
+      <div style={{position: 'absolute', inset: 0, transformOrigin: '0 0', transform: diveCam(f).css}}>
       {SATS.map((s, i) => {
         const p = pop(f, 172 + s.delay, {damping: 15, stiffness: 200});
         const fromX = 540 + Math.cos(s.ang) * 1500;
@@ -65,11 +91,11 @@ export const Folders: React.FC = () => {
           top: FOLDER.top,
           transform: `scale(${mainP})`,
           transformOrigin: '50% 60%',
-          // from f194 the front panel is drawn by <FolderFront/> above the expanding footage
-          opacity: f >= 194 ? 0 : 1,
         }}
       >
-        <Folder width={FOLDER.w} open={open} />
+        {/* from f190 the front panel is drawn by <FolderFront/>, above the footage inside */}
+        <Folder width={FOLDER.w} open={open} noFront={f >= 190} />
+      </div>
       </div>
 
       <div
@@ -89,19 +115,13 @@ export const Folders: React.FC = () => {
 /** The folder's front panel, drawn above the first shot while it bursts out (f194 – f200). */
 export const FolderFront: React.FC = () => {
   const f = useCurrentFrame(); // global frame (rendered without a Sequence offset)
-  const fall = lerp(f, 194, 200, 0, 1, easeIn);
+  const open = lerp(f, 189, 194, 0, 1, easeOut) + lerp(f, 193, 197, 0, 0.45, easeIn);
   return (
-    <AbsoluteFill style={{pointerEvents: 'none'}}>
-      <div
-        style={{
-          position: 'absolute',
-          left: FOLDER.left,
-          top: FOLDER.top + fall * 900,
-          transform: `rotate(${fall * 14}deg)`,
-          opacity: 1 - fall,
-        }}
-      >
-        <Folder width={FOLDER.w} open={1} frontOnly />
+    <AbsoluteFill style={{pointerEvents: 'none', overflow: 'hidden', opacity: lerp(f, 193, 197, 1, 0, easeIn)}}>
+      <div style={{position: 'absolute', inset: 0, transformOrigin: '0 0', transform: diveCam(f).css}}>
+        <div style={{position: 'absolute', left: FOLDER.left, top: FOLDER.top, transform: `scale(${pop(f, 173, {damping: 11, stiffness: 230})})`, transformOrigin: '50% 60%'}}>
+          <Folder width={FOLDER.w} open={open} frontOnly />
+        </div>
       </div>
     </AbsoluteFill>
   );

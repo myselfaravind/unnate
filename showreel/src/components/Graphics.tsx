@@ -9,7 +9,7 @@ export const Sphere: React.FC<{size: number; style?: React.CSSProperties}> = ({s
       height: size,
       borderRadius: '50%',
       background: `radial-gradient(circle at 34% 30%, #FFFFFF 0%, #A9B8FF 9%, ${C.cobaltLight} 24%, ${C.cobalt} 52%, ${C.cobaltDeep} 86%, #070E4A 100%)`,
-      boxShadow: `0 ${size * 0.08}px ${size * 0.16}px rgba(15,30,140,0.28)`,
+      boxShadow: `0 ${size * 0.1}px ${size * 0.22}px rgba(15,30,140,0.32), 0 0 ${size * 0.45}px rgba(80,110,255,0.35), inset ${-size * 0.06}px ${-size * 0.08}px ${size * 0.14}px rgba(4,10,60,0.45)`,
       flexShrink: 0,
       ...style,
     }}
@@ -63,8 +63,9 @@ export const Folder: React.FC<{
   tint?: 'cobalt' | 'light';
   showPaper?: boolean;
   frontOnly?: boolean;
+  noFront?: boolean;
   style?: React.CSSProperties;
-}> = ({width, open = 0, tint = 'cobalt', showPaper = true, frontOnly = false, style}) => {
+}> = ({width, open = 0, tint = 'cobalt', showPaper = true, frontOnly = false, noFront = false, style}) => {
   const h = width * 0.78;
   const back = tint === 'cobalt' ? C.cobaltDeep : '#7C93F5';
   const front =
@@ -72,7 +73,7 @@ export const Folder: React.FC<{
       ? `linear-gradient(180deg, ${C.cobaltLight} 0%, ${C.cobalt} 60%, #1B33C8 100%)`
       : 'linear-gradient(180deg, #C9D4FF 0%, #9DB0FF 100%)';
   return (
-    <div style={{position: 'relative', width, height: h, perspective: width * 3, ...style}}>
+    <div style={{position: 'relative', width, height: h, perspective: width * 3, filter: tint === 'cobalt' && !frontOnly ? `drop-shadow(0 ${width * 0.05}px ${width * 0.08}px rgba(15,30,140,0.28))` : undefined, ...style}}>
       {/* tab + back */}
       {frontOnly ? null : (
         <>
@@ -84,7 +85,7 @@ export const Folder: React.FC<{
         <div style={{position: 'absolute', left: width * 0.07, top: h * 0.2 - open * h * 0.06, width: width * 0.86, height: h * 0.6, background: '#FBFBF8', borderRadius: width * 0.015}} />
       ) : null}
       {/* front panel */}
-      <div
+      {noFront ? null : <div
         style={{
           position: 'absolute',
           left: 0,
@@ -95,9 +96,9 @@ export const Folder: React.FC<{
           borderRadius: width * 0.035,
           transformOrigin: '50% 100%',
           transform: `rotateX(${open * 62}deg)`,
-          boxShadow: 'inset 0 2px 0 rgba(255,255,255,0.35)',
+          boxShadow: 'inset 0 2px 0 rgba(255,255,255,0.35), 0 -10px 30px rgba(15,30,140,0.18)',
         }}
-      />
+      />}
     </div>
   );
 };

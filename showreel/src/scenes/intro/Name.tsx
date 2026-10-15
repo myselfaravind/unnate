@@ -37,7 +37,7 @@ export const Name: React.FC = () => {
 
   const portraitImg = (filter: string | undefined, dx: number, dy: number, opacity = 1) => (
     <Img
-      src={staticFile('img/aravind-cutout.png')}
+      src={staticFile('img/aravind-photo.png')}
       style={{
         ...portraitBox,
         filter,
@@ -120,9 +120,22 @@ export const Name: React.FC = () => {
 
       {portraitOn ? (
         <>
+          <div
+            style={{
+              position: 'absolute',
+              left: 540 + 30 - 520,
+              top: 560 - lift * 0.4,
+              width: 1040,
+              height: 1040,
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(170,190,255,0.75) 0%, rgba(110,140,255,0.38) 32%, rgba(60,90,255,0) 68%)',
+              transform: `scale(${0.6 + 0.4 * reveal})`,
+              opacity: reveal,
+            }}
+          />
           {portraitImg('brightness(0)', -42 * echo, -26 * echo, echo)}
           {portraitImg('brightness(0) invert(1)', 46 * echo, 30 * echo, echo)}
-          {portraitImg(undefined, 0, 0)}
+          {portraitImg('drop-shadow(0 0 1.5px rgba(200,214,255,0.95)) drop-shadow(-14px -6px 22px rgba(120,150,255,0.55)) drop-shadow(0 40px 50px rgba(5,10,60,0.55))', 0, 0)}
         </>
       ) : null}
 

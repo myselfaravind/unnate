@@ -153,9 +153,11 @@ export const StandOut: React.FC = () => {
               fontSize: 600,
               lineHeight: 1,
               letterSpacing: '-0.06em',
-              color: C.cobalt,
+              color: 'transparent',
               transform: `scale(${(0.15 + 0.85 * outP) * outGrow}) rotate(${-7 + outP * 3}deg)`,
-              textShadow: `0 24px 60px rgba(15,30,140,0.25)`,
+              filter: 'drop-shadow(0 18px 30px rgba(15,30,140,0.35)) drop-shadow(0 0 60px rgba(80,110,255,0.35))',
+              backgroundImage: 'linear-gradient(170deg, #6A86FF 0%, #2340E8 45%, #142BB8 100%)',
+              WebkitBackgroundClip: 'text',
             }}
           >
             OUT
