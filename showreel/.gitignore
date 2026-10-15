@@ -1,0 +1,5 @@
+node_modules/
+out/
+# portfolio originals stay off git (repo policy) — see README
+public/video/*.mp4
+*.log

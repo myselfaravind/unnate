@@ -1,0 +1,28 @@
+{
+  "name": "aravind-showreel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aravind \u2014 personal intro + portfolio showreel (Remotion, 1080x1920 @ 30fps)",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts Showreel out/master.mp4 --codec=h264 --audio-codec=aac --crf=17",
+    "still": "remotion still src/index.ts Showreel",
+    "typecheck": "tsc --noEmit",
+    "finalize": "ffmpeg -v error -y -i out/master.mp4 -vf \"scale=in_range=full:out_range=tv,format=yuv420p\" -c:v libx264 -profile:v high -preset slow -crf 18 -color_range tv -colorspace bt709 -color_primaries bt709 -color_trc bt709 -c:a copy -movflags +faststart out/aravind-showreel.mp4",
+    "music": "python3 tools/make_music.py public/audio/music-bed.wav",
+    "build": "npm run render && npm run finalize"
+  },
+  "dependencies": {
+    "@fontsource/inter-tight": "5.3.0",
+    "@fontsource/instrument-serif": "5.3.0",
+    "@remotion/cli": "4.0.535",
+    "@remotion/media-utils": "4.0.535",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.535"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}
