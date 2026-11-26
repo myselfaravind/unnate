@@ -1,7 +1,18 @@
-# Cloudflare Pages redirects. Old or likely addresses → the real pages.
-/clinic-websites      /clinical-websites/     301
-/clinic-websites/     /clinical-websites/     301
-/clinics              /clinical-websites/     301
-/clinics/             /clinical-websites/     301
-/final-year-project   /final-year-projects/   301
-/final-year-project/  /final-year-projects/   301
+# Cloudflare Pages redirects. Pages from the previous site → the closest page now.
+/clinical-websites     /websites/   301
+/clinical-websites/    /websites/   301
+/clinic-websites       /websites/   301
+/clinic-websites/      /websites/   301
+/clinics               /websites/   301
+/clinics/              /websites/   301
+/final-year-projects   /            301
+/final-year-projects/  /            301
+/final-year-project    /            301
+/final-year-project/   /            301
+/demos/oddcart/        /work/       301
+/demos/tickpic-moments/ /work/      301
+/portfolio             /work/       301
+/portfolio/            /work/       301
+/pricing.html          /pricing/    301
+/contact               /start/      301
+/contact/              /start/      301

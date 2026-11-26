@@ -2,5 +2,6 @@
 User-agent: *
 Allow: /
 Disallow: /demos/
+Disallow: /qa/
 
 Sitemap: https://unnate.com/sitemap.xml

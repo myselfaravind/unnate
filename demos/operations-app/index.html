@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Operations app demo (fictional data) — UNNATE</title>
+<meta name="description" content="A working demo of a UNNATE Operations App for a fictional property maintenance company: dashboard, requests, a booking calendar and a customer portal.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preload" href="/assets/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/demos/operations-app/app.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the app</a>
+<aside class="demo-banner" aria-label="Demo notice">
+  <p><b>Demo with fictional data.</b> Built by UNNATE to show an Operations App. The company, people, properties and requests are made up. Your changes are saved only in this browser.</p>
+  <div class="demo-banner-actions"><button type="button" class="lnk" data-act="reset">Reset sample data</button><a href="/software/">Back to UNNATE</a></div>
+</aside>
+
+<div class="shell">
+  <nav class="side" aria-label="App sections">
+    <div class="brand"><span class="logo" aria-hidden="true">NP</span><span><b>Northgate</b><small>Property Care</small></span></div>
+    <ul class="tabs">
+      <li><button type="button" data-tab="dashboard" aria-current="page"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.8"/><rect x="13" y="4" width="7" height="4.5" rx="1.8"/><rect x="13" y="10.5" width="7" height="9.5" rx="1.8"/><rect x="4" y="13" width="7" height="7" rx="1.8"/></svg>Dashboard</button></li>
+      <li><button type="button" data-tab="requests"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 13.5l2.2-7.5h11.6l2.2 7.5V19H4z"/><path d="M4 13.5h4.5l1.2 2h4.6l1.2-2H20"/></svg>Requests <span class="count" data-k="newcount">0</span></button></li>
+      <li><button type="button" data-tab="bookings"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg>Bookings</button></li>
+      <li><button type="button" data-tab="portal"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9.5" r="2.4"/><path d="M15.5 14.3c2.3.2 4.1 1.8 4.6 4.7"/></svg>Customer portal</button></li>
+    </ul>
+    <p class="side-note">Signed in as <b>Dana</b>, office manager</p>
+  </nav>
+
+  <main id="main" class="main">
+    <h1 class="vh">Northgate Property Care: operations app demo</h1>
+    <!-- dashboard -->
+    <section class="view" id="dashboard" data-view="dashboard" aria-labelledby="h-dash">
+      <header class="vhead"><div><p class="crumb">Tuesday · this week</p><h2 class="vt" id="h-dash">Dashboard</h2></div><button type="button" class="b b-go" data-act="new-booking">New booking</button></header>
+      <div class="kpis">
+        <div class="kpi"><span>Open requests</span><b data-k="open">0</b><small data-k="open-sub"></small></div>
+        <div class="kpi"><span>Booked this week</span><b data-k="booked">0</b><small>across 3 technicians</small></div>
+        <div class="kpi kpi-late"><span>Overdue</span><b data-k="late">0</b><small>past the promised date</small></div>
+        <div class="kpi"><span>Average first response</span><b data-k="resp">0</b><small>from request to booked</small></div>
+      </div>
+      <div class="dgrid">
+        <section class="card chart-card" aria-labelledby="h-chart">
+          <div class="card-h"><h3 id="h-chart">Requests per week</h3><span class="muted">last 8 weeks</span></div>
+          <div class="bars" data-bars role="img" aria-label="Requests per week for the last 8 weeks"></div>
+        </section>
+        <section class="card" aria-labelledby="h-type">
+          <div class="card-h"><h3 id="h-type">Open requests by type</h3></div>
+          <ul class="hbars" data-types></ul>
+        </section>
+        <section class="card" aria-labelledby="h-today">
+          <div class="card-h"><h3 id="h-today">Today's visits</h3><button type="button" class="lnk2" data-tab-go="bookings">Open calendar</button></div>
+          <ol class="today" data-today></ol>
+        </section>
+        <section class="card" aria-labelledby="h-attn">
+          <div class="card-h"><h3 id="h-attn">Needs attention</h3><button type="button" class="lnk2" data-tab-go="requests">All requests</button></div>
+          <ul class="attn" data-attn></ul>
+        </section>
+      </div>
+    </section>
+
+    <!-- requests -->
+    <section class="view" id="requests" data-view="requests" aria-labelledby="h-req" hidden>
+      <header class="vhead"><div><p class="crumb">From the portal, email and phone</p><h2 class="vt" id="h-req">Requests</h2></div><button type="button" class="b b-ghost" data-tab-go="portal">See the customer portal</button></header>
+      <div class="toolbar">
+        <div class="chips" role="group" aria-label="Filter by status">
+          <button type="button" class="chip" data-f="all" aria-pressed="true">All</button>
+          <button type="button" class="chip" data-f="new" aria-pressed="false">New</button>
+          <button type="button" class="chip" data-f="booked" aria-pressed="false">Booked</button>
+          <button type="button" class="chip" data-f="progress" aria-pressed="false">In progress</button>
+          <button type="button" class="chip" data-f="done" aria-pressed="false">Done</button>
+        </div>
+        <label class="vh" for="rq">Search requests</label><input id="rq" type="search" placeholder="Search request, property or person" autocomplete="off">
+      </div>
+      <div class="list card" data-reqs aria-live="polite"></div>
+    </section>
+
+    <!-- bookings -->
+    <section class="view" id="bookings" data-view="bookings" aria-labelledby="h-book" hidden>
+      <header class="vhead"><div><p class="crumb">This week · Monday to Friday</p><h2 class="vt" id="h-book">Bookings</h2></div><button type="button" class="b b-go" data-act="new-booking">New booking</button></header>
+      <div class="legend" role="group" aria-label="Show technicians">
+        <button type="button" class="who t-ali" data-tech="ali" aria-pressed="true"><i></i>Ali</button>
+        <button type="button" class="who t-mei" data-tech="mei" aria-pressed="true"><i></i>Mei</button>
+        <button type="button" class="who t-josh" data-tech="josh" aria-pressed="true"><i></i>Josh</button>
+        <span class="muted">No double booking: the calendar refuses overlapping visits for the same person.</span>
+      </div>
+      <div class="week-wrap card" tabindex="0" role="region" aria-label="Week calendar, scrolls sideways on small screens">
+        <div class="week" data-week></div>
+      </div>
+    </section>
+
+    <!-- customer portal -->
+    <section class="view" id="portal" data-view="portal" aria-labelledby="h-portal" hidden>
+      <header class="vhead"><div><p class="crumb">What your customers see</p><h2 class="vt" id="h-portal">Customer portal</h2></div></header>
+      <div class="portal-wrap">
+        <div class="pframe">
+          <div class="pbar" aria-hidden="true"><i></i><i></i><i></i><span>repairs.northgate.demo</span></div>
+          <div class="pbody">
+            <div class="ptop"><span class="logo sm" aria-hidden="true">NP</span><div><b>Report a repair</b><small>Northgate Property Care</small></div></div>
+            <form class="pform" data-portal novalidate>
+              <div class="f2">
+                <div class="fld"><label for="p-name">Your name</label><input id="p-name" name="name" autocomplete="name" required></div>
+                <div class="fld"><label for="p-prop">Property</label><select id="p-prop" name="prop" required></select></div>
+              </div>
+              <div class="fld"><label for="p-type">What needs fixing?</label><select id="p-type" name="type"></select></div>
+              <div class="fld"><label for="p-desc">Describe the problem</label><textarea id="p-desc" name="desc" rows="3" required placeholder="For example: the kitchen tap drips all the time, worse at night."></textarea></div>
+              <fieldset class="fld"><legend>How urgent is it?</legend>
+                <div class="seg"><label><input type="radio" name="urg" value="Normal" checked> Normal</label><label><input type="radio" name="urg" value="Urgent"> Urgent: water, power or a lock</label></div>
+              </fieldset>
+              <p class="perr" data-perr hidden></p>
+              <button type="submit" class="b b-go">Send request</button>
+            </form>
+            <div class="pdone" data-pdone hidden tabindex="-1">
+              <p class="ok">Request received</p>
+              <h2 data-pref>R-0000</h2>
+              <p class="muted">We confirm a visit time by email within 4 working hours. You can follow it here.</p>
+              <ol class="track" aria-label="Request status"><li class="on">Received</li><li>Booked</li><li>On the way</li><li>Done</li></ol>
+              <div class="pdone-act"><button type="button" class="b b-ghost" data-act="portal-again">Report another repair</button><button type="button" class="b b-go" data-tab-go="requests">See it in the team view</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="pside">
+          <h3>Why a portal helps</h3>
+          <ul class="ticks">
+            <li>Requests arrive complete: property, problem and urgency, every time.</li>
+            <li>They land in the team's request list straight away, with no retyping.</li>
+            <li>Customers can see the status, so fewer "any update?" calls.</li>
+          </ul>
+          <p class="muted">Try it: send a request on the left, then open <b>Requests</b> or the <b>Dashboard</b>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- request drawer -->
+<div class="scrim" data-scrim hidden></div>
+<aside class="drawer" data-drawer aria-labelledby="dr-h" role="dialog" aria-modal="true" hidden tabindex="-1">
+  <header class="dr-head"><div><p class="crumb" data-dr-id></p><h2 id="dr-h" data-dr-title></h2></div><button type="button" class="x" data-act="close" aria-label="Close">×</button></header>
+  <div class="dr-body" data-dr-body></div>
+</aside>
+
+<!-- booking dialog -->
+<div class="modal" data-modal role="dialog" aria-modal="true" aria-labelledby="m-h" hidden>
+  <form class="mform" data-bform novalidate>
+    <header class="dr-head"><h2 id="m-h">New booking</h2><button type="button" class="x" data-act="close" aria-label="Close">×</button></header>
+    <div class="fld"><label for="b-req">For request <span class="opt">(optional)</span></label><select id="b-req" name="req"></select></div>
+    <div class="fld"><label for="b-title">Visit</label><input id="b-title" name="title" required placeholder="For example: replace tap washer"></div>
+    <div class="fld"><label for="b-prop">Property</label><select id="b-prop" name="prop"></select></div>
+    <div class="f3">
+      <div class="fld"><label for="b-day">Day</label><select id="b-day" name="day"></select></div>
+      <div class="fld"><label for="b-start">Start</label><select id="b-start" name="start"></select></div>
+      <div class="fld"><label for="b-dur">Length</label><select id="b-dur" name="dur"></select></div>
+    </div>
+    <div class="fld"><label for="b-tech">Technician</label><select id="b-tech" name="tech"></select></div>
+    <p class="perr" data-berr hidden></p>
+    <div class="mact"><button type="button" class="b b-ghost" data-act="close">Cancel</button><button type="submit" class="b b-go">Save booking</button></div>
+  </form>
+</div>
+
+<p class="toast" data-toast role="status" aria-live="polite" hidden></p>
+<script src="/demos/operations-app/app.js" defer></script>
+</body>
+</html>

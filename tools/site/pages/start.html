@@ -1,0 +1,86 @@
+---
+path: /start/
+title: Start a project — UNNATE
+description: Tell UNNATE about your business and the website or software you need. You get a reply within one working day and a written fixed price after a short call.
+og: home-2026.jpg
+nav: /start/
+---
+<section class="ph">
+  <div class="wrap start">
+    <div class="start-side">
+      <p class="eyebrow" data-intro>Start a project</p>
+      <h1 class="d1" data-intro="2">Tell us about your project.</h1>
+      <p class="lede" data-intro="3">It takes about two minutes. Nothing is booked or charged by sending this form, and you only need to answer the first few questions.</p>
+      <ol class="next" data-intro="4" aria-label="What happens after you send it">
+        <li><b>We reply within one working day</b><span>By email, with any questions and times for a call.</span></li>
+        <li><b>A free 30-minute call</b><span>Or email, if you prefer. We recommend an option, or tell you if you do not need us.</span></li>
+        <li><b>A written scope and fixed price</b><span>Within two working days of the call. You decide after that.</span></li>
+      </ol>
+      <div class="start-mail" data-intro="5">
+        <span>Prefer email? Monday to Friday, 10:00–19:00 India time.</span>
+        <span data-emails></span>
+      </div>
+    </div>
+    <div class="form-card" data-formcard data-intro="3">
+      <div data-view="form">
+        <form class="form" data-form data-subject="New project enquiry" novalidate>
+          <div class="form-alert" role="alert" tabindex="-1" hidden></div>
+          <p class="form-sec">About you</p>
+          <div class="row2">
+            <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required data-msg="Enter your name."></div>
+            <div class="field"><label for="f-business">Business name</label><input id="f-business" name="business" type="text" autocomplete="organization" required data-msg="Enter your business name."></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required data-msg="Enter your email address."></div>
+            <div class="field"><label for="f-country">Country</label>
+              <select id="f-country" name="country" required data-msg="Choose your country.">
+                <option value="">Choose…</option><option>Australia</option><option>United Kingdom</option><option>New Zealand</option><option>United States</option><option>Canada</option><option>Other</option>
+              </select></div>
+          </div>
+          <p class="form-sec">What you need</p>
+          <div class="field">
+            <fieldset id="f-service" data-required data-msg="Choose what you need.">
+              <legend>What do you need?</legend>
+              <div class="choices">
+                <label class="choice"><input type="radio" name="service" value="Website Development"><span class="ci">[[ic:globe]]</span><span><b>Website Development</b><small>from $249</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Custom Business Software"><span class="ci">[[ic:grid]]</span><span><b>Custom Business Software</b><small>from $800</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Both"><span class="ci">[[ic:layers]]</span><span><b>Both</b><small>a website that feeds a system</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Not sure yet"><span class="ci">[[ic:sparkle]]</span><span><b>Not sure yet</b><small>we will help you choose</small></span></label>
+              </div>
+            </fieldset>
+          </div>
+          <div class="field"><label for="f-package">Option you are considering <span class="opt">(optional)</span></label>
+            <select id="f-package" name="package">
+              <option value="">Not sure</option>
+              <option value="one-page">Website: One Page ($249)</option>
+              <option value="five-pages">Website: Five Pages ($399)</option>
+              <option value="five-pages-written">Website: Five Pages, Written ($499)</option>
+              <option value="tracker">Software: Workflow Tracker (from $800)</option>
+              <option value="operations-app">Software: Operations App ($1,500–$3,000)</option>
+              <option value="custom-system">Software: Custom System (from $5,000)</option>
+            </select></div>
+          <p class="form-sec">Details</p>
+          <div class="field"><label for="f-website">Current website <span class="opt">(optional)</span></label><input id="f-website" name="website" type="url" inputmode="url" autocomplete="url" placeholder="yourbusiness.com"></div>
+          <div class="field"><label for="f-message">Tell us about the business and what is not working</label><textarea id="f-message" name="message" required data-msg="Tell us a little about what you need." placeholder="For example: we are a 6-person plumbing business in Sydney. Our site is from 2016, and we track jobs in a spreadsheet that is always out of date."></textarea></div>
+          <div class="field"><label for="f-timing">When do you need it? <span class="opt">(optional)</span></label>
+            <select id="f-timing" name="timing"><option value="">No fixed date</option><option>As soon as possible</option><option>Within a month</option><option>In 1–3 months</option><option>Just comparing prices</option></select></div>
+          <div class="hp" aria-hidden="true"><label for="f-honey">Leave this empty</label><input id="f-honey" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
+          <p class="small">We use these details only to reply to your enquiry. Read the <a href="/privacy/">privacy notice</a>.</p>
+          <div><button class="btn btn-tang" type="submit"><span data-label>Send enquiry</span>[[dot]]</button></div>
+        </form>
+      </div>
+      <div class="sent" data-view="sent" hidden>
+        <p class="eyebrow">Sent</p>
+        <h2 class="d3" tabindex="-1">Thank you. Your enquiry has been sent.</h2>
+        <p>Here is what happens next:</p>
+        <ol class="next">
+          <li><b>Within one working day</b><span>A reply from one of the addresses below. If you do not see it, check your spam folder.</span></li>
+          <li><b>A free 30-minute call</b><span>At a time that suits you, or by email.</span></li>
+          <li><b>A written scope and fixed price</b><span>Nothing starts until you approve it.</span></li>
+        </ol>
+        <p data-emails></p>
+        <p><a class="link" href="/work/">Look through the demos while you wait [[arrow]]</a></p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job tracker demo (fictional data) — UNNATE</title>
+<meta name="description" content="A working demo of a UNNATE Workflow Tracker for a fictional plumbing and maintenance business. Add jobs, change statuses, filter, search and export.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preload" href="/assets/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/demos/job-tracker/app.css">
+</head>
+<body>
+<a class="skip" href="#jobs">Skip to the job list</a>
+<aside class="demo-banner" aria-label="Demo notice">
+  <p><b>Demo with fictional data.</b> Built by UNNATE to show a Workflow Tracker. The business, people, phone numbers and jobs are made up. Your changes are saved only in this browser.</p>
+  <div class="demo-banner-actions"><button type="button" class="lnk" data-act="reset">Reset sample data</button><a href="/software/">Back to UNNATE</a></div>
+</aside>
+
+<header class="app-top">
+  <div class="app-id">
+    <span class="app-logo" aria-hidden="true">TC</span>
+    <div><p class="app-biz">Tallow Creek Plumbing &amp; Maintenance</p><h1>Jobs</h1></div>
+  </div>
+  <div class="app-top-actions">
+    <button type="button" class="b b-ghost" data-act="export">Export spreadsheet</button>
+    <button type="button" class="b b-go" data-act="new">New job</button>
+  </div>
+</header>
+
+<main class="app" id="main">
+  <section class="kpis" aria-label="Summary">
+    <button type="button" class="kpi" data-kpi="open"><b data-k="open">0</b><span>Open jobs</span></button>
+    <button type="button" class="kpi" data-kpi="today"><b data-k="today">0</b><span>Due today</span></button>
+    <button type="button" class="kpi kpi-late" data-kpi="late"><b data-k="late">0</b><span>Overdue</span></button>
+    <div class="kpi kpi-static"><b data-k="week">0</b><span>Done in the last 7 days</span></div>
+  </section>
+
+  <section class="toolbar" aria-label="Find jobs">
+    <div class="search"><label for="q" class="vh">Search jobs</label><input id="q" type="search" placeholder="Search job no., work, customer or suburb" autocomplete="off"></div>
+    <div class="filters">
+      <label for="who" class="vh">Assigned to</label>
+      <select id="who"><option value="">Everyone</option></select>
+      <label for="sort" class="vh">Sort by</label>
+      <select id="sort"><option value="due">Sort: due date</option><option value="no">Sort: newest first</option><option value="prio">Sort: priority</option></select>
+      <div class="seg" role="group" aria-label="View">
+        <button type="button" data-view="list" aria-pressed="true">List</button>
+        <button type="button" data-view="board" aria-pressed="false">Board</button>
+      </div>
+    </div>
+    <div class="status-filter" role="group" aria-label="Filter by status" data-status-filter></div>
+  </section>
+
+  <section id="jobs" aria-label="Jobs" tabindex="-1">
+    <p class="result-line" data-result aria-live="polite"></p>
+    <div data-list></div>
+    <div data-board hidden></div>
+    <div class="empty" data-empty hidden>
+      <p><b>No jobs match these filters.</b></p>
+      <button type="button" class="b b-ghost" data-act="clear">Clear filters</button>
+    </div>
+  </section>
+
+  <details class="about-demo">
+    <summary>What this demo shows, and what a real build adds</summary>
+    <div>
+      <p>This is the front end of a Workflow Tracker, running entirely in your browser with sample data. It shows the everyday screens: one list of jobs, statuses named the way the team talks, a board view, a job record with a checklist, notes and history, search, filters and a spreadsheet export.</p>
+      <p>A real build adds what a demo cannot: staff sign-in with admin and staff roles, a shared database so everyone sees the same jobs, daily backups, file attachments, and your current spreadsheet imported on day one.</p>
+      <p><a href="/software/">See what a Workflow Tracker includes and costs</a>.</p>
+    </div>
+  </details>
+</main>
+
+<dialog class="drawer" data-drawer aria-labelledby="d-title">
+  <form method="dialog" class="drawer-in" data-detail></form>
+</dialog>
+
+<dialog class="modal" data-new aria-labelledby="n-title">
+  <form class="modal-in" data-newform novalidate>
+    <div class="modal-head"><h2 id="n-title">New job</h2><button type="button" class="x" data-close aria-label="Close">×</button></div>
+    <div class="form-alert" role="alert" tabindex="-1" hidden></div>
+    <div class="f"><label for="n-work">What needs doing</label><input id="n-work" name="title" required placeholder="e.g. Dripping kitchen tap" data-msg="Describe the job."></div>
+    <div class="f2">
+      <div class="f"><label for="n-cust">Customer</label><input id="n-cust" name="customer" required data-msg="Enter the customer's name."></div>
+      <div class="f"><label for="n-sub">Suburb</label><input id="n-sub" name="suburb" required data-msg="Enter the suburb."></div>
+    </div>
+    <div class="f2">
+      <div class="f"><label for="n-type">Job type</label><select id="n-type" name="type"></select></div>
+      <div class="f"><label for="n-prio">Priority</label><select id="n-prio" name="priority"><option value="normal">Normal</option><option value="urgent">Urgent</option><option value="low">Low</option></select></div>
+    </div>
+    <div class="f2">
+      <div class="f"><label for="n-due">Due date</label><input id="n-due" name="due" type="date" required data-msg="Choose a due date."></div>
+      <div class="f"><label for="n-who">Assign to <span class="opt">(optional)</span></label><select id="n-who" name="assignee"><option value="">Not assigned yet</option></select></div>
+    </div>
+    <div class="f"><label for="n-note">First note <span class="opt">(optional)</span></label><textarea id="n-note" name="note" rows="3"></textarea></div>
+    <div class="modal-foot"><button type="button" class="b b-ghost" data-close>Cancel</button><button type="submit" class="b b-go">Add job</button></div>
+  </form>
+</dialog>
+
+<div class="toast" role="status" aria-live="polite" data-toast hidden></div>
+<script src="/demos/job-tracker/app.js" defer></script>
+</body>
+</html>
