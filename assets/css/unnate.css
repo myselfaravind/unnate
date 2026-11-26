@@ -721,7 +721,7 @@ td small{display:block;color:var(--ink-2);font-size:.82rem;margin-top:3px}
 .dash li{display:grid;grid-template-columns:18px 1fr;gap:8px}
 .dash li::before{content:"–";color:var(--royal-deep);font-weight:700}
 
-/* ---------- 12. forms ---------- */
+/* ---------- 12. contact (start page card; the form styles below are no longer used by any page) ---------- */
 .start{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(2rem,5vw,4.5rem);align-items:start}
 .start-side{display:grid;gap:1.4rem;justify-items:start;position:sticky;top:7rem}
 .next{list-style:none;position:relative;display:grid;gap:1.15rem;padding-left:3rem}
@@ -768,6 +768,34 @@ fieldset{border:0;padding:0;margin:0;display:grid;gap:.6rem}
 .sent h2:focus{outline:none}
 .spinner{width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:inline-block;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* one-click email ("Let's talk"): fallback note, copy button, email preview */
+.mailhint{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .6rem;font-size:.88rem;color:var(--ink-2);margin-top:.2rem}
+.hero-in .mailhint,.ph-c .mailhint,.cta .mailhint{justify-content:center;text-align:center}
+.mailhint a{color:var(--royal-deep);font-weight:600}
+.mh-alt{display:inline-flex;flex-wrap:wrap;align-items:center;gap:.35rem .5rem}
+.copy{font:600 .8rem/1 var(--font);min-height:2rem;padding:.4rem .8rem;border-radius:999px;border:1px solid var(--line-2);background:#fff;color:var(--ink);cursor:pointer;transition:border-color .2s,background-color .2s}
+.copy:hover{border-color:var(--ink)}
+.copy:focus-visible,.mt-x:focus-visible{outline:3px solid var(--royal);outline-offset:2px}
+.on-dark-hint{color:#DCE3FF}
+.on-dark-hint a{color:#fff;text-decoration-color:rgb(255 255 255 / .45)}
+.on-dark-hint .copy{background:transparent;color:#fff;border-color:rgb(255 255 255 / .5)}
+.on-dark-hint .copy:hover{border-color:#fff}
+.on-dark-hint .copy:focus-visible{outline-color:#fff}
+.mail-toast{position:fixed;left:50%;bottom:max(1rem,env(safe-area-inset-bottom));z-index:60;width:min(32rem,calc(100% - 2rem));display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1rem;padding:.85rem .9rem .85rem 1.1rem;background:var(--ink);color:#fff;border-radius:18px;box-shadow:0 18px 40px -16px rgb(16 19 28 / .55);font-size:.92rem;transform:translate(-50%,140%);opacity:0;visibility:hidden;transition:transform .45s var(--ease),opacity .3s,visibility .45s}
+.mail-toast.on{transform:translate(-50%,0);opacity:1;visibility:visible}
+.mail-toast p{flex:1 1 15rem}
+.mail-toast a{color:#C9D4FF;font-weight:600}
+.mt-acts{display:flex;gap:.5rem;align-items:center}
+.mail-toast .copy{background:var(--tang);border-color:var(--tang);color:var(--ink)}
+.mt-x{width:2rem;height:2rem;border-radius:50%;border:1px solid rgb(255 255 255 / .35);background:transparent;color:#fff;font-size:1.1rem;line-height:1;cursor:pointer}
+.talk-card{display:grid;gap:1.1rem;justify-items:start}
+.mail-preview{width:100%;margin:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--paper)}
+.mp-row{display:grid;grid-template-columns:4.8rem minmax(0,1fr);gap:.6rem;align-items:baseline;padding:.7rem 1rem;border-bottom:1px solid var(--line);font-size:.92rem}
+.mp-row span{font:600 .7rem/1.6 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3)}
+.mp-row b{font-weight:600;overflow-wrap:anywhere}
+.mp-body{padding:1rem;display:grid;gap:.7rem;background:#fff;font-size:.98rem}
+.mail-preview figcaption{padding:.65rem 1rem;font-size:.84rem;color:var(--ink-2);border-top:1px solid var(--line)}
 
 /* ---------- 13. motion ---------- */
 /* first load: the hero content settles in, in order, within about a second */

@@ -1,7 +1,7 @@
 /* UNNATE — navigation, the background network, reveals, the hero demo, contacts, the QA summary
-   and the project form. Everything still works, and stays readable, without JavaScript.
-   The form posts to FormSubmit (https://formsubmit.co) using the addresses in config.js; success is shown
-   only when FormSubmit confirms it accepted the enquiry. */
+   and the one-click email links. Everything still works, and stays readable, without JavaScript:
+   "Let's talk" links are plain mailto: links; this file only adds the copy button and the
+   "did your email app open?" note. */
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -282,112 +282,53 @@
     fill(); addEventListener('scroll', fill, { passive: true }); addEventListener('resize', fill);
   }
 
-  /* project form */
-  const form = $('[data-form]');
-  if (!form) return;
-
-  /* preselect from links like /start/?service=website&package=one-page */
-  const q = new URLSearchParams(location.search);
-  const svc = { website: 'Website Development', software: 'Custom Business Software' }[q.get('service')];
-  if (svc) { const r = $$('input[name=service]', form).find(i => i.value === svc); if (r) r.checked = true; }
-  const pkg = q.get('package');
-  if (pkg && form.elements.package && [...form.elements.package.options].some(o => o.value === pkg)) form.elements.package.value = pkg;
-
-  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  const URLISH = /^(https?:\/\/)?[^\s.]+\.[^\s]{2,}$/i;
-  const ENDPOINT = EMAILS.length ? `https://formsubmit.co/ajax/${encodeURIComponent(String(CFG.formsubmitAlias || '').trim() || EMAILS[0])}` : '';
-  const BLACKLIST = 'viagra, cialis, casino, porn, escort, payday loan, backlinks, guest post';
-  const card = form.closest('[data-formcard]');
-  const sentView = $('[data-view=sent]', card), formView = $('[data-view=form]', card);
-  const alertBox = $('.form-alert', form), submit = $('button[type=submit]', form), label = $('[data-label]', submit);
-  const idle = label.textContent;
-  const contactHint = EMAILS.length ? ` You can also email ${EMAILS.join(' or ')}.` : '';
-
-  const labelOf = el => {
-    const host = (el.type === 'checkbox' || el.type === 'radio') ? el.closest('fieldset')?.querySelector('legend') : $(`label[for="${CSS.escape(el.id)}"]`, form);
-    if (!host) return el.name;
-    const c = host.cloneNode(true); $$('.opt', c).forEach(o => o.remove());
-    return c.textContent.replace(/\s+/g, ' ').trim().replace(/[?:]$/, '');
+  /* one-click email: every "Let's talk" link is a plain mailto: link, so the visitor's own email app opens
+     with a short message ready to send, and nothing is sent until they press Send. If no email app seems to
+     open (none set up), a small note shows the address with a copy button. */
+  const ADDR = EMAILS[0] || '';
+  const live = document.createElement('p'); live.className = 'vh'; live.setAttribute('aria-live', 'polite');
+  document.body.appendChild(live);
+  const copyText = async t => {
+    try { await navigator.clipboard.writeText(t); return true; } catch (e) { /* older browsers: fall back below */ }
+    const ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', ''); ta.className = 'vh';
+    document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    ta.remove(); return ok;
   };
-  const setError = (el, msg) => {
-    const field = el.closest('.field'); if (!field) return;
-    let p = $('.err', field);
-    if (!msg) { p?.remove(); el.removeAttribute('aria-invalid'); el.removeAttribute('aria-describedby'); return; }
-    if (!p) { p = document.createElement('p'); p.className = 'err'; p.id = (el.id || el.name) + '-err'; field.appendChild(p); }
-    p.textContent = msg;
-    el.setAttribute('aria-invalid', 'true'); el.setAttribute('aria-describedby', p.id);
-  };
-  const validate = () => {
-    const bad = [];
-    $$('input:not([type=checkbox]):not([type=radio]),select,textarea', form).forEach(el => {
-      if (el.closest('.hp')) return;
-      const v = el.value.trim(); let msg = '';
-      if (el.required && !v) msg = el.dataset.msg || 'Fill in this field.';
-      else if (el.type === 'email' && v && !EMAIL.test(v)) msg = 'Enter an email address like name@business.com.';
-      else if (el.name === 'website' && v && !URLISH.test(v)) msg = 'Enter a web address like yourbusiness.com, or leave it empty.';
-      setError(el, msg); if (msg) bad.push(el);
-    });
-    $$('fieldset[data-required]', form).forEach(fs => {
-      const first = $('input', fs), any = $$('input', fs).some(i => i.checked);
-      const field = fs.closest('.field');
-      let p = field && $('.err', field);
-      if (any) { p?.remove(); fs.removeAttribute('aria-invalid'); fs.removeAttribute('aria-describedby'); return; }
-      if (!p) { p = document.createElement('p'); p.className = 'err'; p.id = fs.id + '-err'; field.appendChild(p); }
-      p.textContent = fs.dataset.msg || 'Choose at least one option.';
-      fs.setAttribute('aria-invalid', 'true'); fs.setAttribute('aria-describedby', p.id);
-      bad.push(first);
-    });
-    return bad;
-  };
-  form.addEventListener('input', () => { if ($('[aria-invalid=true]', form)) validate(); });
-  form.addEventListener('change', () => { if ($('[aria-invalid=true]', form)) validate(); });
-
-  let sending = false;
-  const setSending = on => {
-    sending = on; submit.setAttribute('aria-disabled', String(on));
-    label.innerHTML = on ? '<span class="spinner" aria-hidden="true"></span> Sending…' : idle;
-  };
-  const fail = msg => { alertBox.textContent = msg; alertBox.hidden = false; alertBox.focus(); };
-
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (sending) return;
-    alertBox.hidden = true;
-    const bad = validate(); if (bad.length) { bad[0].focus(); return; }
-    if (!ENDPOINT) { fail('This form cannot send yet.' + contactHint); return; }
-    const fields = {};
-    $$('input,select,textarea', form).forEach(el => {
-      if (!el.name || el.closest('.hp') || ((el.type === 'checkbox' || el.type === 'radio') && !el.checked)) return;
-      const k = labelOf(el), v = el.value.trim();
-      if (el.type === 'checkbox') fields[k] = fields[k] ? `${fields[k]}, ${v}` : v;
-      else fields[k] = v || '—';
-    });
-    const name = form.elements.name.value.trim(), biz = form.elements.business.value.trim();
-    const payload = {
-      _subject: `${form.dataset.subject || 'Project enquiry'} — ${biz || name}`,
-      _replyto: form.elements.email.value.trim(),
-      _cc: EMAILS.slice(1).join(','),
-      _template: 'table',
-      _captcha: 'false',
-      _honey: form.elements._honey?.value || '',
-      _blacklist: BLACKLIST,
-      ...fields,
-      Page: `${location.origin}${location.pathname}`
-    };
-    const ctrl = new AbortController(), t = setTimeout(() => ctrl.abort(), 20000);
-    setSending(true);
-    try {
-      const res = await fetch(ENDPOINT, { method: 'POST', signal: ctrl.signal, headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
-      let body = null; try { body = await res.json(); } catch { /* not JSON */ }
-      if (res.ok && body && String(body.success) === 'true') {
-        formView.hidden = true; sentView.hidden = false;
-        $('h2', sentView).focus();
-      } else {
-        if (body && body.message) console.warn('FormSubmit:', body.message);
-        fail('Your enquiry was not sent: the form service did not accept it. Nothing you typed is lost. Try again in a minute.' + contactHint);
-      }
-    } catch (err) {
-      fail((err.name === 'AbortError' ? 'Your enquiry was not sent: the connection timed out.' : 'Your enquiry was not sent: the form service could not be reached.') + ' Nothing you typed is lost. Check your connection and try again.' + contactHint);
-    } finally { clearTimeout(t); setSending(false); }
+  const bindCopy = btn => btn.addEventListener('click', async () => {
+    const addr = btn.dataset.copy, idle = btn.dataset.idle || btn.textContent;
+    btn.dataset.idle = idle;
+    const ok = await copyText(addr);
+    btn.textContent = ok ? 'Copied' : 'Copy failed';
+    live.textContent = ok ? `Email address copied: ${addr}` : `Could not copy. The address is ${addr}`;
+    clearTimeout(btn._t); btn._t = setTimeout(() => { btn.textContent = idle; }, 2200);
   });
+  $$('[data-copy]').forEach(bindCopy);
+
+  let toast = null;
+  const hideToast = () => { if (toast) toast.classList.remove('on'); };
+  const showToast = () => {
+    if (!ADDR) return;
+    if (!toast) {
+      toast = document.createElement('div'); toast.className = 'mail-toast'; toast.setAttribute('role', 'status');
+      toast.innerHTML = `<p><b>Did your email app open?</b> If not, write to <a href="mailto:${ADDR}">${ADDR}</a>.</p>`
+        + `<div class="mt-acts"><button class="copy" type="button" data-copy="${ADDR}">Copy address</button>`
+        + `<button class="mt-x" type="button" aria-label="Close this note">×</button></div>`;
+      document.body.appendChild(toast);
+      bindCopy($('.copy', toast));
+      $('.mt-x', toast).addEventListener('click', hideToast);
+      addEventListener('keydown', e => { if (e.key === 'Escape') hideToast(); });
+    }
+    toast.classList.add('on');
+    clearTimeout(toast._t); toast._t = setTimeout(hideToast, 12000);
+  };
+  $$('a[data-mailto]').forEach(a => a.addEventListener('click', () => {
+    let left = false;
+    const away = () => { left = true; };
+    addEventListener('blur', away); addEventListener('pagehide', away); document.addEventListener('visibilitychange', away);
+    setTimeout(() => {
+      removeEventListener('blur', away); removeEventListener('pagehide', away); document.removeEventListener('visibilitychange', away);
+      if (!left && document.visibilityState === 'visible' && document.hasFocus()) showToast();
+    }, 1600);
+  }));
 })();
