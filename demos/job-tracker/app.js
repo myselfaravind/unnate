@@ -114,7 +114,7 @@
   function renderList(rows) {
     listEl.innerHTML = rows.length ? `<table class="tbl"><caption class="vh">Jobs</caption><thead><tr><th scope="col">Job</th><th scope="col">Work</th><th scope="col">Due</th><th scope="col">Assigned</th><th scope="col">Priority</th><th scope="col">Progress</th><th scope="col">Status</th></tr></thead><tbody>${rows.map(j => {
       const d = dueLabel(j);
-      return `<tr><td class="c-no"><span class="no">#${j.no}</span></td><td class="c-work"><button type="button" class="open-btn" data-open="${j.no}">${esc(j.title)}</button><span class="sub">${esc(j.customer)} · ${esc(j.suburb)}</span></td><td class="c-due"><span class="${d.cls}">${d.text}</span></td><td class="c-who">${esc(j.assignee) || '<span class="sub">Not assigned</span>'}</td><td class="c-prio"><span class="prio-${j.priority}">${PRIO_L[j.priority]}</span></td><td class="c-prog">${progressHtml(j)}</td><td class="c-status">${chip(j.status)}</td></tr>`;
+      return `<tr><td class="c-no"><span class="no">#${j.no}</span></td><td class="c-work"><button type="button" class="open-btn" data-open="${j.no}">${esc(j.title)}</button><span class="sub">${esc(j.customer)} · ${esc(j.suburb)}</span></td><td class="c-due"><span class="${d.cls}">${d.text}</span></td><td class="c-who">${j.assignee ? `<span class="who-cell"><span class="av av-${esc(j.assignee)}" aria-hidden="true">${esc(j.assignee[0])}</span>${esc(j.assignee)}</span>` : '<span class="who-cell"><span class="av av-none" aria-hidden="true">–</span><span class="sub">Not assigned</span></span>'}</td><td class="c-prio"><span class="prio-${j.priority}">${PRIO_L[j.priority]}</span></td><td class="c-prog">${progressHtml(j)}</td><td class="c-status">${chip(j.status)}</td></tr>`;
     }).join('')}</tbody></table>` : '';
   }
   function renderBoard(rows) {
@@ -123,7 +123,7 @@
       const next = order[order.indexOf(id) + 1];
       return `<section class="lane" aria-label="${label}"><h2>${label}<span>${lane.length}</span></h2>${lane.map(j => {
         const d = dueLabel(j);
-        return `<article class="card"><div class="top"><span class="no">#${j.no}</span><span class="${d.cls}">${d.text}</span></div><button type="button" class="open-btn" data-open="${j.no}">${esc(j.title)}</button><span class="sub">${esc(j.suburb)} · ${esc(j.assignee) || 'Not assigned'}</span>${progressHtml(j)}${next ? `<div class="acts"><button type="button" class="mv" data-move="${j.no}" data-to="${next}">Move to ${SL[next]}</button></div>` : ''}</article>`;
+        return `<article class="card"><div class="top"><span class="no">#${j.no}</span><span class="${d.cls}">${d.text}</span></div><button type="button" class="open-btn" data-open="${j.no}">${esc(j.title)}</button><span class="sub"><span class="av av-${esc(j.assignee) || 'none'}" aria-hidden="true">${esc(j.assignee ? j.assignee[0] : '–')}</span> ${esc(j.suburb)} · ${esc(j.assignee) || 'Not assigned'}</span>${progressHtml(j)}${next ? `<div class="acts"><button type="button" class="mv" data-move="${j.no}" data-to="${next}">Move to ${SL[next]}</button></div>` : ''}</article>`;
       }).join('')}</section>`;
     }).join('')}</div>`;
   }

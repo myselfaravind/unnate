@@ -15,20 +15,20 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#F4F3EE">
+<meta name="theme-color" content="#F2F5F9">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/gochi-hand.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/unnate.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="top">
-  <div class="wrap top-in">
-    <a class="logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+<header class="nav" data-nav>
+  <div class="nav-pill">
+    <a class="nav-logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
     <nav class="menu" id="menu" aria-label="Main">
       <a href="/websites/" aria-current="page">Websites</a>
       <a href="/software/">Software</a>
@@ -36,125 +36,147 @@
       <a href="/work/">Work</a>
       <a href="/process/">How we work</a>
       <a href="/about/">About</a>
-      <a class="btn btn-sm btn-go" href="/start/">Start a project</a>
+      <a class="btn btn-ink btn-sm" href="/start/">Start a project</a>
     </nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span>Menu</button>
   </div>
 </header>
 <main id="main">
-<section class="page-head">
-  <div class="wrap">
-    <span class="kicker">Website Development</span>
-    <h1>A website that tells people what you do and gets them to call.</h1>
-    <p class="lede">Three fixed packages for service businesses. Every one is built to load fast on a phone, put your phone number and quote form in easy reach, and stay yours.</p>
-    <div class="hero-cta"><a class="btn btn-go" href="/start/?service=website">Get a written quote</a><a class="btn btn-line" href="/demos/tallow-creek-plumbing/">See the $249 demo</a></div>
+<section class="ph ph-warm">
+  <span class="glow glow-pink" aria-hidden="true"></span>
+  <div class="wrap ph-grid">
+    <div data-reveal>
+      <span class="kicker k-tang">Website Development</span>
+      <h1 class="d2">A website that tells people what you do, and gets them to call.</h1>
+      <p class="lede">Three fixed packages for service businesses. Every one loads fast on a phone, keeps your number and quote form in easy reach, and stays yours.</p>
+      <div class="ctas"><a class="btn btn-tang" href="/start/?service=website">Get a written quote <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a><a class="btn btn-white" href="/demos/tallow-creek-plumbing/">See the $249 demo</a></div>
+    </div>
+    <div class="ph-visual trio" data-reveal aria-label="The same demo website on a desktop and on a phone">
+      <figure class="browser"><div class="bbar" aria-hidden="true"><i></i><i></i><i></i><span>tallowcreek.demo</span></div><img src="/assets/work/demos/tradie-desktop.webp" alt="Demo plumbing website on a desktop" width="1200" height="750" fetchpriority="high"></figure>
+      <figure class="phone"><img src="/assets/work/demos/tradie-phone.webp" alt="The same demo website on a phone" width="600" height="1169"></figure>
+      <div class="flt f-a"><span class="ic ic-tang"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#phone"/></svg></span><span>Call button<small>always in reach on phones</small></span></div>
+      <div class="flt f-b d2"><span class="ic ic-mint"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg></span><span>Speed and accessibility<small>checked before launch</small></span></div>
+    </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-white">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">Which package do I need?</p>
-      <h2>Three packages, fixed prices</h2>
-      <p class="lede">Pick by how much there is to say. If you are not sure, start with the call; we will tell you.</p>
+    <div class="head-split">
+      <div class="head" data-reveal><p class="hand hand-tang">which package do I need? <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Three packages. Fixed prices.</h2></div>
+      <p class="lede" data-reveal>Pick by how much there is to say. If you are not sure, start with the call and we will tell you.</p>
     </div>
-    <div class="offers">
-      <article class="offer">
-        <p class="offer-k">One Page</p>
-        <p class="price"><small>USD</small>$249</p>
+    <div class="pkgs">
+      <article class="pkg pkg-butter" data-reveal>
+        <div class="pkg-top"><p class="pkg-name">One Page</p><span class="tag tag-tang">New businesses</span></div>
+        <p class="pkg-price"><sup>$</sup>249<small>USD, one-off</small></p>
         <p class="for">For a new business, or a tradie who needs one clear page that works.</p>
-        <p class="meta-row"><span>1 page, up to 7 sections</span><span>5 working days</span><span>2 change rounds</span></p>
-        <ul class="ticks">
-          <li>Built for phones first, with a tap-to-call button</li>
-          <li>Quote or contact form with spam protection</li>
-          <li>Services, service areas, opening hours and a map link</li>
-          <li>Search titles, descriptions and local-business details set up</li>
-          <li>Speed and accessibility checks, with a test report</li>
-          <li>Visitor statistics set up, if you want them</li>
+        <p class="meta-row"><span>1 page · up to 7 sections</span><span>5 working days</span><span>2 change rounds</span></p>
+        <ul>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Built for phones first, with a tap-to-call button</li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Quote or contact form with spam protection</li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Services, service areas, opening hours and a map link</li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Search titles, descriptions and local-business details</li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Speed and accessibility checks, with a test report</li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Visitor statistics set up, if you want them</li>
         </ul>
         <p class="not">You supply the words and photos; we edit them for clarity.</p>
-        <a class="btn btn-line" href="/start/?service=website&amp;package=one-page">Choose One Page</a>
+        <a class="btn btn-ink" href="/start/?service=website&amp;package=one-page">Choose One Page <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a>
       </article>
-      <article class="offer feature">
-        <p class="offer-k">Five Pages</p>
-        <p class="price"><small>USD</small>$399</p>
+      <article class="pkg pkg-ink taller" data-reveal>
+        <div class="pkg-top"><p class="pkg-name">Five Pages</p><span class="tag">Good for redesigns</span></div>
+        <p class="pkg-price"><sup>$</sup>399<small>USD, one-off</small></p>
         <p class="for">For an established business with several services, or an old site to replace.</p>
         <p class="meta-row"><span>Up to 5 pages</span><span>10 working days</span><span>2 change rounds</span></p>
-        <ul class="ticks">
-          <li>Everything in One Page</li>
-          <li>A page for each main service, plus About and Contact</li>
-          <li>Photo gallery of your work and a questions section</li>
-          <li>Old page addresses redirected, so links and search results still work</li>
-          <li>We structure and edit the words you send</li>
+        <ul>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Everything in One Page</li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> A page for each main service, plus About and Contact</li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Photo gallery of your work and a questions section</li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Old page addresses redirected, so links and search results keep working</li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> We structure and edit the words you send</li>
         </ul>
         <p class="not">You supply the words and photos.</p>
-        <a class="btn btn-go" href="/start/?service=website&amp;package=five-pages">Choose Five Pages</a>
+        <a class="btn btn-tang" href="/start/?service=website&amp;package=five-pages">Choose Five Pages <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a>
       </article>
-      <article class="offer">
-        <p class="offer-k">Five Pages, Written</p>
-        <p class="price"><small>USD</small>$499</p>
+      <article class="pkg pkg-pink" data-reveal>
+        <div class="pkg-top"><p class="pkg-name">Five Pages, Written</p><span class="tag tag-pink">We write it</span></div>
+        <p class="pkg-price"><sup>$</sup>499<small>USD, one-off</small></p>
         <p class="for">For owners who know their work but would rather not write about it.</p>
         <p class="meta-row"><span>Up to 5 pages</span><span>12 working days</span><span>2 change rounds</span></p>
-        <ul class="ticks">
-          <li>Everything in Five Pages</li>
-          <li>We write all five pages from a 30-minute call and a short questionnaire</li>
-          <li>You approve every word before launch</li>
+        <ul>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Everything in Five Pages</li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> We write all five pages from a 30-minute call and a short questionnaire</li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> You approve every word before launch</li>
         </ul>
-        <p class="not">You supply photos, or we use plain layouts without them.</p>
-        <a class="btn btn-line" href="/start/?service=website&amp;package=five-pages-written">Choose Five Pages, Written</a>
+        <p class="not">You supply photos, or we use clean layouts without them.</p>
+        <a class="btn btn-ink" href="/start/?service=website&amp;package=five-pages-written">Choose Written <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a>
       </article>
     </div>
-    <p class="price-note">Working days start when we have your content or completed questionnaire. A change round is one combined list of changes.</p>
+    <p class="small mt-2" data-reveal>Working days start when we have your content or completed questionnaire. A change round is one combined list of changes.</p>
   </div>
 </section>
 
-<section class="sec">
-  <div class="wrap grid2">
-    <div class="box">
-      <h3>Add-ons</h3>
-      <ul class="dash">
-        <li>Extra page: $49</li>
-        <li>Extra round of changes: $39</li>
-        <li>Booking or quote tool added to the site (your booking calendar or job app's form): $59</li>
-        <li>Website Care: $29 a month. A monthly check, a form test, an alert if the site goes down, and up to 30 minutes of small edits.</li>
-      </ul>
+<section class="sheet bg-paper">
+  <div class="wrap">
+    <div class="head" data-reveal><p class="hand">what every site includes <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Built to get the call, on every screen.</h2></div>
+    <div class="annot">
+      <figure class="annot-fig" data-reveal>
+        <div class="browser"><div class="bbar" aria-hidden="true"><i></i><i></i><i></i><span>tallowcreek.demo</span></div><img src="/assets/work/demos/tradie-desktop.webp" alt="Demo plumbing website with five numbered features marked" width="1200" height="750" loading="lazy" decoding="async"></div>
+        <span class="pin p-web1" aria-hidden="true">1</span><span class="pin p-web2" aria-hidden="true">2</span><span class="pin p-web3" aria-hidden="true">3</span><span class="pin p-web4" aria-hidden="true">4</span><span class="pin p-web5" aria-hidden="true">5</span>
+      </figure>
+      <ol class="annot-list" data-reveal>
+        <li><span><b>A headline that says what you do</b><span>and where, in words your customers use.</span></span></li>
+        <li><span><b>One obvious next step</b><span>a quote form or a call, never both fighting for attention.</span></span></li>
+        <li><span><b>A second way in</b><span>for people who want to read first.</span></span></li>
+        <li><span><b>Your number, always in reach</b><span>in the header on desktop and a bar on phones.</span></span></li>
+        <li><span><b>The details that build trust</b><span>licence numbers, hours, service areas.</span></span></li>
+      </ol>
     </div>
-    <div class="box">
+  </div>
+</section>
+
+<section class="sheet bg-butter">
+  <div class="wrap who-grid">
+    <div>
+      <div class="head" data-reveal><p class="hand hand-ink">add-ons <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Small extras, priced up front.</h2></div>
+      <div class="addons" data-reveal>
+        <div class="addon"><b>$49</b><span>Extra page</span></div>
+        <div class="addon a-pink"><b>$39</b><span>Extra round of changes</span></div>
+        <div class="addon a-sky"><b>$59</b><span>Booking or quote tool added (your calendar or job app's form)</span></div>
+        <div class="addon a-mint"><b>$29<small class="small">/month</small></b><span>Website Care: monthly check, form test, downtime alert, 30 minutes of edits</span></div>
+      </div>
+    </div>
+    <div class="note n-white r2" data-reveal>
       <h3>Not included in any package</h3>
-      <ul class="dash">
-        <li>Online shops and payments</li>
-        <li>A blog or news section you edit yourself</li>
-        <li>More than one language</li>
-        <li>Logo or brand design, and photography</li>
-        <li>Ongoing SEO, ads or social media</li>
-        <li>Moving a site of more than 20 pages</li>
+      <ul class="crossed">
+        <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#x"/></svg> Online shops and payments</li>
+        <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#x"/></svg> A blog or news section you edit yourself</li>
+        <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#x"/></svg> More than one language</li>
+        <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#x"/></svg> Logo or brand design, and photography</li>
+        <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#x"/></svg> Ongoing SEO, ads or social media</li>
+        <li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#x"/></svg> Moving a site of more than 20 pages</li>
       </ul>
-      <p>Need a form that feeds a system, or customer logins? That is <a href="/software/">Custom Business Software</a>.</p>
+      <p class="mt-1">Need a form that feeds a system, or customer logins? That is <a href="/software/">Custom Business Software</a>.</p>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-sky">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">What do you need from me?</p>
-      <h2>What we need to start</h2>
+    <div class="head" data-reveal><p class="hand">what we need from you <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Four things, and we can start.</h2></div>
+    <div class="notes-wall">
+      <div class="note" data-reveal><p class="hand">1 · details</p><p>Name, phone, email, service areas, opening hours, and any licence numbers you must show.</p></div>
+      <div class="note n-pink r2" data-reveal><p class="hand">2 · words and photos</p><p>Your services in your own words and photos of your work. For Written: a 30-minute call instead.</p></div>
+      <div class="note n-white r3" data-reveal><p class="hand">3 · a domain</p><p>In your name. If you do not have one, we show you how to buy it; we never register it in ours.</p></div>
+      <div class="note n-mint" data-reveal><p class="hand">4 · one approver</p><p>The person who signs off the scope, the changes and the launch.</p></div>
     </div>
-    <ul class="ledger">
-      <li><b>Your business details</b><span>Name, phone, email, service areas, opening hours, and any licence or registration numbers you must show.</span></li>
-      <li><b>Words and photos</b><span>For One Page and Five Pages: your services in your own words, and photos of your work if you have them. For Five Pages, Written: a 30-minute call and a short questionnaire.</span></li>
-      <li><b>A domain in your name</b><span>If you have one, we connect it. If not, we show you how to buy one in your name; we never register it in ours.</span></li>
-      <li><b>One person to approve</b><span>Who signs off the scope, the changes and the launch.</span></li>
-    </ul>
   </div>
 </section>
 
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">What should I ask before I buy?</p>
-      <h2>Website questions</h2>
-    </div>
-    <div class="faq">
+<section class="sheet bg-white">
+  <div class="wrap faq-wrap">
+    <div class="faq-side" data-reveal><p class="hand hand-tang">before you buy <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Website questions</h2><img class="mascot" src="/assets/img/mascot/stand.webp" alt="" width="348" height="409" loading="lazy"></div>
+    <div class="faq" data-reveal>
       <details><summary>Can I edit the site myself?</summary><p>Not through a drag-and-drop editor: we build fast static sites, which is why they load quickly and have nothing to update. Small edits are included in Website Care, or quoted per job. If you want to change your site every week yourself, a builder such as Squarespace or Wix may suit you better, and we will say so.</p></details>
       <details><summary>Where will my site be hosted?</summary><p>On a static hosting service, set up in an account in your name. For a typical small-business site the free plan of these services is enough, so there is usually no monthly hosting bill. You pay for your domain directly to the registrar.</p></details>
       <details><summary>Will it show up on Google?</summary><p>We set up the basics: page titles and descriptions, local-business details, a sitemap, fast loading and a link to your Google Business Profile. We do not promise rankings; nobody honest can.</p></details>
@@ -164,26 +186,39 @@
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-paper last">
   <div class="wrap">
-    <div class="close">
-      <div><h2>Get a written price for your website.</h2><p>Tell us about the business and the site you have now. We reply within one working day.</p></div>
-      <div><a class="btn" href="/start/?service=website">Start a website project</a></div>
+    <div class="cta cta-warm" data-reveal>
+      <img class="mascot cta-mascot hop" src="/assets/img/mascot/leap.webp" alt="" width="356" height="380" loading="lazy">
+      <div><p class="hand hand-ink">your turn <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Get a written price for your website.</h2><p>Tell us about the business and the site you have now. We reply within one working day.</p></div>
+      <div class="cta-act"><a class="btn btn-ink" href="/start/?service=website">Start a website project <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a><div class="mail-chips" data-mail-chips></div></div>
     </div>
   </div>
 </section>
 </main>
 <footer class="foot">
-  <div class="wrap foot-in">
-    <div class="foot-brand">
-      <a class="logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
-      <p>Websites and business software, priced in the open. A small studio in India working with service businesses in Australia and the UK.</p>
-      <p data-emails></p>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <p class="foot-say">Fixed price. Written scope. <span>Yours to keep.</span></p>
+        <p class="hand hand-butter">websites + business software, priced in the open</p>
+      </div>
+      <nav aria-label="Services">
+        <h2>Services</h2>
+        <ul><li><a href="/websites/">Website Development</a></li><li><a href="/software/">Custom Business Software</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/work/">Work and demos</a></li></ul>
+      </nav>
+      <nav aria-label="Studio">
+        <h2>Studio</h2>
+        <ul><li><a href="/process/">How we work</a></li><li><a href="/about/">About</a></li><li><a href="/start/">Start a project</a></li><li><a href="/qa/">Test report</a></li></ul>
+      </nav>
+      <div>
+        <h2>Contact</h2>
+        <p data-emails data-emails-list></p>
+        <p class="small mt-1">Monday to Friday, 10:00–19:00 India time.</p>
+      </div>
     </div>
-    <nav aria-label="Footer">
-      <a href="/websites/">Websites</a><a href="/software/">Software</a><a href="/pricing/">Pricing</a><a href="/work/">Work</a><a href="/process/">How we work</a><a href="/about/">About</a><a href="/start/">Start a project</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/qa/">QA report</a>
-    </nav>
-    <p class="small foot-legal">© <span data-year>2026</span> UNNATE. Prices in US dollars unless stated.</p>
+    <svg class="foot-word" viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg>
+    <div class="foot-legal"><p>© <span data-year>2026</span> UNNATE. Prices in US dollars unless stated.</p><p><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p></div>
   </div>
 </footer>
 <script src="/assets/js/config.js" defer></script>

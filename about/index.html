@@ -15,20 +15,20 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#F4F3EE">
+<meta name="theme-color" content="#F2F5F9">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/gochi-hand.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/unnate.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="top">
-  <div class="wrap top-in">
-    <a class="logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+<header class="nav" data-nav>
+  <div class="nav-pill">
+    <a class="nav-logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
     <nav class="menu" id="menu" aria-label="Main">
       <a href="/websites/">Websites</a>
       <a href="/software/">Software</a>
@@ -36,62 +36,87 @@
       <a href="/work/">Work</a>
       <a href="/process/">How we work</a>
       <a href="/about/" aria-current="page">About</a>
-      <a class="btn btn-sm btn-go" href="/start/">Start a project</a>
+      <a class="btn btn-ink btn-sm" href="/start/">Start a project</a>
     </nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span>Menu</button>
   </div>
 </header>
 <main id="main">
-<section class="page-head">
+<section class="ph ph-warm">
+  <span class="glow glow-butter" aria-hidden="true"></span>
   <div class="wrap">
-    <span class="kicker">About</span>
-    <h1>A small studio that writes things down.</h1>
-    <p class="lede">UNNATE is run by Aravind and Saran from India. We build websites and small business software for service businesses in Australia and the UK.</p>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap grid2">
-    <div class="prose">
-      <h2>Why we work this way</h2>
-      <p>Small businesses tell the same stories about web projects: the designer who stopped replying, the domain registered in someone else's name, the price that grew, the launch date that kept moving. Those problems are rarely about skill. They come from things nobody wrote down.</p>
-      <p>So we sell fixed packages with published prices, write every scope down before taking money, keep your domain and data in your name, and test our work before handing it over.</p>
-      <h2>What we are honest about</h2>
-      <ul>
-        <li>We are in India, not in your city. We work Australian afternoons and UK mornings, and reply within one working day.</li>
-        <li>We are new to this offer and have no client reviews for it yet. Our demos and our test report are there so you can judge the work yourself.</li>
-        <li>We do two things: websites and custom business software. We do not sell SEO retainers, ads or online shops.</li>
-        <li>If ready-made software would serve you better than custom work, we will tell you.</li>
-      </ul>
-    </div>
-    <div class="box">
-      <h3>Contact</h3>
-      <p>Email is the fastest way to reach us.</p>
-      <p data-emails></p>
-      <p>Or use the <a href="/start/">project form</a>; it goes to both of us.</p>
+    <span class="kicker k-tang" data-reveal>About</span>
+    <h1 class="statement mt-1" data-reveal>A small studio that writes things down. <span class="cap cap-char" aria-hidden="true"><img src="/assets/img/mascot/stand.webp" alt="" width="348" height="409"></span></h1>
+    <div class="believe-body">
+      <p class="believe-lede" data-reveal>UNNATE is run by Aravind and Saran, from India.</p>
+      <p class="lede" data-reveal>We build websites and small business software for service businesses in Australia and the UK, at fixed prices we publish, with every scope written down before anyone pays.</p>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-white">
   <div class="wrap">
-    <div class="close">
-      <div><h2>Have a project in mind?</h2><p>Send a few lines. We reply within one working day.</p></div>
-      <div><a class="btn" href="/start/">Start a project</a></div>
+    <div class="head" data-reveal><p class="hand">who you will talk to <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Two people, one inbox each.</h2></div>
+    <div class="people">
+      <div class="person" data-reveal><span class="mono-av" aria-hidden="true">A</span><div><h3 class="h3">Aravind</h3><p>Co-runs UNNATE. Write to <a href="mailto:aravind@unnate.com">aravind@unnate.com</a>.</p></div></div>
+      <div class="person" data-reveal><span class="mono-av" aria-hidden="true">S</span><div><h3 class="h3">Saran</h3><p>Co-runs UNNATE. Write to <a href="mailto:saran@unnate.com">saran@unnate.com</a>.</p></div></div>
+    </div>
+    <div class="believe-body mt-3">
+      <div data-reveal><p class="hand hand-tang">why we work this way <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><p class="believe-lede">Small businesses tell the same stories about web projects.</p></div>
+      <div class="prose-plain" data-reveal>
+        <p>The designer who stopped replying, the domain registered in someone else's name, the price that grew, the launch date that kept moving. Those problems are rarely about skill. They come from things nobody wrote down.</p>
+        <p>So we sell fixed packages with published prices, write every scope down before taking money, keep your domain and data in your name, and test our work before handing it over.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sheet bg-sky">
+  <div class="wrap">
+    <div class="head" data-reveal><p class="hand">what we are honest about <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Four things you should know first.</h2></div>
+    <div class="notes-wall">
+      <div class="note" data-reveal><p class="hand">we are in India</p><p>Not in your city. We work Australian afternoons and UK mornings, and reply within one working day.</p></div>
+      <div class="note n-pink r2" data-reveal><p class="hand">no reviews yet</p><p>We are new to this offer. Our demos and our test report are there so you can judge the work yourself.</p></div>
+      <div class="note n-white r3" data-reveal><p class="hand">two things only</p><p>Websites and custom business software. No SEO retainers, ads or online shops.</p></div>
+      <div class="note n-mint" data-reveal><p class="hand">we will say "buy it"</p><p>If ready-made software would serve you better than custom work, we will tell you.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sheet bg-paper last">
+  <div class="wrap">
+    <div class="cta" data-reveal>
+      <span class="dots dots-light" aria-hidden="true"></span>
+      <img class="mascot cta-mascot hop" src="/assets/img/mascot/hop.webp" alt="" width="339" height="388" loading="lazy">
+      <div><p class="hand hand-butter">say hello <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Have a project in mind?</h2><p>Send a few lines. We reply within one working day.</p></div>
+      <div class="cta-act"><a class="btn btn-tang" href="/start/">Start a project <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a><div class="mail-chips" data-mail-chips></div></div>
     </div>
   </div>
 </section>
 </main>
 <footer class="foot">
-  <div class="wrap foot-in">
-    <div class="foot-brand">
-      <a class="logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
-      <p>Websites and business software, priced in the open. A small studio in India working with service businesses in Australia and the UK.</p>
-      <p data-emails></p>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <p class="foot-say">Fixed price. Written scope. <span>Yours to keep.</span></p>
+        <p class="hand hand-butter">websites + business software, priced in the open</p>
+      </div>
+      <nav aria-label="Services">
+        <h2>Services</h2>
+        <ul><li><a href="/websites/">Website Development</a></li><li><a href="/software/">Custom Business Software</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/work/">Work and demos</a></li></ul>
+      </nav>
+      <nav aria-label="Studio">
+        <h2>Studio</h2>
+        <ul><li><a href="/process/">How we work</a></li><li><a href="/about/">About</a></li><li><a href="/start/">Start a project</a></li><li><a href="/qa/">Test report</a></li></ul>
+      </nav>
+      <div>
+        <h2>Contact</h2>
+        <p data-emails data-emails-list></p>
+        <p class="small mt-1">Monday to Friday, 10:00–19:00 India time.</p>
+      </div>
     </div>
-    <nav aria-label="Footer">
-      <a href="/websites/">Websites</a><a href="/software/">Software</a><a href="/pricing/">Pricing</a><a href="/work/">Work</a><a href="/process/">How we work</a><a href="/about/">About</a><a href="/start/">Start a project</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/qa/">QA report</a>
-    </nav>
-    <p class="small foot-legal">© <span data-year>2026</span> UNNATE. Prices in US dollars unless stated.</p>
+    <svg class="foot-word" viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg>
+    <div class="foot-legal"><p>© <span data-year>2026</span> UNNATE. Prices in US dollars unless stated.</p><p><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p></div>
   </div>
 </footer>
 <script src="/assets/js/config.js" defer></script>

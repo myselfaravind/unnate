@@ -1,7 +1,7 @@
 /* Job tracker demo — same palette as the UNNATE site, denser app layout. */
 @font-face{font-family:"Mona Sans";src:url(/assets/fonts/mona-sans.woff2) format("woff2");font-weight:200 900;font-stretch:75% 125%;font-display:swap}
-:root{--paper:#F4F3EE;--card:#fff;--ink:#15171B;--ink-2:#4B5058;--line:#DDDBD2;--line-2:#C7C4B8;--signal:#0B7A4B;--signal-ink:#075C38;--signal-tint:#E2F0E8;
---new:#2C4FCB;--new-t:#E7ECFB;--sch:#6A3FB5;--sch-t:#EFE8FA;--prog:#075C38;--prog-t:#E2F0E8;--parts:#94590A;--parts-t:#FBEFDA;--done:#5F646C;--done-t:#ECEBE6;--danger:#B42318;--danger-t:#FDECEA;
+:root{--paper:#F2F5F9;--card:#fff;--ink:#10131C;--ink-2:#454C5F;--line:#DCE2EC;--line-2:#C4CDDB;--signal:#3B58F0;--signal-ink:#2840C2;--signal-tint:#E3E8FE;--tang:#FF5B1F;
+--new:#972258;--new-t:#FFE4F1;--sch:#1D2C8C;--sch-t:#E3E8FE;--prog:#B83405;--prog-t:#FFE7DC;--parts:#5E4300;--parts-t:#FFF5CC;--done:#0A6A45;--done-t:#DCF6EA;--danger:#C0261A;--danger-t:#FDECEA;
 --font:"Mona Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;color-scheme:light}
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -148,3 +148,37 @@ dialog::backdrop{background:rgba(21,23,27,.45)}
 .form-alert{background:var(--danger-t);color:var(--danger);border:1px solid #F4C7C2;border-radius:8px;padding:10px 12px;font-weight:560;font-size:.9rem}
 
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 16px;border-radius:10px;font-size:.92rem;box-shadow:0 8px 24px -8px rgba(0,0,0,.4);z-index:70;max-width:calc(100vw - 32px)}
+
+/* ---------- product polish (2026-11 visual upgrade) ---------- */
+.app-top{background:linear-gradient(180deg,#fff,#FBFCFE);box-shadow:0 1px 0 var(--line),0 10px 30px -24px rgb(20 30 90 / .4);position:relative;z-index:2}
+.app-logo{background:#0F2A3A;box-shadow:0 6px 14px -8px rgb(15 42 58 / .8)}
+.b-go{background:var(--tang);border-color:var(--tang);color:var(--ink);box-shadow:0 10px 22px -12px rgb(255 91 31 / .9)}
+.b-go:hover{background:#FF6D36;border-color:#FF6D36}
+.kpi{position:relative;overflow:hidden;box-shadow:0 1px 2px rgb(20 30 90 / .06),0 12px 26px -20px rgb(20 30 90 / .4);border-color:transparent;padding-left:62px}
+.kpi::before{content:"";position:absolute;left:14px;top:50%;width:36px;height:36px;margin-top:-18px;border-radius:11px;background:var(--signal-tint)}
+.kpi::after{content:"";position:absolute;left:25px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:4px;background:var(--signal)}
+.kpi[data-kpi=today]::before{background:#FFF5CC}.kpi[data-kpi=today]::after{background:#E9B300;border-radius:50%}
+.kpi-late::before{background:var(--danger-t)}.kpi-late::after{background:var(--danger);border-radius:50%}
+.kpi-static::before{background:var(--done-t)}.kpi-static::after{background:#22B47A;border-radius:50% 50% 50% 4px}
+.toolbar{box-shadow:0 1px 2px rgb(20 30 90 / .06),0 12px 26px -20px rgb(20 30 90 / .35);border-color:transparent}
+.seg button[aria-pressed=true]{background:var(--signal)}
+.sf[aria-pressed=true]{background:var(--signal);border-color:var(--signal)}
+.tbl{box-shadow:0 1px 2px rgb(20 30 90 / .06),0 16px 34px -24px rgb(20 30 90 / .45);border-color:transparent}
+.tbl tbody tr{transition:background-color .2s}
+.tbl tbody tr:hover{background:#F6F8FE}
+.who-cell{display:inline-flex;align-items:center;gap:8px}
+.av{width:26px;height:26px;border-radius:50%;display:inline-grid;place-items:center;font:700 .7rem/1 var(--font);color:#fff;flex:none}
+.av-Ali{background:#3B58F0}.av-Mei{background:#D9488C}.av-Josh{background:#0E8A5F}.av-Priya{background:#C26A00}.av-none{background:#C4CDDB;color:#454C5F}
+.bar i{background:linear-gradient(90deg,var(--signal),#7F95FF)}
+.lane{background:#E8EDF5}
+.lane h2{border-bottom:3px solid var(--line-2);padding-bottom:8px;margin-bottom:2px}
+.lane[aria-label="New"] h2{border-color:#FF9DCB}.lane[aria-label="Scheduled"] h2{border-color:#3B58F0}.lane[aria-label="In progress"] h2{border-color:#FF5B1F}.lane[aria-label="Waiting on parts"] h2{border-color:#FFD23F}.lane[aria-label="Done"] h2{border-color:#93E3C2}
+.card{box-shadow:0 1px 2px rgb(20 30 90 / .06),0 10px 20px -16px rgb(20 30 90 / .45);border-color:transparent;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-2px)}
+.drawer{box-shadow:-30px 0 60px -30px rgb(20 30 90 / .5)}
+.d-head{padding-bottom:12px;border-bottom:1px solid var(--line)}
+.demo-banner{background:#FFD23F;color:#3A2A00;border-bottom:0}
+.demo-banner a,.lnk{color:#2A1E00}
+:focus-visible{outline-color:var(--signal)}
+.checklist input,.f input[type=checkbox]{accent-color:var(--signal)}
+.toast{background:var(--ink);border-left:4px solid var(--tang)}

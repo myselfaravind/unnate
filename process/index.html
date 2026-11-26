@@ -15,20 +15,20 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#F4F3EE">
+<meta name="theme-color" content="#F2F5F9">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/gochi-hand.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/unnate.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="top">
-  <div class="wrap top-in">
-    <a class="logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+<header class="nav" data-nav>
+  <div class="nav-pill">
+    <a class="nav-logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
     <nav class="menu" id="menu" aria-label="Main">
       <a href="/websites/">Websites</a>
       <a href="/software/">Software</a>
@@ -36,79 +36,109 @@
       <a href="/work/">Work</a>
       <a href="/process/" aria-current="page">How we work</a>
       <a href="/about/">About</a>
-      <a class="btn btn-sm btn-go" href="/start/">Start a project</a>
+      <a class="btn btn-ink btn-sm" href="/start/">Start a project</a>
     </nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span>Menu</button>
   </div>
 </header>
 <main id="main">
-<section class="page-head">
-  <div class="wrap">
-    <span class="kicker">How we work</span>
-    <h1>No surprises, because it is all written down.</h1>
-    <p class="lede">The same steps for every website and every piece of software, with two points where nothing moves until you approve.</p>
+<section class="ph ph-sky">
+  <div class="wrap ph-grid">
+    <div data-reveal>
+      <span class="kicker">How we work</span>
+      <h1 class="d2">No surprises, because it is all written down.</h1>
+      <p class="lede">The same seven steps for every website and every piece of software, with two points where nothing moves until you approve.</p>
+    </div>
+    <div class="ph-visual q-notes" data-reveal aria-label="The three questions we ask first">
+      <div class="note qn-1"><p class="hand">what does the business do?</p></div>
+      <div class="note n-pink r2 qn-2"><p class="hand">what is not working now?</p></div>
+      <div class="note n-white r3 qn-3"><p class="hand">what would a good result look like?</p></div>
+      <img class="mascot qn-m" src="/assets/img/mascot/stand.webp" alt="" width="348" height="409">
+    </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-white">
   <div class="wrap">
-    <ol class="steps">
-      <li><h3>1. Enquiry and a 30-minute call</h3><p class="meta">Free · reply within one working day</p><p>Send the form or an email. We book a short video call, or answer by email if you prefer. You tell us what the business does and what is not working; we say which package fits, or that you do not need us.</p></li>
-      <li class="gate"><h3>2. Written scope and fixed price</h3><p class="meta">Within 2 working days of the call · you approve</p><p>A one-page scope: what we build, what is not included, the price, the change rounds and the delivery date. Work starts when you approve it and pay 50%.</p></li>
-      <li><h3>3. Content</h3><p class="meta">The delivery clock starts here</p><p>You send the words, photos and details we listed, or for written packages we hold the content call. The delivery date counts from the day we have everything.</p></li>
-      <li><h3>4. Build and review</h3><p class="meta">Private preview link · 2 change rounds</p><p>You see the work on a private link and send one combined list of changes per round. Software gets a test version with your real data imported.</p></li>
-      <li><h3>5. Testing</h3><p class="meta">The report is yours to keep</p><p>We test on phone, tablet and desktop: every link, form and button, page speed, accessibility checks, and search basics. You get the results.</p></li>
-      <li class="gate"><h3>6. Sign-off and launch</h3><p class="meta">You approve · balance paid · we launch</p><p>Once you approve and pay the balance, we launch on your domain and hand over every login and file. Software users get a short guide and a walkthrough call.</p></li>
-      <li><h3>7. After launch</h3><p class="meta">30 days of fixes included</p><p>Anything we built that does not work as agreed, we fix free for 30 days. After that, Website Care or software support covers you, or we quote changes as you need them.</p></li>
+    <div class="head" data-reveal><p class="hand hand-tang">seven steps <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">From first message to launch.</h2></div>
+    <ol class="tl" data-timeline>
+      <li><span class="tl-dot">1</span><div class="tl-card" data-reveal><span class="tl-ic ic-tang"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#mail"/></svg></span><h3 class="h3">Enquiry and a 30-minute call</h3><p class="meta">Free · reply within one working day</p><p>Send the form or an email. We book a short video call, or answer by email if you prefer. We say which package fits, or that you do not need us.</p></div></li>
+      <li class="gate"><span class="tl-dot">2</span><div class="tl-card" data-reveal><span class="tl-ic ic-butter"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#doc"/></svg></span><h3 class="h3">Written scope and fixed price</h3><p class="meta">Within 2 working days · you approve</p><p>One page: what we build, what is not included, the price, the change rounds and the delivery date. Work starts when you approve it and pay 50%.</p><span class="stamp">You approve</span></div></li>
+      <li><span class="tl-dot">3</span><div class="tl-card" data-reveal><span class="tl-ic ic-pink"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#pen"/></svg></span><h3 class="h3">Content</h3><p class="meta">The delivery clock starts here</p><p>You send the words, photos and details we listed, or for written packages we hold the content call. The date counts from the day we have everything.</p></div></li>
+      <li><span class="tl-dot">4</span><div class="tl-card" data-reveal><span class="tl-ic ic-royal"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#layers"/></svg></span><h3 class="h3">Build and review</h3><p class="meta">Private preview link · 2 change rounds</p><p>You see the work on a private link and send one combined list of changes per round. Software gets a test version with your real data imported.</p></div></li>
+      <li><span class="tl-dot">5</span><div class="tl-card" data-reveal><span class="tl-ic ic-mint"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#shield"/></svg></span><h3 class="h3">Testing</h3><p class="meta">The report is yours to keep</p><p>Phone, tablet and desktop; every link, form and button; page speed, accessibility checks and search basics. You get the results.</p></div></li>
+      <li class="gate"><span class="tl-dot">6</span><div class="tl-card" data-reveal><span class="tl-ic ic-tang"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#sparkle"/></svg></span><h3 class="h3">Sign-off and launch</h3><p class="meta">You approve · balance paid · we launch</p><p>We launch on your domain and hand over every login and file. Software users get a short guide and a walkthrough call.</p><span class="stamp">You approve</span></div></li>
+      <li><span class="tl-dot">7</span><div class="tl-card" data-reveal><span class="tl-ic ic-royal"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#wrench"/></svg></span><h3 class="h3">After launch</h3><p class="meta">30 days of fixes included</p><p>Anything we built that does not work as agreed, we fix free for 30 days. After that, Website Care or software support covers you, or we quote changes as you need them.</p></div></li>
     </ol>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-sky">
   <div class="wrap">
-    <div class="sec-head"><p class="ask">What are the ground rules?</p><h2>Ownership, hosting and support</h2></div>
-    <ul class="ledger">
-      <li><b>Domain</b><span>Registered in your name, on your account. We never register a client's domain in ours.</span></li>
-      <li><b>Website ownership</b><span>On final payment, you own the website we built: its design, code and the words we wrote for you. Photos and fonts keep their own licences.</span></li>
-      <li><b>Website hosting</b><span>A static hosting account in your name, with us added as a user so we can make changes you ask for.</span></li>
-      <li><b>Software hosting</b><span>Hosted by us, because backups and security updates need an owner. Your data can be exported at any time.</span></li>
-      <li><b>Support</b><span>Email support for every client. Website Care ($29/month) and software support ($49 or $99/month) include a set amount of small changes.</span></li>
-      <li><b>Changes outside the scope</b><span>Quoted in writing before we do them. Never added to your invoice afterwards.</span></li>
-    </ul>
+    <div class="head" data-reveal><p class="hand">the ground rules <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Ownership, hosting and support.</h2></div>
+    <div class="bento">
+      <div class="tile t-white b-mid" data-reveal><span class="ic-lg ic-mint"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#key"/></svg></span><h3 class="h3">Domain</h3><p>Registered in your name, on your account. We never register a client's domain in ours.</p></div>
+      <div class="tile t-butter b-mid" data-reveal><span class="ic-lg ic-ink"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#doc"/></svg></span><h3 class="h3">Website ownership</h3><p>On final payment you own the website we built: its design, code and the words we wrote. Photos and fonts keep their own licences.</p></div>
+      <div class="tile t-white b-mid" data-reveal><span class="ic-lg ic-royal"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#globe"/></svg></span><h3 class="h3">Website hosting</h3><p>A static hosting account in your name, with us added as a user so we can make the changes you ask for.</p></div>
+      <div class="tile t-royal b-mid" data-reveal><span class="ic-lg ic-ink"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#layers"/></svg></span><h3 class="h3">Software hosting</h3><p>Hosted by us, because backups and security updates need an owner. Your data can be exported at any time.</p></div>
+      <div class="tile t-pink b-mid" data-reveal><span class="ic-lg ic-pink"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#wrench"/></svg></span><h3 class="h3">Support</h3><p>Email support for every client. Website Care ($29/month) and software support ($49 or $99/month) include a set amount of small changes.</p></div>
+      <div class="tile t-ink b-mid" data-reveal><span class="ic-lg ic-tang"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#pen"/></svg></span><h3 class="h3">Changes outside the scope</h3><p>Quoted in writing before we do them. Never added to your invoice afterwards.</p></div>
+    </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-paper">
   <div class="wrap">
-    <div class="sec-head"><p class="ask">How do we talk?</p><h2>Communication</h2></div>
-    <ul class="ledger">
-      <li><b>Hours</b><span>Monday to Friday, 10:00 to 19:00 India time. That is the afternoon and evening in eastern Australia, and the morning in the UK.</span></li>
+    <div class="head" data-reveal><p class="hand hand-tang">how do we talk? <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Our hours, next to yours.</h2><p class="lede">We work Monday to Friday, 10:00 to 19:00 India time: the afternoon and evening in eastern Australia, and the morning in the UK.</p></div>
+    <div class="tz" data-reveal>
+      <div class="tz-row"><span><b>India</b><small>our working day</small></span><div class="tz-bar"><span class="tz-on tz-ist">10:00–19:00 IST</span></div></div>
+      <div class="tz-row"><span><b>Sydney</b><small>summer time</small></span><div class="tz-bar"><span class="tz-on tz-syd">15:30–00:30 AEDT</span><span class="tz-on tz-syd2" aria-hidden="true"></span></div></div>
+      <div class="tz-row"><span><b>London</b><small>winter time</small></span><div class="tz-bar"><span class="tz-on tz-lon">04:30–13:30 GMT</span></div></div>
+      <div class="tz-scale" aria-hidden="true"><span></span><div><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div></div>
+    </div>
+    <ul class="ledger mt-3" data-reveal>
       <li><b>Replies</b><span>Within one working day, by email. Calls are booked in advance.</span></li>
       <li><b>Updates</b><span>A short written update at every stage, with the preview link.</span></li>
       <li><b>One contact</b><span>Each project has one named person at UNNATE who answers your messages.</span></li>
     </ul>
+    <p class="small mt-1">Times shown for November to March. When clocks change in Australia or the UK, the overlap moves by an hour.</p>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-white last">
   <div class="wrap">
-    <div class="close">
-      <div><h2>Start with the 30-minute call.</h2><p>It is free, and you will know the price before you commit to anything.</p></div>
-      <div><a class="btn" href="/start/">Start a project</a></div>
+    <div class="cta" data-reveal>
+      <span class="dots dots-light" aria-hidden="true"></span>
+      <img class="mascot cta-mascot hop" src="/assets/img/mascot/hop.webp" alt="" width="339" height="388" loading="lazy">
+      <div><p class="hand hand-butter">step one <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Start with the 30-minute call.</h2><p>It is free, and you will know the price before you commit to anything.</p></div>
+      <div class="cta-act"><a class="btn btn-tang" href="/start/">Start a project <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a><div class="mail-chips" data-mail-chips></div></div>
     </div>
   </div>
 </section>
 </main>
 <footer class="foot">
-  <div class="wrap foot-in">
-    <div class="foot-brand">
-      <a class="logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
-      <p>Websites and business software, priced in the open. A small studio in India working with service businesses in Australia and the UK.</p>
-      <p data-emails></p>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <p class="foot-say">Fixed price. Written scope. <span>Yours to keep.</span></p>
+        <p class="hand hand-butter">websites + business software, priced in the open</p>
+      </div>
+      <nav aria-label="Services">
+        <h2>Services</h2>
+        <ul><li><a href="/websites/">Website Development</a></li><li><a href="/software/">Custom Business Software</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/work/">Work and demos</a></li></ul>
+      </nav>
+      <nav aria-label="Studio">
+        <h2>Studio</h2>
+        <ul><li><a href="/process/">How we work</a></li><li><a href="/about/">About</a></li><li><a href="/start/">Start a project</a></li><li><a href="/qa/">Test report</a></li></ul>
+      </nav>
+      <div>
+        <h2>Contact</h2>
+        <p data-emails data-emails-list></p>
+        <p class="small mt-1">Monday to Friday, 10:00–19:00 India time.</p>
+      </div>
     </div>
-    <nav aria-label="Footer">
-      <a href="/websites/">Websites</a><a href="/software/">Software</a><a href="/pricing/">Pricing</a><a href="/work/">Work</a><a href="/process/">How we work</a><a href="/about/">About</a><a href="/start/">Start a project</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/qa/">QA report</a>
-    </nav>
-    <p class="small foot-legal">© <span data-year>2026</span> UNNATE. Prices in US dollars unless stated.</p>
+    <svg class="foot-word" viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg>
+    <div class="foot-legal"><p>© <span data-year>2026</span> UNNATE. Prices in US dollars unless stated.</p><p><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p></div>
   </div>
 </footer>
 <script src="/assets/js/config.js" defer></script>

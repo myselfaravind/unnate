@@ -15,20 +15,20 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#F4F3EE">
+<meta name="theme-color" content="#F2F5F9">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/gochi-hand.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/unnate.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="top">
-  <div class="wrap top-in">
-    <a class="logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+<header class="nav" data-nav>
+  <div class="nav-pill">
+    <a class="nav-logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
     <nav class="menu" id="menu" aria-label="Main">
       <a href="/websites/">Websites</a>
       <a href="/software/" aria-current="page">Software</a>
@@ -36,128 +36,141 @@
       <a href="/work/">Work</a>
       <a href="/process/">How we work</a>
       <a href="/about/">About</a>
-      <a class="btn btn-sm btn-go" href="/start/">Start a project</a>
+      <a class="btn btn-ink btn-sm" href="/start/">Start a project</a>
     </nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span>Menu</button>
   </div>
 </header>
 <main id="main">
-<section class="page-head">
-  <div class="wrap">
-    <span class="kicker">Custom Business Software</span>
-    <h1>Stop running the business from a spreadsheet and a group chat.</h1>
-    <p class="lede">We build small web apps around one way your business works: jobs, requests, bookings or inspections. Everyone sees the same list, every status change is recorded, and the late work is obvious.</p>
-    <div class="hero-cta"><a class="btn btn-go" href="/demos/job-tracker/">Try the job tracker demo</a><a class="btn btn-line" href="/start/?service=software">Describe your workflow</a></div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="sec-head">
-        <p class="ask">What does $800 actually build?</p>
-        <h2>A Workflow Tracker</h2>
-        <p class="lede">One list for one kind of work, shaped around your fields and your statuses. We reuse the same tested base for every client, which is why it costs hundreds rather than thousands.</p>
-      </div>
-      <ul class="ticks">
-        <li>One main record, such as a job, request or booking, with up to 12 fields</li>
-        <li>Up to 8 statuses named the way your team talks</li>
-        <li>Notes and file attachments on every record, with a history of changes</li>
-        <li>Search, filters and a dashboard of what is due and late</li>
-        <li>Your current spreadsheet imported (up to 5,000 rows)</li>
-        <li>Export to a spreadsheet at any time</li>
-        <li>Up to 10 staff logins, with admin and staff roles</li>
-      </ul>
+<section class="ph ph-cool on-dark">
+  <span class="dots dots-light" aria-hidden="true"></span>
+  <div class="wrap ph-grid">
+    <div data-reveal>
+      <span class="kicker k-white">Custom Business Software</span>
+      <h1 class="d2">Stop running the business from a spreadsheet and a group chat.</h1>
+      <p class="lede">We build small web apps around one way your business works: jobs, requests, bookings or inspections. Everyone sees the same list, every change is recorded, and late work is obvious.</p>
+      <div class="ctas"><a class="btn btn-tang" href="/demos/job-tracker/">Try the job tracker demo <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a><a class="btn btn-ghost" href="/start/?service=software">Describe your workflow</a></div>
     </div>
-    <div class="screen" aria-label="Preview of the job tracker demo, fictional data">
-      <div class="screen-bar"><b>Tallow Creek · Jobs</b><span class="tag-demo">Demo · fictional</span></div>
-      <div class="trk">
-        <div class="trk-kpis"><div><b>14</b><span>Open jobs</span></div><div><b>3</b><span>Due today</span></div><div class="late"><b>1</b><span>Overdue</span></div></div>
-        <div class="trk-row"><span class="no">1041</span><span><b>Blocked drain, rear yard</b><small>Ryde · <span class="due-late">1 day late</span></small></span><span class="asg">Mei</span><span class="chip c-wait">Waiting on parts</span></div>
-        <div class="trk-row"><span class="no">1042</span><span><b>Hot water unit leaking</b><small>Parramatta · due today</small></span><span class="asg">Ali</span><span class="chip c-ok">In progress</span></div>
-        <div class="trk-row"><span class="no">1038</span><span><b>Annual backflow test</b><small>Ermington · done 2 days ago</small></span><span class="asg">Josh</span><span class="chip c-done">Done</span></div>
+    <div class="ph-visual soft-stage" data-reveal aria-label="The job tracker demo with a summary of jobs by status">
+      <figure class="app-shot app"><img src="/assets/work/demos/tracker-list.webp" alt="List view of the job tracker demo with summary figures, filters and jobs" width="1200" height="750" fetchpriority="high"></figure>
+      <div class="k-card">
+        <p class="kc-h">Jobs by status <span class="tag tag-demo">Demo</span></p>
+        <div class="k-bars">
+          <div><span>In progress</span><i><b class="w1"></b></i><span class="num">5</span></div>
+          <div><span>Scheduled</span><i><b class="w2"></b></i><span class="num">4</span></div>
+          <div><span>Waiting on parts</span><i><b class="w3"></b></i><span class="num">2</span></div>
+          <div><span>Done this week</span><i><b class="w4"></b></i><span class="num">3</span></div>
+        </div>
       </div>
-      <div class="screen-foot"><a href="/demos/job-tracker/">Open the full demo</a></div>
+      <div class="flt f-a"><span class="ic ic-tang"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#flow"/></svg></span><span>Job #1041 moved<small>to In progress, by Mei</small></span></div>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-white">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">What if I need more?</p>
-      <h2>Three sizes of project</h2>
-      <p class="lede">The price follows the work: how many workflows, whether people outside your team log in, and how many other systems it has to talk to.</p>
+    <div class="head-split">
+      <div class="head" data-reveal><p class="hand">what does $800 actually build? <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">A Workflow Tracker.</h2></div>
+      <p class="lede" data-reveal>One list for one kind of work, shaped around your fields and your statuses. We reuse the same tested base for every client, which is why it costs hundreds rather than thousands.</p>
     </div>
-    <div class="offers">
-      <article class="offer">
-        <p class="offer-k">Workflow Tracker</p>
-        <p class="price"><small>from</small>$800</p>
+    <div class="annot">
+      <figure class="annot-fig" data-reveal>
+        <div class="app-shot"><img src="/assets/work/demos/tracker-list.webp" alt="The job tracker demo with five numbered features marked" width="1200" height="750" loading="lazy" decoding="async"></div>
+        <span class="pin p-trk1" aria-hidden="true">1</span><span class="pin p-trk2" aria-hidden="true">2</span><span class="pin p-trk3" aria-hidden="true">3</span><span class="pin p-trk4" aria-hidden="true">4</span><span class="pin p-trk5" aria-hidden="true">5</span>
+      </figure>
+      <ol class="annot-list" data-reveal>
+        <li><span><b>A dashboard of what matters</b><span>open, due today, overdue, done this week.</span></span></li>
+        <li><span><b>Search and filters</b><span>by job, customer, suburb, person or status.</span></span></li>
+        <li><span><b>Up to 8 statuses</b><span>named the way your team talks.</span></span></li>
+        <li><span><b>Progress on every job</b><span>a checklist, notes, files and a history of changes.</span></span></li>
+        <li><span><b>Your spreadsheet in, and out</b><span>import up to 5,000 rows; export any time.</span></span></li>
+      </ol>
+    </div>
+    <p class="small mt-2" data-reveal>Also included: up to 10 staff logins with admin and staff roles, and one main record type with up to 12 fields.</p>
+  </div>
+</section>
+
+<section class="sheet bg-cool">
+  <div class="wrap">
+    <div class="head" data-reveal><p class="hand">from request to done <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Every job moves the same way, and everyone can see it.</h2></div>
+    <ol class="flow flow-light" data-reveal aria-label="An example workflow">
+      <li><span class="st st-new">New</span><b>A request arrives</b><small>from your website form, a call or a customer portal</small></li>
+      <li><span class="st st-sch">Scheduled</span><b>Someone owns it</b><small>assigned, with a due date</small></li>
+      <li><span class="st st-prog">In progress</span><b>Work is recorded</b><small>checklist, notes and photos on the job</small></li>
+      <li><span class="st st-done">Done</span><b>Nothing is lost</b><small>history kept, ready to invoice</small></li>
+    </ol>
+    <div class="duo mt-3">
+      <figure class="app-shot" data-reveal><img src="/assets/work/demos/tracker-job.webp" alt="A job open in the tracker demo, with status, checklist, notes and history" width="1200" height="750" loading="lazy" decoding="async"></figure>
+      <figure class="phone duo-phone" data-reveal><img src="/assets/work/demos/tracker-phone.webp" alt="The job tracker demo on a phone" width="600" height="1169" loading="lazy" decoding="async"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sheet bg-paper">
+  <div class="wrap">
+    <div class="head-split">
+      <div class="head" data-reveal><p class="hand hand-tang">what if I need more? <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Three sizes of project.</h2></div>
+      <p class="lede" data-reveal>The price follows the work: how many workflows, whether people outside your team log in, and how many other systems it has to talk to.</p>
+    </div>
+    <div class="tiers">
+      <article class="pkg pkg-sky" data-reveal>
+        <div class="pkg-top"><p class="pkg-name">Workflow Tracker</p><span class="tag tag-royal">1 workflow</span></div>
+        <p class="pkg-price"><small>from</small><sup>$</sup>800</p>
         <p class="for">A team of up to 10 that tracks one thing by hand and keeps missing updates.</p>
-        <p class="meta-row"><span>1 workflow</span><span>2–3 weeks</span><span>2 change rounds</span></p>
-        <ul class="ticks"><li>Everything listed above</li><li>Hosting and support: $49 a month, required</li></ul>
+        <p class="meta-row"><span>2–3 weeks</span><span>2 change rounds</span></p>
+        <ul><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Everything on this page so far</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Hosting and support: $49 a month, required</li></ul>
         <p class="not">Not included: customer logins, connections to other software, payments, offline use.</p>
-        <a class="btn btn-line" href="/start/?service=software&amp;package=tracker">Start with a Tracker</a>
+        <a class="btn btn-ink" href="/start/?service=software&amp;package=tracker">Start with a Tracker <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a>
       </article>
-      <article class="offer feature">
-        <p class="offer-k">Operations App</p>
-        <p class="price"><small>USD</small>$1,500–$3,000</p>
-        <p class="for">Work that passes between people, or to customers: requests that become jobs, a portal for landlords or clients.</p>
-        <p class="meta-row"><span>2–4 workflows</span><span>3–6 weeks</span><span>3 change rounds</span></p>
-        <ul class="ticks"><li>Everything in a Tracker</li><li>A portal for customers or requesters (up to 100 outside users)</li><li>Email notifications and up to 4 roles</li><li>Reports</li><li>One connection to another service, where that service allows it</li><li>Hosting and support: $99 a month, required</li></ul>
+      <article class="pkg pkg-royal" data-reveal>
+        <div class="pkg-top"><p class="pkg-name">Operations App</p><span class="tag">2–4 workflows</span></div>
+        <p class="pkg-price"><sup>$</sup>1,500<small>to $3,000</small></p>
+        <p class="for">Work that passes between people or to customers: requests that become jobs, a portal for landlords or clients.</p>
+        <p class="meta-row"><span>3–6 weeks</span><span>3 change rounds</span></p>
+        <ul><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Everything in a Tracker</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> A portal for customers or requesters (up to 100 outside users)</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Email notifications and up to 4 roles</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Reports</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> One connection to another service, where it allows</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Hosting and support: $99 a month, required</li></ul>
         <p class="not">Fixed price agreed after a free scoping call.</p>
-        <a class="btn btn-go" href="/start/?service=software&amp;package=operations-app">Scope an Operations App</a>
+        <a class="btn btn-tang" href="/start/?service=software&amp;package=operations-app">Scope an Operations App <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a>
       </article>
-      <article class="offer">
-        <p class="offer-k">Custom System</p>
-        <p class="price"><small>from</small>$5,000</p>
+      <article class="pkg pkg-ink" data-reveal>
+        <div class="pkg-top"><p class="pkg-name">Custom System</p><span class="tag">Scoped first</span></div>
+        <p class="pkg-price"><small>from</small><sup>$</sup>5,000</p>
         <p class="for">Several systems that must talk to each other, complex permissions, or data moving from an old system.</p>
-        <p class="meta-row"><span>Scoped first</span><span>Agreed in writing</span></p>
-        <ul class="ticks"><li>Starts with a paid scoping week ($300, credited to the build)</li><li>Fixed price and timeline after scoping</li></ul>
+        <ul><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Starts with a paid scoping week ($300, credited to the build)</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Fixed price and timeline after scoping</li></ul>
         <p class="not">We take on very few of these at a time.</p>
-        <a class="btn btn-line" href="/start/?service=software&amp;package=custom-system">Talk about a Custom System</a>
+        <a class="btn btn-white" href="/start/?service=software&amp;package=custom-system">Talk about a Custom System</a>
       </article>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-white">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">Should I buy software off the shelf instead?</p>
-      <h2>Often, yes. Here is how to tell.</h2>
-      <p class="lede">Ready-made job software such as ServiceM8, Tradify or Jobber is good value for standard trade work, and some plans cost less than $50 a month. We would rather say so than sell you something you do not need.</p>
-    </div>
+    <div class="head" data-reveal><p class="hand">should I buy off the shelf instead? <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Often, yes. Here is how to tell.</h2><p class="lede">Ready-made job software such as ServiceM8, Tradify or Jobber is good value for standard trade work, and some plans cost less than $50 a month. We would rather say so than sell you something you do not need.</p></div>
     <div class="fit">
-      <div class="box yes"><h3>Custom fits when</h3><ul class="dash"><li>Your work does not follow the quote, schedule, invoice pattern those tools are built around.</li><li>You use one part of a big product and pay for all of it, often per person.</li><li>Customers, landlords or partners need to see or send requests.</li><li>You want the data in your own app, exportable whenever you like.</li></ul></div>
-      <div class="box no"><h3>Off the shelf fits when</h3><ul class="dash"><li>You are a sole trader or a crew of two doing standard jobs.</li><li>You need card payments, GPS tracking or an app-store app now.</li><li>You want something running this week.</li><li>A $29–$50 monthly plan already does what you need.</li></ul></div>
+      <div class="note n-mint" data-reveal><h3><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Custom fits when</h3><ul><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Your work does not follow the quote, schedule, invoice pattern those tools are built around.</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> You use one part of a big product and pay for all of it, often per person.</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Customers, landlords or partners need to see or send requests.</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> You want the data in your own app, exportable whenever you like.</li></ul></div>
+      <div class="note r2" data-reveal><h3><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#x"/></svg> Off the shelf fits when</h3><ul><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#x"/></svg> You are a sole trader or a crew of two doing standard jobs.</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#x"/></svg> You need card payments, GPS tracking or an app-store app now.</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#x"/></svg> You want something running this week.</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#x"/></svg> A $29–$50 monthly plan already does what you need.</li></ul></div>
     </div>
   </div>
 </section>
 
-<section class="sec" id="ownership">
+<section class="sheet bg-ink on-dark" id="ownership">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">Who owns it, and is it safe?</p>
-      <h2>Your data, your rules</h2>
+    <div class="head" data-reveal><p class="hand hand-butter">who owns it, and is it safe? <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Your data, your rules.</h2></div>
+    <div class="own">
+      <div data-reveal><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#download"/></svg><h3>Your data</h3><p>Always yours. Export it as a spreadsheet at any time. If you leave, you get a full export and 30 days of read-only access.</p></div>
+      <div data-reveal><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#doc"/></svg><h3>The code</h3><p>Operations App and Custom System: you own the code written for you, with a permanent licence to the shared base. Workflow Tracker: you use it while hosted with us, with an option to buy a handover copy.</p></div>
+      <div data-reveal><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#layers"/></svg><h3>Hosting and support</h3><p>Daily backups kept 30 days, security updates, fixes, and up to 30 minutes (Tracker) or 1 hour (Operations App) of small changes a month.</p></div>
+      <div data-reveal><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#lock"/></svg><h3>Security basics</h3><p>Encrypted connections only, secure sign-in, permissions checked on the server, and a log of who changed what.</p></div>
+      <div data-reveal><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#shield"/></svg><h3>What we do not store</h3><p>Card numbers or health records. If your workflow needs either, we point you to a specialist product.</p></div>
+      <div data-reveal><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#globe"/></svg><h3>UK clients</h3><p>Because we support the app from India, we sign a data processing agreement and the UK's international data transfer agreement before launch.</p></div>
     </div>
-    <ul class="ledger">
-      <li><b>Your data</b><span>Always yours. Export it as a spreadsheet at any time. If you leave, you get a full export and 30 days of read-only access.</span></li>
-      <li><b>The code</b><span>Operations App and Custom System: you own the code written for you, and get a permanent licence to the shared base it runs on. Workflow Tracker: you use the app while it is hosted with us, with the option to buy a handover copy.</span></li>
-      <li><b>Hosting and support</b><span>We host it so backups, security updates and fixes are someone's job. Support includes daily backups kept for 30 days, fixes, updates, and up to 30 minutes (Tracker) or 1 hour (Operations App) of small changes a month.</span></li>
-      <li><b>Security basics</b><span>Encrypted connections only, secure sign-in, permissions checked on the server, and a log of who changed what.</span></li>
-      <li><b>What we do not store</b><span>Card numbers or health records. If your workflow needs either, we will point you to a specialist product.</span></li>
-      <li><b>UK clients</b><span>Because we support the app from India, we sign a data processing agreement and the UK's international data transfer agreement with you before launch.</span></li>
-    </ul>
   </div>
 </section>
 
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">What else should I check?</p>
-      <h2>Software questions</h2>
-    </div>
-    <div class="faq">
+<section class="sheet bg-paper">
+  <div class="wrap faq-wrap">
+    <div class="faq-side" data-reveal><p class="hand">what else should I check? <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Software questions</h2><img class="mascot" src="/assets/img/mascot/step.webp" alt="" width="348" height="407" loading="lazy"></div>
+    <div class="faq" data-reveal>
       <details><summary>Is this a subscription product?</summary><p>No. It is software built for your business. The monthly fee pays for hosting, backups, security updates and support, not for renting a product other companies also use.</p></details>
       <details><summary>Does it work on phones?</summary><p>Yes, in the phone's web browser, and you can add it to the home screen. It is not an app-store app, and it needs a connection to work.</p></details>
       <details><summary>Can it connect to Xero, QuickBooks or my calendar?</summary><p>An Operations App includes one connection where the other service allows it. A Workflow Tracker exports a spreadsheet you can import into most accounting tools.</p></details>
@@ -167,26 +180,40 @@
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-white last">
   <div class="wrap">
-    <div class="close">
-      <div><h2>Describe the job you track by hand.</h2><p>A few lines is enough: what you track, who uses it, and what keeps going wrong. We reply within one working day.</p></div>
-      <div><a class="btn" href="/start/?service=software">Start a software project</a></div>
+    <div class="cta" data-reveal>
+      <span class="dots dots-light" aria-hidden="true"></span>
+      <img class="mascot cta-mascot hop" src="/assets/img/mascot/hop.webp" alt="" width="339" height="388" loading="lazy">
+      <div><p class="hand hand-butter">start here <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Describe the job you track by hand.</h2><p>A few lines is enough: what you track, who uses it, and what keeps going wrong. We reply within one working day.</p></div>
+      <div class="cta-act"><a class="btn btn-tang" href="/start/?service=software">Start a software project <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a><div class="mail-chips" data-mail-chips></div></div>
     </div>
   </div>
 </section>
 </main>
 <footer class="foot">
-  <div class="wrap foot-in">
-    <div class="foot-brand">
-      <a class="logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
-      <p>Websites and business software, priced in the open. A small studio in India working with service businesses in Australia and the UK.</p>
-      <p data-emails></p>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <p class="foot-say">Fixed price. Written scope. <span>Yours to keep.</span></p>
+        <p class="hand hand-butter">websites + business software, priced in the open</p>
+      </div>
+      <nav aria-label="Services">
+        <h2>Services</h2>
+        <ul><li><a href="/websites/">Website Development</a></li><li><a href="/software/">Custom Business Software</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/work/">Work and demos</a></li></ul>
+      </nav>
+      <nav aria-label="Studio">
+        <h2>Studio</h2>
+        <ul><li><a href="/process/">How we work</a></li><li><a href="/about/">About</a></li><li><a href="/start/">Start a project</a></li><li><a href="/qa/">Test report</a></li></ul>
+      </nav>
+      <div>
+        <h2>Contact</h2>
+        <p data-emails data-emails-list></p>
+        <p class="small mt-1">Monday to Friday, 10:00–19:00 India time.</p>
+      </div>
     </div>
-    <nav aria-label="Footer">
-      <a href="/websites/">Websites</a><a href="/software/">Software</a><a href="/pricing/">Pricing</a><a href="/work/">Work</a><a href="/process/">How we work</a><a href="/about/">About</a><a href="/start/">Start a project</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/qa/">QA report</a>
-    </nav>
-    <p class="small foot-legal">© <span data-year>2026</span> UNNATE. Prices in US dollars unless stated.</p>
+    <svg class="foot-word" viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg>
+    <div class="foot-legal"><p>© <span data-year>2026</span> UNNATE. Prices in US dollars unless stated.</p><p><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p></div>
   </div>
 </footer>
 <script src="/assets/js/config.js" defer></script>

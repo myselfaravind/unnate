@@ -15,20 +15,20 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#F4F3EE">
+<meta name="theme-color" content="#F2F5F9">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/gochi-hand.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/unnate.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="top">
-  <div class="wrap top-in">
-    <a class="logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+<header class="nav" data-nav>
+  <div class="nav-pill">
+    <a class="nav-logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
     <nav class="menu" id="menu" aria-label="Main">
       <a href="/websites/">Websites</a>
       <a href="/software/">Software</a>
@@ -36,28 +36,26 @@
       <a href="/work/">Work</a>
       <a href="/process/">How we work</a>
       <a href="/about/">About</a>
-      <a class="btn btn-sm btn-go" href="/start/">Start a project</a>
+      <a class="btn btn-ink btn-sm" href="/start/">Start a project</a>
     </nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span>Menu</button>
   </div>
 </header>
 <main id="main">
-<section class="page-head">
-  <div class="wrap">
-    <span class="kicker">Test report</span>
-    <h1>Test report for this website</h1>
-    <p class="lede">The same kind of report every client gets at handover. These are the real results of the automated checks on this build, not sample data. Anything that failed is listed as failed.</p>
-  </div>
+<section class="ph ph-sky">
+  <span class="dots" aria-hidden="true"></span>
+  <div class="wrap"><div class="head"><span class="kicker">Test report</span><h1 class="d2">Test report for this website</h1><p class="lede">The same kind of report every client gets at handover. These are the real results of the automated checks on this build, not sample data. Anything that failed is listed as failed.</p></div></div>
 </section>
-<section class="sec">
+<section class="sheet bg-paper last">
   <div class="wrap qa-wrap">
     <div class="grid4">
-      <div class="box"><p class="k num">243 / 243</p><h2 class="h-small">checks passed</h2></div>
-      <div class="box"><p class="k k-small">2026-11-20 07:54 UTC</p><h2 class="h-small">when the checks ran</h2></div>
+      <div class="box"><p class="k num">407 / 408</p><h2 class="h-small">checks passed</h2></div>
+      <div class="box"><p class="k k-small">2026-11-26 06:57 UTC</p><h2 class="h-small">when the checks ran</h2></div>
       <div class="box"><p class="k k-small">5 widths</p><h2 class="h-small">320, 390, 768, 1280 and 1440 pixels</h2></div>
-      <div class="box"><p class="k k-small mono">strategy/direct-client-website-saas @ 2d71aec</p><h2 class="h-small">code version checked</h2></div>
+      <div class="box"><p class="k k-small mono">design/visual-upgrade @ b623714</p><h2 class="h-small">code version checked</h2></div>
     </div>
     <h2 class="h3">Every check, by area</h2>
-    <div class="qa-groups"><details class="qa-group"><summary><span>Screen sizes</span><span class="qa qa-ok">120/120</span></summary><ol><li><span class="verdict pass">Pass</span><span>/ at 320px: no errors or failed requests</span></li>
+    <div class="qa-groups"><details class="qa-group"><summary><span>Screen sizes</span><span class="qa qa-ok">130/130</span></summary><ol><li><span class="verdict pass">Pass</span><span>/ at 320px: no errors or failed requests</span></li>
 <li><span class="verdict pass">Pass</span><span>/ at 320px: no sideways scrolling</span></li>
 <li><span class="verdict pass">Pass</span><span>/ at 390px: no errors or failed requests</span></li>
 <li><span class="verdict pass">Pass</span><span>/ at 390px: no sideways scrolling</span></li>
@@ -67,16 +65,26 @@
 <li><span class="verdict pass">Pass</span><span>/ at 1280px: no sideways scrolling</span></li>
 <li><span class="verdict pass">Pass</span><span>/ at 1440px: no errors or failed requests</span></li>
 <li><span class="verdict pass">Pass</span><span>/ at 1440px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/ at 320px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/ at 320px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/ at 390px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/ at 390px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/ at 768px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/ at 768px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/ at 1280px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/ at 1280px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/ at 1440px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/ at 1440px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/ at 320px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/ at 320px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/ at 390px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/ at 390px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/ at 768px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/ at 768px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/ at 1280px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/ at 1280px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/ at 1440px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/ at 1440px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/ at 320px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/ at 320px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/ at 390px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/ at 390px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/ at 768px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/ at 768px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/ at 1280px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/ at 1280px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/ at 1440px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/ at 1440px: no sideways scrolling</span></li>
 <li><span class="verdict pass">Pass</span><span>/pricing/ at 320px: no errors or failed requests</span></li>
 <li><span class="verdict pass">Pass</span><span>/pricing/ at 320px: no sideways scrolling</span></li>
 <li><span class="verdict pass">Pass</span><span>/pricing/ at 390px: no errors or failed requests</span></li>
@@ -87,76 +95,6 @@
 <li><span class="verdict pass">Pass</span><span>/pricing/ at 1280px: no sideways scrolling</span></li>
 <li><span class="verdict pass">Pass</span><span>/pricing/ at 1440px: no errors or failed requests</span></li>
 <li><span class="verdict pass">Pass</span><span>/pricing/ at 1440px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/ at 320px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/ at 320px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/ at 390px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/ at 390px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/ at 768px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/ at 768px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/ at 1280px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/ at 1280px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/ at 1440px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/ at 1440px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/ at 320px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/ at 320px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/ at 390px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/ at 390px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/ at 768px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/ at 768px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/ at 1280px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/ at 1280px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/ at 1440px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/ at 1440px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/ at 320px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/ at 320px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/ at 390px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/ at 390px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/ at 768px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/ at 768px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/ at 1280px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/ at 1280px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/ at 1440px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/ at 1440px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/ at 320px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/ at 320px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/ at 390px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/ at 390px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/ at 768px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/ at 768px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/ at 1280px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/ at 1280px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/ at 1440px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/ at 1440px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/ at 320px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/ at 320px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/ at 390px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/ at 390px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/ at 768px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/ at 768px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/ at 1280px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/ at 1280px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/ at 1440px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/ at 1440px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/ at 320px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/ at 320px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/ at 390px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/ at 390px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/ at 768px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/ at 768px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/ at 1280px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/ at 1280px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/ at 1440px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/ at 1440px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/clinical-websites/ at 320px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/clinical-websites/ at 320px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/clinical-websites/ at 390px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/clinical-websites/ at 390px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/clinical-websites/ at 768px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/clinical-websites/ at 768px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/clinical-websites/ at 1280px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/clinical-websites/ at 1280px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/clinical-websites/ at 1440px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/clinical-websites/ at 1440px: no sideways scrolling</span></li>
 <li><span class="verdict pass">Pass</span><span>/work/ at 320px: no errors or failed requests</span></li>
 <li><span class="verdict pass">Pass</span><span>/work/ at 320px: no sideways scrolling</span></li>
 <li><span class="verdict pass">Pass</span><span>/work/ at 390px: no errors or failed requests</span></li>
@@ -167,133 +105,356 @@
 <li><span class="verdict pass">Pass</span><span>/work/ at 1280px: no sideways scrolling</span></li>
 <li><span class="verdict pass">Pass</span><span>/work/ at 1440px: no errors or failed requests</span></li>
 <li><span class="verdict pass">Pass</span><span>/work/ at 1440px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/final-year-projects/ at 320px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/final-year-projects/ at 320px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/final-year-projects/ at 390px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/final-year-projects/ at 390px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/final-year-projects/ at 768px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/final-year-projects/ at 768px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/final-year-projects/ at 1280px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/final-year-projects/ at 1280px: no sideways scrolling</span></li>
-<li><span class="verdict pass">Pass</span><span>/final-year-projects/ at 1440px: no errors or failed requests</span></li>
-<li><span class="verdict pass">Pass</span><span>/final-year-projects/ at 1440px: no sideways scrolling</span></li></ol></details><details class="qa-group"><summary><span>Search basics</span><span class="qa qa-ok">45/45</span></summary><ol><li><span class="verdict pass">Pass</span><span>/: exactly one main heading</span></li>
-<li><span class="verdict pass">Pass</span><span>/: title 42 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/: description 150 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/: canonical address or noindex</span></li>
-<li><span class="verdict pass">Pass</span><span>/: page language set</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/: exactly one main heading</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/: title 21 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/: description 135 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/: canonical address or noindex</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/: page language set</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/ at 320px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/ at 320px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/ at 390px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/ at 390px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/ at 768px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/ at 768px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/ at 1280px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/ at 1280px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/ at 1440px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/ at 1440px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/ at 320px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/ at 320px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/ at 390px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/ at 390px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/ at 768px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/ at 768px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/ at 1280px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/ at 1280px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/ at 1440px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/ at 1440px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/ at 320px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/ at 320px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/ at 390px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/ at 390px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/ at 768px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/ at 768px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/ at 1280px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/ at 1280px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/ at 1440px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/ at 1440px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/ at 320px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/ at 320px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/ at 390px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/ at 390px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/ at 768px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/ at 768px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/ at 1280px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/ at 1280px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/ at 1440px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/ at 1440px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/ at 320px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/ at 320px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/ at 390px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/ at 390px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/ at 768px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/ at 768px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/ at 1280px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/ at 1280px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/ at 1440px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/ at 1440px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/ at 320px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/ at 320px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/ at 390px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/ at 390px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/ at 768px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/ at 768px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/ at 1280px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/ at 1280px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/ at 1440px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/ at 1440px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/ at 320px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/ at 320px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/ at 390px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/ at 390px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/ at 768px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/ at 768px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/ at 1280px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/ at 1280px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/ at 1440px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/ at 1440px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/ at 320px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/ at 320px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/ at 390px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/ at 390px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/ at 768px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/ at 768px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/ at 1280px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/ at 1280px: no sideways scrolling</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/ at 1440px: no errors or failed requests</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/ at 1440px: no sideways scrolling</span></li></ol></details><details class="qa-group"><summary><span>Search basics</span><span class="qa qa-ok">96/96</span></summary><ol><li><span class="verdict pass">Pass</span><span>/: exactly one main heading</span></li>
+<li><span class="verdict pass">Pass</span><span>/: title 51 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/: description 149 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/: canonical address</span></li>
+<li><span class="verdict pass">Pass</span><span>/: listed in sitemap.xml</span></li>
+<li><span class="verdict pass">Pass</span><span>/: social image exists (/assets/img/og/home-2026.jpg)</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/: exactly one main heading</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/: title 35 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/: description 150 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/: canonical address</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/: listed in sitemap.xml</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/: social image exists (/assets/img/og/websites.jpg)</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/: exactly one main heading</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/: title 43 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/: description 153 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/: canonical address</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/: listed in sitemap.xml</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/: social image exists (/assets/img/og/software.jpg)</span></li>
 <li><span class="verdict pass">Pass</span><span>/pricing/: exactly one main heading</span></li>
-<li><span class="verdict pass">Pass</span><span>/pricing/: title 26 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/pricing/: description 146 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/pricing/: canonical address or noindex</span></li>
-<li><span class="verdict pass">Pass</span><span>/pricing/: page language set</span></li>
+<li><span class="verdict pass">Pass</span><span>/pricing/: title 57 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/pricing/: description 138 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/pricing/: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/pricing/: canonical address</span></li>
+<li><span class="verdict pass">Pass</span><span>/pricing/: listed in sitemap.xml</span></li>
+<li><span class="verdict pass">Pass</span><span>/pricing/: social image exists (/assets/img/og/pricing.jpg)</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/: exactly one main heading</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/: title 23 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/: description 153 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/: canonical address</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/: listed in sitemap.xml</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/: social image exists (/assets/img/og/work.jpg)</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/: exactly one main heading</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/: title 20 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/: description 147 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/: canonical address</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/: listed in sitemap.xml</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/: social image exists (/assets/img/og/process.jpg)</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/: exactly one main heading</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/: title 12 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/: description 142 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/: canonical address</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/: listed in sitemap.xml</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/: social image exists (/assets/img/og/home-2026.jpg)</span></li>
 <li><span class="verdict pass">Pass</span><span>/start/: exactly one main heading</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/: title 22 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/: description 134 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/: canonical address or noindex</span></li>
-<li><span class="verdict pass">Pass</span><span>/start/: page language set</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/: exactly one main heading</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/: title 14 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/: description 152 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/: canonical address or noindex</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/: page language set</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/: exactly one main heading</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/: title 28 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/: description 148 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/: canonical address or noindex</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/: page language set</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/: exactly one main heading</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/: title 33 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/: description 150 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/: canonical address or noindex</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/: page language set</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/: exactly one main heading</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/: title 35 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/: description 132 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/: canonical address or noindex</span></li>
-<li><span class="verdict pass">Pass</span><span>/qa/: page language set</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/: title 24 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/: description 154 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/: canonical address</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/: listed in sitemap.xml</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/: social image exists (/assets/img/og/home-2026.jpg)</span></li>
 <li><span class="verdict pass">Pass</span><span>/privacy/: exactly one main heading</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/: title 16 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/: description 98 characters</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/: canonical address or noindex</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/: page language set</span></li></ol></details><details class="qa-group"><summary><span>Links and anchors</span><span class="qa qa-ok">37/37</span></summary><ol><li><span class="verdict pass">Pass</span><span>/ opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/: title 31 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/: description 105 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/: canonical address</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/: listed in sitemap.xml</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/: social image exists (/assets/img/og/home-2026.jpg)</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/: exactly one main heading</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/: title 34 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/: description 145 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/: canonical address</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/: listed in sitemap.xml</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/: social image exists (/assets/img/og/home-2026.jpg)</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/: exactly one main heading</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/: title 37 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/: description 142 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/: kept out of search results (noindex)</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/: exactly one main heading</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/: title 42 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/: description 148 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/: kept out of search results (noindex)</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/: exactly one main heading</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/: title 53 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/: description 97 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/: page language set (en-AU)</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/: kept out of search results (noindex)</span></li>
+<li><span class="verdict pass">Pass</span><span>/404.html: exactly one main heading</span></li>
+<li><span class="verdict pass">Pass</span><span>/404.html: title 23 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/404.html: description 118 characters</span></li>
+<li><span class="verdict pass">Pass</span><span>/404.html: page language set (en-GB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/404.html: kept out of search results (noindex)</span></li>
+<li><span class="verdict pass">Pass</span><span>robots.txt points to the sitemap and excludes demos</span></li>
+<li><span class="verdict pass">Pass</span><span>/favicon.ico exists</span></li>
+<li><span class="verdict pass">Pass</span><span>/favicon-32x32.png exists</span></li>
+<li><span class="verdict pass">Pass</span><span>/apple-touch-icon.png exists</span></li>
+<li><span class="verdict pass">Pass</span><span>/site.webmanifest exists</span></li>
+<li><span class="verdict pass">Pass</span><span>/icon-512.png exists</span></li></ol></details><details class="qa-group"><summary><span>Links and anchors</span><span class="qa qa-ok">62/62</span></summary><ol><li><span class="verdict pass">Pass</span><span>main pages and new demos link only to this site and email addresses</span></li>
+<li><span class="verdict pass">Pass</span><span>/ opens (200)</span></li>
 <li><span class="verdict pass">Pass</span><span>/#main opens (200)</span></li>
 <li><span class="verdict pass">Pass</span><span>#main exists on /</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/ opens (200)</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/#main opens (200)</span></li>
-<li><span class="verdict pass">Pass</span><span>#main exists on /demos/</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/ opens (200)</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/#board opens (200)</span></li>
-<li><span class="verdict pass">Pass</span><span>#board exists on /demos/job-board/</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/ opens (200)</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/#main opens (200)</span></li>
-<li><span class="verdict pass">Pass</span><span>#main exists on /demos/partner-portal/</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/ opens (200)</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/#main opens (200)</span></li>
-<li><span class="verdict pass">Pass</span><span>#main exists on /how-it-works/</span></li>
+<li><span class="verdict pass">Pass</span><span>/404.html#main opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#main exists on /404.html</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/ opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/#main opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#main exists on /about/</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/ opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/#jobs opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#jobs exists on /demos/job-tracker/</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/maren-dental-studio/ opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/ opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/#areas opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#areas exists on /demos/tallow-creek-plumbing/</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/#booking opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#booking exists on /demos/tallow-creek-plumbing/</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/#main opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#main exists on /demos/tallow-creek-plumbing/</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/#quote opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#quote exists on /demos/tallow-creek-plumbing/</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/#services opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#services exists on /demos/tallow-creek-plumbing/</span></li>
 <li><span class="verdict pass">Pass</span><span>/pricing/ opens (200)</span></li>
-<li><span class="verdict pass">Pass</span><span>/pricing/#builds opens (200)</span></li>
-<li><span class="verdict pass">Pass</span><span>#builds exists on /pricing/</span></li>
-<li><span class="verdict pass">Pass</span><span>/pricing/#care opens (200)</span></li>
-<li><span class="verdict pass">Pass</span><span>#care exists on /pricing/</span></li>
 <li><span class="verdict pass">Pass</span><span>/pricing/#main opens (200)</span></li>
 <li><span class="verdict pass">Pass</span><span>#main exists on /pricing/</span></li>
-<li><span class="verdict pass">Pass</span><span>/pricing/#retainer opens (200)</span></li>
-<li><span class="verdict pass">Pass</span><span>#retainer exists on /pricing/</span></li>
 <li><span class="verdict pass">Pass</span><span>/privacy/ opens (200)</span></li>
 <li><span class="verdict pass">Pass</span><span>/privacy/#main opens (200)</span></li>
 <li><span class="verdict pass">Pass</span><span>#main exists on /privacy/</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/ opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/#main opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#main exists on /process/</span></li>
 <li><span class="verdict pass">Pass</span><span>/qa/ opens (200)</span></li>
 <li><span class="verdict pass">Pass</span><span>/qa/#main opens (200)</span></li>
 <li><span class="verdict pass">Pass</span><span>#main exists on /qa/</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/ opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/#main opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#main exists on /software/</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/#ownership opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#ownership exists on /software/</span></li>
 <li><span class="verdict pass">Pass</span><span>/start/ opens (200)</span></li>
 <li><span class="verdict pass">Pass</span><span>/start/#main opens (200)</span></li>
 <li><span class="verdict pass">Pass</span><span>#main exists on /start/</span></li>
-<li><span class="verdict pass">Pass</span><span>home keeps #services for links from older pages</span></li>
-<li><span class="verdict pass">Pass</span><span>home keeps #work for links from older pages</span></li>
-<li><span class="verdict pass">Pass</span><span>home keeps #approach for links from older pages</span></li>
-<li><span class="verdict pass">Pass</span><span>home keeps #contact for links from older pages</span></li></ol></details><details class="qa-group"><summary><span>Navigation</span><span class="qa qa-ok">5/5</span></summary><ol><li><span class="verdict pass">Pass</span><span>phone: menu closed at start</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/?service=software opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/?service=software&amp;package=custom-system opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/?service=software&amp;package=operations-app opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/?service=software&amp;package=tracker opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/?service=website opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/?service=website&amp;package=five-pages opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/?service=website&amp;package=five-pages-written opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/?service=website&amp;package=one-page opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/ opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/#main opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#main exists on /terms/</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/ opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/#main opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#main exists on /websites/</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/ opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/#main opens (200)</span></li>
+<li><span class="verdict pass">Pass</span><span>#main exists on /work/</span></li>
+<li><span class="verdict pass">Pass</span><span>email links use only the two published addresses</span></li></ol></details><details class="qa-group"><summary><span>Navigation</span><span class="qa qa-ok">16/16</span></summary><ol><li><span class="verdict pass">Pass</span><span>phone: menu closed at start</span></li>
 <li><span class="verdict pass">Pass</span><span>phone: menu opens</span></li>
 <li><span class="verdict pass">Pass</span><span>phone: menu button reports open state</span></li>
+<li><span class="verdict pass">Pass</span><span>phone: menu link opens the page</span></li>
 <li><span class="verdict pass">Pass</span><span>keyboard: first Tab reaches the skip link</span></li>
-<li><span class="verdict pass">Pass</span><span>home: QA summary loads from the real report</span></li></ol></details><details class="qa-group"><summary><span>Forms</span><span class="qa qa-ok">12/12</span></summary><ol><li><span class="verdict pass">Pass</span><span>confirmation hidden before sending</span></li>
-<li><span class="verdict pass">Pass</span><span>empty form shows 10 field messages</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/: menu marks the current page</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/: menu marks the current page</span></li>
+<li><span class="verdict pass">Pass</span><span>/pricing/: menu marks the current page</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/: menu marks the current page</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/: menu marks the current page</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/: menu marks the current page</span></li>
+<li><span class="verdict pass">Pass</span><span>unknown address returns the 404 page with status 404</span></li>
+<li><span class="verdict pass">Pass</span><span>old address /clinical-websites/ redirects to /websites/</span></li>
+<li><span class="verdict pass">Pass</span><span>old address /final-year-projects/ redirects to /</span></li>
+<li><span class="verdict pass">Pass</span><span>old address /demos/oddcart/ redirects to /work/</span></li>
+<li><span class="verdict pass">Pass</span><span>old address /contact redirects to /start/</span></li></ol></details><details class="qa-group"><summary><span>Forms</span><span class="qa qa-ok">18/18</span></summary><ol><li><span class="verdict pass">Pass</span><span>confirmation hidden before sending</span></li>
+<li><span class="verdict pass">Pass</span><span>empty form explains all 6 required fields (6)</span></li>
 <li><span class="verdict pass">Pass</span><span>focus moves to the first problem</span></li>
+<li><span class="verdict pass">Pass</span><span>problem fields are marked and linked to their message</span></li>
 <li><span class="verdict pass">Pass</span><span>nothing is sent while the form is invalid</span></li>
 <li><span class="verdict pass">Pass</span><span>a bad email address is explained</span></li>
+<li><span class="verdict pass">Pass</span><span>messages clear once fields are fixed</span></li>
 <li><span class="verdict pass">Pass</span><span>a refused submission shows an error, not success</span></li>
-<li><span class="verdict pass">Pass</span><span>confirmation stays hidden after a refusal</span></li>
-<li><span class="verdict pass">Pass</span><span>subject names the agency</span></li>
-<li><span class="verdict pass">Pass</span><span>chosen platforms sent together</span></li>
-<li><span class="verdict pass">Pass</span><span>pilot starting point sent</span></li>
+<li><span class="verdict pass">Pass</span><span>after a refusal the confirmation stays hidden and nothing typed is lost</span></li>
+<li><span class="verdict pass">Pass</span><span>a network failure is explained</span></li>
+<li><span class="verdict pass">Pass</span><span>one submission sends exactly one request</span></li>
+<li><span class="verdict pass">Pass</span><span>subject names the business</span></li>
+<li><span class="verdict pass">Pass</span><span>service, option and country are sent</span></li>
 <li><span class="verdict pass">Pass</span><span>reply-to and copy addresses set</span></li>
-<li><span class="verdict pass">Pass</span><span>focus moves to the confirmation</span></li></ol></details><details class="qa-group"><summary><span>Demos</span><span class="qa qa-ok">15/15</span></summary><ol><li><span class="verdict pass">Pass</span><span>portal: 5 sample jobs load</span></li>
-<li><span class="verdict pass">Pass</span><span>portal: figures match the jobs</span></li>
-<li><span class="verdict pass">Pass</span><span>portal: QA result shown for the job awaiting review</span></li>
-<li><span class="verdict pass">Pass</span><span>portal: approving hands the job over</span></li>
-<li><span class="verdict pass">Pass</span><span>portal: adding care updates the monthly total</span></li>
-<li><span class="verdict pass">Pass</span><span>portal: approving a quote starts the build</span></li>
-<li><span class="verdict pass">Pass</span><span>portal: an empty brief explains what is missing</span></li>
-<li><span class="verdict pass">Pass</span><span>portal: a new brief becomes a quoted job</span></li>
-<li><span class="verdict pass">Pass</span><span>portal: arrow key opens the care tab</span></li>
-<li><span class="verdict pass">Pass</span><span>portal: invoices list deposits and balances</span></li>
-<li><span class="verdict pass">Pass</span><span>portal: state kept after reload</span></li>
-<li><span class="verdict pass">Pass</span><span>portal: reset restores the sample</span></li>
-<li><span class="verdict pass">Pass</span><span>portal: no errors during use</span></li>
-<li><span class="verdict pass">Pass</span><span>job board: sending a quote moves the job</span></li>
-<li><span class="verdict pass">Pass</span><span>job board: no errors during use</span></li></ol></details><details class="qa-group"><summary><span>Accessibility</span><span class="qa qa-ok">9/9</span></summary><ol><li><span class="verdict pass">Pass</span><span>/: WCAG 2.1 AA automated rules</span></li>
-<li><span class="verdict pass">Pass</span><span>/how-it-works/: WCAG 2.1 AA automated rules</span></li>
+<li><span class="verdict pass">Pass</span><span>spam honeypot and word filter included</span></li>
+<li><span class="verdict pass">Pass</span><span>focus moves to the confirmation</span></li>
+<li><span class="verdict pass">Pass</span><span>links from package cards preselect the service and option</span></li>
+<li><span class="verdict pass">Pass</span><span>honeypot field hidden from people and keyboard</span></li></ol></details><details class="qa-group"><summary><span>Demos</span><span class="qa qa-ok">32/32</span></summary><ol><li><span class="verdict pass">Pass</span><span>tracker: summary figures match the sample jobs (14 open, 3 due today, 1 overdue, 3 done this week)</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: open jobs listed by default</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: demo banner says the data is fictional</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: search narrows the list</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: an empty search shows a way back</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: clearing filters shows all jobs</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: status filter shows done jobs</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: the overdue figure opens the overdue job</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: filter by person</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: a job opens in a side panel</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: status change is recorded in the history</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: ticking the checklist updates progress</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: a note is added to the history</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: marking done updates the summary</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: Escape closes the panel and returns focus</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: an empty new job explains the 3 missing fields</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: a new job is added to the list</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: focus moves to the new job</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: board view shows five status columns</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: moving a card changes its status</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: spreadsheet export downloads the listed jobs</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: changes kept after reload</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: reset restores the sample</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker: no errors during use</span></li>
+<li><span class="verdict pass">Pass</span><span>tracker on a phone: the job panel fits the screen</span></li>
+<li><span class="verdict pass">Pass</span><span>tradie site on a phone: call bar stays on screen</span></li>
+<li><span class="verdict pass">Pass</span><span>tradie site: demo banner says the business is fictional</span></li>
+<li><span class="verdict pass">Pass</span><span>tradie site: empty quote form explains the 4 fields</span></li>
+<li><span class="verdict pass">Pass</span><span>tradie site: the form says plainly that the demo sends nothing</span></li>
+<li><span class="verdict pass">Pass</span><span>tradie site: no errors and no network request from the demo form</span></li>
+<li><span class="verdict pass">Pass</span><span>clinic demo opens and is marked fictional</span></li>
+<li><span class="verdict pass">Pass</span><span>demos are kept out of search results (X-Robots-Tag)</span></li></ol></details><details class="qa-group"><summary><span>Accessibility</span><span class="qa qa-fail">18/19</span></summary><ol><li><span class="verdict pass">Pass</span><span>/demos/job-tracker/ with a job open: WCAG 2.1 AA automated rules</span></li>
+<li><span class="verdict pass">Pass</span><span>/: WCAG 2.1 AA automated rules</span></li>
+<li><span class="verdict fail">Fail</span><span>/: 2 images load, have alt text and fixed sizes</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/: WCAG 2.1 AA automated rules</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/: WCAG 2.1 AA automated rules</span></li>
 <li><span class="verdict pass">Pass</span><span>/pricing/: WCAG 2.1 AA automated rules</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/: WCAG 2.1 AA automated rules</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/: 3 images load, have alt text and fixed sizes</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/: WCAG 2.1 AA automated rules</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/: WCAG 2.1 AA automated rules</span></li>
 <li><span class="verdict pass">Pass</span><span>/start/: WCAG 2.1 AA automated rules</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/: WCAG 2.1 AA automated rules</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/partner-portal/: WCAG 2.1 AA automated rules</span></li>
-<li><span class="verdict pass">Pass</span><span>/demos/job-board/: WCAG 2.1 AA automated rules</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/: WCAG 2.1 AA automated rules</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/: WCAG 2.1 AA automated rules</span></li>
 <li><span class="verdict pass">Pass</span><span>/qa/: WCAG 2.1 AA automated rules</span></li>
-<li><span class="verdict pass">Pass</span><span>/privacy/: WCAG 2.1 AA automated rules</span></li></ol></details></div>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/: WCAG 2.1 AA automated rules</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/: WCAG 2.1 AA automated rules</span></li>
+<li><span class="verdict pass">Pass</span><span>/404.html: WCAG 2.1 AA automated rules</span></li>
+<li><span class="verdict pass">Pass</span><span>keyboard focus is visible</span></li>
+<li><span class="verdict pass">Pass</span><span>reduced-motion setting turns off smooth scrolling</span></li></ol></details><details class="qa-group"><summary><span>Performance</span><span class="qa qa-ok">26/26</span></summary><ol><li><span class="verdict pass">Pass</span><span>/: 51 KB in 7 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/: page ready in 43 ms on the local server</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/: 46 KB in 7 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/websites/: page ready in 55 ms on the local server</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/: 136 KB in 7 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/software/: page ready in 64 ms on the local server</span></li>
+<li><span class="verdict pass">Pass</span><span>/pricing/: 19 KB in 7 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/pricing/: page ready in 60 ms on the local server</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/: 70 KB in 10 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/work/: page ready in 47 ms on the local server</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/: 43 KB in 7 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/process/: page ready in 57 ms on the local server</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/: 40 KB in 7 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/about/: page ready in 64 ms on the local server</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/: 18 KB in 7 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/start/: page ready in 50 ms on the local server</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/: 8 KB in 7 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/privacy/: page ready in 52 ms on the local server</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/: 131 KB in 7 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/terms/: page ready in 52 ms on the local server</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/: 65 KB in 7 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/qa/: page ready in 61 ms on the local server</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/: 28 KB in 4 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/job-tracker/: page ready in 57 ms on the local server</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/: 103 KB in 4 requests (budget 400 KB)</span></li>
+<li><span class="verdict pass">Pass</span><span>/demos/tallow-creek-plumbing/: page ready in 49 ms on the local server</span></li></ol></details><details class="qa-group"><summary><span>Security</span><span class="qa qa-ok">9/9</span></summary><ol><li><span class="verdict pass">Pass</span><span>main pages: Content-Security-Policy allows only this site&#x27;s own scripts</span></li>
+<li><span class="verdict pass">Pass</span><span>header x-content-type-options set</span></li>
+<li><span class="verdict pass">Pass</span><span>header referrer-policy set</span></li>
+<li><span class="verdict pass">Pass</span><span>header x-frame-options set</span></li>
+<li><span class="verdict pass">Pass</span><span>header strict-transport-security set</span></li>
+<li><span class="verdict pass">Pass</span><span>header permissions-policy set</span></li>
+<li><span class="verdict pass">Pass</span><span>no keys or secrets in 47 text files</span></li>
+<li><span class="verdict pass">Pass</span><span>no insecure http:// resources on any page</span></li>
+<li><span class="verdict pass">Pass</span><span>main pages have no inline scripts or inline styles</span></li></ol></details></div>
     <div class="box">
       <h2 class="h3">What this report does not cover</h2>
       <ul class="dash">
@@ -307,16 +468,28 @@
 </section>
 </main>
 <footer class="foot">
-  <div class="wrap foot-in">
-    <div class="foot-brand">
-      <a class="logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
-      <p>Websites and business software, priced in the open. A small studio in India working with service businesses in Australia and the UK.</p>
-      <p data-emails></p>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <p class="foot-say">Fixed price. Written scope. <span>Yours to keep.</span></p>
+        <p class="hand hand-butter">websites + business software, priced in the open</p>
+      </div>
+      <nav aria-label="Services">
+        <h2>Services</h2>
+        <ul><li><a href="/websites/">Website Development</a></li><li><a href="/software/">Custom Business Software</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/work/">Work and demos</a></li></ul>
+      </nav>
+      <nav aria-label="Studio">
+        <h2>Studio</h2>
+        <ul><li><a href="/process/">How we work</a></li><li><a href="/about/">About</a></li><li><a href="/start/">Start a project</a></li><li><a href="/qa/">Test report</a></li></ul>
+      </nav>
+      <div>
+        <h2>Contact</h2>
+        <p data-emails data-emails-list></p>
+        <p class="small mt-1">Monday to Friday, 10:00–19:00 India time.</p>
+      </div>
     </div>
-    <nav aria-label="Footer">
-      <a href="/websites/">Websites</a><a href="/software/">Software</a><a href="/pricing/">Pricing</a><a href="/work/">Work</a><a href="/process/">How we work</a><a href="/about/">About</a><a href="/start/">Start a project</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/qa/">QA report</a>
-    </nav>
-    <p class="small foot-legal">© <span data-year>2026</span> UNNATE. Prices in US dollars unless stated.</p>
+    <svg class="foot-word" viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg>
+    <div class="foot-legal"><p>© <span data-year>2026</span> UNNATE. Prices in US dollars unless stated.</p><p><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p></div>
   </div>
 </footer>
 <script src="/assets/js/config.js" defer></script>

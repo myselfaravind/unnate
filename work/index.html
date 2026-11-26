@@ -15,20 +15,20 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#F4F3EE">
+<meta name="theme-color" content="#F2F5F9">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/gochi-hand.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/unnate.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="top">
-  <div class="wrap top-in">
-    <a class="logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+<header class="nav" data-nav>
+  <div class="nav-pill">
+    <a class="nav-logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
     <nav class="menu" id="menu" aria-label="Main">
       <a href="/websites/">Websites</a>
       <a href="/software/">Software</a>
@@ -36,81 +36,120 @@
       <a href="/work/" aria-current="page">Work</a>
       <a href="/process/">How we work</a>
       <a href="/about/">About</a>
-      <a class="btn btn-sm btn-go" href="/start/">Start a project</a>
+      <a class="btn btn-ink btn-sm" href="/start/">Start a project</a>
     </nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span>Menu</button>
   </div>
 </header>
 <main id="main">
-<section class="page-head">
-  <div class="wrap">
-    <span class="kicker">Work</span>
-    <h1>Working demos you can click through.</h1>
-    <p class="lede">Each demo below was built by us for a fictional business, to show what a package delivers. Names, phone numbers, jobs and addresses in them are made up. Client projects will appear here only with the client's written permission.</p>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap">
-    <div class="work-grid">
-      <article class="work-card">
-        <a class="shot" href="/demos/job-tracker/" tabindex="-1" aria-hidden="true"><img src="/assets/work/demos/job-tracker.webp" alt="" width="1200" height="750" loading="lazy" decoding="async"></a>
-        <div class="body">
-          <div class="tags"><span class="tag-demo">Demo · fictional data</span><span class="tag-pkg">Workflow Tracker</span></div>
-          <h2 class="h3">Job tracker for a plumbing and maintenance business</h2>
-          <p>The kind of app a Workflow Tracker delivers. Try it: add a job, assign it, move it through its statuses, add notes, search and filter, switch between list and board, and export to a spreadsheet. Changes stay in your browser, and a reset button restores the sample data.</p>
-          <a class="btn btn-sm" href="/demos/job-tracker/">Try the job tracker</a>
-        </div>
-      </article>
-      <article class="work-card">
-        <a class="shot" href="/demos/tallow-creek-plumbing/" tabindex="-1" aria-hidden="true"><img src="/assets/work/demos/tallow-creek.webp" alt="" width="1200" height="750" loading="lazy" decoding="async"></a>
-        <div class="body">
-          <div class="tags"><span class="tag-demo">Demo · fictional business</span><span class="tag-pkg">One Page · $249</span></div>
-          <h2 class="h3">One-page website for a plumber</h2>
-          <p>What the $249 package delivers: a clear headline, a call button that stays on screen on phones, services, service areas, how booking works, common questions and a quote form. The form in the demo does not send anything.</p>
-          <a class="btn btn-sm" href="/demos/tallow-creek-plumbing/">View the demo site</a>
-        </div>
-      </article>
-      <article class="work-card">
-        <a class="shot" href="/demos/maren-dental-studio/" tabindex="-1" aria-hidden="true"><img src="/assets/work/sites/maren-0.webp" alt="" width="1200" height="750" loading="lazy" decoding="async"></a>
-        <div class="body">
-          <div class="tags"><span class="tag-demo">Demo · fictional clinic</span><span class="tag-pkg">Design example</span></div>
-          <h2 class="h3">Website for a dental clinic</h2>
-          <p>A richer single-page design for an appointment business, built before our current packages. It shows treatments, the team section layout and booking prompts. Photos are stock images from Unsplash.</p>
-          <a class="btn btn-sm" href="/demos/maren-dental-studio/">View the clinic demo</a>
-        </div>
-      </article>
-      <article class="work-card">
-        <div class="body">
-          <div class="tags"><span class="tag-pkg">This website</span></div>
-          <h2 class="h3">The site you are reading, and its test report</h2>
-          <p>We publish the automated test results for this site: page sizes on phone, tablet and desktop, links, forms, the demos, accessibility and search basics. It is the same kind of report you get at handover.</p>
-          <a class="btn btn-sm" href="/qa/">Read the test report</a>
-        </div>
-      </article>
+<section class="ph ph-ink on-dark">
+  <span class="dots dots-light" aria-hidden="true"></span>
+  <div class="wrap ph-grid">
+    <div class="head" data-reveal>
+      <span class="kicker k-butter">Work</span>
+      <h1 class="d1">Working demos you can click&nbsp;through.</h1>
+      <p class="lede">Each demo was built by us for a fictional business, to show what a package delivers. Names, numbers, jobs and addresses in them are made up. Client projects will appear here only with the client's written permission.</p>
+    </div>
+    <div class="fan r2" data-reveal aria-hidden="true">
+      <figure class="print tape fa"><img src="/assets/work/sites/maren-0.webp" alt="" width="1200" height="750"><figcaption>Maren Dental, demo</figcaption></figure>
+      <figure class="print tape fb"><img src="/assets/work/demos/tradie-desktop.webp" alt="" width="1200" height="750"><figcaption>Tallow Creek Plumbing, demo</figcaption></figure>
+      <figure class="print tape fc"><img src="/assets/work/demos/tracker-board.webp" alt="" width="1200" height="750"><figcaption>the job tracker, demo data</figcaption></figure>
+      <p class="sticker fan-st"><span>Every one</span><b>clickable</b></p>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-paper last">
   <div class="wrap">
-    <div class="close">
-      <div><h2>Want one of these for your business?</h2><p>Tell us which demo is closest to what you need.</p></div>
-      <div><a class="btn" href="/start/">Start a project</a></div>
+    <article class="wk wk-royal" data-reveal>
+      <div class="wk-copy">
+        <div class="tags"><span class="tag tag-demo">Demo · fictional data</span><span class="tag tag-ghost">Workflow Tracker · from $800</span></div>
+        <h2 class="d3">Job tracker for a plumbing and maintenance business</h2>
+        <p>The kind of app a Workflow Tracker delivers. Your changes stay in your browser, and a reset button restores the sample data.</p>
+        <ul><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Add a job and assign it</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Move it through five statuses, on a list or a board</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Checklist, notes and a history on every job</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Search, filters and a spreadsheet export</li></ul>
+        <p><a class="btn btn-tang" href="/demos/job-tracker/">Try the job tracker <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a></p>
+      </div>
+      <div class="wk-vis">
+        <figure class="app-shot"><img src="/assets/work/demos/tracker-board.webp" alt="Board view of the job tracker demo" width="1200" height="750" loading="lazy" decoding="async"></figure>
+        <figure class="phone"><img src="/assets/work/demos/tracker-phone.webp" alt="The job tracker demo on a phone" width="600" height="1169" loading="lazy" decoding="async"></figure>
+      </div>
+    </article>
+
+    <article class="wk wk-navy flip" data-reveal>
+      <div class="wk-copy">
+        <div class="tags"><span class="tag tag-demo">Demo · fictional business</span><span class="tag tag-ghost">One Page · $249</span></div>
+        <h2 class="d3">One-page website for a plumber</h2>
+        <p>What the $249 package delivers. The form in the demo does not send anything.</p>
+        <ul><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> A headline that says what and where</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> A call button that stays on screen on phones</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Services, areas, booking steps and questions</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> A quote form with clear error messages</li></ul>
+        <p><a class="btn btn-tang" href="/demos/tallow-creek-plumbing/">View the demo site <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a></p>
+      </div>
+      <div class="wk-vis">
+        <figure class="browser"><div class="bbar" aria-hidden="true"><i></i><i></i><i></i><span>tallowcreek.demo</span></div><img src="/assets/work/demos/tradie-desktop.webp" alt="The demo plumbing website on a desktop" width="1200" height="750" loading="lazy" decoding="async"></figure>
+        <figure class="phone"><img src="/assets/work/demos/tradie-phone.webp" alt="The demo plumbing website on a phone" width="600" height="1169" loading="lazy" decoding="async"></figure>
+      </div>
+    </article>
+
+    <article class="wk wk-green" data-reveal>
+      <div class="wk-copy">
+        <div class="tags"><span class="tag tag-demo">Demo · fictional clinic</span><span class="tag tag-ghost">Design example</span></div>
+        <h2 class="d3">Website for a dental clinic</h2>
+        <p>A richer single-page design for an appointment business, built before our current packages. Photos are stock images from Unsplash.</p>
+        <ul><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> Treatments and booking prompts</li><li><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#check"/></svg> A calm design for a healthcare audience</li></ul>
+        <p><a class="btn btn-white" href="/demos/maren-dental-studio/">View the clinic demo <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a></p>
+      </div>
+      <div class="wk-vis">
+        <figure class="browser"><div class="bbar" aria-hidden="true"><i></i><i></i><i></i><span>maren.demo</span></div><img src="/assets/work/sites/maren-0.webp" alt="The demo dental clinic website on a desktop" width="1200" height="750" loading="lazy" decoding="async"></figure>
+        <figure class="phone"><img src="/assets/work/sites/maren-m.webp" alt="The demo dental clinic website on a phone" width="585" height="1266" loading="lazy" decoding="async"></figure>
+      </div>
+    </article>
+
+    <article class="wk wk-paper flip" data-reveal>
+      <div class="wk-copy">
+        <div class="tags"><span class="tag tag-mint">This website</span></div>
+        <h2 class="d3">The site you are reading, and its test report</h2>
+        <p>We publish the automated test results for this site: page sizes on phone, tablet and desktop, links, forms, the demos, accessibility, speed and security basics. It is the same kind of report you get at handover.</p>
+        <p class="qa-line" data-qa-summary><b data-qa-pass>—</b> of <b data-qa-total>—</b> checks passed on the latest run (<span data-qa-date>—</span>).</p>
+        <p><a class="btn btn-ink" href="/qa/">Read the test report <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a></p>
+      </div>
+      <div class="wk-vis qa-vis" aria-hidden="true">
+        <div class="note n-mint"><p class="hand">screen sizes ✓</p><p>320 to 1440 pixels wide, no sideways scrolling.</p></div>
+        <div class="note r2"><p class="hand">forms ✓</p><p>Errors explained, nothing lost on a failed send.</p></div>
+        <div class="note n-sky r3"><p class="hand">accessibility ✓</p><p>WCAG 2.1 AA automated rules on every page.</p></div>
+      </div>
+    </article>
+
+    <div class="cta mt-3" data-reveal>
+      <span class="dots dots-light" aria-hidden="true"></span>
+      <img class="mascot cta-mascot hop" src="/assets/img/mascot/hop.webp" alt="" width="339" height="388" loading="lazy">
+      <div><p class="hand hand-butter">want one of these? <svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg></p><h2 class="d2">Tell us which demo is closest to what you need.</h2></div>
+      <div class="cta-act"><a class="btn btn-tang" href="/start/">Start a project <span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span></a><div class="mail-chips" data-mail-chips></div></div>
     </div>
   </div>
 </section>
 </main>
 <footer class="foot">
-  <div class="wrap foot-in">
-    <div class="foot-brand">
-      <a class="logo" href="/"><svg viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg><span class="vh">UNNATE home</span></a>
-      <p>Websites and business software, priced in the open. A small studio in India working with service businesses in Australia and the UK.</p>
-      <p data-emails></p>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <p class="foot-say">Fixed price. Written scope. <span>Yours to keep.</span></p>
+        <p class="hand hand-butter">websites + business software, priced in the open</p>
+      </div>
+      <nav aria-label="Services">
+        <h2>Services</h2>
+        <ul><li><a href="/websites/">Website Development</a></li><li><a href="/software/">Custom Business Software</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/work/">Work and demos</a></li></ul>
+      </nav>
+      <nav aria-label="Studio">
+        <h2>Studio</h2>
+        <ul><li><a href="/process/">How we work</a></li><li><a href="/about/">About</a></li><li><a href="/start/">Start a project</a></li><li><a href="/qa/">Test report</a></li></ul>
+      </nav>
+      <div>
+        <h2>Contact</h2>
+        <p data-emails data-emails-list></p>
+        <p class="small mt-1">Monday to Friday, 10:00–19:00 India time.</p>
+      </div>
     </div>
-    <nav aria-label="Footer">
-      <a href="/websites/">Websites</a><a href="/software/">Software</a><a href="/pricing/">Pricing</a><a href="/work/">Work</a><a href="/process/">How we work</a><a href="/about/">About</a><a href="/start/">Start a project</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/qa/">QA report</a>
-    </nav>
-    <p class="small foot-legal">© <span data-year>2026</span> UNNATE. Prices in US dollars unless stated.</p>
+    <svg class="foot-word" viewBox="0 0 2180 662" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#wm"/></svg>
+    <div class="foot-legal"><p>© <span data-year>2026</span> UNNATE. Prices in US dollars unless stated.</p><p><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p></div>
   </div>
 </footer>
 <script src="/assets/js/config.js" defer></script>

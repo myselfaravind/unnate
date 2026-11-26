@@ -5,36 +5,30 @@ description: Tell UNNATE about your business and the website or software you nee
 og: home-2026.jpg
 nav: /start/
 ---
-<section class="page-head">
-  <div class="wrap">
-    <span class="kicker">Start a project</span>
-    <h1>Tell us what you need.</h1>
-    <p class="lede">A few lines is enough. You get a reply within one working day, and a written fixed price after a short call. Nothing is booked or charged by sending this form.</p>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap start-grid">
-    <aside class="start-side">
-      <div class="box">
-        <h2 class="h3">What happens next</h2>
-        <ol class="dash">
-          <li>We reply by email within one working day.</li>
-          <li>We book a 30-minute call, or answer by email if you prefer.</li>
-          <li>You get a one-page written scope with a fixed price and a delivery date.</li>
-        </ol>
+<section class="ph ph-cool on-dark start-ph">
+  <span class="dots dots-light" aria-hidden="true"></span>
+  <div class="wrap start-stage">
+    <div class="start-side">
+      <span class="kicker k-white" data-reveal>Start a project</span>
+      <h1 class="d2" data-reveal>Tell us what you need.</h1>
+      <p class="lede" data-reveal>A few lines is enough. Nothing is booked or charged by sending this form.</p>
+      <div class="steps-notes" data-reveal>
+        <div class="note"><p class="hand">1 · we reply</p><p>By email, within one working day.</p></div>
+        <div class="note n-pink r2"><p class="hand">2 · a short call</p><p>30 minutes, or email if you prefer.</p></div>
+        <div class="note n-white r3"><p class="hand">3 · a written price</p><p>One page: scope, price, delivery date.</p></div>
       </div>
-      <div class="box">
-        <h2 class="h3">Prefer email?</h2>
-        <p data-emails></p>
-        <p class="small">Monday to Friday, 10:00–19:00 India time.</p>
+      <div data-reveal>
+        <p class="small">Prefer email? Monday to Friday, 10:00–19:00 India time.</p>
+        <div class="mail-chips mt-1" data-mail-chips></div>
       </div>
-    </aside>
+      <img class="mascot start-mascot hop" src="/assets/img/mascot/leap.webp" alt="" width="356" height="380">
+    </div>
 
-    <div class="form-card" data-formcard>
+    <div class="form-sheet" data-formcard data-reveal>
       <div data-view="form">
         <form class="form" data-form data-subject="New project enquiry" novalidate>
           <div class="form-alert" role="alert" tabindex="-1" hidden></div>
+          <p class="form-sec">About you</p>
           <div class="row2">
             <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required data-msg="Enter your name."></div>
             <div class="field"><label for="f-business">Business name</label><input id="f-business" name="business" type="text" autocomplete="organization" required data-msg="Enter your business name."></div>
@@ -46,14 +40,15 @@ nav: /start/
                 <option value="">Choose…</option><option>Australia</option><option>United Kingdom</option><option>New Zealand</option><option>United States</option><option>Canada</option><option>Other</option>
               </select></div>
           </div>
+          <p class="form-sec">What you need</p>
           <div class="field">
             <fieldset id="f-service" data-required data-msg="Choose what you need.">
               <legend>What do you need?</legend>
-              <div class="checks">
-                <label class="check"><input type="radio" name="service" value="A website"> A website</label>
-                <label class="check"><input type="radio" name="service" value="Custom business software"> Custom business software</label>
-                <label class="check"><input type="radio" name="service" value="Both"> Both</label>
-                <label class="check"><input type="radio" name="service" value="Not sure yet"> Not sure yet</label>
+              <div class="choices">
+                <label class="choice"><input type="radio" name="service" value="A website"><span class="ci ic-tang">[[ic:globe]]</span><span><b>A website</b><small>from $249</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Custom business software"><span class="ci ic-royal">[[ic:list]]</span><span><b>Custom business software</b><small>from $800</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Both"><span class="ci ic-mint">[[ic:layers]]</span><span><b>Both</b><small>a site that feeds a system</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Not sure yet"><span class="ci ic-butter">[[ic:sparkle]]</span><span><b>Not sure yet</b><small>we will help you choose</small></span></label>
               </div>
             </fieldset>
           </div>
@@ -67,20 +62,22 @@ nav: /start/
               <option value="operations-app">Software: Operations App ($1,500–$3,000)</option>
               <option value="custom-system">Software: Custom System (from $5,000)</option>
             </select></div>
+          <p class="form-sec">Details</p>
           <div class="field"><label for="f-website">Current website <span class="opt">(optional)</span></label><input id="f-website" name="website" type="url" inputmode="url" autocomplete="url" placeholder="yourbusiness.com"></div>
           <div class="field"><label for="f-message">Tell us about the business and what is not working</label><textarea id="f-message" name="message" required data-msg="Tell us a little about what you need." placeholder="For example: we are a 6-person plumbing business in Sydney. Our site is from 2016 and the quote form stopped working."></textarea></div>
           <div class="field"><label for="f-timing">When do you need it? <span class="opt">(optional)</span></label>
             <select id="f-timing" name="timing"><option value="">No fixed date</option><option>As soon as possible</option><option>Within a month</option><option>In 1–3 months</option><option>Just comparing prices</option></select></div>
           <div class="hp" aria-hidden="true"><label for="f-honey">Leave this empty</label><input id="f-honey" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
           <p class="small">We use these details only to reply to your enquiry. Read the <a href="/privacy/">privacy notice</a>.</p>
-          <div><button class="btn btn-go" type="submit"><span data-label>Send enquiry</span></button></div>
+          <div><button class="btn btn-tang" type="submit"><span data-label>Send enquiry</span>[[dot]]</button></div>
         </form>
       </div>
       <div class="sent" data-view="sent" hidden>
-        <h2 tabindex="-1">Thank you. Your enquiry has been sent.</h2>
+        <img class="mascot" src="/assets/img/mascot/hop.webp" alt="" width="339" height="388">
+        <h2 class="d3" tabindex="-1">Thank you. Your enquiry has been sent.</h2>
         <p>We will reply within one working day from one of the addresses below. If you do not see our reply, check your spam folder.</p>
         <p data-emails></p>
-        <p><a href="/work/">Look through the demos while you wait</a>.</p>
+        <p><a class="link-arrow" href="/work/">Look through the demos while you wait [[arrow]]</a></p>
       </div>
     </div>
   </div>

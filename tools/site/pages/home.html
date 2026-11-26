@@ -7,159 +7,269 @@ nav: /
 ld: org
 ---
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <h1>Websites and simple business software, <em>priced in the open.</em></h1>
-      <p class="lede">Fixed-price websites from $249 and custom job software from $800 for small service businesses. The scope is written down before you pay, your domain and data stay in your name, and every launch comes with a test report.</p>
-      <div class="hero-cta">
-        <a class="btn btn-go" href="/pricing/">See every price <svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></a>
-        <a class="btn btn-line" href="/demos/job-tracker/">Try the job tracker demo</a>
+  <div class="wrap">
+    <p class="hand" data-reveal>websites + business software, made properly [[scrib]]</p>
+    <h1 class="d1 hero-h" data-reveal><span class="nw">Websites [[cap-web]]</span> and simple business <span class="nw">software [[cap-soft]],</span> priced in the <span class="nw">[[eyes]] open.</span></h1>
+    <div class="hero-foot">
+      <div class="r2" data-reveal>
+        <p class="lede">Fixed-price websites from $249 and custom job software from $800 for small service businesses. The scope is written down before you pay, your domain and data stay in your name, and every launch comes with a test report.</p>
+        <div class="ctas">
+          <a class="btn btn-tang" href="/pricing/">See every price [[dot]]</a>
+          <a class="btn btn-white" href="/demos/job-tracker/">Try the job tracker demo</a>
+        </div>
+        <ul class="hero-facts">
+          <li>[[ic:check]] Fixed price before you pay</li>
+          <li>[[ic:check]] Domain and data in your name</li>
+          <li>[[ic:check]] Test report with every launch</li>
+        </ul>
       </div>
-      <ul class="facts">
-        <li>Fixed price before you pay</li>
-        <li>Domain and data in your name</li>
-        <li>Test report with every launch</li>
-      </ul>
-    </div>
-    <div class="screen" aria-label="Preview of the job tracker demo, fictional data">
-      <div class="screen-bar"><b>Tallow Creek · Jobs</b><span class="bar-biz">Today</span><span class="tag-demo">Demo · fictional</span></div>
-      <div class="trk">
-        <div class="trk-kpis"><div><b>14</b><span>Open jobs</span></div><div><b>3</b><span>Due today</span></div><div class="late"><b>1</b><span>Overdue</span></div></div>
-        <div class="trk-row head" aria-hidden="true"><span>Job</span><span>Work</span><span class="asg">Assigned</span><span>Status</span></div>
-        <div class="trk-row"><span class="no">1042</span><span><b>Hot water unit leaking</b><small>Parramatta · due today</small></span><span class="asg">Ali</span><span class="chip c-ok">In progress</span></div>
-        <div class="trk-row"><span class="no">1041</span><span><b>Blocked drain, rear yard</b><small>Ryde · <span class="due-late">1 day late</span></small></span><span class="asg">Mei</span><span class="chip c-wait">Waiting on parts</span></div>
-        <div class="trk-row"><span class="no">1040</span><span><b>Replace three tap sets</b><small>Epping · due in 4 days</small></span><span class="asg">Josh</span><span class="chip c-sch">Scheduled</span></div>
-        <div class="trk-row"><span class="no">1039</span><span><b>Quote request from website</b><small>Carlingford · not assigned</small></span><span class="asg">—</span><span class="chip c-new">New</span></div>
+      <div class="svc-switch r3" data-reveal>
+        <a class="sw sw-web" href="/websites/"><span class="wd">Websites</span><span class="sw-t">for service businesses</span><span class="sw-p">from $249</span></a>
+        <a class="sw sw-soft" href="/software/"><span class="wd">Software</span><span class="sw-t">jobs, requests, bookings</span><span class="sw-p">from $800</span></a>
       </div>
-      <div class="screen-foot"><span>One list instead of a group chat.</span><a href="/demos/job-tracker/">Open the full demo</a></div>
+    </div>
+
+    <div class="stage" data-reveal aria-label="A demo website for a fictional plumber, and the job tracker its quote form feeds">
+      <span class="glow glow-tang" aria-hidden="true"></span><span class="glow glow-royal" aria-hidden="true"></span><span class="dots" aria-hidden="true"></span>
+      <span class="tag tag-demo stage-label">Demo · fictional business</span>
+      <figure class="browser st-web">
+        <div class="bbar" aria-hidden="true"><i></i><i></i><i></i><span>tallowcreek.demo</span></div>
+        <img src="/assets/work/demos/tradie-desktop.webp" alt="Demo one-page website for Tallow Creek Plumbing, a fictional business" width="1200" height="750" fetchpriority="high">
+      </figure>
+      <figure class="phone st-phone"><img src="/assets/work/demos/tradie-phone.webp" alt="The same demo website on a phone, with a call button" width="600" height="1169"></figure>
+      <img class="mascot st-mascot hop" src="/assets/img/mascot/crouch.webp" alt="" width="359" height="362">
+      <svg class="st-flow" viewBox="0 0 200 90" aria-hidden="true" focusable="false"><path d="M6 70 C 60 6, 120 96, 186 26"/><path class="head" d="M174 22 L188 25 L182 38"/></svg>
+      <p class="stage-note" aria-hidden="true">quote form → straight into the job list</p>
+      <div class="app st-app" data-hero-app>
+        <div class="app-bar"><span class="app-logo" aria-hidden="true">TC</span><b>Tallow Creek · Jobs</b><span class="live-dot">Live demo</span></div>
+        <div class="app-kpis">
+          <div><b data-count="14">14</b><span>Open jobs</span></div>
+          <div class="k-today"><b data-count="3">3</b><span>Due today</span></div>
+          <div class="k-late"><b data-count="1">1</b><span>Overdue</span></div>
+        </div>
+        <div class="app-row" data-cycle><span class="no">#1039</span><span><b>Quote request from website</b><small>Carlingford · <span data-cycle-when>not assigned</span></small></span><span class="av av-n" data-cycle-av aria-hidden="true">–</span><span class="st st-new" data-cycle-st>New</span></div>
+        <div class="app-row"><span class="no">#1042</span><span><b>Hot water unit leaking</b><small>Parramatta · due today</small></span><span class="av av-a" aria-hidden="true">A</span><span class="st st-prog">In progress</span></div>
+        <div class="app-row"><span class="no">#1041</span><span><b>Blocked drain, rear yard</b><small>Ryde · <span class="late">1 day late</span></small></span><span class="av av-m" aria-hidden="true">M</span><span class="st st-wait">Waiting on parts</span></div>
+        <div class="app-row"><span class="no">#1040</span><span><b>Replace three tap sets</b><small>Epping · due in 4 days</small></span><span class="av av-j" aria-hidden="true">J</span><span class="st st-sch">Scheduled</span></div>
+      </div>
+      <div class="flt f-quote"><span class="ic ic-tang">[[ic:doc]]</span><span>Quote request sent<small>from the website form</small></span></div>
+      <div class="flt f-job d2"><span class="ic ic-royal">[[ic:list]]</span><span>New job #1039<small>added to the tracker</small></span></div>
+      <div class="flt f-test d3"><span class="ic ic-mint">[[ic:check]]</span><span>Test report<small>sent at every handover</small></span></div>
+      <p class="sticker st-price"><span>One page</span><b>$249</b></p>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-white">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">What do you build?</p>
-      <h2>Two things, done properly</h2>
-      <p class="lede">We build websites for service businesses, and small web apps that run one part of the business. Nothing else, so both get our full attention.</p>
+    <div class="head-split">
+      <div class="head" data-reveal>
+        <p class="hand">two services, one studio [[scrib]]</p>
+        <h2 class="d2">Websites that win the call. Software that runs the day.</h2>
+      </div>
+      <p class="lede" data-reveal>We build websites for service businesses, and small web apps that run one part of the business. Nothing else, so both get our full attention.</p>
     </div>
-    <div class="svc">
-      <article class="svc-card">
-        <p class="offer-k">Website Development</p>
-        <h3>A website that gets the phone ringing</h3>
-        <p>Clear services, a call button and a quote form, built to load fast on a phone. Choose one page, five pages, or five pages with the words written for you.</p>
-        <div class="from"><span>from</span><span class="price">$249</span><span>one-off · 5–12 working days</span></div>
-        <ul class="ticks"><li>Three fixed packages: $249, $399 and $499</li><li>Domain and hosting account in your name</li><li>Two rounds of changes included</li></ul>
-        <a class="btn btn-line" href="/websites/">Website packages</a>
-      </article>
-      <article class="svc-card">
-        <p class="offer-k">Custom Business Software</p>
-        <h3>A system built around how you work</h3>
-        <p>A web app for jobs, requests or bookings, so your team stops chasing updates in chats and spreadsheets. Built for your business, not rented from a one-size-fits-all product.</p>
-        <div class="from"><span>from</span><span class="price">$800</span><span>plus hosting and support $49/month</span></div>
-        <ul class="ticks"><li>Your spreadsheet imported on day one</li><li>Works in any phone or computer browser</li><li>Export all your data at any time</li></ul>
-        <a class="btn btn-line" href="/software/">Software options</a>
-      </article>
+
+    <article class="folder folder-butter" data-reveal>
+      <p class="folder-tab"><span class="tn">01</span> Website Development</p>
+      <div class="folder-grid">
+        <div class="folder-copy">
+          <h3 class="d3">A website that gets the phone ringing.</h3>
+          <p>Clear services, a call button and a quote form, built to load fast on a phone. Choose one page, five pages, or five pages with the words written for you.</p>
+          <div class="chips"><span class="chip-p">One Page <b>$249</b></span><span class="chip-p">Five Pages <b>$399</b></span><span class="chip-p">Five Pages, Written <b>$499</b></span></div>
+          <ul class="dash"><li>Domain and hosting account in your name</li><li>Two rounds of changes included</li><li>Live in 5 to 12 working days after content arrives</li></ul>
+          <p><a class="btn btn-ink" href="/websites/">Website packages [[dot]]</a></p>
+        </div>
+        <div class="folder-visual fv-web">
+          <figure class="print tape print-a"><div class="browser"><div class="bbar" aria-hidden="true"><i></i><i></i><i></i><span>tallowcreek.demo</span></div><img src="/assets/work/demos/tradie-desktop.webp" alt="Demo plumbing website on a desktop screen" width="1200" height="750" loading="lazy" decoding="async"></div><figcaption>Tallow Creek Plumbing, demo site</figcaption></figure>
+          <figure class="print tape print-b"><img src="/assets/work/sites/maren-m.webp" alt="Demo dental clinic website on a phone" width="585" height="1266" loading="lazy" decoding="async"><figcaption>Maren Dental, demo</figcaption></figure>
+          <p class="hand" aria-hidden="true">clear on a desktop, fast on a phone [[scrib]]</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="folder folder-royal" data-reveal>
+      <p class="folder-tab"><span class="tn">02</span> Custom Business Software</p>
+      <div class="folder-grid">
+        <div class="folder-copy">
+          <h3 class="d3">A system built around how you work.</h3>
+          <p>A web app for jobs, requests or bookings, so your team stops chasing updates in chats and spreadsheets. Built for your business, not rented from a one-size-fits-all product.</p>
+          <ol class="flow" aria-label="An example workflow">
+            <li><b>Request</b><small>from a form or a call</small></li>
+            <li><b>Scheduled</b><small>assigned with a date</small></li>
+            <li><b>In progress</b><small>notes and photos</small></li>
+            <li><b>Done</b><small>history kept</small></li>
+          </ol>
+          <div class="chips"><span class="chip-p">Workflow Tracker <b>from $800</b></span><span class="chip-p">Operations App <b>$1,500–$3,000</b></span></div>
+          <p><a class="btn btn-tang" href="/software/">Software options [[dot]]</a></p>
+        </div>
+        <div class="folder-visual fv-soft">
+          <figure class="app-shot app"><img src="/assets/work/demos/tracker-board.webp" alt="Board view of the job tracker demo, with jobs in five status columns" width="1200" height="750" loading="lazy" decoding="async"></figure>
+          <div class="portal" aria-label="Example customer portal form, Operations App">
+            <div class="portal-h"><b>Report a repair</b><span class="tag tag-royal">Portal</span></div>
+            <div class="field-m"><span>Property</span><i>Unit 4, Westmead</i></div>
+            <div class="field-m"><span>What is wrong?</span><i>Kitchen tap dripping</i></div>
+            <span class="send">Send to Tallow Creek</span>
+          </div>
+          <p class="hand hand-butter" aria-hidden="true">a portal for your customers, too [[scrib]]</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sheet bg-paper">
+  <div class="wrap">
+    <p class="hand hand-tang" data-reveal>what we believe [[scrib]]</p>
+    <h2 class="statement" data-reveal>No surprises. It is all written down. <span class="cap cap-char" aria-hidden="true"><img src="/assets/img/mascot/stand.webp" alt="" width="348" height="409" loading="lazy"></span></h2>
+    <div class="believe-body">
+      <p class="believe-lede" data-reveal>Most problems with web projects come from things nobody wrote down.</p>
+      <p class="lede" data-reveal>The designer who stopped replying, the domain in someone else's name, the price that grew. So we write the rules down, and they are the same on every project.</p>
+    </div>
+    <div class="bento mt-3">
+      <div class="tile t-white b-wide b-tall" data-reveal>
+        <span class="ic-lg ic-tang">[[ic:doc]]</span>
+        <h3 class="h3">Written scope and price</h3>
+        <p>Before you pay anything, you get one page: what we build, what is not included, the price and the delivery date.</p>
+        <div class="scope-doc" aria-label="Example scope">
+          <div class="row"><span>Package</span><b>Five Pages</b></div>
+          <div class="row"><span>Change rounds</span><b>2</b></div>
+          <div class="row"><span>Delivery</span><b>10 working days</b></div>
+          <div class="row"><span>Price</span><b>$399</b></div>
+        </div>
+        <span class="stamp">Fixed price</span>
+      </div>
+      <div class="tile t-sky b-wide" data-reveal>
+        <span class="ic-lg ic-royal">[[ic:calendar]]</span>
+        <h3 class="h3">A delivery date that means something</h3>
+        <p>The clock starts when we have your content. Websites take 5 to 12 working days; software 2 to 6 weeks.</p>
+        <div class="cal" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="go"></i><i></i><i></i></div>
+      </div>
+      <div class="tile t-pink b-wide" data-reveal>
+        <span class="ic-lg ic-pink">[[ic:pen]]</span>
+        <h3 class="h3">Two rounds of changes</h3>
+        <p>Each round is one combined list of changes. More rounds cost $39 each on websites, so nothing drifts.</p>
+      </div>
+      <div class="tile t-mint b-mid" data-reveal>
+        <span class="ic-lg ic-mint">[[ic:key]]</span>
+        <h3 class="h3">Yours to keep</h3>
+        <p>Domain, hosting account and data in your name. On final payment you own the site.</p>
+      </div>
+      <div class="tile t-ink b-mid" data-reveal>
+        <span class="ic-lg ic-ink">[[ic:shield]]</span>
+        <h3 class="h3">A test report at handover</h3>
+        <div class="qa-mini" aria-label="What the report checks"><span>Phone, tablet, desktop <b>✓</b></span><span>Links and forms <b>✓</b></span><span>Accessibility checks <b>✓</b></span></div>
+      </div>
+      <div class="tile t-butter b-mid" data-reveal>
+        <span class="ic-lg ic-ink">[[ic:split]]</span>
+        <h3 class="h3">Half now, half at the end</h3>
+        <div class="split-bar"><span>50%<small>to start</small></span><span>50%<small>after you approve</small></span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-ink on-dark">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">What do I actually get?</p>
-      <h2>The same rules on every project</h2>
-      <p class="lede">Most problems with web projects come from things nobody wrote down. So we write them down.</p>
+    <div class="head-split">
+      <div class="head" data-reveal>
+        <p class="hand hand-butter">a little proof of what we do [[scrib]]</p>
+        <h2 class="d2">Click through the work before you talk to us.</h2>
+      </div>
+      <p class="lede" data-reveal>Working demos for fictional businesses, built by us to show what each package delivers. They are labelled as demos everywhere they appear.</p>
     </div>
-    <ul class="ledger">
-      <li><b>Written scope and price</b><span>Before you pay anything, you get a one-page scope: what we build, what is not included, the price and the delivery date.</span></li>
-      <li><b>A delivery date that means something</b><span>The clock starts when we have your content. Websites take 5 to 12 working days; software 2 to 6 weeks.</span></li>
-      <li><b>Two rounds of changes</b><span>Each round is one combined list of changes. More rounds cost $39 each on websites, so nothing drifts.</span></li>
-      <li><b>Yours to keep</b><span>Your domain, hosting account and data are in your name. On final payment you own the site we built.</span></li>
-      <li><b>A test report at handover</b><span>We test on phone, tablet and desktop, check links, forms, speed and accessibility, and send you the results.</span></li>
-      <li><b>Half now, half at the end</b><span>50% to start, 50% when you have approved the finished work. Nothing goes live without your sign-off.</span></li>
-    </ul>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">Can I see what you make?</p>
-      <h2>Click through the work before you talk to us</h2>
-      <p class="lede">These are working demonstrations for fictional businesses, built by us to show what each package delivers. They are labelled as demos everywhere they appear.</p>
-    </div>
-    <div class="work-grid">
-      <article class="work-card">
-        <a class="shot" href="/demos/job-tracker/" tabindex="-1" aria-hidden="true"><img src="/assets/work/demos/job-tracker.webp" alt="" width="1200" height="750" loading="lazy" decoding="async"></a>
-        <div class="body">
-          <div class="tags"><span class="tag-demo">Demo · fictional data</span><span class="tag-pkg">Workflow Tracker</span></div>
+    <div class="show">
+      <a class="sc sc-royal" href="/demos/job-tracker/" data-reveal>
+        <div class="sc-copy">
+          <div class="tags"><span class="tag tag-demo">Demo · fictional data</span><span class="tag tag-ghost">Workflow Tracker</span></div>
           <h3>Job tracker for a plumbing business</h3>
-          <p>Add a job, assign it, move it through each status, search and filter, and see what is late. Your changes stay in your browser.</p>
-          <a class="btn btn-sm" href="/demos/job-tracker/">Try the demo</a>
+          <p>Add a job, assign it, move it through its statuses, search, filter and see what is late.</p>
         </div>
-      </article>
-      <article class="work-card">
-        <a class="shot" href="/demos/tallow-creek-plumbing/" tabindex="-1" aria-hidden="true"><img src="/assets/work/demos/tallow-creek.webp" alt="" width="1200" height="750" loading="lazy" decoding="async"></a>
-        <div class="body">
-          <div class="tags"><span class="tag-demo">Demo · fictional business</span><span class="tag-pkg">One Page · $249</span></div>
-          <h3>One-page website for a tradie</h3>
-          <p>Call button, services, service areas, a quote form and a mobile call bar: what the $249 package delivers.</p>
-          <a class="btn btn-sm" href="/demos/tallow-creek-plumbing/">View the demo site</a>
+        <span class="go">Try the demo [[arrow]]</span>
+        <span class="app-shot sc-img"><img src="/assets/work/demos/tracker-list.webp" alt="" width="1200" height="750" loading="lazy" decoding="async"></span>
+      </a>
+      <a class="sc sc-navy" href="/demos/tallow-creek-plumbing/" data-reveal>
+        <div class="sc-copy">
+          <div class="tags"><span class="tag tag-demo">Demo · fictional</span><span class="tag tag-ghost">One Page · $249</span></div>
+          <h3>One-page site for a tradie</h3>
+          <p>Call button, services, areas and a quote form.</p>
         </div>
-      </article>
+        <span class="go">View the demo site [[arrow]]</span>
+        <span class="browser sc-img"><span class="bbar" aria-hidden="true"><i></i><i></i><i></i><span>tallowcreek.demo</span></span><img src="/assets/work/demos/tradie-desktop.webp" alt="" width="1200" height="750" loading="lazy" decoding="async"></span>
+      </a>
+      <a class="sc sc-green" href="/demos/maren-dental-studio/" data-reveal>
+        <div class="sc-copy">
+          <div class="tags"><span class="tag tag-demo">Demo · fictional clinic</span><span class="tag tag-ghost">Design example</span></div>
+          <h3>Website for a dental clinic</h3>
+          <p>A richer design for an appointment business.</p>
+        </div>
+        <span class="go">View the clinic demo [[arrow]]</span>
+        <span class="browser sc-img"><span class="bbar" aria-hidden="true"><i></i><i></i><i></i><span>maren.demo</span></span><img src="/assets/work/sites/maren-0.webp" alt="" width="1200" height="750" loading="lazy" decoding="async"></span>
+      </a>
+      <a class="sc sc-paper" href="/qa/" data-reveal>
+        <div class="sc-copy">
+          <div class="tags"><span class="tag tag-mint">This website</span></div>
+          <h3>Our own test report, published</h3>
+          <p>Every automated check on this site: screen sizes, links, forms, demos, accessibility, speed and security. The same kind of report you get at handover.</p>
+          <p class="qa-line" data-qa-summary><b data-qa-pass>—</b> of <b data-qa-total>—</b> checks passed on the latest run.</p>
+        </div>
+        [[qa-sheet]]
+        <span class="go">Read the test report [[arrow]]</span>
+      </a>
     </div>
-    <p class="price-note"><a href="/work/">See all demos</a>, including a five-page clinic website.</p>
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-sky">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">How does it work?</p>
-      <h2>Four steps, the same every time</h2>
+    <div class="head" data-reveal>
+      <p class="hand">how it works [[scrib]]</p>
+      <h2 class="d2">Four steps, the same every time.</h2>
     </div>
-    <ol class="steps">
-      <li><h3>A 30-minute call</h3><p class="meta">Free · by video or email if you prefer</p><p>You tell us what the business does and what is not working. We say which package fits, or whether you need us at all.</p></li>
-      <li class="gate"><h3>A written scope and fixed price</h3><p class="meta">Within 2 working days of the call</p><p>One page listing what we build, what is excluded, the price and the date. You pay 50% to start.</p></li>
-      <li><h3>We build, you review</h3><p class="meta">Preview link for every stage</p><p>You see the work on a private link and send changes in up to two rounds.</p></li>
-      <li class="gate"><h3>Test report, sign-off, launch</h3><p class="meta">You approve, then pay the balance</p><p>We test everything, send the report, and launch on your domain once you approve.</p></li>
-    </ol>
-    <p class="price-note"><a href="/process/">Read the full process</a>: ownership, hosting, support and what we need from you.</p>
+    <div class="track-wrap"><ol class="track">
+      <li class="step" data-reveal><span class="step-n">1</span><h3 class="h3">A 30-minute call</h3><p class="meta">Free · video, or email if you prefer</p><p>You tell us what the business does and what is not working. We say which package fits, or whether you need us at all.</p></li>
+      <li class="step gate" data-reveal><span class="step-n">2</span><h3 class="h3">Written scope, fixed price</h3><p class="meta">Within 2 working days</p><p>One page listing what we build, what is excluded, the price and the date. You pay 50% to start.</p><span class="stamp">You approve</span></li>
+      <li class="step" data-reveal><span class="step-n">3</span><h3 class="h3">We build, you review</h3><p class="meta">Private preview link</p><p>You see the work as it grows and send changes in up to two rounds.</p></li>
+      <li class="step gate" data-reveal><span class="step-n">4</span><h3 class="h3">Test report, sign-off, launch</h3><p class="meta">You approve, then pay the balance</p><p>We test everything, send the report, and launch on your domain once you approve.</p><span class="stamp">You approve</span></li>
+    </ol><img class="mascot track-walker" src="/assets/img/mascot/walk-a.webp" alt="" width="352" height="393" loading="lazy"></div>
+    <p class="mt-2"><a class="link-arrow" href="/process/">The full process: ownership, hosting and support [[arrow]]</a></p>
   </div>
 </section>
 
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">Is this for my business?</p>
-      <h2>Who we work with</h2>
-      <p class="lede">Owner-run service businesses with 1 to 25 people, in Australia and the UK first.</p>
+<section class="sheet bg-paper">
+  <div class="wrap who-grid">
+    <div>
+      <div class="head" data-reveal>
+        <p class="hand hand-tang">is this for my business? [[scrib]]</p>
+        <h2 class="d2">Who we work with</h2>
+        <p class="lede">Owner-run service businesses with 1 to 25 people, in Australia and the UK first.</p>
+      </div>
+      <div class="cloud" data-reveal>
+        <span class="pill-ic"><span class="ic ic-tang">[[ic:wrench]]</span><span class="pt">Trades <small>plumbers, electricians, builders</small></span></span>
+        <span class="pill-ic"><span class="ic ic-royal">[[ic:pin]]</span><span class="pt">Home and property services <small>cleaning, maintenance, pest control</small></span></span>
+        <span class="pill-ic"><span class="ic ic-pink">[[ic:calendar]]</span><span class="pt">Appointment businesses <small>clinics, salons, studios</small></span></span>
+        <span class="pill-ic"><span class="ic ic-mint">[[ic:list]]</span><span class="pt">Teams with a spreadsheet problem <small>jobs, requests, bookings</small></span></span>
+      </div>
     </div>
-    <ul class="asg">
-      <li><b>Trades</b><span>Plumbers, electricians, builders, roofers, landscapers.</span></li>
-      <li><b>Home and property services</b><span>Cleaning, maintenance, pest control, removals.</span></li>
-      <li><b>Appointment businesses</b><span>Clinics, salons, studios and consultants who take bookings.</span></li>
-      <li><b>Small operators with a spreadsheet problem</b><span>Any team tracking jobs, requests or bookings by hand.</span></li>
-    </ul>
-    <div class="notfit mt-20">
+    <div class="note n-pink r2 notfit" data-reveal>
       <h3>When we are not the right choice</h3>
       <ul>
-        <li>You need an online shop, a blog you update weekly, or ongoing SEO and ads.</li>
-        <li>You are a sole trader who needs standard job software: ServiceM8 or Jobber will cost you less than custom work.</li>
-        <li>You need a large platform with many integrations from day one.</li>
+        <li>[[ic:x]] You need an online shop, a blog you update weekly, or ongoing SEO and ads.</li>
+        <li>[[ic:x]] You are a sole trader who needs standard job software: ServiceM8 or Jobber will cost you less than custom work.</li>
+        <li>[[ic:x]] You need a large platform with many integrations from day one.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="ask">What else should I know?</p>
-      <h2>Questions people ask first</h2>
+<section class="sheet bg-white">
+  <div class="wrap faq-wrap">
+    <div class="faq-side" data-reveal>
+      <p class="hand">what else should I know? [[scrib]]</p>
+      <h2 class="d2">Questions people ask first</h2>
+      <img class="mascot" src="/assets/img/mascot/step.webp" alt="" width="348" height="407" loading="lazy">
     </div>
-    <div class="faq">
+    <div class="faq" data-reveal>
       <details><summary>Why are your prices lower than local agencies?</summary><p>Our costs are in India, the packages are fixed so there is no open-ended work to price in, and our websites are fast static sites with no plugins or licences to pay for. The trade-off is scope: everything included is listed, and anything else is quoted before we do it.</p></details>
       <details><summary>Do you have client reviews?</summary><p>Not yet for this offer. Instead of asking you to trust reviews, we let you check the work: click through the demos, read the test report for this site, and pay the second half only after you have approved the finished work.</p></details>
       <details><summary>Where are you, and when can I reach you?</summary><p>We are in India and work Monday to Friday, 10:00 to 19:00 India time. That is the afternoon and evening in eastern Australia and the morning in the UK. We reply to every enquiry within one working day.</p></details>
@@ -170,14 +280,20 @@ ld: org
   </div>
 </section>
 
-<section class="sec">
+<section class="sheet bg-paper last">
   <div class="wrap">
-    <div class="close">
+    <div class="cta" data-reveal>
+      <span class="dots dots-light" aria-hidden="true"></span>
+      <img class="mascot cta-mascot hop" src="/assets/img/mascot/hop.webp" alt="" width="339" height="388" loading="lazy">
       <div>
-        <h2>Tell us what you need. We will tell you what it costs.</h2>
+        <p class="hand hand-butter">start here [[scrib]]</p>
+        <h2 class="d2">Tell us what you need. We will tell you what it costs.</h2>
         <p>Send a few lines about your business. You get a reply within one working day, and a written price after a short call.</p>
       </div>
-      <div><a class="btn" href="/start/">Start a project <svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></a></div>
+      <div class="cta-act">
+        <a class="btn btn-tang" href="/start/">Start a project [[dot]]</a>
+        <div class="mail-chips" data-mail-chips></div>
+      </div>
     </div>
   </div>
 </section>
