@@ -20,8 +20,8 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 PAGES = pathlib.Path(__file__).resolve().parent / "pages"
 SITE = "https://unnate.com"
 
-NAV = [("/websites/", "Websites"), ("/software/", "Software"), ("/pricing/", "Pricing"),
-       ("/work/", "Work"), ("/process/", "How we work"), ("/about/", "About")]
+NAV = [("/websites/", "Websites"), ("/software/", "Software"), ("/work/", "Demos"),
+       ("/process/", "How we work"), ("/pricing/", "Pricing"), ("/about/", "About")]
 
 def head(m):
     title = m["title"]; desc = m["description"]; path = m["path"]
@@ -32,7 +32,7 @@ def head(m):
     if m.get("ld") == "org":
         data = {"@context": "https://schema.org", "@type": "Organization", "name": "UNNATE", "url": SITE + "/",
                 "logo": SITE + "/icon-512.png", "email": "aravind@unnate.com",
-                "description": "Fixed-price websites and custom business software for small service businesses in Australia and the UK.",
+                "description": "Professional websites and custom business software for small and growing businesses, with fixed prices and a written scope.",
                 "areaServed": ["AU", "GB"]}
         ld = '<script type="application/ld+json">' + json.dumps(data, separators=(",", ":")) + "</script>\n"
     e = html.escape
@@ -52,13 +52,12 @@ def head(m):
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#F2F5F9">
+<meta name="theme-color" content="#F5F7FB">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/gochi-hand.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/unnate.css">
 {ld}</head>
 <body>
@@ -89,11 +88,10 @@ FOOTER = """<footer class="foot">
     <div class="foot-top">
       <div>
         <p class="foot-say">Fixed price. Written scope. <span>Yours to keep.</span></p>
-        <p class="hand hand-butter">websites + business software, priced in the open</p>
       </div>
       <nav aria-label="Services">
         <h2>Services</h2>
-        <ul><li><a href="/websites/">Website Development</a></li><li><a href="/software/">Custom Business Software</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/work/">Work and demos</a></li></ul>
+        <ul><li><a href="/websites/">Website Development</a></li><li><a href="/software/">Custom Business Software</a></li><li><a href="/work/">Demos</a></li><li><a href="/pricing/">Pricing</a></li></ul>
       </nav>
       <nav aria-label="Studio">
         <h2>Studio</h2>
@@ -117,16 +115,23 @@ FOOTER = """<footer class="foot">
 
 
 # ---- small macros used in page files, so markup stays readable ----
-import itertools
-_eye_ids = itertools.count()
-def _eyes(m=None):
-    n = next(_eye_ids)
-    return f"""<span class="cap cap-eyes" data-eyes aria-hidden="true"><svg viewBox="30 30 500 196" preserveAspectRatio="xMidYMid slice" focusable="false"><defs><clipPath id="eyc{n}a"><path d="M94.3 51.7L252 78.7A89.3 71.4 0 1 1 94.3 51.7Z"/></clipPath><clipPath id="eyc{n}b"><path d="M310 91.1L470.9 118.4A90.9 69.6 -2.4 1 1 310 91.1Z"/></clipPath><linearGradient id="eyw{n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B42F00" stop-opacity=".75"/><stop offset="1" stop-color="#D93A00" stop-opacity="0"/></linearGradient><radialGradient id="eyb{n}" cx="50%" cy="40%" r="75%"><stop offset="0" stop-color="#FF4F0C"/><stop offset="1" stop-color="#F23F03"/></radialGradient></defs><rect x="0" y="0" width="558" height="252" fill="url(#eyb{n})"/><path d="M52 44.5L96 52L88 80Z" fill="url(#eyw{n})"/><path d="M252 78.7L256 82L304 90L299 120Z" fill="url(#eyw{n})"/><path d="M471 118.4L512 125.3L464 166Z" fill="url(#eyw{n})"/><path d="M94.3 51.7L252 78.7A89.3 71.4 0 1 1 94.3 51.7Z" fill="#F4EEE4"/><path d="M310 91.1L470.9 118.4A90.9 69.6 -2.4 1 1 310 91.1Z" fill="#F4EEE4"/><g clip-path="url(#eyc{n}a)"><ellipse class="pupil" cx="95.9" cy="94.5" rx="21.3" ry="36.8" fill="#191716"/><rect class="lid" x="60" y="30" width="230" height="150" fill="#F9450A"/></g><g clip-path="url(#eyc{n}b)"><ellipse class="pupil" cx="310.9" cy="133.2" rx="21.3" ry="36.8" fill="#191716"/><rect class="lid" x="280" y="70" width="230" height="150" fill="#F9450A"/></g></svg></span>"""
 CAP_WEB = """<span class="cap cap-web" aria-hidden="true"><svg viewBox="0 0 100 42" focusable="false"><rect x="22" y="7" width="56" height="30" rx="4" fill="#fff"/><rect x="22" y="7" width="56" height="7" rx="3" fill="#FFE1D3"/><circle cx="27" cy="10.5" r="1.4" fill="#FF5B1F"/><circle cx="31.5" cy="10.5" r="1.4" fill="#FFD23F"/><circle cx="36" cy="10.5" r="1.4" fill="#93E3C2"/><rect x="27" y="18" width="22" height="4" rx="2" fill="#10131C"/><rect x="27" y="25" width="16" height="2.6" rx="1.3" fill="#C9CEDB"/><rect x="27" y="30" width="12" height="3.4" rx="1.7" fill="#FF5B1F"/><rect x="54" y="18" width="19" height="14" rx="2" fill="#CFE2F8"/></svg></span>"""
 CAP_SOFT = """<span class="cap cap-soft" aria-hidden="true"><svg viewBox="0 0 100 42" focusable="false"><circle class="live" cx="20" cy="21" r="4" fill="#93E3C2"/><rect class="bar" x="30" y="11" width="46" height="5" rx="2.5" fill="#fff"/><rect class="bar b2" x="30" y="19" width="36" height="5" rx="2.5" fill="#fff" fill-opacity=".85"/><rect class="bar b3" x="30" y="27" width="52" height="5" rx="2.5" fill="#FFD23F"/></svg></span>"""
 def _ic(m): return f'<svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#{m.group(1)}"/></svg>'
 DOT = '<span class="btn-dot"><svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></span>'
-SCRIB = '<svg aria-hidden="true"><use href="/assets/img/icons.svg#scribble"/></svg>'
+CTA = """<section class="sec">
+  <div class="wrap">
+    <div class="panel panel-royal cta on-dark" data-reveal>
+      [[rt-cta]]
+      <p class="eyebrow">Start here</p>
+      <h2 class="d2">Tell us what you need. You get a written price.</h2>
+      <p class="lede">Send a few lines about your business. We reply within one working day, talk it through on a short call, and send a written scope with a fixed price. You decide after that.</p>
+      <div class="acts"><a class="btn btn-on-royal btn-lg" href="/start/">Start a project [[dot]]</a><a class="link" href="/pricing/">View pricing [[arrow]]</a></div>
+      <p class="mails"><span>Prefer email?</span> <span data-emails></span></p>
+    </div>
+  </div>
+</section>"""
+RT_CTA = """<svg class="rt" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path class="rt-l" d="M-30 470 C 220 420, 360 520, 600 480 S 960 400, 1230 450"/><path class="rt-l" d="M-30 60 C 200 100, 360 20, 600 50 S 980 110, 1230 40"/><path class="rt-l hi" d="M90 76 C 60 200, 70 330, 120 452"/><path class="rt-l hi" d="M1110 52 C 1150 180, 1140 320, 1090 446"/><circle class="rt-n" cx="90" cy="76" r="6"/><circle class="rt-n" cx="120" cy="452" r="6"/><circle class="rt-n" cx="1110" cy="52" r="6"/><circle class="rt-n" cx="1090" cy="446" r="6"/><circle class="rt-p" r="5"><animateMotion dur="9s" repeatCount="indefinite" path="M-30 470 C 220 420, 360 520, 600 480 S 960 400, 1230 450"/></circle><circle class="rt-p" r="4"><animateMotion dur="12s" begin="-5s" repeatCount="indefinite" path="M-30 60 C 200 100, 360 20, 600 50 S 980 110, 1230 40"/></circle></svg>"""
 QA_ROWS = ["Screen sizes", "Links and anchors", "Forms", "Demos", "Accessibility", "Performance", "Security"]
 def _qa_sheet():
     """The little printed report on the home page. Counts come from qa/summary.json, written by the real QA run."""
@@ -146,10 +151,10 @@ def _qa_sheet():
             + "".join(rows) + '<span class="stamp">Published</span></span>')
 
 def expand(body):
+    body = body.replace("[[cta]]", CTA)
     body = body.replace("[[qa-sheet]]", _qa_sheet()) if "[[qa-sheet]]" in body else body
-    body = re.sub(r"\[\[eyes\]\]", _eyes, body)
     body = re.sub(r"\[\[ic:([a-z-]+)\]\]", _ic, body)
-    return body.replace("[[cap-web]]", CAP_WEB).replace("[[cap-soft]]", CAP_SOFT).replace("[[dot]]", DOT).replace("[[scrib]]", SCRIB).replace("[[arrow]]", ARROW)
+    return body.replace("[[cap-web]]", CAP_WEB).replace("[[cap-soft]]", CAP_SOFT).replace("[[dot]]", DOT).replace("[[rt-cta]]", RT_CTA).replace("[[arrow]]", ARROW)
 
 def parse(text):
     m = re.match(r"---\n(.*?)\n---\n", text, re.S)

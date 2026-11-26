@@ -15,13 +15,12 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#F2F5F9">
+<meta name="theme-color" content="#F5F7FB">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/gochi-hand.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/unnate.css">
 </head>
 <body>
@@ -32,9 +31,9 @@
     <nav class="menu" id="menu" aria-label="Main">
       <a href="/websites/">Websites</a>
       <a href="/software/">Software</a>
-      <a href="/pricing/">Pricing</a>
-      <a href="/work/">Work</a>
+      <a href="/work/">Demos</a>
       <a href="/process/">How we work</a>
+      <a href="/pricing/">Pricing</a>
       <a href="/about/">About</a>
       <a class="btn btn-ink btn-sm" href="/start/" aria-current="page">Start a project</a>
     </nav>
@@ -42,26 +41,23 @@
   </div>
 </header>
 <main id="main">
-<section class="ph ph-cool on-dark start-ph">
-  <span class="dots dots-light" aria-hidden="true"></span>
-  <div class="wrap start-stage">
+<section class="ph">
+  <div class="wrap start">
     <div class="start-side">
-      <span class="kicker k-white" data-reveal>Start a project</span>
-      <h1 class="d2" data-reveal>Tell us what you need.</h1>
-      <p class="lede" data-reveal>A few lines is enough. Nothing is booked or charged by sending this form.</p>
-      <div class="steps-notes" data-reveal>
-        <div class="note"><p class="hand">1 · we reply</p><p>By email, within one working day.</p></div>
-        <div class="note n-pink r2"><p class="hand">2 · a short call</p><p>30 minutes, or email if you prefer.</p></div>
-        <div class="note n-white r3"><p class="hand">3 · a written price</p><p>One page: scope, price, delivery date.</p></div>
+      <p class="eyebrow" data-intro>Start a project</p>
+      <h1 class="d1" data-intro="2">Tell us about your project.</h1>
+      <p class="lede" data-intro="3">It takes about two minutes. Nothing is booked or charged by sending this form, and you only need to answer the first few questions.</p>
+      <ol class="next" data-intro="4" aria-label="What happens after you send it">
+        <li><b>We reply within one working day</b><span>By email, with any questions and times for a call.</span></li>
+        <li><b>A free 30-minute call</b><span>Or email, if you prefer. We recommend an option, or tell you if you do not need us.</span></li>
+        <li><b>A written scope and fixed price</b><span>Within two working days of the call. You decide after that.</span></li>
+      </ol>
+      <div class="start-mail" data-intro="5">
+        <span>Prefer email? Monday to Friday, 10:00–19:00 India time.</span>
+        <span data-emails></span>
       </div>
-      <div data-reveal>
-        <p class="small">Prefer email? Monday to Friday, 10:00–19:00 India time.</p>
-        <div class="mail-chips mt-1" data-mail-chips></div>
-      </div>
-      <img class="mascot start-mascot hop" src="/assets/img/mascot/leap.webp" alt="" width="356" height="380">
     </div>
-
-    <div class="form-sheet" data-formcard data-reveal>
+    <div class="form-card" data-formcard data-intro="3">
       <div data-view="form">
         <form class="form" data-form data-subject="New project enquiry" novalidate>
           <div class="form-alert" role="alert" tabindex="-1" hidden></div>
@@ -82,10 +78,10 @@
             <fieldset id="f-service" data-required data-msg="Choose what you need.">
               <legend>What do you need?</legend>
               <div class="choices">
-                <label class="choice"><input type="radio" name="service" value="A website"><span class="ci ic-tang"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#globe"/></svg></span><span><b>A website</b><small>from $249</small></span></label>
-                <label class="choice"><input type="radio" name="service" value="Custom business software"><span class="ci ic-royal"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#list"/></svg></span><span><b>Custom business software</b><small>from $800</small></span></label>
-                <label class="choice"><input type="radio" name="service" value="Both"><span class="ci ic-mint"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#layers"/></svg></span><span><b>Both</b><small>a site that feeds a system</small></span></label>
-                <label class="choice"><input type="radio" name="service" value="Not sure yet"><span class="ci ic-butter"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#sparkle"/></svg></span><span><b>Not sure yet</b><small>we will help you choose</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Website Development"><span class="ci"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#globe"/></svg></span><span><b>Website Development</b><small>from $249</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Custom Business Software"><span class="ci"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#grid"/></svg></span><span><b>Custom Business Software</b><small>from $800</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Both"><span class="ci"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#layers"/></svg></span><span><b>Both</b><small>a website that feeds a system</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Not sure yet"><span class="ci"><svg class="icon" aria-hidden="true"><use href="/assets/img/icons.svg#sparkle"/></svg></span><span><b>Not sure yet</b><small>we will help you choose</small></span></label>
               </div>
             </fieldset>
           </div>
@@ -101,7 +97,7 @@
             </select></div>
           <p class="form-sec">Details</p>
           <div class="field"><label for="f-website">Current website <span class="opt">(optional)</span></label><input id="f-website" name="website" type="url" inputmode="url" autocomplete="url" placeholder="yourbusiness.com"></div>
-          <div class="field"><label for="f-message">Tell us about the business and what is not working</label><textarea id="f-message" name="message" required data-msg="Tell us a little about what you need." placeholder="For example: we are a 6-person plumbing business in Sydney. Our site is from 2016 and the quote form stopped working."></textarea></div>
+          <div class="field"><label for="f-message">Tell us about the business and what is not working</label><textarea id="f-message" name="message" required data-msg="Tell us a little about what you need." placeholder="For example: we are a 6-person plumbing business in Sydney. Our site is from 2016, and we track jobs in a spreadsheet that is always out of date."></textarea></div>
           <div class="field"><label for="f-timing">When do you need it? <span class="opt">(optional)</span></label>
             <select id="f-timing" name="timing"><option value="">No fixed date</option><option>As soon as possible</option><option>Within a month</option><option>In 1–3 months</option><option>Just comparing prices</option></select></div>
           <div class="hp" aria-hidden="true"><label for="f-honey">Leave this empty</label><input id="f-honey" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
@@ -110,11 +106,16 @@
         </form>
       </div>
       <div class="sent" data-view="sent" hidden>
-        <img class="mascot" src="/assets/img/mascot/hop.webp" alt="" width="339" height="388">
+        <p class="eyebrow">Sent</p>
         <h2 class="d3" tabindex="-1">Thank you. Your enquiry has been sent.</h2>
-        <p>We will reply within one working day from one of the addresses below. If you do not see our reply, check your spam folder.</p>
+        <p>Here is what happens next:</p>
+        <ol class="next">
+          <li><b>Within one working day</b><span>A reply from one of the addresses below. If you do not see it, check your spam folder.</span></li>
+          <li><b>A free 30-minute call</b><span>At a time that suits you, or by email.</span></li>
+          <li><b>A written scope and fixed price</b><span>Nothing starts until you approve it.</span></li>
+        </ol>
         <p data-emails></p>
-        <p><a class="link-arrow" href="/work/">Look through the demos while you wait <svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></a></p>
+        <p><a class="link" href="/work/">Look through the demos while you wait <svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></a></p>
       </div>
     </div>
   </div>
@@ -125,11 +126,10 @@
     <div class="foot-top">
       <div>
         <p class="foot-say">Fixed price. Written scope. <span>Yours to keep.</span></p>
-        <p class="hand hand-butter">websites + business software, priced in the open</p>
       </div>
       <nav aria-label="Services">
         <h2>Services</h2>
-        <ul><li><a href="/websites/">Website Development</a></li><li><a href="/software/">Custom Business Software</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/work/">Work and demos</a></li></ul>
+        <ul><li><a href="/websites/">Website Development</a></li><li><a href="/software/">Custom Business Software</a></li><li><a href="/work/">Demos</a></li><li><a href="/pricing/">Pricing</a></li></ul>
       </nav>
       <nav aria-label="Studio">
         <h2>Studio</h2>
