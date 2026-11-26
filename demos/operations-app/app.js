@@ -59,12 +59,12 @@
 
   /* ---------- tabs ---------- */
   let tab = 'dashboard';
-  const show = name => {
+  const show = (name, keepUrl) => {
     tab = name;
     $$('[data-tab]').forEach(b => { if (b.dataset.tab === name) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
     $$('[data-view]').forEach(v => { v.hidden = v.dataset.view !== name; });
     render();
-    if (location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
+    if (!keepUrl && location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
   };
   document.addEventListener('click', e => {
     const t = e.target.closest('[data-tab],[data-tab-go]');
@@ -262,6 +262,11 @@
     if (tab === 'requests') renderReqs();
     if (tab === 'bookings') renderWeek();
   };
+  // First view: leave the URL alone (writing #dashboard before load makes the browser jump to that
+  // view and scroll the demo notice out of sight). A deep link such as #portal opens that tab, and
+  // the page is returned to the top once loaded so the notice stays visible.
   const start = (location.hash || '').slice(1);
-  show(['dashboard', 'requests', 'bookings', 'portal'].includes(start) ? start : 'dashboard');
+  const deep = ['dashboard', 'requests', 'bookings', 'portal'].includes(start);
+  show(deep ? start : 'dashboard', true);
+  if (deep) addEventListener('load', () => requestAnimationFrame(() => window.scrollTo(0, 0)), { once: true });
 })();

@@ -196,42 +196,81 @@
     }).catch(() => {});
   }
 
-  /* hero visual: it tilts back slightly and straightens as you scroll to it */
-  const tilt = $('[data-tilt]');
-  if (tilt && !still) {
-    const set = () => {
-      if (innerWidth <= 820) { tilt.style.setProperty('--tilt', '0'); return; }
-      const r = tilt.getBoundingClientRect();
-      tilt.style.setProperty('--tilt', clamp((r.top - innerHeight * 0.12) / (innerHeight * 0.75)).toFixed(3));
+  /* hero showcase: a quote request leaves the demo website, follows the dotted route and lands
+     in the job list as New, then gets booked to a technician. The route is drawn from the real
+     positions of the two windows, so it always runs through the gap and never over content. */
+  const hs = $('[data-hs]');
+  if (hs) {
+    const svg = $('.hs-rt', hs), site = $('.hs-site', hs), tap = $('.hs-tap', hs), capSite = $('.hs-cap-site', hs), win = $('.hs-app', hs), slot = $('[data-slot]', hs);
+    const ring = $('.rt-ring', svg), na = $('.rt-a', svg), nb = $('.rt-b', svg), pkt = $('.rt-p', svg), mot = $('animateMotion', svg);
+    const f = v => v.toFixed(1);
+    const draw = () => {
+      const H = hs.getBoundingClientRect(), s = site.getBoundingClientRect(), a = win.getBoundingClientRect(), r = slot.getBoundingClientRect();
+      if (!H.width) return;
+      let x1, y1, x2, y2, d;
+      if (a.left >= s.right - 1) {            // side by side: from the website's edge, level with its quote button, to the new row
+        const t = tap.getBoundingClientRect();
+        x1 = s.right - H.left; y1 = t.top - H.top + t.height / 2; x2 = a.left - H.left; y2 = r.top - H.top + r.height / 2;
+        const m = (x2 - x1) / 2; d = `M${f(x1)} ${f(y1)} C${f(x1 + m)} ${f(y1)} ${f(x2 - m)} ${f(y2)} ${f(x2)} ${f(y2)}`;
+      } else {                                 // stacked: down from under the website's label to the list
+        const c = capSite.getBoundingClientRect();
+        x1 = s.left - H.left + s.width / 2; y1 = c.bottom - H.top + 12; x2 = a.left - H.left + a.width / 2; y2 = a.top - H.top;
+        const m = (y2 - y1) / 2; d = `M${f(x1)} ${f(y1)} C${f(x1)} ${f(y1 + m)} ${f(x2)} ${f(y2 - m)} ${f(x2)} ${f(y2)}`;
+      }
+      svg.setAttribute('viewBox', `0 0 ${f(H.width)} ${f(H.height)}`);
+      $$('path', svg).forEach(p => p.setAttribute('d', d));
+      [[ring, x1, y1], [na, x1, y1], [nb, x2, y2]].forEach(([c, x, y]) => { c.setAttribute('cx', f(x)); c.setAttribute('cy', f(y)); });
+      hs.classList.add('is-drawn');
     };
-    set(); addEventListener('scroll', set, { passive: true }); addEventListener('resize', set);
-  }
+    draw();
+    if (document.fonts) document.fonts.ready.then(draw);
+    if ('ResizeObserver' in window) new ResizeObserver(draw).observe(hs); else addEventListener('resize', draw);
 
-  /* hero demo: figures count up; a request travels from the website form into the job list */
-  const app = $('[data-hero-app]');
-  if (app && !still) {
-    $$('[data-count]', app).forEach(el => {
-      const end = Number(el.dataset.count); let n = 0; el.textContent = '0';
-      const step = () => { n += Math.max(1, Math.round(end / 12)); el.textContent = String(Math.min(n, end)); if (n < end) setTimeout(step, 55); };
-      setTimeout(step, 500);
-    });
-    const row = $('[data-cycle]', app);
-    if (row) {
-      const st = $('[data-cycle-st]', row), av = $('[data-cycle-av]', row), when = $('[data-cycle-when]', row);
-      const states = [
-        { s: 'st-new', t: 'New', a: 'av-n', l: '–', w: 'from the website form' },
-        { s: 'st-sch', t: 'Scheduled', a: 'av-j', l: 'J', w: 'Josh · tomorrow 9am' }
+    if (!still) {
+      $$('[data-count]', win).forEach(el => {
+        const end = Number(el.dataset.count); let n = 0; el.textContent = '0';
+        const step = () => { n += Math.max(1, Math.round(end / 12)); el.textContent = String(Math.min(n, end)); if (n < end) setTimeout(step, 55); };
+        setTimeout(step, 600);
+      });
+    }
+    if (!still && mot && typeof mot.beginElement === 'function') {
+      const REQ = [
+        { t: 'Burst pipe in laundry', l: 'J', av: 'av-j', when: 'Josh · tomorrow 9am' },
+        { t: 'Outdoor tap replacement', l: 'A', av: 'av-a', when: 'Ali · Thursday 2pm' },
+        { t: 'Toilet cistern running', l: 'P', av: 'av-p', when: 'Priya · Friday 11am' },
+        { t: 'Gas heater service', l: 'M', av: 'av-m', when: 'Mei · Monday 8:30am' }
       ];
-      let i = 0;
-      setInterval(() => {
-        i = (i + 1) % states.length; const x = states[i];
-        st.className = `st ${x.s}`; st.textContent = x.t;
-        av.className = `av ${x.a}`; av.textContent = x.l; when.textContent = x.w;
-        row.classList.add('flash'); setTimeout(() => row.classList.remove('flash'), 1000);
-      }, 2400);
+      const no = $('[data-slot-no]', slot), tt = $('[data-slot-t]', slot), meta = $('[data-slot-m]', slot), av = $('[data-slot-av]', slot), st = $('[data-slot-st]', slot);
+      const show = (x, n, booked) => {
+        no.textContent = '#' + n; tt.textContent = x.t;
+        meta.textContent = booked ? x.when : 'Website form · just now';
+        av.className = 'av ' + (booked ? x.av : 'av-n'); av.textContent = booked ? x.l : '–';
+        st.className = 'st ' + (booked ? 'st-sch' : 'st-new'); st.textContent = booked ? 'Scheduled' : 'New';
+      };
+      let i = 0, n = 1043, timers = [], running = false, onScreen = false;
+      show(REQ[0], n, true);                   // the last request is already booked; the next one is on its way
+      const later = (fn, ms) => { timers.push(setTimeout(fn, ms)); };
+      const cycle = () => {
+        timers = [];
+        hs.classList.remove('is-sending'); void hs.offsetWidth; hs.classList.add('is-sending');
+        later(() => { pkt.classList.add('on'); mot.beginElement(); }, 380);
+        later(() => {
+          pkt.classList.remove('on');
+          i = (i + 1) % REQ.length; n += 1; show(REQ[i], n, false);
+          slot.classList.remove('arrive'); void slot.offsetWidth; slot.classList.add('arrive');
+        }, 1630);
+        later(() => show(REQ[i], n, true), 3900);
+        later(cycle, 7000);
+      };
+      const start = () => { if (running || !onScreen || document.hidden) return; running = true; later(cycle, 900); };
+      const stop = () => { running = false; timers.forEach(clearTimeout); timers = []; pkt.classList.remove('on'); hs.classList.remove('is-sending'); };
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(es => { onScreen = es[0].isIntersecting; if (onScreen) start(); else stop(); }, { threshold: .35 }).observe(hs);
+      } else { onScreen = true; start(); }
+      document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
     }
   }
-  if (still) $$('svg.rt, svg.hv-rt').forEach(s => s.pauseAnimations && s.pauseAnimations());
+  if (still) $$('svg.rt, svg.hs-rt').forEach(s => s.pauseAnimations && s.pauseAnimations());
 
   /* process timeline: the route fills as you read */
   const tl = $('[data-timeline]');

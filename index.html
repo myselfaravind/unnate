@@ -52,30 +52,35 @@
       <a class="link" href="/pricing/">View pricing <svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></a>
     </div>
   </div>
-  <div class="wrap hv-wrap" data-intro="5">
-    <div class="hv" data-tilt>
-      <figure class="browser hv-site">
+  <div class="wrap hs-wrap" data-intro="5">
+    <div class="hs" data-hs>
+      <div class="browser hs-site">
         <div class="bbar" aria-hidden="true"><i></i><i></i><i></i><span>tallowcreek.demo</span></div>
-        <img src="/assets/work/demos/tradie-desktop.webp" alt="Demo website for Tallow Creek Plumbing, a fictional business, with a quote button" width="1200" height="750" fetchpriority="high">
-      </figure>
-      <div class="app hv-app" data-hero-app aria-label="Demo job list that receives the website's quote requests">
-        <div class="app-bar"><span class="app-logo" aria-hidden="true">TC</span><b>Jobs</b><span class="live-dot">Live demo</span></div>
+        <div class="hs-shot">
+          <img src="/assets/work/demos/tradie-hero.webp" alt="Demo website for Tallow Creek Plumbing, a fictional business, with a Get a fixed quote button" width="1200" height="591" fetchpriority="high">
+          <span class="hs-tap" aria-hidden="true"></span>
+        </div>
+      </div>
+      <p class="hs-cap hs-cap-site"><span class="hs-k">Website</span><span>A clear offer, with the quote button up front. <a href="/demos/tallow-creek-plumbing/">Open the demo site</a></span></p>
+      <div class="app hs-app" role="group" aria-label="Demo job list that receives the website's quote requests">
+        <div class="app-bar"><span class="app-logo" aria-hidden="true">TC</span><span class="app-t"><b>Jobs</b><small>Tallow Creek Plumbing</small></span><span class="tag tag-demo">Demo data</span></div>
         <div class="app-kpis">
           <div><b data-count="14">14</b><span>Open jobs</span></div>
           <div class="k-today"><b data-count="3">3</b><span>Due today</span></div>
           <div class="k-late"><b data-count="1">1</b><span>Overdue</span></div>
         </div>
-        <div class="app-row" data-cycle><span class="no">#1043</span><span><b>Quote request: blocked drain</b><small><span data-cycle-when>from the website form</span></small></span><span class="av av-n" data-cycle-av aria-hidden="true">–</span><span class="st st-new" data-cycle-st>New</span></div>
-        <div class="app-row"><span class="no">#1042</span><span><b>Hot water unit leaking</b><small>Parramatta · due today</small></span><span class="av av-a" aria-hidden="true">A</span><span class="st st-prog">In progress</span></div>
-        <div class="app-row"><span class="no">#1041</span><span><b>Replace three tap sets</b><small>Ryde · <span class="late">1 day late</span></small></span><span class="av av-m" aria-hidden="true">M</span><span class="st st-wait">Waiting on parts</span></div>
+        <div class="app-row" data-slot><span class="w"><b data-slot-t>Burst pipe in laundry</b><small><span class="no" data-slot-no>#1043</span> · <span data-slot-m>Website form · just now</span></small></span><span class="av av-n" data-slot-av aria-hidden="true">–</span><span class="st st-new" data-slot-st>New</span></div>
+        <div class="app-row"><span class="w"><b>Hot water unit leaking</b><small><span class="no">#1042</span> · Parramatta · due today</small></span><span class="av av-a" aria-hidden="true">A</span><span class="st st-prog">In progress</span></div>
+        <div class="app-row"><span class="w"><b>Blocked drain, rear yard</b><small><span class="no">#1041</span> · Ryde · <span class="late">1 day late</span></small></span><span class="av av-m" aria-hidden="true">M</span><span class="st st-wait">Waiting on parts</span></div>
       </div>
-      <svg class="hv-rt" viewBox="0 0 1200 690" aria-hidden="true" focusable="false">
-        <path class="rt-under" d="M150 382 C 330 470, 520 300, 708 318"/>
-        <path class="rt-l" d="M150 382 C 330 470, 520 300, 708 318"/>
-        <circle class="rt-ring" cx="150" cy="382" r="9"/>
-        <circle class="rt-n" cx="150" cy="382" r="7"/>
-        <circle class="rt-n" cx="708" cy="318" r="7"/>
-        <circle class="rt-p" r="7"><animateMotion dur="2.4s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;.6;1" calcMode="linear" path="M150 382 C 330 470, 520 300, 708 318"/></circle>
+      <p class="hs-cap hs-cap-app"><span class="hs-k k-soft">Software</span><span>Each request becomes a job to book. <a href="/demos/job-tracker/">Open the job tracker</a></span></p>
+      <svg class="hs-rt" aria-hidden="true" focusable="false">
+        <path id="hs-path" class="rt-under" d=""/>
+        <path class="rt-l" d=""/>
+        <circle class="rt-ring" r="8"/>
+        <circle class="rt-n rt-a" r="5.5"/>
+        <circle class="rt-n rt-b" r="5.5"/>
+        <circle class="rt-p" r="6"><animateMotion dur="1.25s" begin="indefinite" fill="freeze" calcMode="spline" keyTimes="0;1" keyPoints="0;1" keySplines=".5 0 .3 1"><mpath href="#hs-path"/></animateMotion></circle>
       </svg>
     </div>
     <p class="hv-cap"><span class="tag tag-demo">Demo</span> A fictional plumber's website, and the job list its quote form feeds.</p>
@@ -105,8 +110,8 @@
           <a class="link" href="/websites/">Explore website development <svg aria-hidden="true"><use href="/assets/img/icons.svg#arrow"/></svg></a>
         </div>
         <div class="svc-vis">
-          <figure class="browser"><div class="bbar" aria-hidden="true"><i></i><i></i><i></i><span>maren.demo</span></div><img src="/assets/work/sites/maren-0.webp" alt="Demo website for Maren Dental Studio, a fictional clinic" width="1200" height="750" loading="lazy" decoding="async"></figure>
-          <figure class="phone"><img src="/assets/work/sites/maren-m.webp" alt="The same demo clinic website on a phone" width="585" height="1266" loading="lazy" decoding="async"></figure>
+          <figure class="browser"><div class="bbar" aria-hidden="true"><i></i><i></i><i></i><span>maren.demo</span></div><img src="/assets/work/sites/maren-hero.webp" alt="Demo website for Maren Dental Studio, a fictional clinic" width="1200" height="656" loading="lazy" decoding="async"></figure>
+          <figure class="phone"><img src="/assets/work/sites/maren-phone.webp" alt="The same demo clinic website on a phone" width="600" height="1301" loading="lazy" decoding="async"></figure>
         </div>
       </div>
     </article>
