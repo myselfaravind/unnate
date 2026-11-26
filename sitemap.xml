@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://unnate.com/</loc></url>
-  <url><loc>https://unnate.com/clinical-websites/</loc></url>
-  <url><loc>https://unnate.com/final-year-projects/</loc></url>
-  <url><loc>https://unnate.com/work/</loc></url>
+  <url><loc>https://unnate.com/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://unnate.com/websites/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://unnate.com/software/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://unnate.com/pricing/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://unnate.com/work/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://unnate.com/process/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://unnate.com/about/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://unnate.com/start/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://unnate.com/privacy/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://unnate.com/terms/</loc><lastmod>2026-11-26</lastmod></url>
 </urlset>
